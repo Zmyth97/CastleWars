@@ -1,6 +1,8 @@
 package com.desitum.castleWars.world;
 
 import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.libraries.animation.MovementAnimator;
+import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.screens.MenuScreen;
 
 import java.util.ArrayList;
