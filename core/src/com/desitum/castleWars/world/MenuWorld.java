@@ -26,10 +26,10 @@ public class MenuWorld {
 
     private void createButtons() {
         //Create the buttons!
-        playButton = new com.desitum.castleWars.objects.MenuButton(MenuScreen.PLAY, 3, 7, Assets.playButtonUp);
+        playButton = new com.desitum.castleWars.objects.MenuButton(MenuScreen.PLAY, 3, 7.5f, Assets.playButtonUp);
         //multiButton = new com.desitum.castleWars.objects.MenuButton(MainScreen.OTHER, 5.5f, 5.5f, Assets.menuButtonTexture);
-        scoreButton = new com.desitum.castleWars.objects.MenuButton(MenuScreen.SCORE, 3, 5, Assets.exitButtonUp);
-        settingsButton = new com.desitum.castleWars.objects.MenuButton(MenuScreen.SETTINGS, 3, 1, Assets.settingsButtonUp);
+        scoreButton = new com.desitum.castleWars.objects.MenuButton(MenuScreen.SCORE, 3, 4f, Assets.exitButtonUp);
+        settingsButton = new com.desitum.castleWars.objects.MenuButton(MenuScreen.SETTINGS, 3, .5f, Assets.settingsButtonUp);
 
         //Add the buttons to the ArrayList
         menuButtons.add(playButton);

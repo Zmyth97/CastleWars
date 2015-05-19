@@ -35,6 +35,7 @@ public class MenuScreen implements Screen {
     public static final int MENU_BEFORE_TRANSITION = 0;
     public static final int MENU_WAITING = 1;
     public static final int MENU_TRANSITION = 2;
+    public static final int SETTINGS_MENU = 3;
 
 
     public static String PLAY = "play";
@@ -119,8 +120,11 @@ public class MenuScreen implements Screen {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 
+        if (state == SETTINGS_MENU) {
+            popupMenu.updateTouchInput(touchPoint, Gdx.input.isTouched());
+        }
         if (Gdx.input.justTouched()) {
             if (state == MENU_WAITING || state == MENU_TRANSITION) {
                 touchPoint = menuRenderer.getCam().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -133,7 +137,8 @@ public class MenuScreen implements Screen {
         cam.update();
         spriteBatch.enableBlending();
         spriteBatch.begin();
-
+        spriteBatch.draw(Assets.menuBackground, 0, 0, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
+        popupMenu.draw(spriteBatch);
         draw();
 
         spriteBatch.end();
@@ -156,7 +161,8 @@ public class MenuScreen implements Screen {
                 } else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
                     //Bring up Scores
                 } else if (mb.getCommand().equals(SETTINGS)) { // If the button was sound
-                    //Bring up the Little Popup for Settings
+                    popupMenu.moveIn();
+                    state = SETTINGS_MENU;
                 }
             }
         }
@@ -173,6 +179,8 @@ public class MenuScreen implements Screen {
             case MENU_TRANSITION:
                 updateMenuTransition(delta);
                 break;
+            case SETTINGS_MENU:
+                updatePopupMenu(delta);
         }
     }
 
@@ -188,6 +196,10 @@ public class MenuScreen implements Screen {
         menuWorld.update(delta);
     }
 
+    private void updatePopupMenu(float delta){
+        popupMenu.update(delta);
+    }
+
     private void draw() {
         switch (state) {
             case MENU_BEFORE_TRANSITION:
@@ -197,6 +209,9 @@ public class MenuScreen implements Screen {
                 drawMenuWaiting();
                 break;
             case MENU_TRANSITION:
+                drawMenuTransition();
+                break;
+            case SETTINGS_MENU:
                 drawMenuTransition();
                 break;
         }
