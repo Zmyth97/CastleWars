@@ -8,7 +8,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
+import com.desitum.castleWars.libraries.animation.MovementAnimator;
+import com.desitum.castleWars.libraries.interpolation.Interpolation;
+import com.desitum.castleWars.libraries.menu.OnClickListener;
+import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.menu.PopupMenu;
+import com.desitum.castleWars.libraries.menu.PopupSlider;
+import com.desitum.castleWars.libraries.menu.PopupSliderListener;
+
+import javax.swing.plaf.synth.Region;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
@@ -19,7 +29,6 @@ public class MenuScreen implements Screen {
     public static final float SCREEN_HEIGHT = 15;
 
     public static int state = 1;
-    public int score;
 
     private Viewport viewport;
 
@@ -33,26 +42,22 @@ public class MenuScreen implements Screen {
     public static String SETTINGS = "settings";
 
     private OrthographicCamera cam;
-    private OrthographicCamera textCam;
     private SpriteBatch spriteBatch;
 
+    private PopupMenu popupMenu;
+
     private com.desitum.castleWars.world.MenuWorld menuWorld;
-    private com.desitum.castleWars.world.GameWorld gameWorld;
 
     private com.desitum.castleWars.world.MenuRenderer menuRenderer;
-    private com.desitum.castleWars.world.GameRenderer gameRenderer;
 
     private Vector3 touchPoint;
 
-    private com.desitum.castleWars.GooglePlayServicesInterface gpgs;
+    private com.desitum.castleWars.GooglePlayServicesInterface gpgs; //Will be used for scoreboard popup later
 
 
     public MenuScreen(com.desitum.castleWars.GooglePlayServicesInterface gps) {
-        score = 0;
-
         gpgs = gps;
         cam = new OrthographicCamera(SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
-        textCam = new OrthographicCamera(100, 150);
         cam.position.set(SCREEN_WIDTH * 10 / 2, SCREEN_HEIGHT * 10 / 2, 0);
 
         //the viewport object will handle camera's attributes
@@ -62,10 +67,52 @@ public class MenuScreen implements Screen {
         spriteBatch = new SpriteBatch();
 
         menuWorld = new com.desitum.castleWars.world.MenuWorld();
-        gameWorld = new com.desitum.castleWars.world.GameWorld();
 
         menuRenderer = new com.desitum.castleWars.world.MenuRenderer(menuWorld, spriteBatch);
-        gameRenderer = new com.desitum.castleWars.world.GameRenderer(gameWorld, spriteBatch);
+
+        //region SettingsMenu
+        // code to create the settings menu
+        // do not delete or edit without permission first
+        popupMenu = new PopupMenu(Assets.textFieldBackground, 10, -130, 130, 80);
+        MovementAnimator yAnimator = new MovementAnimator(-130, 10, 1, Interpolation.DECELERATE_INTERPOLATOR);
+        yAnimator.setControllingY(true);
+        popupMenu.addIncomingAnimator(yAnimator);
+        MovementAnimator yAnimator2 = new MovementAnimator(10, -130, 1, Interpolation.ANTICIPATE_INTERPOLATOR);
+        yAnimator2.setControllingY(true);
+        popupMenu.addOutgoingAnimator(yAnimator2);
+
+        PopupButton cancelButton = new PopupButton(Assets.cancelButtonUp, Assets.cancelButtonDown, 5, 5, 57.5f, 15);
+        cancelButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick() {
+                popupMenu.moveOut();
+                state = MENU_WAITING;
+
+            }
+        });
+        popupMenu.addPopupWidget(cancelButton);
+
+        final PopupSlider volumeSlider = new PopupSlider(Assets.textFieldBackground, Assets.textFieldBackground, 5, 60, 120, 5, 3, 10);
+        volumeSlider.setSliderListener(new PopupSliderListener() {
+            @Override
+            public void onChange(float pos) {
+                System.out.println(pos);
+            }
+        });
+        popupMenu.addPopupWidget(volumeSlider);
+
+        PopupButton okButton = new PopupButton(Assets.okButtonUp, Assets.okButtonDown, 67.5f, 5, 57.5f, 15);
+        okButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick() {
+                Settings.setVolume(volumeSlider.getPosition());
+                popupMenu.moveOut();
+                state = MENU_WAITING;
+
+            }
+        });
+        popupMenu.addPopupWidget(okButton);
+        //endregion
     }
 
 
@@ -74,13 +121,9 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glClearColor(1f, 1f, 1f, 1);
 
-
-
         if (Gdx.input.justTouched()) {
             if (state == MENU_WAITING || state == MENU_TRANSITION) {
                 touchPoint = menuRenderer.getCam().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            } else if (state == GAME_BEFORE || state == GAME_RUNNING || state == GAME_PAUSED || state == GAME_OVER) {
-                touchPoint = gameRenderer.getCam().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             }
             onClick();
         }
@@ -101,18 +144,6 @@ public class MenuScreen implements Screen {
             case MENU_WAITING:
                 onClickMenuWaiting();
                 break;
-            case GAME_BEFORE:
-                onClickGameBefore();
-                break;
-            case GAME_PAUSED:
-                onClickGamePaused();
-                break;
-            case GAME_RUNNING:
-                onClickGameRunning();
-                break;
-            case GAME_OVER:
-                onClickGameOver();
-                break;
         }
     }
 
@@ -121,39 +152,14 @@ public class MenuScreen implements Screen {
             if (com.desitum.castleWars.libraries.CollisionDetection.pointInRectangle(mb.getBoundingRectangle(), touchPoint)) { // if touched a rectangle
                 mb.onClick();
                 if (mb.getCommand().equals(PLAY)) { // If the button was play
-                    state = GAME_RUNNING;
-                    GAME_MODE = REGULAR_MODE;
-                } else if (mb.getCommand().equals(OTHER)) { // If the button was Endless Mode
-                    state = GAME_RUNNING;
-                    GAME_MODE = OTHER_MODE;
+                    //Move to the Game Screen
                 } else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
-
-                } else if (mb.getCommand().equals(SOUND)) { // If the button was sound
-                    Settings.volumeOn = !Settings.volumeOn; // toggle whether the volume is on
-                    if (Settings.volumeOn) { // update the texture for the Sound Button
-                        mb.setTexture(com.desitum.castleWars.data.Assets.menuButtonTexture); //No sound on texture yet!
-                    } else {
-                        mb.setTexture(com.desitum.castleWars.data.Assets.menuButtonTexture); //No sound off texture yet!
-                    }
+                    //Bring up Scores
+                } else if (mb.getCommand().equals(SETTINGS)) { // If the button was sound
+                    //Bring up the Little Popup for Settings
                 }
             }
         }
-    }
-
-    private void onClickGameBefore() {
-        state = GAME_RUNNING;
-    }
-
-    private void onClickGamePaused() {
-        state = GAME_RUNNING;
-    }
-
-    private void onClickGameRunning() {
-
-    }
-
-    private void onClickGameOver() {
-        //TODO Add in end game interface
     }
 
     private void update(float delta) {
@@ -166,21 +172,6 @@ public class MenuScreen implements Screen {
                 break;
             case MENU_TRANSITION:
                 updateMenuTransition(delta);
-                break;
-            case GAME_BEFORE:
-                updateGameBefore(delta);
-                break;
-            case GAME_PAUSED:
-                updateGamePaused(delta);
-                break;
-            case GAME_RUNNING:
-                updateGameRunning(delta);
-                break;
-            case GAME_OVER:
-                updateGameOver(delta);
-                break;
-            case GAME_OVER_WITH_TRANSITION:
-                updateGameOverTransition(delta);
                 break;
         }
     }
@@ -197,51 +188,16 @@ public class MenuScreen implements Screen {
         menuWorld.update(delta);
     }
 
-    private void updateGameBefore(float delta) {
-        gameWorld.update(state, gameRenderer.getCam(), delta);
-    }
-
-    private void updateGameRunning(float delta) {
-        gameWorld.update(state, gameRenderer.getCam(), delta);
-    }
-
-    private void updateGamePaused(float delta) {
-
-    }
-
-    private void updateGameOver(float delta) {
-        gameWorld.update(state, gameRenderer.getCam(), delta);
-    }
-
-    private void updateGameOverTransition(float delta) {
-
-    }
-
     private void draw() {
         switch (state) {
             case MENU_BEFORE_TRANSITION:
                 drawMenuBeforeTransition();
-                break;
-            case GAME_OVER:
-                drawGameOver();
-                break;
-            case GAME_RUNNING:
-                drawGameRunning();
                 break;
             case MENU_WAITING:
                 drawMenuWaiting();
                 break;
             case MENU_TRANSITION:
                 drawMenuTransition();
-                break;
-            case GAME_BEFORE:
-                drawGameBefore();
-                break;
-            case GAME_PAUSED:
-                drawGamePaused();
-                break;
-            case GAME_OVER_WITH_TRANSITION:
-                drawGameOver();
                 break;
         }
     }
@@ -250,39 +206,12 @@ public class MenuScreen implements Screen {
         menuRenderer.render();
     }
 
-    private void drawGamePaused() {
-        gameRenderer.render();
-    }
-
-    private void drawGameBefore() {
-        gameRenderer.render();
-
-    }
-
     private void drawMenuTransition() {
         menuRenderer.render();
     }
 
     private void drawMenuWaiting() {
         menuRenderer.render();
-    }
-
-    private void drawGameRunning() {
-        gameRenderer.render();
-        spriteBatch.setProjectionMatrix(cam.combined);
-    }
-
-    private void drawGameOver() {
-        gameRenderer.render();
-        spriteBatch.setProjectionMatrix(cam.combined);
-
-    }
-
-    private void resetGame() {
-        cam.position.set(SCREEN_WIDTH * 10 / 2, SCREEN_HEIGHT * 10 / 2, 0);
-        gameWorld.reset();
-        gameRenderer.resetCam();
-        menuRenderer.resetCam();
     }
 
     @Override
@@ -300,16 +229,12 @@ public class MenuScreen implements Screen {
 
     @Override
     public void hide() {
-        if (state == GAME_RUNNING) {
-            state = GAME_PAUSED;
-        }
+
     }
 
     @Override
     public void pause() {
-        if (state == GAME_RUNNING) {
-            state = GAME_PAUSED;
-        }
+
     }
 
     @Override

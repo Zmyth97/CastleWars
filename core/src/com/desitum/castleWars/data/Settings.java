@@ -34,6 +34,10 @@ public class Settings {
         getSound();
     }
 
+    public static void setVolume(float volume){
+        //TODO need to actually do something
+    }
+
     public static void saveScore(int score) {
         if (highscore > score){
             return;
