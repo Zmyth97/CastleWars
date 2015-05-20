@@ -3,12 +3,11 @@ package com.desitum.castleWars.objects;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.world.GameInterface;
 
 import java.util.ArrayList;
 
-import kody.libgdx.libraries.Colors;
+import kody.libgdx.libraries.animation.Animator;
 import kody.libgdx.libraries.animation.ColorEffects;
 import kody.libgdx.libraries.animation.MovementAnimator;
 
