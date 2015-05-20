@@ -42,7 +42,7 @@ public class MenuWorld {
 
     }
 
-    public ArrayList<com.desitum.castleWars.objects.MenuButton> getMenuButtons() {
+    public ArrayList<PopupButton> getMenuButtons() {
         return this.menuButtons;
     }
 }
