@@ -27,8 +27,7 @@ public class MenuWorld {
         //Create the buttons!
         playButton = new PopupButton(Assets.playButtonUp, Assets.playButtonDown, 1, 5, 3, 2);
         //multiButton = new com.desitum.castleWars.objects.MenuButton(MainScreen.OTHER, 5.5f, 5.5f, Assets.menuButtonTexture);
-        //scoreButton = new PopupButton(Assets);
-        //settingsButton = new PopupButton(MenuScreen.SETTINGS, 3, .5f, Assets.settingsButtonUp);
+        settingsButton = new PopupButton(Assets.settingsButtonUp, Assets.settingsButtonDown, 1, 2, 3, 2);
 
         //Add the buttons to the ArrayList
         menuButtons.add(playButton);

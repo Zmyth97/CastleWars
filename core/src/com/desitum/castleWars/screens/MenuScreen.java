@@ -11,7 +11,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
 
-import kody.libgdx.libraries.CollisionDetection;
 import kody.libgdx.libraries.animation.MovementAnimator;
 import kody.libgdx.libraries.interpolation.Interpolation;
 import kody.libgdx.libraries.menu.OnClickListener;
@@ -153,19 +152,6 @@ public class MenuScreen implements Screen {
     }
 
     private void onClickMenuWaiting() {
-        for (com.desitum.castleWars.objects.MenuButton mb : menuWorld.getMenuButtons()) {
-            if (CollisionDetection.pointInRectangle(mb.getBoundingRectangle(), touchPoint)) { // if touched a rectangle
-                mb.onClick();
-                if (mb.getCommand().equals(PLAY)) { // If the button was play
-                    //Move to the Game Screen
-                } else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
-                    //Bring up Scores
-                } else if (mb.getCommand().equals(SETTINGS)) { // If the button was sound
-                    popupMenu.moveIn();
-                    state = SETTINGS_MENU;
-                }
-            }
-        }
     }
 
     private void update(float delta) {
