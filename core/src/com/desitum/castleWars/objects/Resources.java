@@ -8,59 +8,59 @@ import java.util.ArrayList;
 public class Resources {
 
     private static final int BUILDER = 1;
-    private static final int SOLDIER = 2; //Army? Warrior?
-    private static final int MAGE = 3; //Wizard?
+    private static final int SOLDIER = 2;
+    private static final int WIZARD = 3;
 
-    private static final int TOOLS = 4; //Bricks? Stones?
-    private static final int WEAPONS = 5; //Swords? Spears? Supplies?
+    private static final int STONES = 4;
+    private static final int SUPPLIES = 5;
     private static final int GEMS = 6;
 
     private int playerBuilders;
     private int playerSoldiers;
-    private int playerMages;
-    private int playerTools;
+    private int playerWizards;
+    private int playerStones;
     private int playerWeapons;
     private int playerGems;
 
     private int computerBuilders;
     private int computerSoldiers;
-    private int computerMages;
-    private int computerTools;
+    private int computerWizards;
+    private int computerStones;
     private int computerWeapons;
     private int computerGems;
 
     public Resources(){
         playerBuilders = 2;
         playerSoldiers = 2;
-        playerMages = 2;
-        playerTools = 8;
+        playerWizards = 2;
+        playerStones = 8;
         playerWeapons = 8;
         playerGems = 8;
 
         computerBuilders = 2;
         computerSoldiers = 2;
-        computerMages = 2;
-        computerTools = 8;
+        computerWizards = 2;
+        computerStones = 8;
         computerWeapons = 8;
         computerGems = 8;
     }
 
-    public void changePlayerResources(int builderAmount, int soldierAmount, int mageAmount, int toolsAmount, int weaponsAmount, int gemsAmount){
+    public void changePlayerResources(int builderAmount, int soldierAmount, int wizardAmount, int stoneAmount, int weaponsAmount, int gemsAmount){
         playerBuilders += builderAmount;
         playerSoldiers += soldierAmount;
-        playerMages += mageAmount;
+        playerWizards += wizardAmount;
 
-        playerTools += toolsAmount;
+        playerStones += stoneAmount;
         playerWeapons += weaponsAmount;
         playerGems += gemsAmount;
     }
 
-    public void changeComputerResources(int builderAmount, int soldierAmount, int mageAmount, int toolsAmount, int weaponsAmount, int gemsAmount){
+    public void changeComputerResources(int builderAmount, int soldierAmount, int wizardAmount, int stoneAmount, int weaponsAmount, int gemsAmount){
         computerBuilders += builderAmount;
         computerSoldiers += soldierAmount;
-        computerMages += mageAmount;
+        computerWizards += wizardAmount;
 
-        computerTools += toolsAmount;
+        computerStones += stoneAmount;
         computerWeapons += weaponsAmount;
         computerGems += gemsAmount;
     }
@@ -73,12 +73,12 @@ public class Resources {
         return playerSoldiers;
     }
 
-    public int getPlayerMages() {
-        return playerMages;
+    public int getPlayerWizards() {
+        return playerWizards;
     }
 
-    public int getPlayerTools() {
-        return playerTools;
+    public int getPlayerStones() {
+        return playerStones;
     }
 
     public int getPlayerWeapons() {
@@ -97,12 +97,12 @@ public class Resources {
         return computerSoldiers;
     }
 
-    public int getComputerMages() {
-        return computerMages;
+    public int getComputerWizards() {
+        return computerWizards;
     }
 
-    public int getComputerTools() {
-        return computerTools;
+    public int getComputerStones() {
+        return computerStones;
     }
 
     public int getComputerWeapons() {
@@ -121,12 +121,12 @@ public class Resources {
         this.playerSoldiers = playerSoldiers;
     }
 
-    public void setPlayerMages(int playerMages) {
-        this.playerMages = playerMages;
+    public void setPlayerWizards(int playerWizards) {
+        this.playerWizards = playerWizards;
     }
 
-    public void setPlayerTools(int playerTools) {
-        this.playerTools = playerTools;
+    public void setPlayerStones(int playerStones) {
+        this.playerStones = playerStones;
     }
 
     public void setPlayerWeapons(int playerWeapons) {
@@ -145,12 +145,12 @@ public class Resources {
         this.computerSoldiers = computerSoldiers;
     }
 
-    public void setComputerMages(int computerMages) {
-        this.computerMages = computerMages;
+    public void setComputerWizards(int computerWizards) {
+        this.computerWizards = computerWizards;
     }
 
-    public void setComputerTools(int computerTools) {
-        this.computerTools = computerTools;
+    public void setComputerStones(int computerStones) {
+        this.computerStones = computerStones;
     }
 
     public void setComputerWeapons(int computerWeapons) {
