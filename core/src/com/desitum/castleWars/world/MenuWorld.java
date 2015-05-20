@@ -1,35 +1,34 @@
 package com.desitum.castleWars.world;
 
 import com.desitum.castleWars.data.Assets;
-import com.desitum.castleWars.screens.MenuScreen;
 
 import java.util.ArrayList;
+
+import kody.libgdx.libraries.menu.PopupButton;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
 public class MenuWorld {
-    private ArrayList<com.desitum.castleWars.objects.MenuButton> menuButtons;
+    private ArrayList<PopupButton> menuButtons;
 
     private float loadTiming;
 
-    private com.desitum.castleWars.objects.MenuButton playButton;
-    //private com.desitum.castleWars.objects.MenuButton multiButton?;
-    //TODO: Do you think we'd want to try and get multiplayer on it? Might be worth it, helps spread the game if people want their friends to install it to play with them.
-    private com.desitum.castleWars.objects.MenuButton scoreButton;
-    private com.desitum.castleWars.objects.MenuButton settingsButton;
+    private PopupButton playButton;
+    private PopupButton scoreButton;
+    private PopupButton settingsButton;
 
     public MenuWorld() {
-        menuButtons = new ArrayList<com.desitum.castleWars.objects.MenuButton>();
+        menuButtons = new ArrayList<PopupButton>();
         createButtons();
     }
 
     private void createButtons() {
         //Create the buttons!
-        playButton = new com.desitum.castleWars.objects.MenuButton(MenuScreen.PLAY, 3, 7.5f, Assets.playButtonUp);
+        playButton = new PopupButton(Assets.playButtonUp, Assets.playButtonDown, 1, 5, 3, 2);
         //multiButton = new com.desitum.castleWars.objects.MenuButton(MainScreen.OTHER, 5.5f, 5.5f, Assets.menuButtonTexture);
-        scoreButton = new com.desitum.castleWars.objects.MenuButton(MenuScreen.SCORE, 3, 4f, Assets.exitButtonUp);
-        settingsButton = new com.desitum.castleWars.objects.MenuButton(MenuScreen.SETTINGS, 3, .5f, Assets.settingsButtonUp);
+        //scoreButton = new PopupButton(Assets);
+        //settingsButton = new PopupButton(MenuScreen.SETTINGS, 3, .5f, Assets.settingsButtonUp);
 
         //Add the buttons to the ArrayList
         menuButtons.add(playButton);
@@ -43,7 +42,7 @@ public class MenuWorld {
 
     }
 
-    public ArrayList<com.desitum.castleWars.objects.MenuButton> getMenuButtons() {
+    public ArrayList<PopupButton> getMenuButtons() {
         return this.menuButtons;
     }
 }

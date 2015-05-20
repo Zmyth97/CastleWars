@@ -10,15 +10,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
-import com.desitum.castleWars.libraries.animation.MovementAnimator;
-import com.desitum.castleWars.libraries.interpolation.Interpolation;
-import com.desitum.castleWars.libraries.menu.OnClickListener;
-import com.desitum.castleWars.libraries.menu.PopupButton;
-import com.desitum.castleWars.libraries.menu.PopupMenu;
-import com.desitum.castleWars.libraries.menu.PopupSlider;
-import com.desitum.castleWars.libraries.menu.PopupSliderListener;
 
-import javax.swing.plaf.synth.Region;
+import kody.libgdx.libraries.CollisionDetection;
+import kody.libgdx.libraries.animation.MovementAnimator;
+import kody.libgdx.libraries.interpolation.Interpolation;
+import kody.libgdx.libraries.menu.OnClickListener;
+import kody.libgdx.libraries.menu.PopupButton;
+import kody.libgdx.libraries.menu.PopupMenu;
+import kody.libgdx.libraries.menu.PopupSlider;
+import kody.libgdx.libraries.menu.PopupSliderListener;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
@@ -154,7 +154,7 @@ public class MenuScreen implements Screen {
 
     private void onClickMenuWaiting() {
         for (com.desitum.castleWars.objects.MenuButton mb : menuWorld.getMenuButtons()) {
-            if (com.desitum.castleWars.libraries.CollisionDetection.pointInRectangle(mb.getBoundingRectangle(), touchPoint)) { // if touched a rectangle
+            if (CollisionDetection.pointInRectangle(mb.getBoundingRectangle(), touchPoint)) { // if touched a rectangle
                 mb.onClick();
                 if (mb.getCommand().equals(PLAY)) { // If the button was play
                     //Move to the Game Screen
