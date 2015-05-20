@@ -1,6 +1,7 @@
 package com.desitum.castleWars.world;
 
 import com.desitum.castleWars.objects.Card;
+import com.desitum.castleWars.objects.Resources;
 
 /**
  * Created by kody on 4/7/15.
@@ -8,4 +9,5 @@ import com.desitum.castleWars.objects.Card;
  */
 public interface GameInterface {
     public void onClickCard(Card card, int cardID);
+    public Resources getResources();
 }
