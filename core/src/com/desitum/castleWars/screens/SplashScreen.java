@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.CastleWars;
+import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
 
 /**
@@ -53,10 +54,9 @@ public class SplashScreen implements Screen {
             game.setScreen(new MenuScreen(gps));
         } else if (beenThrough && !hasLoaded){
             hasLoaded = true;
-            com.desitum.castleWars.data.Assets.loadMenuTextures();
-            com.desitum.castleWars.data.Assets.loadGameTextures();
-            com.desitum.castleWars.data.Assets.loadSounds();
-            com.desitum.castleWars.libraries.Colors.load();
+            Assets.loadMenuTextures();
+            Assets.loadGameTextures();
+            Assets.loadSounds();
             Settings.load();
         }
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Created by Zmyth97 on 2/25/2015.
+ * Created by Zmyth97 on 2/9/2015.
  */
 public class Drawing {
 
@@ -50,10 +50,10 @@ public class Drawing {
         pixmap.fillRectangle(width - lineWidth, 0, lineWidth, height);
 
         //top rectangle
-        pixmap.fillRectangle(lineWidth, height - lineWidth, width - lineWidth * 2, lineWidth);
+        pixmap.fillRectangle(lineWidth, height - lineWidth, width - lineWidth*2, lineWidth);
 
         //bottom rectangle
-        pixmap.fillRectangle(lineWidth, 0, width - lineWidth * 2, lineWidth);
+        pixmap.fillRectangle(lineWidth, 0, width - lineWidth*2, lineWidth);
         Texture returnTexture = new Texture(pixmap.getWidth(), pixmap.getHeight(), Pixmap.Format.RGBA8888);
         returnTexture.draw(pixmap, 0, 0);
         return returnTexture;

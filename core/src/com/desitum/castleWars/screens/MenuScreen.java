@@ -18,15 +18,13 @@ import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupSlider;
 import com.desitum.castleWars.libraries.menu.PopupSliderListener;
 
-import javax.swing.plaf.synth.Region;
-
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
 public class MenuScreen implements Screen {
 
-    public static final float SCREEN_WIDTH = 10;
-    public static final float SCREEN_HEIGHT = 15;
+    public static final float SCREEN_WIDTH = 15;
+    public static final float SCREEN_HEIGHT = 10;
 
     public static int state = 1;
 
@@ -36,11 +34,6 @@ public class MenuScreen implements Screen {
     public static final int MENU_WAITING = 1;
     public static final int MENU_TRANSITION = 2;
     public static final int SETTINGS_MENU = 3;
-
-
-    public static String PLAY = "play";
-    public static String SCORE = "open_scores";
-    public static String SETTINGS = "settings";
 
     private OrthographicCamera cam;
     private SpriteBatch spriteBatch;
@@ -54,7 +47,6 @@ public class MenuScreen implements Screen {
     private Vector3 touchPoint;
 
     private com.desitum.castleWars.GooglePlayServicesInterface gpgs; //Will be used for scoreboard popup later
-
 
     public MenuScreen(com.desitum.castleWars.GooglePlayServicesInterface gps) {
         gpgs = gps;
@@ -116,7 +108,6 @@ public class MenuScreen implements Screen {
         //endregion
     }
 
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -138,6 +129,7 @@ public class MenuScreen implements Screen {
         spriteBatch.enableBlending();
         spriteBatch.begin();
         spriteBatch.draw(Assets.menuBackground, 0, 0, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
+
         popupMenu.draw(spriteBatch);
         draw();
 
@@ -153,19 +145,6 @@ public class MenuScreen implements Screen {
     }
 
     private void onClickMenuWaiting() {
-        for (com.desitum.castleWars.objects.MenuButton mb : menuWorld.getMenuButtons()) {
-            if (com.desitum.castleWars.libraries.CollisionDetection.pointInRectangle(mb.getBoundingRectangle(), touchPoint)) { // if touched a rectangle
-                mb.onClick();
-                if (mb.getCommand().equals(PLAY)) { // If the button was play
-                    //Move to the Game Screen
-                } else if (mb.getCommand().equals(SCORE)) { // If the button was high scores
-                    //Bring up Scores
-                } else if (mb.getCommand().equals(SETTINGS)) { // If the button was sound
-                    popupMenu.moveIn();
-                    state = SETTINGS_MENU;
-                }
-            }
-        }
     }
 
     private void update(float delta) {

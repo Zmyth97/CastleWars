@@ -1,4 +1,4 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;

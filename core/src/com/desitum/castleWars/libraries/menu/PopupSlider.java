@@ -103,7 +103,6 @@ public class PopupSlider extends PopupWidget {
         return sliderX/getWidth();
     }
 
-    @Override
     public void draw(SpriteBatch batch){
         super.draw(batch);
         batch.draw(sliderTexture, getX() + sliderX - sliderWidth/2, getY() + getHeight()/2 - sliderHeight/2, sliderWidth, sliderHeight);

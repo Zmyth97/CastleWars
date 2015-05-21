@@ -40,9 +40,9 @@ public class LinearInterpolator implements Interpolator {
     }
 
     /**
-     * Gets a new {@link com.desitum.castleWars.libraries.interpolation.LinearInterpolator} from a maintained pool of {@link Interpolator}s.
+     * Gets a new {@link com.desitum.shveetlife.libraries.interpolation.LinearInterpolator} from a maintained pool of {@link Interpolator}s.
      *
-     * @return the obtained {@link com.desitum.castleWars.libraries.interpolation.LinearInterpolator}
+     * @return the obtained {@link com.desitum.shveetlife.libraries.interpolation.LinearInterpolator}
      */
     public static LinearInterpolator $() {
         return pool.obtain();

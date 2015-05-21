@@ -29,6 +29,14 @@ public abstract class PopupWidget extends Sprite {
 
     public abstract void startOutgoingAnimators();
 
+    public void setOriginCenter(){
+        this.setOrigin(this.getWidth() / 2, this.getHeight() / 2);
+    }
+    
+    public void setAlpha(float alpha){
+    	super.setColor(1, 1, 1, alpha);
+    }
+
     public void draw(SpriteBatch batch){
         super.draw(batch);
     }

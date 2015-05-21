@@ -11,7 +11,10 @@ import com.desitum.castleWars.libraries.interpolation.Interpolator;
 import com.desitum.castleWars.libraries.interpolation.LinearInterpolator;
 import com.desitum.castleWars.libraries.interpolation.OvershootInterpolator;
 
-
+/**
+ * Created by kody on 2/24/15.
+ * can be used by kody and people in []
+ */
 public class MovementAnimator implements Animator {
 
     private float startPos;

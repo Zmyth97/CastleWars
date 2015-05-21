@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import java.util.ArrayList;
 
 /**
- * Created by Zmyth97 on 2/25/2015.
+ * Created by Zmyth97 on 2/15/2015.
  */
 public class Colors {
     public static final Color ACTIVE_CIRCLE = new Color(0.992f, 0.231f, 0.251f, 1);// 253, 59, 64

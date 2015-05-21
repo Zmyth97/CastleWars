@@ -42,4 +42,31 @@ public class CastleWars extends Game {
         getScreen().dispose();
     }
 
+    //CheckList!!!//
+
+    //Basics//
+    //CardActions
+    //GUI
+        //GameScreen Layout
+        //Deck Animations/Layout
+        //Castle Texture & Animations/Layout
+        //Particle Effects for Castle and Cards
+        //Card Texture & Animations/Layout for Cards
+        //Background
+        //Card Images
+        //MenuScreen Additions (Multi Button, Build Deck, Settings, Game Difficulty, Store for Purchases, etc)
+    //Computer AI
+    //Dev Console
+    //Achievements
+
+    //Extra//
+    //Multiplayer
+    //In App Purchases
+    //Random Events
+    //Random Cards
+    //Build your Deck
+    //Textures for Skin Packs
+    //More Cards for Packs
+
+
 }

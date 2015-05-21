@@ -46,10 +46,10 @@ public class DecelerateInterpolator implements Interpolator {
     }
 
     /**
-     * Gets a new {@link com.desitum.castleWars.libraries.interpolation.DecelerateInterpolator} from a maintained pool of {@link Interpolator}s.
+     * Gets a new {@link com.desitum.shveetlife.libraries.interpolation.DecelerateInterpolator} from a maintained pool of {@link Interpolator}s.
      *
      * @param factor the factor controlling the rate of change
-     * @return the obtained {@link com.desitum.castleWars.libraries.interpolation.DecelerateInterpolator}
+     * @return the obtained {@link com.desitum.shveetlife.libraries.interpolation.DecelerateInterpolator}
      */
     public static DecelerateInterpolator $(float factor) {
         DecelerateInterpolator inter = pool.obtain();
@@ -59,11 +59,11 @@ public class DecelerateInterpolator implements Interpolator {
     }
 
     /**
-     * Gets a new {@link com.desitum.castleWars.libraries.interpolation.DecelerateInterpolator} from a maintained pool of {@link Interpolator}s.
+     * Gets a new {@link com.desitum.shveetlife.libraries.interpolation.DecelerateInterpolator} from a maintained pool of {@link Interpolator}s.
      * <p/>
-     * The initial factor is set to <code>{@value com.desitum.castleWars.libraries.interpolation.DecelerateInterpolator#DEFAULT_FACTOR}</code>.
+     * The initial factor is set to <code>{@value com.desitum.shveetlife.libraries.interpolation.DecelerateInterpolator#DEFAULT_FACTOR}</code>.
      *
-     * @return the obtained {@link com.desitum.castleWars.libraries.interpolation.DecelerateInterpolator}
+     * @return the obtained {@link com.desitum.shveetlife.libraries.interpolation.DecelerateInterpolator}
      */
     public static DecelerateInterpolator $() {
         return $(DEFAULT_FACTOR);

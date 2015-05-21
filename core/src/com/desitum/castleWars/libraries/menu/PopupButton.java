@@ -1,5 +1,6 @@
 package com.desitum.castleWars.libraries.menu;
 
+
 import com.badlogic.gdx.graphics.Texture;
 import com.desitum.castleWars.libraries.animation.Animator;
 
@@ -35,7 +36,7 @@ public class PopupButton extends PopupWidget {
         this.goingOutAnimators = new ArrayList<Animator>();
     }
 
-    public void onClickDown(){
+	public void onClickDown(){
         this.setTexture(downTexture);
         beenDown = true;
     }
