@@ -1,12 +1,22 @@
 package com.desitum.castleWars.objects;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
+import java.util.ArrayList;
+
+import kody.libgdx.libraries.animation.Animator;
+
 /**
  * Created by Zmyth97 on 5/18/2015.
  */
-public class Castle {
+public class Castle extends Sprite {
     private float health; //Health = height in this game haha
 
-    public Castle(){
+    private ArrayList<Animator> animators;
+
+    public Castle(Texture castleImage){
+        super(castleImage, 0, 0, castleImage.getWidth(), castleImage.getHeight());
         health = 30;
     }
 
@@ -22,5 +32,9 @@ public class Castle {
         if(health >= 100){
             //End Game!
         }
+    }
+
+    public void addAnimator(Animator anim) {
+        animators.add(anim);
     }
 }

@@ -13,6 +13,9 @@ import kody.libgdx.libraries.interpolation.Interpolation;
  */
 public class GameWorld implements GameInterface {
 
+    public static final int PLAYER = 0;
+    public static final int PLAYER2 = 1;
+
     private Resources myResources;
 
     public static final float DISCARD_PILE_X = 5;
@@ -41,5 +44,10 @@ public class GameWorld implements GameInterface {
     @Override
     public Resources getResources() {
         return myResources;
+    }
+
+    @Override
+    public int getPlayerTurn() {
+        return 0;
     }
 }

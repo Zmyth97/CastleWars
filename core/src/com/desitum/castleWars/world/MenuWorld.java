@@ -31,7 +31,6 @@ public class MenuWorld {
 
         //Add the buttons to the ArrayList
         menuButtons.add(playButton);
-        //menuButtons.add(multiButton);
         menuButtons.add(scoreButton);
         menuButtons.add(settingsButton);
 

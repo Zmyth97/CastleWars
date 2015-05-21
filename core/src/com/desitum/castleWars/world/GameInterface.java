@@ -10,4 +10,5 @@ import com.desitum.castleWars.objects.Resources;
 public interface GameInterface {
     public void onClickCard(Card card, int cardID);
     public Resources getResources();
+    public int getPlayerTurn();
 }

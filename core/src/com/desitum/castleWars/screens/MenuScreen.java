@@ -36,11 +36,6 @@ public class MenuScreen implements Screen {
     public static final int MENU_TRANSITION = 2;
     public static final int SETTINGS_MENU = 3;
 
-
-    public static String PLAY = "play";
-    public static String SCORE = "open_scores";
-    public static String SETTINGS = "settings";
-
     private OrthographicCamera cam;
     private SpriteBatch spriteBatch;
 
@@ -53,7 +48,6 @@ public class MenuScreen implements Screen {
     private Vector3 touchPoint;
 
     private com.desitum.castleWars.GooglePlayServicesInterface gpgs; //Will be used for scoreboard popup later
-
 
     public MenuScreen(com.desitum.castleWars.GooglePlayServicesInterface gps) {
         gpgs = gps;
@@ -114,7 +108,6 @@ public class MenuScreen implements Screen {
         popupMenu.addPopupWidget(okButton);
         //endregion
     }
-
 
     @Override
     public void render(float delta) {
