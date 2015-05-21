@@ -113,51 +113,136 @@ public class Resources {
         return computerGems;
     }
 
-    public void setPlayerBuilders(int playerBuilders) {
-        this.playerBuilders = playerBuilders;
+
+    public int adjustPlayerBuilders(int amount) {
+        int difference = amount;
+        if (playerBuilders > Math.abs(difference) && amount < 0) {
+            difference = -playerBuilders;
+            playerBuilders = 0;
+        } else {
+            playerBuilders += amount;
+        }
+        return difference;
     }
 
-    public void setPlayerSoldiers(int playerSoldiers) {
-        this.playerSoldiers = playerSoldiers;
+    public int adjustPlayerSoldiers(int amount) {
+        int difference = amount;
+        if (playerSoldiers > Math.abs(difference) && amount < 0) {
+            difference = -playerSoldiers;
+            playerSoldiers = 0;
+        } else {
+            playerSoldiers += amount;
+        }
+        return difference;
     }
 
-    public void setPlayerWizards(int playerWizards) {
-        this.playerWizards = playerWizards;
+    public int adjustPlayerWizards(int amount) {
+        int difference = amount;
+        if (playerWizards > Math.abs(difference) && amount < 0) {
+            difference = -playerWizards;
+            playerWizards = 0;
+        } else {
+            playerWizards += amount;
+        }
+        return difference;
     }
 
-    public void setPlayerStones(int playerStones) {
-        this.playerStones = playerStones;
+    public int adjustPlayerStones(int amount) {
+        int difference = amount;
+        if (playerStones > Math.abs(difference) && amount < 0) {
+            difference = -playerStones;
+            playerStones = 0;
+        } else {
+            playerStones += amount;
+        }
+        return difference;
     }
 
-    public void setPlayerWeapons(int playerWeapons) {
-        this.playerWeapons = playerWeapons;
+    public int adjustPlayerWeapons(int amount) {
+        int difference = amount;
+        if (playerWeapons > Math.abs(difference) && amount < 0) {
+            difference = -playerWeapons;
+            playerWeapons = 0;
+        } else {
+            playerWeapons += amount;
+        }
+        return difference;
     }
 
-    public void setPlayerGems(int playerGems) {
-        this.playerGems = playerGems;
+    public int adjustPlayerGems(int amount) {
+        int difference = amount;
+        if (playerGems > Math.abs(difference) && amount < 0) {
+            difference = -playerGems;
+            playerGems = 0;
+        } else {
+            playerGems += amount;
+        }
+        return difference;
     }
 
-    public void setComputerBuilders(int computerBuilders) {
-        this.computerBuilders = computerBuilders;
+    public int adjustComputerBuilders(int amount) {
+        int difference = amount;
+        if (computerBuilders > Math.abs(difference) && amount < 0) {
+            difference = -computerBuilders;
+            computerBuilders = 0;
+        } else {
+            computerBuilders += amount;
+        }
+        return difference;
     }
 
-    public void setComputerSoldiers(int computerSoldiers) {
-        this.computerSoldiers = computerSoldiers;
+    public int adjustComputerSoldiers(int amount) {
+        int difference = amount;
+        if (computerSoldiers > Math.abs(difference) && amount < 0) {
+            difference = -computerSoldiers;
+            computerSoldiers = 0;
+        } else {
+            computerSoldiers += amount;
+        }
+        return difference;
     }
 
-    public void setComputerWizards(int computerWizards) {
-        this.computerWizards = computerWizards;
+    public int adjustComputerWizards(int amount) {
+        int difference = amount;
+        if (computerWizards > Math.abs(difference) && amount < 0) {
+            difference = -computerWizards;
+            computerWizards = 0;
+        } else {
+            computerWizards += amount;
+        }
+        return difference;
     }
 
-    public void setComputerStones(int computerStones) {
-        this.computerStones = computerStones;
+    public int adjustComputerStones(int amount) {
+        int difference = amount;
+        if (computerStones > Math.abs(difference) && amount < 0) {
+            difference = -computerStones;
+            computerStones = 0;
+        } else {
+            computerStones += amount;
+        }
+        return difference;
     }
 
-    public void setComputerWeapons(int computerWeapons) {
-        this.computerWeapons = computerWeapons;
+    public int adjustComputerWeapons(int amount) {
+        int difference = amount;
+        if (computerWeapons > Math.abs(difference) && amount < 0) {
+            difference = -computerWeapons;
+            computerWeapons = 0;
+        } else {
+            computerWeapons += amount;
+        }
+        return difference;
     }
 
-    public void setComputerGems(int computerGems) {
-        this.computerGems = computerGems;
+    public int adjustComputerGems(int amount) {
+        int difference = amount;
+        if (computerGems > Math.abs(difference) && amount < 0) {
+            difference = -computerGems;
+            computerGems = 0;
+        } else {
+            computerGems += amount;
+        }
+        return difference;
     }
 }

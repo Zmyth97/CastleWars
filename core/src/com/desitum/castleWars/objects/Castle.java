@@ -56,4 +56,8 @@ public class Castle extends Sprite {
     public void addAnimator(Animator anim) {
         animators.add(anim);
     }
+
+    public void setHealth(float health) {
+        this.health = health;
+    }
 }
