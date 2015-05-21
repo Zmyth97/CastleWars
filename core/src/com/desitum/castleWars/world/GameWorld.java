@@ -1,12 +1,11 @@
 package com.desitum.castleWars.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.desitum.castleWars.libraries.animation.Animator;
+import com.desitum.castleWars.libraries.animation.MovementAnimator;
+import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Resources;
-
-import kody.libgdx.libraries.animation.Animator;
-import kody.libgdx.libraries.animation.MovementAnimator;
-import kody.libgdx.libraries.interpolation.Interpolation;
 
 /**
  * Created by Zmyth97 on 2/25/2015.

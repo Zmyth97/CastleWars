@@ -4,8 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-
-import kody.libgdx.libraries.Drawing;
+import com.desitum.castleWars.libraries.Drawing;
 
 /**
  * Created by Zmyth97 on 2/25/2015.

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -11,21 +12,21 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
 
-import kody.libgdx.libraries.animation.MovementAnimator;
-import kody.libgdx.libraries.interpolation.Interpolation;
-import kody.libgdx.libraries.menu.OnClickListener;
-import kody.libgdx.libraries.menu.PopupButton;
-import kody.libgdx.libraries.menu.PopupMenu;
-import kody.libgdx.libraries.menu.PopupSlider;
-import kody.libgdx.libraries.menu.PopupSliderListener;
+import com.desitum.castleWars.libraries.animation.MovementAnimator;
+import com.desitum.castleWars.libraries.interpolation.Interpolation;
+import com.desitum.castleWars.libraries.menu.OnClickListener;
+import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.menu.PopupMenu;
+import com.desitum.castleWars.libraries.menu.PopupSlider;
+import com.desitum.castleWars.libraries.menu.PopupSliderListener;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
 public class MenuScreen implements Screen {
 
-    public static final float SCREEN_WIDTH = 10;
-    public static final float SCREEN_HEIGHT = 15;
+    public static final float SCREEN_WIDTH = 15;
+    public static final float SCREEN_HEIGHT = 10;
 
     public static int state = 1;
 
@@ -130,6 +131,10 @@ public class MenuScreen implements Screen {
         spriteBatch.enableBlending();
         spriteBatch.begin();
         spriteBatch.draw(Assets.menuBackground, 0, 0, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
+
+        Sprite mySprite = new Sprite(Assets.cancelButtonDown);
+        mySprite.setSize(5, 5);
+        mySprite.draw(spriteBatch);
         //popupMenu.draw(spriteBatch);
         draw();
 
