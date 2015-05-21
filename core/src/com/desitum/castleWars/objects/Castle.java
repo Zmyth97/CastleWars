@@ -20,7 +20,16 @@ public class Castle extends Sprite {
     }
 
     public void doDamage(float damage){
-        health -= damage;
+        if(wall.getHealth() > 0){
+            if(damage > wall.getHealth()){
+                float extraDamage = damage - wall.getHealth();
+                wall.doDamage(damage);
+                doDamage(extraDamage);
+            } else {
+                health -= damage;
+            }
+
+        }
         if(health <= 0){
             //End game!
         }
@@ -31,6 +40,14 @@ public class Castle extends Sprite {
         if(health >= 100){
             //End Game!
         }
+    }
+
+    public float getHealth() {
+        return health;
+    }
+
+    public Wall getWall() {
+        return wall;
     }
 
     public void addAnimator(Animator anim) {

@@ -16,9 +16,10 @@ import java.util.ArrayList;
  */
 public class Card extends Sprite {
 
-    private static final int BUILD = 1;
-    private static final int ATTACK = 2;
-    private static final int MAGIC = 3;
+    public static final int BUILD = 1;
+    public static final int ATTACK = 2;
+    public static final int MAGIC = 3;
+    public static final int GOLDEN = 4;
 
     private static Color regularColor = new Color(1f, 1f, 1f, 1);
 
