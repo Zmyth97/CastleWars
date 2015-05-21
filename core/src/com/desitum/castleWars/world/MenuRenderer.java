@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.screens.MenuScreen;
 
+import kody.libgdx.libraries.menu.PopupButton;
+
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
@@ -24,8 +26,8 @@ public void render() {
         menuCamera.update();
         menuBatch.setProjectionMatrix(menuCamera.combined);
 
-        for (com.desitum.castleWars.objects.MenuButton menuItem : this.world.getMenuButtons()) {
-        menuItem.draw(menuBatch);
+        for (PopupButton menuItem : this.world.getMenuButtons()) {
+            menuItem.draw(menuBatch);
         }
 
         }

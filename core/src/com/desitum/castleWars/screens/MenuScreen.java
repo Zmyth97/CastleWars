@@ -130,7 +130,7 @@ public class MenuScreen implements Screen {
         spriteBatch.enableBlending();
         spriteBatch.begin();
         spriteBatch.draw(Assets.menuBackground, 0, 0, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
-        popupMenu.draw(spriteBatch);
+        //popupMenu.draw(spriteBatch);
         draw();
 
         spriteBatch.end();

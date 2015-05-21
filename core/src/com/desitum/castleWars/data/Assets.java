@@ -1,10 +1,11 @@
 package com.desitum.castleWars.data;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+
+import kody.libgdx.libraries.Drawing;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
@@ -47,8 +48,7 @@ public class Assets {
         exitButtonUp = new Texture("menu/exit_button_up.png");
         exitButtonDown = new Texture("menu/exit_button_down.png");
 
-        textCursor = new Texture("menu/textFieldBar.png");
-        textFieldBackground = new Texture("menu/textFieldBackground.png");
+        textFieldBackground = Drawing.getTextureRoundedRectangle(50, 50, 5, new Color(0.5f, 0.2f, 0.1f, 0.8f));
         menuBackground = new Texture("menu/menu_bg.png");
 
         textFieldFont = new BitmapFont(Gdx.files.internal("font/cartoon.fnt"), Gdx.files.internal("font/cartoon.png"), false);

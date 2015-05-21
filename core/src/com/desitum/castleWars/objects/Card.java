@@ -20,9 +20,9 @@ public class Card extends Sprite {
     private static final int ATTACK = 2;
     private static final int MAGIC = 3;
 
-    private static Color regularColor = new Color(12.2f, 0f, 61.6f, 1);
+    private static Color regularColor = new Color(1f, 1f, 1f, 1);
 
-    private static Color fadedColor = new Color(30.6f, 22.7f, 63.5f, 1);
+    private static Color fadedColor = new Color(0.5f, 0.5f, 0.5f, 1);
 
     private ArrayList<Animator> animators;
 
@@ -48,13 +48,16 @@ public class Card extends Sprite {
             anim.update(delta);
         }
     }
+
     public void fadeColor(){
         colorChanger = new ColorEffects(regularColor, fadedColor, 0.2f);
+        colorChanger.setSprite(this, true, true);
         colorChanger.start(false);
     }
 
     public void restoreColor(){
         colorChanger = new ColorEffects(fadedColor, regularColor, 0.2f);
+        colorChanger.setSprite(this, true, true);
         colorChanger.start(false);
     }
 
