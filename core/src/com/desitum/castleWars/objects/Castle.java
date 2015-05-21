@@ -2,6 +2,7 @@ package com.desitum.castleWars.objects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.libraries.animation.Animator;
 
 import java.util.ArrayList;
@@ -13,11 +14,12 @@ public class Castle extends Sprite {
     private float health; //Health = height in this game haha
 
     private ArrayList<Animator> animators;
-    private Wall myWall;
+    private Wall wall;
 
     public Castle(Texture castleImage){
         super(castleImage, 0, 0, castleImage.getWidth(), castleImage.getHeight());
         health = 30;
+        wall = new Wall(Assets.cancelButtonUp);
     }
 
     public void doDamage(float damage){

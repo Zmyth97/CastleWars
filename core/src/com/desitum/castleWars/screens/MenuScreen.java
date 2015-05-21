@@ -4,14 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
-
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
@@ -132,10 +130,7 @@ public class MenuScreen implements Screen {
         spriteBatch.begin();
         spriteBatch.draw(Assets.menuBackground, 0, 0, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
 
-        Sprite mySprite = new Sprite(Assets.cancelButtonDown);
-        mySprite.setSize(5, 5);
-        mySprite.draw(spriteBatch);
-        //popupMenu.draw(spriteBatch);
+        popupMenu.draw(spriteBatch);
         draw();
 
         spriteBatch.end();
