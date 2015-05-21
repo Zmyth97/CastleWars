@@ -1,10 +1,9 @@
 package com.desitum.castleWars.world;
 
 import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.libraries.menu.PopupButton;
 
 import java.util.ArrayList;
-
-import kody.libgdx.libraries.menu.PopupButton;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
@@ -31,7 +30,6 @@ public class MenuWorld {
 
         //Add the buttons to the ArrayList
         menuButtons.add(playButton);
-        menuButtons.add(scoreButton);
         menuButtons.add(settingsButton);
 
     }
