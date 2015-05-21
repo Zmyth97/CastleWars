@@ -13,6 +13,7 @@ public class Castle extends Sprite {
     private float health; //Health = height in this game haha
 
     private ArrayList<Animator> animators;
+    private Wall myWall;
 
     public Castle(Texture castleImage){
         super(castleImage, 0, 0, castleImage.getWidth(), castleImage.getHeight());
