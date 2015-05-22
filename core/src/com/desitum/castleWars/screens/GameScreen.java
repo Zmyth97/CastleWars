@@ -28,11 +28,11 @@ public class GameScreen implements Screen {
 
     public GameScreen(GooglePlayServicesInterface googlePlayServicesInterface, CastleWars cw) {
         batch = new SpriteBatch();
-        cam = new OrthographicCamera(MenuScreen.SCREEN_WIDTH * 10, MenuScreen.SCREEN_HEIGHT * 10);
-
+        cam = new OrthographicCamera(MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
+        cam.position.set(MenuScreen.SCREEN_WIDTH/2, MenuScreen.SCREEN_HEIGHT/2, 0);
         //the viewport object will handle camera's attributes
         //the aspect provided (worldWidth/worldHeight) will be kept
-        viewport = new FitViewport(MenuScreen.SCREEN_WIDTH * 10, MenuScreen.SCREEN_HEIGHT * 10, cam);
+        viewport = new FitViewport(MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT, cam);
 
         castleWars = cw;
         gpgs = googlePlayServicesInterface;

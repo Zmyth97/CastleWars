@@ -36,7 +36,6 @@ public class KodyWorld {
                 System.out.println("Ok... X:" + touchPoint.x + ", Y:" + touchPoint.y + ", cam:" + cam);
                 cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
                 System.out.println("Ok... X:" + touchPoint.x + ", Y:" + touchPoint.y + ", cam:" + cam);
-                widgets.add(new PopupButton(Assets.cancelButtonUp, Assets.cancelButtonDown, touchPoint.x, touchPoint.y, 5, 5));
             }
         }
 

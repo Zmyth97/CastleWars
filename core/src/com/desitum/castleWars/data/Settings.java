@@ -49,12 +49,14 @@ public class Settings {
     public static int TROJAN_HORSE_AMOUNT = 2;
     public static int BLACK_PLAGUE_AMOUNT = 2;
     public static int MERLIN_AMOUNT = 2;
+    public static int DUPLICATE_AMOUNT = 2;
     //endregion
+
 
     public static void getSound() {
         Preferences prefs = Gdx.app.getPreferences("settings");
         prefs.putBoolean("soundOn", volumeOn);
-        prefs.flush();
+        //prefs.flush();
         if(Settings.volumeOn == true)
         {
             //Assets.menuMusic.setVolume(1);

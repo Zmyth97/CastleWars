@@ -22,11 +22,11 @@ public class Hand {
 
     }
 
-    private void addCardToHand(Card card){
+    public void addCardToHand(Card card){
         cardList.add(card);
     }
 
-    private void removeCardFromHand(Card card){
+    public void removeCardFromHand(Card card){
         cardList.remove(card);
     }
 

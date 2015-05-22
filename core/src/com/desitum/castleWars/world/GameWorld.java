@@ -23,8 +23,11 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private Resources myResources;
 
-    public static final float DISCARD_PILE_X = 5;
-    public static final float DISCARD_PILE_Y = 5;
+    public static final float DRAW_PILE_X = 50;
+    public static final float DRAW_PILE_Y = 50;
+    public static final float DISCARD_PILE_X = 50;
+    public static final float DISCARD_PILE_Y = 50;
+
     public GameWorld(Viewport cam) {
         super();
         super.setCam(cam);
@@ -47,7 +50,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     @Override
     public void onClickCard(Card card, int cardID) {
-        card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), DISCARD_PILE_X, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+        card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), DRAW_PILE_X, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
         //insert call to card actions here
     }
 

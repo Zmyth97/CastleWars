@@ -93,6 +93,7 @@ public class CardActions {
     public static final int TROJAN_HORSE = 301; //Destroy 20 Castle (Ignores Wall) (ATTACK)
     public static final int BLACK_PLAGUE = 302; //-1 of All People (MAGIC)
     public static final int MERLIN = 303; //+32 Attack (MAGIC)
+    public static final int DUPLICATE = 304; //Double Existing Wall Height
     //endRegion
 
     //region Golden Costs
@@ -100,6 +101,7 @@ public class CardActions {
     public static final int TROJAN_HORSE_COST = 56;
     public static final int BLACK_PLAGUE_COST = 72;
     public static final int MERLIN_COST = 64;
+    public static final int DUPLICATE_COST = 52;
     //endregion
 
     public CardActions(GameInterface gi){
@@ -441,6 +443,14 @@ public class CardActions {
             } else {
                 gi.getPlayer1().getCastle().doDamage(32);
                 gi.getResources().adjustComputerGems(-MERLIN_COST); //Cost
+            }
+        }else if(cardID == DUPLICATE){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer1().getCastle().getWall().repair(gi.getPlayer1().getCastle().getWall().getHealth());
+                gi.getResources().adjustPlayerStones(-DUPLICATE_COST); //Cost
+            } else {
+                gi.getPlayer2().getCastle().getWall().repair(gi.getPlayer2().getCastle().getWall().getHealth());
+                gi.getResources().adjustComputerStones(-DUPLICATE_COST); //Cost
             }
         }
 
