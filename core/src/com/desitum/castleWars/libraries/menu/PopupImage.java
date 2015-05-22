@@ -50,7 +50,7 @@ public class PopupImage extends PopupWidget {
 
     public void onClickUp(boolean clicked){
         if (buttonListener != null && clicked && beenDown){
-            buttonListener.onClick();
+            buttonListener.onClick(this);
         }
     }
 

@@ -17,6 +17,7 @@ import com.desitum.castleWars.libraries.menu.PopupButton;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupSlider;
 import com.desitum.castleWars.libraries.menu.PopupSliderListener;
+import com.desitum.castleWars.libraries.menu.PopupWidget;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
@@ -59,7 +60,7 @@ public class MenuScreen implements Screen {
 
         spriteBatch = new SpriteBatch();
 
-        menuWorld = new com.desitum.castleWars.world.MenuWorld();
+        menuWorld = new com.desitum.castleWars.world.MenuWorld(viewport);
 
         menuRenderer = new com.desitum.castleWars.world.MenuRenderer(menuWorld, spriteBatch);
 
@@ -77,7 +78,7 @@ public class MenuScreen implements Screen {
         PopupButton cancelButton = new PopupButton(Assets.cancelButtonUp, Assets.cancelButtonDown, 5, 5, 57.5f, 15);
         cancelButton.setButtonListener(new OnClickListener() {
             @Override
-            public void onClick() {
+            public void onClick(PopupWidget widget) {
                 popupMenu.moveOut();
                 state = MENU_WAITING;
 
@@ -97,7 +98,7 @@ public class MenuScreen implements Screen {
         PopupButton okButton = new PopupButton(Assets.okButtonUp, Assets.okButtonDown, 67.5f, 5, 57.5f, 15);
         okButton.setButtonListener(new OnClickListener() {
             @Override
-            public void onClick() {
+            public void onClick(PopupWidget widget) {
                 Settings.setVolume(volumeSlider.getPosition());
                 popupMenu.moveOut();
                 state = MENU_WAITING;

@@ -1,9 +1,11 @@
 package com.desitum.castleWars.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
+import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Player;
 import com.desitum.castleWars.data.Resources;
@@ -11,7 +13,7 @@ import com.desitum.castleWars.data.Resources;
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
-public class GameWorld implements GameInterface {
+public class GameWorld extends KodyWorld implements GameInterface {
 
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
@@ -22,7 +24,9 @@ public class GameWorld implements GameInterface {
     private Resources myResources;
 
     public static final float DISCARD_PILE_X = 5;
-    public GameWorld() {
+    public GameWorld(Viewport cam) {
+        super();
+        super.setCam(cam);
         player1 = new Player();
         player2 = new Player();
         myResources = new Resources();

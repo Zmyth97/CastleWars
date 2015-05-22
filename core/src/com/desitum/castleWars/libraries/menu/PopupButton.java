@@ -44,7 +44,7 @@ public class PopupButton extends PopupWidget {
     public void onClickUp(boolean clicked){
         this.setTexture(upTexture);
         if (buttonListener != null && clicked && beenDown){
-            buttonListener.onClick();
+            buttonListener.onClick(this);
         }
         beenDown = false;
     }
