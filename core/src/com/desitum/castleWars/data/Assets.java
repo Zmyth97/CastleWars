@@ -20,13 +20,10 @@ public class Assets {
     public static Texture cancelButtonDown;
     public static Texture okButtonUp;
     public static Texture okButtonDown;
-    public static Texture saveButtonUp;
-    public static Texture saveButtonDown;
     public static Texture exitButtonUp;
     public static Texture exitButtonDown;
 
     //Menu Textures
-    public static Texture textCursor;
     public static Texture textFieldBackground;
     public static Texture menuBackground;
 
@@ -42,8 +39,6 @@ public class Assets {
         cancelButtonDown = new Texture("menu/cancel_button_down.png");
         okButtonUp = new Texture("menu/ok_button_up.png");
         okButtonDown = new Texture("menu/ok_button_down.png");
-        saveButtonUp = new Texture("menu/save_button_up.png");
-        saveButtonDown = new Texture("menu/save_button_down.png");
         exitButtonUp = new Texture("menu/exit_button_up.png");
         exitButtonDown = new Texture("menu/exit_button_down.png");
 
