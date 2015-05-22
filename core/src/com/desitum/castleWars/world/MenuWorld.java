@@ -15,25 +15,29 @@ import com.desitum.castleWars.screens.MenuScreen;
  */
 public class MenuWorld extends KodyWorld {
 
-    private float loadTiming;
+    private MenuInterface menuInterface;
 
     private PopupButton playButton;
     private PopupButton settingsButton;
 
-    public MenuWorld(Viewport cam) {
+    public MenuWorld(Viewport cam, MenuInterface mi) {
         super();
         super.setCam(cam);
+
+        menuInterface = mi;
+
         createButtons();
+        setupOnClickListeners();
     }
 
     private void createButtons() {
         //Create the buttons!
-        playButton = new PopupButton(Assets.playButtonUp, Assets.playButtonDown, MenuScreen.SCREEN_WIDTH/2-1.5f, 5, 3, 2);
-        playButton.addIncomingAnimator(new MovementAnimator(playButton, -2, playButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
+        playButton = new PopupButton(Assets.playButtonUp, Assets.playButtonDown, MenuScreen.SCREEN_WIDTH/2-15f, 50, 30, 20);
+        playButton.addIncomingAnimator(new MovementAnimator(playButton, -20, playButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         playButton.startIncomingAnimators();
 
-        settingsButton = new PopupButton(Assets.settingsButtonUp, Assets.settingsButtonDown, MenuScreen.SCREEN_WIDTH/2 - 1.5f, 2, 3, 2);
-        settingsButton.addIncomingAnimator(new MovementAnimator(settingsButton, -2, settingsButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
+        settingsButton = new PopupButton(Assets.settingsButtonUp, Assets.settingsButtonDown, MenuScreen.SCREEN_WIDTH/2 - 15f, 20, 30, 20);
+        settingsButton.addIncomingAnimator(new MovementAnimator(settingsButton, -20, settingsButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         settingsButton.startIncomingAnimators();
 
         //Add the buttons to the ArrayList
@@ -49,6 +53,14 @@ public class MenuWorld extends KodyWorld {
         playButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
+                menuInterface.playGame();
+            }
+        });
+
+        settingsButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                menuInterface.settings();
             }
         });
     }

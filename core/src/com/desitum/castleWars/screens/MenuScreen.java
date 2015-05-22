@@ -8,214 +8,77 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.desitum.castleWars.data.Assets;
-import com.desitum.castleWars.data.Settings;
-import com.desitum.castleWars.libraries.animation.MovementAnimator;
-import com.desitum.castleWars.libraries.interpolation.Interpolation;
-import com.desitum.castleWars.libraries.menu.OnClickListener;
-import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.CastleWars;
+import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
-import com.desitum.castleWars.libraries.menu.PopupSlider;
-import com.desitum.castleWars.libraries.menu.PopupSliderListener;
-import com.desitum.castleWars.libraries.menu.PopupWidget;
+import com.desitum.castleWars.world.MenuInterface;
+import com.desitum.castleWars.world.MenuRenderer;
+import com.desitum.castleWars.world.MenuWorld;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
+ * can be used by Zmyth97 and people in [Zmyth97}]
  */
-public class MenuScreen implements Screen {
+public class MenuScreen implements Screen, MenuInterface {
 
     public static final float SCREEN_WIDTH = 15;
     public static final float SCREEN_HEIGHT = 10;
 
-    public static int state = 1;
-
-    private Viewport viewport;
-
-    public static final int MENU_BEFORE_TRANSITION = 0;
-    public static final int MENU_WAITING = 1;
-    public static final int MENU_TRANSITION = 2;
-    public static final int SETTINGS_MENU = 3;
 
     private OrthographicCamera cam;
+    private Viewport viewport;
+
     private SpriteBatch spriteBatch;
 
     private PopupMenu popupMenu;
 
-    private com.desitum.castleWars.world.MenuWorld menuWorld;
+    private MenuWorld menuWorld;
 
-    private com.desitum.castleWars.world.MenuRenderer menuRenderer;
+    private MenuRenderer menuRenderer;
 
-    private Vector3 touchPoint;
+    private GooglePlayServicesInterface gpgs; //Will be used for scoreboard popup later
+    private CastleWars castleWars;
 
-    private com.desitum.castleWars.GooglePlayServicesInterface gpgs; //Will be used for scoreboard popup later
-
-    public MenuScreen(com.desitum.castleWars.GooglePlayServicesInterface gps) {
+    public MenuScreen(GooglePlayServicesInterface gps, CastleWars castleWars) {
         gpgs = gps;
-        cam = new OrthographicCamera(SCREEN_WIDTH * 10, SCREEN_HEIGHT * 10);
-        cam.position.set(SCREEN_WIDTH * 10 / 2, SCREEN_HEIGHT * 10 / 2, 0);
-
-        //the viewport object will handle camera's attributes
-        //the aspect provided (worldWidth/worldHeight) will be kept
-        viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
+        this.castleWars = castleWars;
 
         spriteBatch = new SpriteBatch();
 
-        menuWorld = new com.desitum.castleWars.world.MenuWorld(viewport);
+        cam = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
+        cam.position.set(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0);
+        viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
 
-        menuRenderer = new com.desitum.castleWars.world.MenuRenderer(menuWorld, spriteBatch);
-
-        //region SettingsMenu
-        // code to create the settings menu
-        // do not delete or edit without permission first
-        popupMenu = new PopupMenu(Assets.textFieldBackground, 10, -130, 130, 80);
-        MovementAnimator yAnimator = new MovementAnimator(-130, 10, 1, Interpolation.DECELERATE_INTERPOLATOR);
-        yAnimator.setControllingY(true);
-        popupMenu.addIncomingAnimator(yAnimator);
-        MovementAnimator yAnimator2 = new MovementAnimator(10, -130, 1, Interpolation.ANTICIPATE_INTERPOLATOR);
-        yAnimator2.setControllingY(true);
-        popupMenu.addOutgoingAnimator(yAnimator2);
-
-        PopupButton cancelButton = new PopupButton(Assets.cancelButtonUp, Assets.cancelButtonDown, 5, 5, 57.5f, 15);
-        cancelButton.setButtonListener(new OnClickListener() {
-            @Override
-            public void onClick(PopupWidget widget) {
-                popupMenu.moveOut();
-                state = MENU_WAITING;
-
-            }
-        });
-        popupMenu.addPopupWidget(cancelButton);
-
-        final PopupSlider volumeSlider = new PopupSlider(Assets.textFieldBackground, Assets.textFieldBackground, 5, 60, 120, 5, 3, 10);
-        volumeSlider.setSliderListener(new PopupSliderListener() {
-            @Override
-            public void onChange(float pos) {
-                System.out.println(pos);
-            }
-        });
-        popupMenu.addPopupWidget(volumeSlider);
-
-        PopupButton okButton = new PopupButton(Assets.okButtonUp, Assets.okButtonDown, 67.5f, 5, 57.5f, 15);
-        okButton.setButtonListener(new OnClickListener() {
-            @Override
-            public void onClick(PopupWidget widget) {
-                Settings.setVolume(volumeSlider.getPosition());
-                popupMenu.moveOut();
-                state = MENU_WAITING;
-
-            }
-        });
-        popupMenu.addPopupWidget(okButton);
-        //endregion
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-
-        if (state == SETTINGS_MENU) {
-            popupMenu.updateTouchInput(touchPoint, Gdx.input.isTouched());
-        }
-        if (Gdx.input.justTouched()) {
-            if (state == MENU_WAITING || state == MENU_TRANSITION) {
-                touchPoint = menuRenderer.getCam().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            }
-            onClick();
-        }
-
-        update(delta);
-
-        cam.update();
-        spriteBatch.enableBlending();
-        spriteBatch.begin();
-        spriteBatch.draw(Assets.menuBackground, 0, 0, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
-
-        popupMenu.draw(spriteBatch);
-        draw();
-
-        spriteBatch.end();
-    }
-
-    private void onClick() {
-        switch (state) {
-            case MENU_WAITING:
-                onClickMenuWaiting();
-                break;
-        }
-    }
-
-    private void onClickMenuWaiting() {
+        menuWorld = new MenuWorld(viewport, this);
+        menuRenderer = new MenuRenderer(menuWorld, spriteBatch);
     }
 
     private void update(float delta) {
-        switch (state) {
-            case MENU_BEFORE_TRANSITION:
-                updateMenuBeforeTransition(delta);
-                break;
-            case MENU_WAITING:
-                updateMenuWaiting(delta);
-                break;
-            case MENU_TRANSITION:
-                updateMenuTransition(delta);
-                break;
-            case SETTINGS_MENU:
-                updatePopupMenu(delta);
+        menuWorld.update(delta);
+
+        if (Gdx.input.isTouched()){
+            System.out.println(viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x);
         }
-    }
-
-    private void updateMenuBeforeTransition(float delta) {
-        menuWorld.update(delta);
-    }
-
-    private void updateMenuTransition(float delta) {
-        menuWorld.update(delta);
-    }
-
-    private void updateMenuWaiting(float delta) {
-        menuWorld.update(delta);
-    }
-
-    private void updatePopupMenu(float delta){
-        popupMenu.update(delta);
     }
 
     private void draw() {
-        switch (state) {
-            case MENU_BEFORE_TRANSITION:
-                drawMenuBeforeTransition();
-                break;
-            case MENU_WAITING:
-                drawMenuWaiting();
-                break;
-            case MENU_TRANSITION:
-                drawMenuTransition();
-                break;
-            case SETTINGS_MENU:
-                drawMenuTransition();
-                break;
-        }
-    }
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
 
-    private void drawMenuBeforeTransition() {
+        spriteBatch.begin();
         menuRenderer.render();
-    }
-
-    private void drawMenuTransition() {
-        menuRenderer.render();
-    }
-
-    private void drawMenuWaiting() {
-        menuRenderer.render();
+        spriteBatch.end();
     }
 
     @Override
-    public void resize(int width, int height) {
-        //notice that the method receives the entire screen size
-        //the last argument tells the viewport to center the camera in the screen
-        viewport.update(width, height, true);
+    public void playGame() {
+        castleWars.setScreen(new GameScreen(gpgs, castleWars));
     }
 
+    @Override
+    public void settings() {
+
+    }
 
     @Override
     public void show() {
@@ -223,7 +86,13 @@ public class MenuScreen implements Screen {
     }
 
     @Override
-    public void hide() {
+    public void render(float delta) {
+        update(delta);
+        draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {
 
     }
 
@@ -238,8 +107,12 @@ public class MenuScreen implements Screen {
     }
 
     @Override
-    public void dispose() {
+    public void hide() {
 
     }
 
+    @Override
+    public void dispose() {
+
+    }
 }

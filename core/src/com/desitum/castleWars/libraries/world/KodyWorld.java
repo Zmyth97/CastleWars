@@ -3,6 +3,7 @@ package com.desitum.castleWars.libraries.world;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.menu.PopupButton;
 import com.desitum.castleWars.libraries.menu.PopupScrollArea;
@@ -32,7 +33,10 @@ public class KodyWorld {
 
         if (Gdx.input.isTouched()) {
             if (cam != null) {
-                touchPoint = cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+                System.out.println("Ok... X:" + touchPoint.x + ", Y:" + touchPoint.y + ", cam:" + cam);
+                cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+                System.out.println("Ok... X:" + touchPoint.x + ", Y:" + touchPoint.y + ", cam:" + cam);
+                widgets.add(new PopupButton(Assets.cancelButtonUp, Assets.cancelButtonDown, touchPoint.x, touchPoint.y, 5, 5));
             }
         }
 

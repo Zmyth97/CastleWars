@@ -5,11 +5,16 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.desitum.castleWars.CastleWars;
+import com.desitum.castleWars.GooglePlayServicesInterface;
 
 /**
  * Created by Zmyth97 on 5/18/2015.
  */
 public class GameScreen implements Screen {
+
+    private CastleWars castleWars;
+    private GooglePlayServicesInterface gpgs;
 
     private SpriteBatch batch;
     private OrthographicCamera cam;
@@ -21,13 +26,16 @@ public class GameScreen implements Screen {
     public static final int GAME_OVER = 6;
     public static final int GAME_OVER_WITH_TRANSITION = 7;
 
-    public GameScreen(){
+    public GameScreen(GooglePlayServicesInterface googlePlayServicesInterface, CastleWars cw) {
         batch = new SpriteBatch();
         cam = new OrthographicCamera(MenuScreen.SCREEN_WIDTH * 10, MenuScreen.SCREEN_HEIGHT * 10);
 
         //the viewport object will handle camera's attributes
         //the aspect provided (worldWidth/worldHeight) will be kept
         viewport = new FitViewport(MenuScreen.SCREEN_WIDTH * 10, MenuScreen.SCREEN_HEIGHT * 10, cam);
+
+        castleWars = cw;
+        gpgs = googlePlayServicesInterface;
     }
 
     @Override

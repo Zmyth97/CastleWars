@@ -51,7 +51,7 @@ public class SplashScreen implements Screen {
     @Override
     public void render(float delta) {
         if (timeElapsed > 3){
-            game.setScreen(new MenuScreen(gps));
+            game.setScreen(new MenuScreen(gps, game));
         } else if (beenThrough && !hasLoaded){
             hasLoaded = true;
             Assets.loadMenuTextures();
