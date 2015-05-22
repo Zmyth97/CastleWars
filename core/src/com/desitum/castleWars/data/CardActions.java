@@ -84,7 +84,7 @@ public class CardActions {
     public static final int DESTROY_GEMS_COST = 10;
     public static final int MAGE_COST = 16;
     public static final int HAT_TRICK_COST = 4;
-    public static final int LIGHTNING_STRICK_COST = 32;
+    public static final int LIGHTNING_STRIKE_COST = 32;
     public static final int BLAST_COST = 16;
     //endregion
 
@@ -385,10 +385,10 @@ public class CardActions {
         } else if(cardID == LIGHTNING_STRIKE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(16);
-                gi.getResources().adjustPlayerGems(-LIGHTNING_STRICK_COST); //Cost
+                gi.getResources().adjustPlayerGems(-LIGHTNING_STRIKE_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(16);
-                gi.getResources().adjustComputerGems(-LIGHTNING_STRICK_COST); //Cost
+                gi.getResources().adjustComputerGems(-LIGHTNING_STRIKE_COST); //Cost
             }
         } else if(cardID == BLAST){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {

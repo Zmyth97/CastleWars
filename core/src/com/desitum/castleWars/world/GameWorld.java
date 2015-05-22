@@ -24,6 +24,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private Resources myResources;
 
     public static final float DISCARD_PILE_X = 5;
+    public static final float DISCARD_PILE_Y = 5;
     public GameWorld(Viewport cam) {
         super();
         super.setCam(cam);
