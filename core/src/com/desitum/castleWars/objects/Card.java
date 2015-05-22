@@ -34,7 +34,7 @@ public class Card extends Sprite {
     private ColorEffects colorChanger; //Fade from a lighter shade to more vibrant when you actually have enough resources
     private MovementAnimator movementAnimator;
 
-    public Card(Texture cardImage, int cardType,   int cardID, int cardCost, int x, int y, GameInterface gi){
+    public Card(Texture cardImage, int cardType,   int cardID, int cardCost, float x, float y, GameInterface gi){
         super(cardImage, 0, 0, cardImage.getWidth(), cardImage.getHeight());
         available = false;
         this.cardImage = cardImage;
