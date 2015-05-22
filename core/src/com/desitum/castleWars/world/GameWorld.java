@@ -6,7 +6,7 @@ import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Player;
-import com.desitum.castleWars.objects.Resources;
+import com.desitum.castleWars.data.Resources;
 
 /**
  * Created by Zmyth97 on 2/25/2015.

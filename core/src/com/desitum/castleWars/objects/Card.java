@@ -19,7 +19,6 @@ public class Card extends Sprite {
     public static final int BUILD = 1;
     public static final int ATTACK = 2;
     public static final int MAGIC = 3;
-    public static final int GOLDEN = 4;
 
     private static Color regularColor = new Color(1f, 1f, 1f, 1);
 
@@ -29,16 +28,18 @@ public class Card extends Sprite {
 
     private int cardType;
     private Texture cardImage;
+    private boolean available;
+    private int cardCost;
 
     private ColorEffects colorChanger; //Fade from a lighter shade to more vibrant when you actually have enough resources
     private MovementAnimator movementAnimator;
 
-    public Card(Texture cardImage, int cardType, int cardID, int x, int y, GameInterface gi){
+    public Card(Texture cardImage, int cardType,   int cardID, int cardCost, int x, int y, GameInterface gi){
         super(cardImage, 0, 0, cardImage.getWidth(), cardImage.getHeight());
-
+        available = false;
         this.cardImage = cardImage;
         this.cardType = cardType;
-
+        this.cardCost = cardCost;
         this.setPosition(x, y);
 
         animators = new ArrayList<Animator>();
@@ -64,5 +65,21 @@ public class Card extends Sprite {
 
     public void addMoveAnimtor(Animator anim){
         this.animators.add(anim);
+    }
+
+    public int getCardCost() {
+        return cardCost;
+    }
+
+    public int getCardType() {
+        return cardType;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }

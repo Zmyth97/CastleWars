@@ -89,10 +89,10 @@ public class CardActions {
     //endregion
 
     //region Golden Cards
-    public static final int JERICHO = 300; //Destroy Enemy Wall
-    public static final int TROJAN_HORSE = 301; //Destroy 20 Castle (Ignores Wall)
-    public static final int BLACK_PLAGUE = 302; //-1 of All People
-    public static final int MERLIN = 303; //+32 Attack
+    public static final int JERICHO = 300; //Destroy Enemy Wall (ATTACK)
+    public static final int TROJAN_HORSE = 301; //Destroy 20 Castle (Ignores Wall) (ATTACK)
+    public static final int BLACK_PLAGUE = 302; //-1 of All People (MAGIC)
+    public static final int MERLIN = 303; //+32 Attack (MAGIC)
     //endRegion
 
     //region Golden Costs

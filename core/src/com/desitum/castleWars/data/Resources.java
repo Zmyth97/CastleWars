@@ -1,4 +1,4 @@
-package com.desitum.castleWars.objects;
+package com.desitum.castleWars.data;
 
 import java.util.ArrayList;
 
