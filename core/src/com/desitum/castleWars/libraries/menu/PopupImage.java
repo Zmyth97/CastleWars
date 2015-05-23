@@ -23,6 +23,17 @@ public class PopupImage extends PopupWidget {
 
     private OnClickListener buttonListener;
 
+    /**
+     * PopupImage can have a highlighted area showing it is selected,
+     * Extends PopupWidget and has all the animations you need
+     * @param upTexture image to turn into a PopupImage
+     * @param highlight texture to use as a highlight
+     * @param x x position in relation to the parent (if applicable)
+     * @param y y position in relation to the parent (if applicable)
+     * @param width width of the PopupImage
+     * @param height height of the PopupImage
+     * @param enabledClicking whether you can click on it to highlight it
+     */
     public PopupImage(Texture upTexture, Texture highlight, float x, float y, float width, float height, boolean enabledClicking) {
         super(upTexture, width, height, x, y);
 

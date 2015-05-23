@@ -26,6 +26,16 @@ public class PopupMenu extends Sprite {
 
     private int commandToSend;
 
+    /**
+     * Create new Popup Menu with a blank canvas
+     * use PopupWidgets to create and add them to the PopupMenu
+     * PopupWidgets will inherit all Animators from the PopupMenu, and can be overriden
+     * @param background background texture for the image
+     * @param x left x position of the PopupMenu
+     * @param y bottom y position of the PopupMenu
+     * @param width the width of the PopupMenu
+     * @param height the height of the PopupMenu
+     */
     public PopupMenu(Texture background, float x, float y, float width, float height){
         super(background, 0, 0, background.getWidth(), background.getHeight());
         widgets = new ArrayList<PopupWidget>();
@@ -40,6 +50,10 @@ public class PopupMenu extends Sprite {
         this.setSize(width, height);
     }
 
+    /**
+     * Draws the PopupMenu with widgets on the screen
+     * @param batch batch to draw with
+     */
     public void draw(SpriteBatch batch){
         super.draw(batch);
 
@@ -48,10 +62,16 @@ public class PopupMenu extends Sprite {
         }
     }
 
+    /**
+     * updates the PopupMenu with touch, done automatically in KodyWorld
+     * @param touchPos - touchPos in relation to the world
+     * @param clickDown - whether or not the mouse is down or not
+     */
     public void updateTouchInput(Vector3 touchPos, boolean clickDown){
-        for (PopupWidget widget: widgets){
+        for (PopupWidget widget: widgets){ // Go through each PopupWidget in the menu's widgets
+
             boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
-            if (widget.getClass().equals(PopupButton.class)){
+            if (widget.getClass().equals(PopupButton.class)){ // if Widget is a PopupButton
                 PopupButton button = (PopupButton) widget;
                 if (clickInArea && clickDown){
                     button.onClickDown();
@@ -60,7 +80,7 @@ public class PopupMenu extends Sprite {
                 } else {
                     button.onClickUp(false);
                 }
-            } else if (widget.getClass().equals(PopupSlider.class)){
+            } else if (widget.getClass().equals(PopupSlider.class)){ // if widget is a Slider
                 PopupSlider slider = (PopupSlider) widget;
                 if (clickInArea && clickDown){
                     slider.onClickDown(touchPos);
@@ -69,13 +89,20 @@ public class PopupMenu extends Sprite {
                 } else {
                     slider.onClickUp(); // handles if not in area
                 }
-            } else if (widget.getClass().equals(PopupScrollArea.class)){
+            } else if (widget.getClass().equals(PopupScrollArea.class)){ // if widget is a PopupScrollArea
                 PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
                 popupScrollArea.updateTouchInput(touchPos, clickDown);
             }
         }
     }
 
+    /**
+     * Updates information from the scroll wheel
+     * all handled in KodyWorld
+     * @param amount gives either 0, 1, or -1
+     * @param mousePos pos of the cursor
+     * @param posMatters if your mouse position matters
+     */
     public void udpateScrollInput(int amount, Vector3 mousePos, boolean posMatters){
         for (PopupWidget widget: widgets){
             if (!widget.getClass().equals(PopupScrollArea.class)){
@@ -93,6 +120,10 @@ public class PopupMenu extends Sprite {
         }
     }
 
+    /**
+     * update animation and widgets and their animations associated with the PopupMenu
+     * @param delta - time since last frame
+     */
     public void update(float delta){
         for (PopupWidget widget: widgets){
             widget.update(delta);
@@ -100,7 +131,11 @@ public class PopupMenu extends Sprite {
 
         updateAnimation(delta);
     }
-    //Kody is an idiot
+
+    /**
+     * updates animation for the PopupMenu
+     * @param delta - time since last frame
+     */
     private void updateAnimation(float delta){
         for (Animator anim: incomingAnimators) {
             anim.update(delta);
@@ -111,16 +146,28 @@ public class PopupMenu extends Sprite {
         }
     }
 
+    /**
+     * adds an animator that should be run when called moveIn
+     * @param anim - animator to add
+     */
     public void addIncomingAnimator(Animator anim){
         incomingAnimators.add(anim);
         incomingAnimatorsToAdd.add(anim);
     }
 
+    /** adds an animator that should be run when called moveOut
+     * @param anim - animator to add
+     */
     public void addOutgoingAnimator(Animator anim){
         outgoingAnimators.add(anim);
         outgoingAnimatorsToAdd.add(anim);
     }
 
+    /**
+     * add widget to the PopupMenu
+     * widget location is in relation to PopupMenu
+     * @param toAdd
+     */
     public void addPopupWidget(PopupWidget toAdd){
         for (Animator anim: incomingAnimatorsToAdd){
             Animator dupAnim = anim.duplicate();
@@ -156,6 +203,9 @@ public class PopupMenu extends Sprite {
         widgets.add(toAdd);
     }
 
+    /**
+     * start animators added to incomingAnimators
+     */
     public void moveIn(){
         for (PopupWidget widget: widgets){
             widget.startIncomingAnimators();
@@ -165,6 +215,9 @@ public class PopupMenu extends Sprite {
         }
     }
 
+    /**
+     * start animators added to outgoingAnimators
+     */
     public void moveOut(){
         for (PopupWidget widget: widgets){
             widget.startOutgoingAnimators();
