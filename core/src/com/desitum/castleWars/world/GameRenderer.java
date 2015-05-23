@@ -2,6 +2,8 @@ package com.desitum.castleWars.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.desitum.castleWars.objects.Card;
+import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.screens.MenuScreen;
 
 /**
@@ -17,15 +19,16 @@ public class GameRenderer {
         this.world = world;
         this.gameBatch = batch;
 
-        gameCam = new OrthographicCamera(MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
-        gameCam.position.set(MenuScreen.SCREEN_WIDTH / 2, MenuScreen.SCREEN_WIDTH / 2, 0);
+        gameCam = new OrthographicCamera(GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
+        gameCam.position.set(GameScreen.SCREEN_WIDTH / 2, GameScreen.SCREEN_WIDTH / 2, 0);
     }
 
-    public void render() {
+    public void draw(){
         gameCam.position.set(MenuScreen.SCREEN_WIDTH / 2, MenuScreen.SCREEN_HEIGHT / 2, 0);
         gameCam.update();
         gameBatch.setProjectionMatrix(gameCam.combined);
 
+       //Draw stuff
     }
 
     public OrthographicCamera getCam() {
