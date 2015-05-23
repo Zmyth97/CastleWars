@@ -21,8 +21,8 @@ import com.desitum.castleWars.world.MenuWorld;
  */
 public class MenuScreen implements Screen, MenuInterface {
 
-    public static final float SCREEN_WIDTH = 15;
-    public static final float SCREEN_HEIGHT = 10;
+    public static final float SCREEN_WIDTH = 150;
+    public static final float SCREEN_HEIGHT = 100;
 
 
     private OrthographicCamera cam;
@@ -48,6 +48,7 @@ public class MenuScreen implements Screen, MenuInterface {
         cam = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
         cam.position.set(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0);
         viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
+        System.out.println(viewport.getWorldWidth() + ", " + viewport.getScreenWidth());
 
         menuWorld = new MenuWorld(viewport, this);
         menuRenderer = new MenuRenderer(menuWorld, spriteBatch);
@@ -93,7 +94,7 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width, height);
     }
 
     @Override
