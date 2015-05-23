@@ -37,11 +37,9 @@ public class MenuWorld extends KodyWorld {
 
         //region Settings Popup Menu
         popupMenu = new PopupMenu(Assets.textFieldBackground, 10, -130, 130, 80);
-        MovementAnimator yAnimator = new MovementAnimator(-130, 10, 1, Interpolation.DECELERATE_INTERPOLATOR);
-        yAnimator.setControllingY(true);
+        MovementAnimator yAnimator = new MovementAnimator(popupMenu, -130, 10, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         popupMenu.addIncomingAnimator(yAnimator);
-        MovementAnimator yAnimator2 = new MovementAnimator(10, -130, 1, Interpolation.ANTICIPATE_INTERPOLATOR);
-        yAnimator2.setControllingY(true);
+        MovementAnimator yAnimator2 = new MovementAnimator(popupMenu, 10, -130, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
         popupMenu.addOutgoingAnimator(yAnimator2);
 
         PopupButton cancelButton = new PopupButton(Assets.cancelButtonUp, Assets.cancelButtonDown, 5, 5, 57.5f, 15);

@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
-import com.desitum.castleWars.libraries.animation.ScaleAnimator;
 
 import java.util.ArrayList;
 
@@ -24,11 +23,6 @@ public class PopupMenu extends Sprite {
     private ArrayList<Animator> outgoingAnimatorsToAdd;
 
     private Texture background;
-
-    private float x;
-    private float y;
-    private float width;
-    private float height;
 
     private int commandToSend;
 
@@ -47,7 +41,7 @@ public class PopupMenu extends Sprite {
     }
 
     public void draw(SpriteBatch batch){
-        batch.draw(background, x, y, width, height);
+        super.draw(batch);
 
         for (PopupWidget widget: widgets){
             widget.draw(batch);
@@ -157,8 +151,8 @@ public class PopupMenu extends Sprite {
             }
         }
 
-        toAdd.setX(x + toAdd.getX());
-        toAdd.setY(y + toAdd.getY());
+        toAdd.setX(getX() + toAdd.getX());
+        toAdd.setY(getY() + toAdd.getY());
         widgets.add(toAdd);
     }
 
@@ -178,18 +172,6 @@ public class PopupMenu extends Sprite {
         for (Animator anim: outgoingAnimators){
             anim.start(false);
         }
-    }
-
-    public float getY(){
-        return y;
-    }
-
-    public float getWidth(){
-        return width;
-    }
-
-    public float getHeight(){
-        return height;
     }
 }
 
