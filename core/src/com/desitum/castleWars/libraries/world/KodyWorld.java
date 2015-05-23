@@ -3,9 +3,9 @@ package com.desitum.castleWars.libraries.world;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupScrollArea;
 import com.desitum.castleWars.libraries.menu.PopupSlider;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
@@ -19,11 +19,13 @@ import java.util.ArrayList;
 public class KodyWorld {
 
     private ArrayList<PopupWidget> widgets;
+    private ArrayList<PopupMenu> menus;
     private Vector3 touchPoint;
     private Viewport cam;
 
     public KodyWorld () {
         widgets = new ArrayList<PopupWidget>();
+        menus = new ArrayList<PopupMenu>();
         touchPoint = new Vector3(0, 0, 0);
     }
     public void update(float delta) {
@@ -31,11 +33,13 @@ public class KodyWorld {
             widget.update(delta);
         }
 
+        for (PopupMenu menu: menus) {
+            menu.update(delta);
+        }
+
         if (Gdx.input.isTouched()) {
             if (cam != null) {
-                System.out.println("Ok... X:" + touchPoint.x + ", Y:" + touchPoint.y + ", cam:" + cam);
                 cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-                System.out.println("Ok... X:" + touchPoint.x + ", Y:" + touchPoint.y + ", cam:" + cam);
             }
         }
 
@@ -74,12 +78,19 @@ public class KodyWorld {
                 popupScrollArea.updateTouchInput(touchPos, clickDown);
             }
         }
+
+        for (PopupMenu menu: menus) {
+            menu.updateTouchInput(touchPos, clickDown);
+        }
     }
 
     public void addWidget(PopupWidget widget){
         widgets.add(widget);
     }
 
+    public void addPopupMenu(PopupMenu menu) {
+        menus.add(menu);
+    }
     public ArrayList<PopupWidget> getWidgets() {
         return widgets;
     }
