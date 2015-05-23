@@ -49,6 +49,7 @@ public class GameScreen implements Screen {
 
         castleWars = cw;
         gpgs = googlePlayServicesInterface;
+
     }
 
     @Override

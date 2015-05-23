@@ -3,6 +3,7 @@ package com.desitum.castleWars.world;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.screens.MenuScreen;
@@ -32,6 +33,10 @@ public class GameRenderer {
         gameBatch.setProjectionMatrix(gameCam.combined);
 
        drawWorld();
+
+        for (PopupMenu menu: this.world.getMenus()) {
+            menu.draw(gameBatch);
+        }
     }
 
     private void drawWorld(){

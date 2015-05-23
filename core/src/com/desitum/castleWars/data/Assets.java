@@ -32,6 +32,7 @@ public class Assets {
     public static Texture computerCastle;
     public static Texture gameGround;
     public static Texture gameSky;
+    public static Texture menuArea;
 
 
     //Misc Textures
@@ -62,6 +63,7 @@ public class Assets {
         computerCastle = new Texture("game/castle2.png");
         gameGround = new Texture("game/ground.png");
         gameSky = new Texture("game/sky.png");
+        menuArea = new Texture("game/area.png");
     }
 
     public static void loadSounds(){
