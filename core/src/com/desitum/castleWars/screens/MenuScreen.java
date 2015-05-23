@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.CastleWars;
@@ -29,11 +28,7 @@ public class MenuScreen implements Screen, MenuInterface {
     private Viewport viewport;
 
     private SpriteBatch spriteBatch;
-
-    private PopupMenu popupMenu;
-
     private MenuWorld menuWorld;
-
     private MenuRenderer menuRenderer;
 
     private GooglePlayServicesInterface gpgs; //Will be used for scoreboard popup later
@@ -44,7 +39,6 @@ public class MenuScreen implements Screen, MenuInterface {
         this.castleWars = castleWars;
 
         spriteBatch = new SpriteBatch();
-
         cam = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
         cam.position.set(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0);
         viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
@@ -56,10 +50,6 @@ public class MenuScreen implements Screen, MenuInterface {
 
     private void update(float delta) {
         menuWorld.update(delta);
-
-        if (Gdx.input.isTouched()){
-            System.out.println(viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x);
-        }
     }
 
     private void draw() {
@@ -78,7 +68,7 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void settings() {
-
+        menuWorld.getMenuMove();
     }
 
     @Override

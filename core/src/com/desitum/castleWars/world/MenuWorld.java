@@ -2,10 +2,14 @@ package com.desitum.castleWars.world;
 
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.menu.PopupMenu;
+import com.desitum.castleWars.libraries.menu.PopupSlider;
+import com.desitum.castleWars.libraries.menu.PopupSliderListener;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.screens.MenuScreen;
@@ -16,7 +20,7 @@ import com.desitum.castleWars.screens.MenuScreen;
 public class MenuWorld extends KodyWorld {
 
     private MenuInterface menuInterface;
-
+    private PopupMenu popupMenu;
     private PopupButton playButton;
     private PopupButton settingsButton;
 
@@ -28,7 +32,51 @@ public class MenuWorld extends KodyWorld {
 
         createButtons();
         setupOnClickListeners();
+
+        //region Settings Popup Menu
+        popupMenu = new PopupMenu(Assets.textFieldBackground, 10, -130, 130, 80);
+        MovementAnimator yAnimator = new MovementAnimator(-130, 10, 1, Interpolation.DECELERATE_INTERPOLATOR);
+        yAnimator.setControllingY(true);
+        popupMenu.addIncomingAnimator(yAnimator);
+        MovementAnimator yAnimator2 = new MovementAnimator(10, -130, 1, Interpolation.ANTICIPATE_INTERPOLATOR);
+        yAnimator2.setControllingY(true);
+        popupMenu.addOutgoingAnimator(yAnimator2);
+
+        PopupButton cancelButton = new PopupButton(Assets.cancelButtonUp, Assets.cancelButtonDown, 5, 5, 57.5f, 15);
+        cancelButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                popupMenu.moveOut();
+            }
+        });
+        popupMenu.addPopupWidget(cancelButton);
+
+        final PopupSlider volumeSlider = new PopupSlider(Assets.textFieldBackground, Assets.textFieldBackground, 5, 60, 120, 5, 3, 10);
+        volumeSlider.setSliderListener(new PopupSliderListener() {
+            @Override
+            public void onChange(float pos) {
+            }
+        });
+        popupMenu.addPopupWidget(volumeSlider);
+
+        PopupButton okButton = new PopupButton(Assets.okButtonUp, Assets.okButtonDown, 67.5f, 5, 57.5f, 15);
+        okButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Settings.setVolume(volumeSlider.getPosition());
+                popupMenu.moveOut();
+            }
+        });
+        popupMenu.addPopupWidget(okButton);
+        this.addPopupMenu(popupMenu);
+        //endregion
+
     }
+
+    public void getMenuMove(){
+        popupMenu.moveIn();
+    }
+
 
     private void createButtons() {
         //Create the buttons!

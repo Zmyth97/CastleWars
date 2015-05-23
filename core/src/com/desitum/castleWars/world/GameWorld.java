@@ -28,6 +28,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public static final float DISCARD_PILE_X = 50;
     public static final float DISCARD_PILE_Y = 50;
 
+
     public GameWorld(Viewport cam) {
         super();
         super.setCam(cam);

@@ -35,6 +35,7 @@ public class MenuRenderer {
         }
     }
 
+
     public void resetCam() {
         menuCamera.position.set(MenuScreen.SCREEN_WIDTH / 2, MenuScreen.SCREEN_HEIGHT / 2, 0);
     }
