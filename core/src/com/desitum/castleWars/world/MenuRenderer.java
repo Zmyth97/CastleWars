@@ -2,7 +2,7 @@ package com.desitum.castleWars.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.screens.MenuScreen;
 
@@ -30,6 +30,9 @@ public class MenuRenderer {
             menuItem.draw(menuBatch);
         }
 
+        for (PopupMenu menu: this.world.getMenus()) {
+            menu.draw(menuBatch);
+        }
     }
 
     public void resetCam() {

@@ -95,4 +95,8 @@ public class KodyWorld {
     public ArrayList<PopupWidget> getWidgets() {
         return widgets;
     }
+
+    public ArrayList<PopupMenu> getMenus() {
+        return menus;
+    }
 }
