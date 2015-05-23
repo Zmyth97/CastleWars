@@ -33,17 +33,27 @@ public class GameRenderer {
         gameBatch.setProjectionMatrix(gameCam.combined);
 
        drawWorld();
+        drawCards();
 
         for (PopupMenu menu: this.world.getMenus()) {
             menu.draw(gameBatch);
         }
+
     }
 
     private void drawWorld(){
         gameBatch.draw(Assets.gameSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
-        gameBatch.draw(Assets.playerCastle, ((GameScreen.SCREEN_WIDTH/6)), 0,(GameScreen.SCREEN_WIDTH/4), (GameScreen.SCREEN_HEIGHT/2));
-        gameBatch.draw(Assets.computerCastle, ((GameScreen.SCREEN_WIDTH/1.75f)), 0, (GameScreen.SCREEN_WIDTH/4), (GameScreen.SCREEN_HEIGHT/2));
-        gameBatch.draw(Assets.gameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT/4));
+        gameBatch.draw(Assets.cardBack, (GameScreen.SCREEN_WIDTH / 2 - 15), (GameScreen.SCREEN_HEIGHT - 26), 14, 21);
+        gameBatch.draw(Assets.cardBlank, (GameScreen.SCREEN_WIDTH/2 + 1), (GameScreen.SCREEN_HEIGHT -26), 14, 21);
+        gameBatch.draw(Assets.playerCastle, (GameScreen.SCREEN_WIDTH / 2 + 25), 0, 25, 50);
+        gameBatch.draw(Assets.computerCastle, (GameScreen.SCREEN_WIDTH / 2 - 50), 0, 25, 50);
+        gameBatch.draw(Assets.gameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT / 4 + 8));
+    }
+
+    private void drawCards(){
+        for(Card card:world.getDeck().getCardList()){
+            card.renderCard(gameBatch);
+        }
     }
     public OrthographicCamera getCam() {
         return gameCam;

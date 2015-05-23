@@ -15,11 +15,6 @@ public class Hand {
 
     public Hand(){
         cardList = new ArrayList<Card>();
-        setStartingCards();
-    }
-
-    private void setStartingCards(){
-
     }
 
     public void addCardToHand(Card card){
