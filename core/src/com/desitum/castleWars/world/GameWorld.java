@@ -38,9 +38,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupMenu computerMagicMenu;
     private PopupMenu computerCastleMenu;
 
-    private static Color buildColor = new Color(12.2f, 0f, 61.6f, 1);
-    private static Color attackColor = new Color(85.5f, 0f, 10.2f, 1);
-    private static Color magicColor = new Color(3.5f, 72.2f, 0, 1);
+    private static Color buildColor = new Color(.122f, 0f, .616f, 1);
+    private static Color attackColor = new Color(.855f, 0f, .102f, 1);
+    private static Color magicColor = new Color(.035f, .722f, 0, 1);
     private static Color castleColor = new Color(1, 1, 1, 1);
 
     public static final float DRAW_PILE_X = 50;
@@ -61,34 +61,30 @@ public class GameWorld extends KodyWorld implements GameInterface {
         //region Player Menus
 
         //Build Menu
-        playerBuildMenu = new PopupMenu(Assets.menuArea, 10, -40, 20, 15);
+        playerBuildMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
         playerBuildMenu.setColor(buildColor);
-        MovementAnimator playerBuildAnimator = new MovementAnimator(playerBuildMenu, 10, 80, 1, 0.2f, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        playerBuildAnimator.setControllingY(true);
+        MovementAnimator playerBuildAnimator = new MovementAnimator(playerBuildMenu, 0, 80, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerBuildMenu.addIncomingAnimator(playerBuildAnimator);
         this.addPopupMenu(playerBuildMenu);
 
         //Attack Menu
-        playerAttackMenu = new PopupMenu(Assets.menuArea, 10, -40, 20, 15);
+        playerAttackMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
         playerAttackMenu.setColor(attackColor);
-        MovementAnimator playerAttackAnimator = new MovementAnimator(playerAttackMenu, 10, 60, 1, 0.2f, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        playerAttackAnimator.setControllingY(true);
+        MovementAnimator playerAttackAnimator = new MovementAnimator(playerAttackMenu, 0, 60, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerAttackMenu.addIncomingAnimator(playerAttackAnimator);
         this.addPopupMenu(playerAttackMenu);
 
         //Magic Menu
-        playerMagicMenu = new PopupMenu(Assets.menuArea, 10, -40, 20, 15);
+        playerMagicMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
         playerMagicMenu.setColor(magicColor);
-        MovementAnimator playerMagicAnimator = new MovementAnimator(playerMagicMenu, 10, 40, 1, 0.2f, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        playerMagicAnimator.setControllingY(true);
+        MovementAnimator playerMagicAnimator = new MovementAnimator(playerMagicMenu, 0, 40, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerMagicMenu.addIncomingAnimator(playerMagicAnimator);
         this.addPopupMenu(playerMagicMenu);
 
         //Castle Menu
-        playerCastleMenu = new PopupMenu(Assets.menuArea, 10, -40, 20, 15);
+        playerCastleMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
         playerCastleMenu.setColor(castleColor);
-        MovementAnimator playerCastleAnimator = new MovementAnimator(playerCastleMenu, 10, 20, 1, 0.2f, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        playerCastleAnimator.setControllingY(true);
+        MovementAnimator playerCastleAnimator = new MovementAnimator(playerCastleMenu, 0, 20, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerCastleMenu.addIncomingAnimator(playerCastleAnimator);
         this.addPopupMenu(playerCastleMenu);
 
@@ -97,34 +93,30 @@ public class GameWorld extends KodyWorld implements GameInterface {
         //region Computer Menus
 
         //Build Menu
-        computerBuildMenu = new PopupMenu(Assets.menuArea, 140 - Assets.menuArea.getWidth(), -40, 20, 15);
+        computerBuildMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
         computerBuildMenu.setColor(buildColor);
-        MovementAnimator computerBuildAnimator = new MovementAnimator(computerBuildMenu, 140 - Assets.menuArea.getWidth(), 80, 1, 0.2f, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        computerBuildAnimator.setControllingY(true);
+        MovementAnimator computerBuildAnimator = new MovementAnimator(computerBuildMenu, 130, 80, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerBuildMenu.addIncomingAnimator(computerBuildAnimator);
         this.addPopupMenu(computerBuildMenu);
 
         //Attack Menu
-        computerAttackMenu = new PopupMenu(Assets.menuArea, 140 - Assets.menuArea.getWidth(), -40, 20, 15);
+        computerAttackMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
         computerAttackMenu.setColor(attackColor);
-        MovementAnimator computerAttackAnimator = new MovementAnimator(computerAttackMenu, 140 - Assets.menuArea.getWidth(), 60, 1, 0.2f, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        computerAttackAnimator.setControllingY(true);
+        MovementAnimator computerAttackAnimator = new MovementAnimator(computerAttackMenu, 130, 60, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerAttackMenu.addIncomingAnimator(computerAttackAnimator);
         this.addPopupMenu(computerAttackMenu);
 
         //magic Menu
-        computerMagicMenu = new PopupMenu(Assets.menuArea, 140 - Assets.menuArea.getWidth(), -40, 20, 15);
+        computerMagicMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
         computerMagicMenu.setColor(magicColor);
-        MovementAnimator computerMagicAnimator = new MovementAnimator(computerMagicMenu, 140 - Assets.menuArea.getWidth(), 40, 1, 0.2f, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        computerMagicAnimator.setControllingY(true);
+        MovementAnimator computerMagicAnimator = new MovementAnimator(computerMagicMenu, 130, 40, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerMagicMenu.addIncomingAnimator(computerMagicAnimator);
         this.addPopupMenu(computerMagicMenu);
 
         //Castle Menu
-        computerCastleMenu = new PopupMenu(Assets.menuArea, 140 - Assets.menuArea.getWidth(), -40, 20, 15);
+        computerCastleMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
         computerCastleMenu.setColor(castleColor);
-        MovementAnimator computerCastleAnimator = new MovementAnimator(computerCastleMenu, 140 - Assets.menuArea.getWidth(), 20, 1, 0.2f, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        computerCastleAnimator.setControllingY(true);
+        MovementAnimator computerCastleAnimator = new MovementAnimator(computerCastleMenu, 130, 20, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerCastleMenu.addIncomingAnimator(computerCastleAnimator);
         this.addPopupMenu(computerCastleMenu);
         //endregion
