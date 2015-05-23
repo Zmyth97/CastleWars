@@ -7,6 +7,7 @@ import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
+import com.desitum.castleWars.objects.Deck;
 import com.desitum.castleWars.objects.Player;
 import com.desitum.castleWars.data.Resources;
 
@@ -21,12 +22,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private Player player1;
     private Player player2;
 
+    private Deck deck;
+
     private Resources myResources;
 
     public static final float DRAW_PILE_X = 50;
     public static final float DRAW_PILE_Y = 50;
-    public static final float DISCARD_PILE_X = 50;
-    public static final float DISCARD_PILE_Y = 50;
+    public static final float DISCARD_PILE_X = 70;
+    public static final float DISCARD_PILE_Y = 80;
 
 
     public GameWorld(Viewport cam) {
@@ -34,6 +37,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         super.setCam(cam);
         player1 = new Player();
         player2 = new Player();
+        deck = new Deck();
         myResources = new Resources();
     }
 
@@ -73,5 +77,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
     @Override
     public Player getPlayer2(){
         return player2;
+    }
+
+    public Deck getDeck(){
+        return deck;
     }
 }

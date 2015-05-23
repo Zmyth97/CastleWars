@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
+import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.world.MenuInterface;
 import com.desitum.castleWars.world.MenuRenderer;
@@ -42,7 +43,6 @@ public class MenuScreen implements Screen, MenuInterface {
         cam = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
         cam.position.set(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0);
         viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
-        System.out.println(viewport.getWorldWidth() + ", " + viewport.getScreenWidth());
 
         menuWorld = new MenuWorld(viewport, this);
         menuRenderer = new MenuRenderer(menuWorld, spriteBatch);
@@ -54,9 +54,10 @@ public class MenuScreen implements Screen, MenuInterface {
 
     private void draw() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
 
         spriteBatch.begin();
+        spriteBatch.draw(Assets.menuBackground, 0, 0, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
         menuRenderer.render();
         spriteBatch.end();
     }
@@ -71,6 +72,14 @@ public class MenuScreen implements Screen, MenuInterface {
         menuWorld.getMenuMove();
     }
 
+    @Override
+    public void multiplayer() {
+        //For when we add multiplayer
+    }
+    @Override
+    public void buildDeck() {
+        //For when they can choose their own deck
+    }
     @Override
     public void show() {
 
