@@ -83,10 +83,10 @@ public class Assets {
     }
 
     private static void loadBuildCards() {
-        buildCardReinforce = new Texture("game/cards/build/reinforce.png");
-        buildCardFortify = new Texture("game/cards/build/fortify.png");
-        buildCardCastle = new Texture("game/cards/build/castle.png");
-        buildCardBarrier = new Texture("game/cards/build/barrier.png");
+        buildCardReinforce = new Texture("game/cards/reinforce.png");
+        buildCardFortify = new Texture("game/cards/fortify.png");
+        buildCardCastle = new Texture("game/cards/castle.png");
+        buildCardBarrier = new Texture("game/cards/barrier.png");
     }
 
     private static void loadAttackCards() {
