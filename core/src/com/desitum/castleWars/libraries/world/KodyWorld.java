@@ -55,7 +55,7 @@ public class KodyWorld {
     public void updateTouchInput(Vector3 touchPos, boolean clickDown){
         for (PopupWidget widget: widgets){
             boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
-            if (widget.getClass().equals(PopupButton.class)){
+            if (widget instanceof PopupButton){
                 PopupButton button = (PopupButton) widget;
                 if (clickInArea && clickDown){
                     button.onClickDown();
@@ -64,7 +64,7 @@ public class KodyWorld {
                 } else {
                     button.onClickUp(false);
                 }
-            } else if (widget.getClass().equals(PopupSlider.class)){
+            } else if (widget instanceof PopupSlider){
                 PopupSlider slider = (PopupSlider) widget;
                 if (clickInArea && clickDown){
                     slider.onClickDown(touchPos);
@@ -73,7 +73,7 @@ public class KodyWorld {
                 } else {
                     slider.onClickUp(); // handles if not in area
                 }
-            } else if (widget.getClass().equals(PopupScrollArea.class)){
+            } else if (widget instanceof PopupScrollArea){
                 PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
                 popupScrollArea.updateTouchInput(touchPos, clickDown);
             }
@@ -90,6 +90,10 @@ public class KodyWorld {
 
     public void addPopupMenu(PopupMenu menu) {
         menus.add(menu);
+    }
+
+    public void removeWidget(PopupWidget widget) {
+        widgets.remove(widget);
     }
 
     public ArrayList<PopupWidget> getWidgets() {

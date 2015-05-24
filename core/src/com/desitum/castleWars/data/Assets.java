@@ -36,6 +36,11 @@ public class Assets {
     public static Texture cardBack;
     public static Texture cardBlank;
 
+    public static Texture buildCardReinforce;
+    public static Texture buildCardFortify;
+    public static Texture buildCardCastle;
+    public static Texture buildCardBarrier;
+
 
     //Misc Textures
     public static BitmapFont textFieldFont;
@@ -68,6 +73,27 @@ public class Assets {
         menuArea = new Texture("game/area.png");
         cardBack = new Texture("game/card_back.png");
         cardBlank = new Texture("game/card_blank.png");
+
+    }
+
+    public static void loadCards() {
+        loadBuildCards();
+        loadAttackCards();
+        loadGemCards();
+    }
+
+    private static void loadBuildCards() {
+        buildCardReinforce = new Texture("game/cards/build/reinforce.png");
+        buildCardFortify = new Texture("game/cards/build/fortify.png");
+        buildCardCastle = new Texture("game/cards/build/castle.png");
+        buildCardBarrier = new Texture("game/cards/build/barrier.png");
+    }
+
+    private static void loadAttackCards() {
+
+    }
+
+    private static void loadGemCards() {
 
     }
 

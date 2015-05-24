@@ -35,6 +35,8 @@ public class MovementAnimator implements Animator {
     private Interpolator interpolator;
     private Sprite controllingSprite;
 
+    private OnAnimationFinishedListener finishedListener;
+
     public MovementAnimator(float startPos, float endPos, float duration, int interpolator){
         this.controllingSprite = null;
         this.startPos = startPos;
@@ -116,6 +118,10 @@ public class MovementAnimator implements Animator {
     }
 
     public void stop(){
+        if (finishedListener != null) {
+            finishedListener.onAnimationFinished(this);
+        }
+
         running = false;
     }
 
@@ -234,5 +240,10 @@ public class MovementAnimator implements Animator {
 
     public float getDistance(){
         return travelDistance;
+    }
+
+    @Override
+    public void setOnFinishedListener(OnAnimationFinishedListener listener) {
+        this.finishedListener = listener;
     }
 }

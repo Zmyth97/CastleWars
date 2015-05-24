@@ -57,6 +57,7 @@ public class SplashScreen implements Screen {
             Assets.loadMenuTextures();
             Assets.loadGameTextures();
             Assets.loadSounds();
+            Assets.loadCards();
             Settings.load();
         }
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

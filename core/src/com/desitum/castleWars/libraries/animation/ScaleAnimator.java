@@ -35,6 +35,8 @@ public class ScaleAnimator implements Animator {
     private boolean controllingX;
     private boolean controllingY;
 
+    private OnAnimationFinishedListener finishedListener;
+
     public ScaleAnimator(float duration, float startScale, float endScale, int interpolator){
         this.duration = duration;
         this.startScale = startScale;
@@ -166,6 +168,9 @@ public class ScaleAnimator implements Animator {
     }
 
     public void stop(){
+        if (finishedListener != null) {
+            finishedListener.onAnimationFinished(this);
+        }
         running = false;
     }
 
@@ -179,6 +184,11 @@ public class ScaleAnimator implements Animator {
     @Override
     public boolean isRunning(){
         return running;
+    }
+
+    @Override
+    public void setOnFinishedListener(OnAnimationFinishedListener listener) {
+        this.finishedListener = listener;
     }
 
     private void setupInterpolator(int interpolator){

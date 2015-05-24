@@ -1,48 +1,30 @@
 package com.desitum.castleWars.world;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.CardActions;
-import com.desitum.castleWars.libraries.animation.Animator;
+import com.desitum.castleWars.data.Resources;
+import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
+import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
+import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Deck;
 import com.desitum.castleWars.objects.Player;
-import com.desitum.castleWars.data.Resources;
+import com.desitum.castleWars.screens.MenuScreen;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
 public class GameWorld extends KodyWorld implements GameInterface {
 
+    private int playerTurn;
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
-
-    public static final int CARDSLOT1 = 1; //These Slots are the X coords to put the Cards
-    public static final int CARDSLOT2 = 11;
-    public static final int CARDSLOT3 = 21;
-    public static final int CARDSLOT4 = 31;
-    public static final int CARDSLOT5 = 41;
-    public static final int CARDSLOT6 = 51;
-    public static final int CARDSLOT7 = 61;
-    public static final int CARDSLOT8 = 71;
-
-    private boolean slot1Available;
-    private boolean slot2Available;
-    private boolean slot3Available;
-    private boolean slot4Available;
-    private boolean slot5Available;
-    private boolean slot6Available;
-    private boolean slot7Available;
-    private boolean slot8Available;
-
-    private GameInterface gi;
 
     private Player player1;
     private Player player2;
@@ -66,33 +48,202 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static Color magicColor = new Color(.035f, .722f, 0, 1);
     private static Color castleColor = new Color(1, 1, 1, 1);
 
-    public static final float DRAW_PILE_X = 60;
-    public static final float DRAW_PILE_Y = 74;
-    public static final float DISCARD_PILE_X = 76;
-    public static final float DISCARD_PILE_Y = 74;
+    public static final float DRAW_PILE_X = MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH - 1.25f;
+    public static final float DRAW_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
+    public static final float DISCARD_PILE_X = MenuScreen.SCREEN_WIDTH/2 + 1.25f;
+    public static final float DISCARD_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
+    public static final float CARD_SPACING = 2.5f;
+    public static final float CARDS_Y = 5;
 
+    private float computerDelay;
 
     public GameWorld(Viewport cam) {
         super();
         super.setCam(cam);
-        player1 = new Player();
-        player2 = new Player();
+        playerTurn = PLAYER2;
+        player1 = new Player(this);
+        player2 = new Player(this);
         deck = new Deck();
-        cardActions = new CardActions(gi);
+        for (Card card: deck.getCardList()) {
+            card.setButtonListener(new OnClickListener() {
+                @Override
+                public void onClick(PopupWidget widget) {
+                    System.out.println("Clicked on");
+                    Card card = (Card) widget;
+                    onClickCard(card);
+                }
+            });
+        }
+        cardActions = new CardActions(this);
         myResources = new Resources();
 
-        slot1Available = false;
-        slot2Available = false;
-        slot3Available = false;
-        slot4Available = false;
-        slot5Available = false;
-        slot6Available = false;
-        slot7Available = false;
-        slot8Available = false;
+        computerDelay = Settings.COMPUTER_DELAY;
 
-        //region Player Menus
+        setupSideMenus();
 
-        //Build Popup Menu
+        //Fill Both Players Hands At Start
+        for (int i = 0; i < Settings.CARDS_DEALT; i++) {
+            float cardX = MenuScreen.SCREEN_WIDTH/2 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING))/2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
+            player1.getHand().addCardToHand(drawNewCard(cardX, CARDS_Y, i * 0.2f));
+            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f));
+        }
+    }
+
+    public void setGameMode() {
+
+    }
+
+    public void update(float delta) {
+        Card addToPlayer1 = null;
+        Card addToPlayer2 = null;
+        for (Card card : this.getDeck().getCardList()) {
+            if (player1.containsCard(card)) {
+                card.startOutgoingAnimators();
+                player1.getHand().removeCardFromHand(card);
+                addToPlayer1 = card;
+                switchTurns(PLAYER2);
+            } else if (player2.containsCard(card)) {
+                card.startOutgoingAnimators();
+                player2.getHand().removeCardFromHand(card);
+                addToPlayer2 = card;
+                switchTurns(PLAYER);
+            }
+        }
+
+        if (addToPlayer1 != null) player1.getHand().addCardToHand(drawNewCard(addToPlayer1.getX(), addToPlayer1.getY(), 0));
+        if (addToPlayer2 != null) player1.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, 0));
+
+        for (Card c: deck.getCardList()) {
+            c.update(delta);
+        }
+
+        super.update(delta);
+
+        if (playerTurn == PLAYER2) {
+            System.out.println("Computers turn: " + computerDelay);
+            computerDelay -= delta;
+            if (computerDelay < 0) {
+                computerDelay = Settings.COMPUTER_DELAY;
+                computerTurn();
+            }
+        }
+
+        player1.update(delta);
+        player2.update(delta);
+    }
+
+    private void switchTurns(int playerTurn) {
+        this.playerTurn = playerTurn;
+
+        if (getPlayerTurn() == PLAYER) {
+            myResources.adjustPlayerStones(2 * myResources.getPlayerBuilders());
+            myResources.adjustPlayerGems(2 * myResources.getPlayerWizards());
+            myResources.adjustPlayerWeapons(2 * myResources.getPlayerSoldiers());
+        } else {
+            myResources.adjustComputerStones(2 * myResources.getComputerBuilders());
+            myResources.adjustComputerGems(2 * myResources.getPlayerWizards());
+            myResources.adjustComputerWeapons(2 * myResources.getComputerSoldiers());
+        }
+    }
+
+    public void reset() {
+
+    }
+
+    private void computerTurn() {
+        boolean usedCard = false;
+        for (Card c: player2.getHand().getCardsInHand()) {
+            if (c.isAvailable()) {
+                cardActions.doCardAction(c.getCardID());
+                processTurn(c);
+                usedCard = true;
+            }
+        }
+        if (!usedCard) {
+            Card c = player2.getHand().getCardsInHand().get(0);
+            processTurn(c);
+        }
+    }
+
+    @Override
+    public void onClickCard(Card card) {
+        System.out.println(card.isAvailable());
+        System.out.println(playerTurn == PLAYER);
+        if (card.isAvailable() && playerTurn == PLAYER) {
+            cardActions.doCardAction(card.getCardID());
+            processTurn(card);
+        }
+    }
+
+    private void processTurn(Card card) {
+        card.enable();
+        deck.addCard(card);
+
+        System.out.println("Card Used: " + card + "Card ID: " + card.getCardID());
+        System.out.println("Player Weapons: " + myResources.getPlayerWeapons());
+        System.out.println("Player Stones: " + myResources.getPlayerStones());
+        System.out.println("Player Gems: " + myResources.getPlayerGems());
+        System.out.println("Computer Weapons: " + myResources.getComputerWeapons());
+        System.out.println("Computer Weapons: " + myResources.getComputerStones());
+        System.out.println("Computer Weapons: " + myResources.getComputerGems());
+        System.out.println("Player Builders: " + myResources.getPlayerBuilders());
+        System.out.println("Player Wizards: " + myResources.getPlayerWizards());
+        System.out.println("Player Soldiers: " + myResources.getPlayerSoldiers());
+        System.out.println("Computer Builders: " + myResources.getComputerBuilders());
+        System.out.println("Computer Wizards: " + myResources.getComputerWizards());
+        System.out.println("Computer Soldiers: " + myResources.getComputerSoldiers());
+        System.out.println("Player Castle: " + player1.getCastle().getHealth());
+        System.out.println("Player Wall: " + player1.getCastle().getWall().getHealth());
+        System.out.println("Computer Castle: " + player2.getCastle().getHealth());
+        System.out.println("Computer Wall: " + player2.getCastle().getWall().getHealth());
+    }
+
+    private Card drawNewCard(float x, float y, float delay) {
+        Card card = deck.drawCard();
+        card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_X, x, 0.5f, delay, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
+        card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_Y, y, 0.5f, delay, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+        card.addOutgoingAnimator(new MovementAnimator(card, x, DISCARD_PILE_X, 0.5f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
+        card.addOutgoingAnimator(new MovementAnimator(card, y, DISCARD_PILE_Y, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+        card.startIncomingAnimators();
+        return card;
+    }
+
+    @Override
+    public Resources getResources() {
+        return myResources;
+    }
+
+    @Override
+    public int getPlayerTurn() {
+        return PLAYER;
+    }
+
+    @Override
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    @Override
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    @Override
+    public void addCardToWorld(Card card) {
+        addWidget(card);
+    }
+
+    @Override
+    public void removeCardFromWorld(Card card) {
+        removeWidget(card);
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    private void setupSideMenus() {
+        //region player menus
         playerBuildMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
         playerBuildMenu.setColor(buildColor);
         MovementAnimator playerBuildAnimator = new MovementAnimator(playerBuildMenu, 0, 80, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
@@ -161,154 +312,5 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerAttackMenu.moveIn();
         computerMagicMenu.moveIn();
         computerCastleMenu.moveIn();
-
-        //Fill Both Players Hands At Start
-        for (int cards = 0; cards < 8; cards++) {
-            player1.getHand().addCardToHand(deck.getCardList().get(0));
-            deck.getCardList().remove(0);
-            player2.getHand().addCardToHand(deck.getCardList().get(0));
-            deck.getCardList().remove(0);
-        }
-
-    }
-
-    public void setGameMode() {
-
-    }
-
-    public void update(int state, OrthographicCamera cam, float delta) {
-        for (Card card : this.getDeck().getCardList()) {
-            card.update(delta);
-        }
-    }
-
-    public void reset() {
-
-    }
-
-    @Override
-    public void onClickCard(Card card, int cardID) {
-        if (card.isAvailable()) {
-            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), DISCARD_PILE_X, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
-            //Once Card has Reached Draw Pile Then Do The Method Below
-            processTurn(card, cardID);
-        }
-    }
-
-    private void processTurn(Card card, int cardID) {
-        cardActions.doCardAction(cardID);
-        if (card.getX() == CARDSLOT1) {
-            slot1Available = true;
-        } else if (card.getX() == CARDSLOT2) {
-            slot2Available = true;
-        } else if (card.getX() == CARDSLOT3) {
-            slot3Available = true;
-        } else if (card.getX() == CARDSLOT4) {
-            slot4Available = true;
-        } else if (card.getX() == CARDSLOT5) {
-            slot5Available = true;
-        } else if (card.getX() == CARDSLOT6) {
-            slot6Available = true;
-        } else if (card.getX() == CARDSLOT7) {
-            slot7Available = true;
-        } else {
-            slot8Available = true;
-        }
-        drawNewCard();
-
-
-        if (gi.getPlayerTurn() == PLAYER) {
-            for (int count = 0; count < myResources.getPlayerBuilders(); count++) {
-                myResources.adjustPlayerStones(2);
-            }
-            for (int count = 0; count < myResources.getPlayerWizards(); count++) {
-                myResources.adjustPlayerGems(2);
-            }
-            for (int count = 0; count < myResources.getPlayerSoldiers(); count++) {
-                myResources.adjustPlayerWeapons(2);
-            }
-        } else {
-            for (int count = 0; count < myResources.getComputerBuilders(); count++) {
-                myResources.adjustComputerStones(2);
-            }
-            for (int count = 0; count < myResources.getComputerWizards(); count++) {
-                myResources.adjustComputerGems(2);
-            }
-            for (int count = 0; count < myResources.getComputerSoldiers(); count++) {
-                myResources.adjustComputerWeapons(2);
-            }
-        }
-
-
-        System.out.println("Card Used: " + card + "Card ID: " + cardID);
-        System.out.println("Player Weapons: " + myResources.getPlayerWeapons());
-        System.out.println("Player Stones: " + myResources.getPlayerStones());
-        System.out.println("Player Gems: " + myResources.getPlayerGems());
-        System.out.println("Computer Weapons: " + myResources.getComputerWeapons());
-        System.out.println("Computer Weapons: " + myResources.getComputerStones());
-        System.out.println("Computer Weapons: " + myResources.getComputerGems());
-        System.out.println("Player Builders: " + myResources.getPlayerBuilders());
-        System.out.println("Player Wizards: " + myResources.getPlayerWizards());
-        System.out.println("Player Soldiers: " + myResources.getPlayerSoldiers());
-        System.out.println("Computer Builders: " + myResources.getComputerBuilders());
-        System.out.println("Computer Wizards: " + myResources.getComputerWizards());
-        System.out.println("Computer Soldiers: " + myResources.getComputerSoldiers());
-        System.out.println("Player Castle: " + player1.getCastle().getHealth());
-        System.out.println("Player Wall: " + player1.getCastle().getWall().getHealth());
-        System.out.println("Computer Castle: " + player2.getCastle().getHealth());
-        System.out.println("Computer Wall: " + player2.getCastle().getWall().getHealth());
-    }
-
-    private void drawNewCard() {
-        Card card = deck.drawCard();
-        if (slot1Available) {
-            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT1, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
-            slot1Available = false;
-        } else if (slot2Available) {
-            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT2, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
-            slot2Available = false;
-        } else if (slot3Available) {
-            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT3, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
-            slot3Available = false;
-        } else if (slot4Available) {
-            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT4, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
-            slot4Available = false;
-        } else if (slot5Available) {
-            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT5, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
-            slot5Available = false;
-        } else if (slot6Available) {
-            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT6, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
-            slot6Available = false;
-        } else if (slot7Available) {
-            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT7, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
-            slot7Available = false;
-        } else {
-            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT8, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
-            slot8Available = false;
-        }
-    }
-
-    @Override
-    public Resources getResources() {
-        return myResources;
-    }
-
-    @Override
-    public int getPlayerTurn() {
-        return 0;
-    }
-
-    @Override
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    @Override
-    public Player getPlayer2() {
-        return player2;
-    }
-
-    public Deck getDeck() {
-        return deck;
     }
 }

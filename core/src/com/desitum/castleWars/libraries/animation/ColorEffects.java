@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  * Created by dvan6234 on 2/17/2015.
  */
 public class ColorEffects implements Animator{
+    private Sprite controllingSprite;
+
     private float pointInTransition;
     private float duration;
 
@@ -27,6 +29,8 @@ public class ColorEffects implements Animator{
     private float currentBlue;
 
     private boolean transforming;
+
+    private OnAnimationFinishedListener finishedListener;
 
     public ColorEffects(Color startColor, Color endColor, float duration) {
         transforming = false;
@@ -75,10 +79,17 @@ public class ColorEffects implements Animator{
             if (pointInTransition >= 1) {
                 transforming = false;
 
+                if (finishedListener != null) {
+                    finishedListener.onAnimationFinished(this);
+                }
+
                 currentRed = endRed;
                 currentGreen = endGreen;
                 currentBlue = endBlue;
             }
+        }
+        if (controllingSprite != null) {
+            controllingSprite.setColor(getCurrentColor());
         }
     }
 
@@ -93,7 +104,7 @@ public class ColorEffects implements Animator{
 
     @Override
     public void setSprite(Sprite control, boolean x, boolean y){
-        return; //TODO currently no effect
+        controllingSprite = control;
     }
 
     @Override
@@ -119,6 +130,11 @@ public class ColorEffects implements Animator{
     @Override
     public boolean isRunning(){
         return transforming;
+    }
+
+    @Override
+    public void setOnFinishedListener(OnAnimationFinishedListener listener) {
+        this.finishedListener = listener;
     }
 }
 

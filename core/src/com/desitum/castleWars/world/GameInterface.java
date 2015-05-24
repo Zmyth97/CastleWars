@@ -9,9 +9,11 @@ import com.desitum.castleWars.data.Resources;
  * can be used by kody and people in []
  */
 public interface GameInterface {
-    public void onClickCard(Card card, int cardID);
+    public void onClickCard(Card card);
     public Resources getResources();
     public int getPlayerTurn();
     public Player getPlayer1();
     public Player getPlayer2();
+    public void addCardToWorld(Card card);
+    public void removeCardFromWorld(Card card);
 }

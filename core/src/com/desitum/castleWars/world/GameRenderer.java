@@ -8,8 +8,6 @@ import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.screens.MenuScreen;
 
-import java.awt.Menu;
-
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
@@ -32,7 +30,7 @@ public class GameRenderer {
         gameCam.update();
         gameBatch.setProjectionMatrix(gameCam.combined);
 
-       drawWorld();
+        drawWorld();
         drawCards();
 
         for (PopupMenu menu: this.world.getMenus()) {
@@ -43,8 +41,6 @@ public class GameRenderer {
 
     private void drawWorld(){
         gameBatch.draw(Assets.gameSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
-        gameBatch.draw(Assets.cardBack, (GameScreen.SCREEN_WIDTH / 2 - 15), (GameScreen.SCREEN_HEIGHT - 26), 14, 21);
-        gameBatch.draw(Assets.cardBlank, (GameScreen.SCREEN_WIDTH/2 + 1), (GameScreen.SCREEN_HEIGHT -26), 14, 21);
         gameBatch.draw(Assets.playerCastle, (GameScreen.SCREEN_WIDTH / 2 + 25), 0, 25, 50);
         gameBatch.draw(Assets.computerCastle, (GameScreen.SCREEN_WIDTH / 2 - 50), 0, 25, 50);
         gameBatch.draw(Assets.gameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT / 4 + 8));
@@ -52,7 +48,13 @@ public class GameRenderer {
 
     private void drawCards(){
         for(Card card:world.getDeck().getCardList()){
-            card.renderCard(gameBatch);
+            card.draw(gameBatch);
+        }
+        for (Card card: world.getPlayer1().getHand().getCardsInHand()) {
+            card.draw(gameBatch);
+        }
+        for (Card card: world.getPlayer2().getHand().getCardsInHand()) {
+            card.draw(gameBatch);
         }
     }
     public OrthographicCamera getCam() {

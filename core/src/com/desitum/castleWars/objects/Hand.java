@@ -1,7 +1,6 @@
 package com.desitum.castleWars.objects;
 
 import com.desitum.castleWars.world.GameInterface;
-import com.desitum.castleWars.world.GameWorld;
 
 import java.util.ArrayList;
 
@@ -13,70 +12,61 @@ public class Hand {
     private ArrayList<Card> cardList;
     private GameInterface gi;
 
-    public Hand(){
+    public Hand(GameInterface gameInterface){
+        this.gi = gameInterface;
         cardList = new ArrayList<Card>();
     }
 
     public void addCardToHand(Card card){
         cardList.add(card);
+        gi.addCardToWorld(card);
     }
 
     public void removeCardFromHand(Card card){
         cardList.remove(card);
+        gi.removeCardFromWorld(card);
     }
 
     private void checkCardCosts(){
         for(Card card: cardList){
-            if(gi.getPlayerTurn() == GameWorld.PLAYER){
+            if(gi.getPlayer1().getHand().equals(this)){
                 if(card.getCardType() == Card.BUILD){
                     if(card.getCardCost() < gi.getResources().getPlayerStones()){
-                        card.setAvailable(true);
-                        card.restoreColor();
+                        card.enable();
                     } else {
-                        card.setAvailable(false);
-                        card.fadeColor();
+                        card.disable();
                     }
                 } else if(card.getCardType() == Card.ATTACK){
                     if(card.getCardCost() < gi.getResources().getPlayerWeapons()){
-                        card.setAvailable(true);
-                        card.restoreColor();
+                        card.enable();
                     }else {
-                        card.setAvailable(false);
-                        card.fadeColor();
+                        card.disable();
                     }
                 } else {
                     if(card.getCardCost() < gi.getResources().getPlayerGems()){
-                        card.setAvailable(true);
-                        card.restoreColor();
+                        card.enable();
                     }else {
-                        card.setAvailable(false);
-                        card.fadeColor();
+                        card.disable();
                     }
                 }
             } else {
                 if(card.getCardType() == Card.BUILD){
                     if(card.getCardCost() < gi.getResources().getComputerStones()){
-                        card.setAvailable(true);
-                        card.restoreColor();
+                        card.enable();
                     }else {
-                        card.setAvailable(false);
-                        card.fadeColor();
+                        card.disable();
                     }
                 } else if(card.getCardType() == Card.ATTACK){
                     if(card.getCardCost() < gi.getResources().getComputerWeapons()){
-                        card.setAvailable(true);
-                        card.restoreColor();
+                        card.enable();
                     }else {
-                        card.setAvailable(false);
-                        card.fadeColor();
+                        card.disable();
                     }
                 } else {
                     if(card.getCardCost() < gi.getResources().getComputerGems()){
-                        card.setAvailable(true);
-                        card.restoreColor();
+                        card.enable();
                     }else {
-                        card.setAvailable(false);
-                        card.fadeColor();
+                        card.disable();
                     }
                 }
             }
@@ -87,5 +77,10 @@ public class Hand {
         return cardList;
     }
 
-
+    public void update(float delta) {
+        for (Card c: cardList) {
+            c.update(delta);
+        }
+        checkCardCosts();
+    }
 }

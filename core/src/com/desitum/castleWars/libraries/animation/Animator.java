@@ -14,4 +14,5 @@ public interface Animator {
     public float getAmount();
     public Animator duplicate();
     public boolean isRunning();
+    public void setOnFinishedListener(OnAnimationFinishedListener listener);
 }

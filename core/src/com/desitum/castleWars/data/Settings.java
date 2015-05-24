@@ -11,6 +11,9 @@ public class Settings {
     public static float volume = 1;
     public static int highscore;
 
+    public static int CARDS_DEALT = 6;
+    public static float COMPUTER_DELAY = 0.5f;
+
     //region CardAmounts
     public static int REINFORCE_AMOUNT = 2;
     public static int FORTIFY_AMOUNT = 2;
