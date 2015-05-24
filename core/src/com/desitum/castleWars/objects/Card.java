@@ -3,6 +3,7 @@ package com.desitum.castleWars.objects;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
@@ -30,6 +31,7 @@ public class Card extends Sprite {
     private Texture cardImage;
     private boolean available;
     private int cardCost;
+    private int cardID;
 
     private ColorEffects colorChanger; //Fade from a lighter shade to more vibrant when you actually have enough resources
     private MovementAnimator movementAnimator;
@@ -40,6 +42,7 @@ public class Card extends Sprite {
         this.cardImage = cardImage;
         this.cardType = cardType;
         this.cardCost = cardCost;
+        this.cardID = cardID;
         this.setPosition(x, y);
 
         animators = new ArrayList<Animator>();
@@ -75,6 +78,10 @@ public class Card extends Sprite {
         return cardType;
     }
 
+    public int getCardID(){
+        return cardID;
+    }
+
     public boolean isAvailable() {
         return available;
     }
@@ -82,4 +89,9 @@ public class Card extends Sprite {
     public void setAvailable(boolean available) {
         this.available = available;
     }
+
+    public void renderCard(SpriteBatch batch){
+        batch.draw(cardImage, this.getX(), this.getY(), 14, 21);
+    }
+
 }

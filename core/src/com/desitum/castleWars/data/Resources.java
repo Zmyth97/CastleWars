@@ -33,16 +33,16 @@ public class Resources {
         playerBuilders = 2;
         playerSoldiers = 2;
         playerWizards = 2;
-        playerStones = 8;
-        playerWeapons = 8;
-        playerGems = 8;
+        playerStones = 16;
+        playerWeapons = 16;
+        playerGems = 16;
 
         computerBuilders = 2;
         computerSoldiers = 2;
         computerWizards = 2;
-        computerStones = 8;
-        computerWeapons = 8;
-        computerGems = 8;
+        computerStones = 16;
+        computerWeapons = 16;
+        computerGems = 16;
     }
 
     public void changePlayerResources(int builderAmount, int soldierAmount, int wizardAmount, int stoneAmount, int weaponsAmount, int gemsAmount){

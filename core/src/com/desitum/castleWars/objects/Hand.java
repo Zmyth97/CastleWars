@@ -15,11 +15,6 @@ public class Hand {
 
     public Hand(){
         cardList = new ArrayList<Card>();
-        setStartingCards();
-    }
-
-    private void setStartingCards(){
-
     }
 
     public void addCardToHand(Card card){
@@ -36,32 +31,61 @@ public class Hand {
                 if(card.getCardType() == Card.BUILD){
                     if(card.getCardCost() < gi.getResources().getPlayerStones()){
                         card.setAvailable(true);
+                        card.restoreColor();
+                    } else {
+                        card.setAvailable(false);
+                        card.fadeColor();
                     }
                 } else if(card.getCardType() == Card.ATTACK){
                     if(card.getCardCost() < gi.getResources().getPlayerWeapons()){
                         card.setAvailable(true);
+                        card.restoreColor();
+                    }else {
+                        card.setAvailable(false);
+                        card.fadeColor();
                     }
                 } else {
                     if(card.getCardCost() < gi.getResources().getPlayerGems()){
                         card.setAvailable(true);
+                        card.restoreColor();
+                    }else {
+                        card.setAvailable(false);
+                        card.fadeColor();
                     }
                 }
             } else {
                 if(card.getCardType() == Card.BUILD){
                     if(card.getCardCost() < gi.getResources().getComputerStones()){
                         card.setAvailable(true);
+                        card.restoreColor();
+                    }else {
+                        card.setAvailable(false);
+                        card.fadeColor();
                     }
                 } else if(card.getCardType() == Card.ATTACK){
                     if(card.getCardCost() < gi.getResources().getComputerWeapons()){
                         card.setAvailable(true);
+                        card.restoreColor();
+                    }else {
+                        card.setAvailable(false);
+                        card.fadeColor();
                     }
                 } else {
                     if(card.getCardCost() < gi.getResources().getComputerGems()){
                         card.setAvailable(true);
+                        card.restoreColor();
+                    }else {
+                        card.setAvailable(false);
+                        card.fadeColor();
                     }
                 }
             }
         }
     }
+
+    public ArrayList<Card> getCardsInHand(){
+        return cardList;
+    }
+
 
 }

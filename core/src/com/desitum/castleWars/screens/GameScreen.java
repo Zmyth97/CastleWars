@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
+import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.world.GameRenderer;
 import com.desitum.castleWars.world.GameWorld;
 
