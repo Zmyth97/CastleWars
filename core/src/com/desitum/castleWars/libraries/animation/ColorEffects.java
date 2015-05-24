@@ -15,18 +15,22 @@ public class ColorEffects implements Animator{
     private float startRed;
     private float startGreen;
     private float startBlue;
+    private float startAlpha;
 
     private float slopeRed;
     private float slopeGreen;
     private float slopeBlue;
+    private float slopeAlpha;
 
     private float endRed;
     private float endGreen;
     private float endBlue;
+    private float endAlpha;
 
     private float currentRed;
     private float currentGreen;
     private float currentBlue;
+    private float currentAlpha;
 
     private boolean transforming;
 
@@ -45,6 +49,9 @@ public class ColorEffects implements Animator{
             currentBlue = endColor.b;
             endBlue = (int) endColor.b;
             slopeBlue = 0;
+            currentAlpha = endColor.a;
+            endAlpha = (int) endColor.a;
+            slopeAlpha = 0;
             return;
         }
 
@@ -54,18 +61,22 @@ public class ColorEffects implements Animator{
         startRed = startColor.r;
         startGreen = startColor.g;
         startBlue = startColor.b;
+        startAlpha = startColor.a;
 
         slopeRed = (endColor.r - startColor.r);
         slopeGreen = (endColor.g - startColor.g);
         slopeBlue = (endColor.b - startColor.b);
+        slopeAlpha = (endColor.a - startColor.a);
 
         currentRed = startColor.r;
         currentGreen = startColor.g;
         currentBlue = startColor.b;
+        currentAlpha = startColor.a;
 
         endRed = endColor.r;
         endGreen = endColor.g;
         endBlue = endColor.b;
+        endAlpha = endColor.a;
     }
 
     public void update(float delta) {
@@ -75,6 +86,7 @@ public class ColorEffects implements Animator{
             currentRed = slopeRed * pointInTransition + startRed;
             currentGreen = slopeGreen * pointInTransition + startGreen;
             currentBlue = slopeBlue * pointInTransition + startBlue;
+            currentAlpha = slopeAlpha * pointInTransition + startAlpha;
 
             if (pointInTransition >= 1) {
                 transforming = false;
@@ -86,6 +98,7 @@ public class ColorEffects implements Animator{
                 currentRed = endRed;
                 currentGreen = endGreen;
                 currentBlue = endBlue;
+                currentAlpha = endAlpha;
             }
         }
         if (controllingSprite != null) {
@@ -99,7 +112,7 @@ public class ColorEffects implements Animator{
     }
 
     public Color getCurrentColor() {
-        return new Color(currentRed, currentGreen, currentBlue, 1);
+        return new Color(currentRed, currentGreen, currentBlue, currentAlpha);
     }
 
     @Override

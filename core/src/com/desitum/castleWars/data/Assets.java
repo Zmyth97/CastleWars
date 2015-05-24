@@ -62,7 +62,7 @@ public class Assets {
 
         textFieldFont = new BitmapFont(Gdx.files.internal("font/cartoon.fnt"), Gdx.files.internal("font/cartoon.png"), false);
         textFieldFont.setScale(0.15f);
-        textFieldFont.setColor(Color.BLACK);
+        textFieldFont.setColor(Color.WHITE);
     }
 
     public static void loadGameTextures() {
