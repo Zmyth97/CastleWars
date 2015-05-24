@@ -1,15 +1,12 @@
 package com.desitum.castleWars.world;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
-import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupButton;
-import com.desitum.castleWars.libraries.menu.PopupEditText;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupSlider;
 import com.desitum.castleWars.libraries.menu.PopupSliderListener;
@@ -104,12 +101,6 @@ public class MenuWorld extends KodyWorld {
         this.addWidget(settingsButton);
         this.addWidget(multiButton);
         this.addWidget(deckButton);
-
-
-        PopupEditText label = new PopupEditText(Assets.textFieldBackground, new Color(1, 1, 1, 1), Assets.textFieldFont, 10, 10, 100, 20, "Hey");
-        ColorEffects fontColor = new ColorEffects(new Color(1, 1, 1.0f, 1.0f), new Color(1.0f, 1.0f, 1.0f, 0.0f), 2);
-        label.addFontColorChanger(fontColor);
-        this.addWidget(label);
     }
 
     public void update(float delta) {
