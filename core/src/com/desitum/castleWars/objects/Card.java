@@ -93,4 +93,5 @@ public class Card extends Sprite {
     public void renderCard(SpriteBatch batch){
         batch.draw(cardImage, this.getX(), this.getY(), 14, 21);
     }
+
 }

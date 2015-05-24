@@ -137,7 +137,7 @@ public class Deck {
         }
     }
 
-    public void drawCard(){
+    public Card drawCard(){
         Card drawCard = cardList.get(0);
         Collections.shuffle(cardList);
         if(gi.getPlayerTurn() == GameWorld.PLAYER){
@@ -147,6 +147,7 @@ public class Deck {
             gi.getPlayer2().getHand().addCardToHand(drawCard);
             cardList.remove(0);
         }
+        return drawCard;
     }
 
     public ArrayList<Card> getCardList(){

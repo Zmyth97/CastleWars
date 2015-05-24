@@ -163,12 +163,13 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerCastleMenu.moveIn();
 
         //Fill Both Players Hands At Start
-        for(int cards = 0; cards < 8; cards++){
+        for (int cards = 0; cards < 8; cards++) {
             player1.getHand().addCardToHand(deck.getCardList().get(0));
             deck.getCardList().remove(0);
             player2.getHand().addCardToHand(deck.getCardList().get(0));
             deck.getCardList().remove(0);
         }
+
     }
 
     public void setGameMode() {
@@ -176,7 +177,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     public void update(int state, OrthographicCamera cam, float delta) {
-        for(Card card: this.getDeck().getCardList()){
+        for (Card card : this.getDeck().getCardList()) {
             card.update(delta);
         }
     }
@@ -187,8 +188,58 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     @Override
     public void onClickCard(Card card, int cardID) {
-        card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), 10, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+        if (card.isAvailable()) {
+            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), DISCARD_PILE_X, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+            //Once Card has Reached Draw Pile Then Do The Method Below
+            processTurn(card, cardID);
+        }
+    }
+
+    private void processTurn(Card card, int cardID) {
         cardActions.doCardAction(cardID);
+        if (card.getX() == CARDSLOT1) {
+            slot1Available = true;
+        } else if (card.getX() == CARDSLOT2) {
+            slot2Available = true;
+        } else if (card.getX() == CARDSLOT3) {
+            slot3Available = true;
+        } else if (card.getX() == CARDSLOT4) {
+            slot4Available = true;
+        } else if (card.getX() == CARDSLOT5) {
+            slot5Available = true;
+        } else if (card.getX() == CARDSLOT6) {
+            slot6Available = true;
+        } else if (card.getX() == CARDSLOT7) {
+            slot7Available = true;
+        } else {
+            slot8Available = true;
+        }
+        drawNewCard();
+
+
+        if (gi.getPlayerTurn() == PLAYER) {
+            for (int count = 0; count < myResources.getPlayerBuilders(); count++) {
+                myResources.adjustPlayerStones(2);
+            }
+            for (int count = 0; count < myResources.getPlayerWizards(); count++) {
+                myResources.adjustPlayerGems(2);
+            }
+            for (int count = 0; count < myResources.getPlayerSoldiers(); count++) {
+                myResources.adjustPlayerWeapons(2);
+            }
+        } else {
+            for (int count = 0; count < myResources.getComputerBuilders(); count++) {
+                myResources.adjustComputerStones(2);
+            }
+            for (int count = 0; count < myResources.getComputerWizards(); count++) {
+                myResources.adjustComputerGems(2);
+            }
+            for (int count = 0; count < myResources.getComputerSoldiers(); count++) {
+                myResources.adjustComputerWeapons(2);
+            }
+        }
+
+
         System.out.println("Card Used: " + card + "Card ID: " + cardID);
         System.out.println("Player Weapons: " + myResources.getPlayerWeapons());
         System.out.println("Player Stones: " + myResources.getPlayerStones());
@@ -206,7 +257,35 @@ public class GameWorld extends KodyWorld implements GameInterface {
         System.out.println("Player Wall: " + player1.getCastle().getWall().getHealth());
         System.out.println("Computer Castle: " + player2.getCastle().getHealth());
         System.out.println("Computer Wall: " + player2.getCastle().getWall().getHealth());
+    }
 
+    private void drawNewCard() {
+        Card card = deck.drawCard();
+        if (slot1Available) {
+            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT1, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+            slot1Available = false;
+        } else if (slot2Available) {
+            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT2, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+            slot2Available = false;
+        } else if (slot3Available) {
+            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT3, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+            slot3Available = false;
+        } else if (slot4Available) {
+            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT4, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+            slot4Available = false;
+        } else if (slot5Available) {
+            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT5, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+            slot5Available = false;
+        } else if (slot6Available) {
+            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT6, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+            slot6Available = false;
+        } else if (slot7Available) {
+            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT7, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+            slot7Available = false;
+        } else {
+            card.addMoveAnimtor((Animator) new MovementAnimator(card, card.getX(), CARDSLOT8, 0.5f, 0, Interpolation.DECELERATE_INTERPOLATOR, true, false));
+            slot8Available = false;
+        }
     }
 
     @Override
@@ -220,16 +299,16 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     @Override
-    public Player getPlayer1(){
+    public Player getPlayer1() {
         return player1;
     }
 
     @Override
-    public Player getPlayer2(){
+    public Player getPlayer2() {
         return player2;
     }
 
-    public Deck getDeck(){
+    public Deck getDeck() {
         return deck;
     }
 }
