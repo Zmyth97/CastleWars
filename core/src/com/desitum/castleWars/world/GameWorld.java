@@ -30,6 +30,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
 
+    private int EASY_DIFFICULTY = 0;
+    private int HARD_DIFFICULTY = 1;
+
+
     private Player player1;
     private Player player2;
     private ComputerAI ai;
@@ -43,6 +47,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupTextLabel computerBuildersLabel;
     private PopupTextLabel computerSoldiersLabel;
     private PopupTextLabel computerWizardsLabel;
+
+    private int difficulty;
 
     private Deck deck;
 
@@ -83,6 +89,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
         cardActions = new CardActions(this);
         myResources = new Resources(this);
 
+        difficulty = 0;
+
+        ai = new ComputerAI(this);
         computerDelay = Settings.COMPUTER_DELAY;
 
         setupSideMenus();
@@ -155,17 +164,23 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     private void computerTurn() {
-        boolean usedCard = false;
-        for (Card c: player2.getHand().getCardsInHand()) {
-            if (c.isAvailable()) {
-                cardActions.doCardAction(c.getCardID());
-                processTurn(c);
-                usedCard = true;
+        if(difficulty == EASY_DIFFICULTY){
+            boolean usedCard = false;
+            for (Card c: player2.getHand().getCardsInHand()) {
+                if (c.isAvailable()) {
+                    cardActions.doCardAction(c.getCardID());
+                    processTurn(c);
+                    usedCard = true;
+                }
             }
-        }
-        if (!usedCard) {
-            Card c = player2.getHand().getCardsInHand().get(0);
-            processTurn(c);
+            if (!usedCard) {
+                Card c = player2.getHand().getCardsInHand().get(0);
+                processTurn(c);
+            }
+        } else if(difficulty == HARD_DIFFICULTY) {
+            Card chosenCard = ai.processAI();
+            processTurn(chosenCard);
+            cardActions.doCardAction(chosenCard.getCardID());
         }
     }
 

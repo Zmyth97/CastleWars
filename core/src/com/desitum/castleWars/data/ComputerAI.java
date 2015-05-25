@@ -17,13 +17,10 @@ public class ComputerAI {
 
     GameInterface gi;
 
-    private int strategy;
-
     ArrayList<Integer> possibleCards;
 
     public ComputerAI(GameInterface gi) {
         this.gi = gi;
-        strategy = 0;
         possibleCards = new ArrayList<Integer>();
     }
 
@@ -37,9 +34,20 @@ public class ComputerAI {
             }
         }
         if(possibleCards.size() > 0) {
+            System.out.println("Possible Cards Amonut: " + possibleCards.size());
+            System.out.println("Starting AI");
             Collections.sort(possibleCards);
+            System.out.println("Possible Cards: ");
+            for(int card: possibleCards){
+                System.out.println(card);
+            }
             int card = determineStrategy();
+            System.out.println("Card ID: " + card);
+            if(card == 0){
+                card = possibleCards.get(0);
+            }
             chosenCard = chooseCard(card);
+            System.out.println("Chosen Card: " + chosenCard.getCardID());
         } else {
             //TODO Method for Discard
         }
@@ -48,33 +56,39 @@ public class ComputerAI {
     }
 
     private int determineStrategy() {
+        System.out.println("Determine a Strategy");
         int chosenCard = 0;
         boolean moveToNext = true;
         if (gi.getPlayer1().getCastle().getWall().getHealth() + gi.getPlayer1().getCastle().getHealth() <= MAX_ATTACK || gi.getPlayer1().getCastle().getHealth() <= 20) { //20 for Trojan Horse Card
             chosenCard = checkForAttackWin();
+            System.out.println("See if AI can attack to win");
             if (chosenCard > 0) {
                 moveToNext = false;
             }
         }
-        if (gi.getPlayer2().getCastle().getHealth() >= MAX_BUILD && moveToNext) {
+        if ((100 - gi.getPlayer2().getCastle().getHealth()) <= MAX_BUILD && moveToNext) {
             chosenCard = checkForBuildWin();
+            System.out.println("See if AI can build to win");
             if (chosenCard > 0) {
                 moveToNext = false;
             }
         }
         if (gi.getPlayer2().getCastle().getWall().getHealth() + gi.getPlayer2().getCastle().getHealth() <= MAX_ATTACK || gi.getPlayer2().getCastle().getHealth() <= 20 && moveToNext) {//20 for Trojan Horse Card
             chosenCard = checkForAttackDefeat();
+            System.out.println("Try to avoid attack defeat by Player1");
             if (chosenCard > 0) {
                 moveToNext = false;
             }
         }
-        if (gi.getPlayer1().getCastle().getHealth() >= MAX_BUILD && moveToNext) {
+        if ((100 - gi.getPlayer1().getCastle().getHealth()) <= MAX_BUILD && moveToNext) {
             chosenCard = checkForBuildDefeat();
+            System.out.println("Try to avoid build win by Player1");
             if (chosenCard > 0) {
                 moveToNext = false;
             }
         }
         if (moveToNext) {
+            System.out.println("Checking for Possible Cards");
             chosenCard = processPossibleCards();
         }
         return chosenCard;
@@ -188,10 +202,12 @@ public class ComputerAI {
 
     private int processPossibleCards() {
         int chosenCard = 0;
+        System.out.println("See if AI can recruit people");
         checkForPeople();
 
         if (chosenCard == 0) {
-            improveEconomy();
+            System.out.println("Improve Economy Chosen");
+            chosenCard = improveEconomy();
         }
         return chosenCard;
     }
@@ -201,19 +217,24 @@ public class ComputerAI {
         boolean attack = false;
 
         if (gi.getPlayer1().getCastle().getHealth() < 40 || gi.getPlayer1().getCastle().getHealth() > 70) {
+            System.out.println("Attack Economy");
             card = attackEconomy();
             attack = true;
         } else {
+            System.out.println("Build Economy");
             card = buildEconomy();
         }
 
         if(card == 0){
             if(attack) {
+                System.out.println("Attack Failed, On to Build");
                 card = buildEconomy();
             } else {
+                System.out.println("Build failed, on to attack");
                 card = attackEconomy();
             }
         }
+        System.out.println("Card After Improve Economy: " + card);
         return card;
     }
 
@@ -277,6 +298,8 @@ public class ComputerAI {
             chosenCard = CardActions.STRONGHOLD;
         } else if (possibleCards.contains(CardActions.GREATWALL)) {
             chosenCard = CardActions.GREATWALL;
+        }  else if (possibleCards.contains(CardActions.RESERVE)) {
+            chosenCard = CardActions.RESERVE;
         }  else if (possibleCards.contains(CardActions.WALL)) {
             chosenCard = CardActions.WALL;
         } else if (possibleCards.contains(CardActions.BARRIER)) {
@@ -290,6 +313,7 @@ public class ComputerAI {
         } else if (possibleCards.contains(CardActions.HAT_TRICK)) {
             chosenCard = CardActions.HAT_TRICK;
         }
+        System.out.println("Chosen Card in Build Eco: " + chosenCard);
         return chosenCard;
     }
 
@@ -311,6 +335,7 @@ public class ComputerAI {
 
     private Card chooseCard(int card) {
         Card theCard = null;
+        System.out.println("Choose The Card for ID " + card);
         for (Card c : gi.getPlayer2().getHand().getCardsInHand()) {
             if (c.isAvailable()) {
                 if (c.getCardID() == card) {
