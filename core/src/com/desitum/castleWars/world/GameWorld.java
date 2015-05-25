@@ -44,9 +44,16 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupTextLabel playerStoneLabel;
     private PopupTextLabel playerWeaponLabel;
     private PopupTextLabel playerGemLabel;
+    private PopupTextLabel playerCastleLabel;
+    private PopupTextLabel playerWallLabel;
     private PopupTextLabel computerBuildersLabel;
     private PopupTextLabel computerSoldiersLabel;
     private PopupTextLabel computerWizardsLabel;
+    private PopupTextLabel computerStoneLabel;
+    private PopupTextLabel computerWeaponLabel;
+    private PopupTextLabel computerGemLabel;
+    private PopupTextLabel computerCastleLabel;
+    private PopupTextLabel computerWallLabel;
 
     private int difficulty;
 
@@ -58,7 +65,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static Color buildColor = new Color(.122f, 0f, .616f, 1);
     private static Color attackColor = new Color(.855f, 0f, .102f, 1);
     private static Color magicColor = new Color(.035f, .722f, 0, 1);
-    private static Color castleColor = new Color(1, 1, 1, 1);
+    private static Color castleColor = new Color(0.18f, 0.18f, 0.192f, 1);
 
     public static final float DRAW_PILE_X = MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH - 1.25f;
     public static final float DRAW_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
@@ -147,6 +154,16 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerStoneLabel.setText(":" + myResources.getPlayerStones());
         playerWeaponLabel.setText(":" + myResources.getPlayerWeapons());
         playerGemLabel.setText(":" + myResources.getPlayerGems());
+        playerCastleLabel.setText(":" +(int)  player1.getCastle().getHealth());
+        playerWallLabel.setText(":" +(int)  player1.getCastle().getWall().getHealth());
+        computerBuildersLabel.setText(":" + myResources.getPlayerBuilders());
+        computerSoldiersLabel.setText(":" + myResources.getPlayerSoldiers());
+        computerWizardsLabel.setText(":" + myResources.getPlayerWizards());
+        computerStoneLabel.setText(":" + myResources.getPlayerStones());
+        computerWeaponLabel.setText(":" + myResources.getPlayerWeapons());
+        computerGemLabel.setText(":" + myResources.getPlayerGems());
+        computerCastleLabel.setText(":" +(int)  player2.getCastle().getHealth());
+        computerWallLabel.setText(":" +(int)  player2.getCastle().getWall().getHealth());
     }
 
     private void switchTurns(int playerTurn) {
@@ -304,6 +321,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerCastleMenu.setColor(castleColor);
         MovementAnimator playerCastleAnimator = new MovementAnimator(playerCastleMenu, 0, 33, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerCastleMenu.addIncomingAnimator(playerCastleAnimator);
+        playerCastleMenu.addPopupWidget(new PopupImage(Assets.wand, Assets.invisible, 1, 9, 6, 6, false));
+        playerCastleMenu.addPopupWidget(new PopupImage(Assets.gem, Assets.invisible, 1, 1, 6, 6, false));
+        playerCastleLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, 12, 6);
+        playerCastleLabel.setText(":" + (int)player1.getCastle().getHealth());
+        playerWallLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, 12, 6);
+        playerWallLabel.setText(":" + (int) player1.getCastle().getWall().getHealth());
+        playerCastleMenu.addPopupWidget(playerCastleLabel);
+        playerCastleMenu.addPopupWidget(playerWallLabel);
         this.addPopupMenu(playerCastleMenu);
 
         //endregion
@@ -315,6 +340,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerBuildMenu.setColor(buildColor);
         MovementAnimator computerBuildAnimator = new MovementAnimator(computerBuildMenu, 130, 80, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerBuildMenu.addIncomingAnimator(computerBuildAnimator);
+        computerBuildMenu.addPopupWidget(new PopupImage(Assets.hammer, Assets.invisible, 1, 9, 6, 6, false));
+        computerBuildMenu.addPopupWidget(new PopupImage(Assets.stone, Assets.invisible, 1, 1, 6, 6, false));
+        computerBuildersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, 12, 6);
+        computerBuildersLabel.setText(":" + myResources.getComputerSoldiers());
+        computerStoneLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, 12, 6);
+        computerStoneLabel.setText(":" + myResources.getComputerWeapons());
+        computerBuildMenu.addPopupWidget(computerBuildersLabel);
+        computerBuildMenu.addPopupWidget(computerStoneLabel);
         this.addPopupMenu(computerBuildMenu);
 
         //Attack Popup Menu
@@ -322,6 +355,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerAttackMenu.setColor(attackColor);
         MovementAnimator computerAttackAnimator = new MovementAnimator(computerAttackMenu, 130, 65, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerAttackMenu.addIncomingAnimator(computerAttackAnimator);
+        computerAttackMenu.addPopupWidget(new PopupImage(Assets.spear, Assets.invisible, 1, 9, 6, 6, false));
+        computerAttackMenu.addPopupWidget(new PopupImage(Assets.steak, Assets.invisible, 1, 1, 6, 6, false));
+        computerSoldiersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, 12, 6);
+        computerSoldiersLabel.setText(":" + myResources.getComputerSoldiers());
+        computerWeaponLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, 12, 6);
+        computerWeaponLabel.setText(":" + myResources.getComputerWeapons());
+        computerAttackMenu.addPopupWidget(computerSoldiersLabel);
+        computerAttackMenu.addPopupWidget(computerWeaponLabel);
         this.addPopupMenu(computerAttackMenu);
 
         //magic Popup Menu
@@ -329,6 +370,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerMagicMenu.setColor(magicColor);
         MovementAnimator computerMagicAnimator = new MovementAnimator(computerMagicMenu, 130, 50, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerMagicMenu.addIncomingAnimator(computerMagicAnimator);
+        computerMagicMenu.addPopupWidget(new PopupImage(Assets.wand, Assets.invisible, 1, 9, 6, 6, false));
+        computerMagicMenu.addPopupWidget(new PopupImage(Assets.gem, Assets.invisible, 1, 1, 6, 6, false));
+        computerWizardsLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, 12, 6);
+        computerWizardsLabel.setText(":" + myResources.getComputerWizards());
+        computerGemLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, 12, 6);
+        computerGemLabel.setText(":" + myResources.getComputerGems());
+        computerMagicMenu.addPopupWidget(computerWizardsLabel);
+        computerMagicMenu.addPopupWidget(computerGemLabel);
         this.addPopupMenu(computerMagicMenu);
 
         //Castle Popup Menu
@@ -336,6 +385,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerCastleMenu.setColor(castleColor);
         MovementAnimator computerCastleAnimator = new MovementAnimator(computerCastleMenu, 130, 35, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerCastleMenu.addIncomingAnimator(computerCastleAnimator);
+        computerCastleMenu.addPopupWidget(new PopupImage(Assets.wand, Assets.invisible, 1, 9, 6, 6, false));
+        computerCastleMenu.addPopupWidget(new PopupImage(Assets.gem, Assets.invisible, 1, 1, 6, 6, false));
+        computerCastleLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, 12, 6);
+        computerCastleLabel.setText(":" + (int) player2.getCastle().getHealth());
+        computerWallLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, 12, 6);
+        computerWallLabel.setText(":" + (int) player2.getCastle().getWall().getHealth());
+        computerCastleMenu.addPopupWidget(computerCastleLabel);
+        computerCastleMenu.addPopupWidget(computerWallLabel);
         this.addPopupMenu(computerCastleMenu);
         //endregion
 
