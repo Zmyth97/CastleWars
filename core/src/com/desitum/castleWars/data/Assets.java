@@ -11,6 +11,8 @@ import com.desitum.castleWars.libraries.Drawing;
  */
 public class Assets {
 
+    public static Texture invisible;
+
     //Button Textures
     public static Texture playButtonUp;
     public static Texture playButtonDown;
@@ -40,12 +42,45 @@ public class Assets {
     public static Texture buildCardFortify;
     public static Texture buildCardCastle;
     public static Texture buildCardBarrier;
+    public static Texture buildCardWall;
+    public static Texture buildCardGreatWall;
+    public static Texture buildCardArchitect;
+
+    public static Texture gemCardCreateStones;
+    public static Texture gemCardCreateWeapons;
+    public static Texture gemCardCreateGems;
+    public static Texture gemCardDestroyStones;
+    public static Texture gemCardDestroyWeapons;
+    public static Texture gemCardDestroyGems;
+    public static Texture gemCardMage;
+    public static Texture gemCardHatTrick;
+    public static Texture gemCardLightningStrike;
+    public static Texture gemCardBlast;
+
+    public static Texture hammer;
+    public static Texture stone;
+    public static Texture spear;
+    public static Texture steak;
+    public static Texture wand;
+    public static Texture gem;
+
+//    public static final int CREATE_STONES = 200; //+16 Stones
+//    public static final int CREATE_WEAPONS = 201; //+16 Weapons
+//    public static final int CREATE_GEMS = 202; //+16 Gems
+//    public static final int DESTROY_STONES = 203; //-16 Stones
+//    public static final int DESTROY_WEAPONS = 204; //-16 Weapons
+//    public static final int DESTROY_GEMS = 205; //-16 Gems
+//    public static final int MAGE = 206; //+1 Wizard
+//    public static final int HAT_TRICK = 207; //+4 all res
+//    public static final int LIGHTNING_STRIKE = 208; //+16 Attack
+//    public static final int BLAST = 209; //+8 Attack
 
 
     //Misc Textures
     public static BitmapFont textFieldFont;
 
     public static void loadMenuTextures() {
+        invisible = Drawing.getHollowRectangle(10, 10, 1, new Color(0, 0, 0, 0));
         playButtonUp = new Texture("menu/play_button_up.png");
         playButtonDown = new Texture("menu/play_button_down.png");
         settingsButtonUp = new Texture("menu/settings_button_up.png");
@@ -74,6 +109,12 @@ public class Assets {
         cardBack = new Texture("game/card_back.png");
         cardBlank = new Texture("game/card_blank.png");
 
+        hammer = new Texture("game/hammer.png");
+        stone = new Texture("game/stone.png");
+        spear = new Texture("game/spear.png");
+        steak = new Texture("game/steak.png");
+        wand = new Texture("game/wand.png");
+        gem = new Texture("game/gem.png");
     }
 
     public static void loadCards() {
@@ -87,6 +128,9 @@ public class Assets {
         buildCardFortify = new Texture("game/cards/fortify.png");
         buildCardCastle = new Texture("game/cards/castle.png");
         buildCardBarrier = new Texture("game/cards/barrier.png");
+        buildCardWall = new Texture("game/cards/wall.png");
+        buildCardGreatWall = new Texture("game/cards/great_wall.png");
+        buildCardArchitect = new Texture("game/cards/architect.png");
     }
 
     private static void loadAttackCards() {
@@ -94,7 +138,16 @@ public class Assets {
     }
 
     private static void loadGemCards() {
-
+        gemCardCreateStones = new Texture("game/cards/create_stones.png");
+        gemCardCreateWeapons = new Texture("game/cards/create_weapons.png");
+        gemCardCreateGems = new Texture("game/cards/create_gems.png");
+        gemCardDestroyStones = new Texture("game/cards/destroy_stones.png");
+        gemCardDestroyWeapons = new Texture("game/cards/destroy_weapons.png");
+        gemCardDestroyGems = new Texture("game/cards/destroy_gems.png");
+        gemCardMage = new Texture("game/cards/mage.png");
+        gemCardHatTrick = new Texture("game/cards/top_hat.png");
+        gemCardLightningStrike = new Texture("game/cards/lightning_strike.png");
+        gemCardBlast = new Texture("game/cards/blast.png");
     }
 
     public static void loadSounds(){

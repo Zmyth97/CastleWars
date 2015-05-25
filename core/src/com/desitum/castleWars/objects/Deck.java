@@ -35,13 +35,13 @@ public class Deck {
             cardList.add(new Card(Assets.buildCardBarrier, Card.BUILD, CardActions.BARRIER, CardActions.BARRIER_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.WALL_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.BUILD, CardActions.WALL, CardActions.WALL_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.buildCardWall, Card.BUILD, CardActions.WALL, CardActions.WALL_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.GREATWALL_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.BUILD, CardActions.GREATWALL, CardActions.GREATWALL_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.buildCardGreatWall, Card.BUILD, CardActions.GREATWALL, CardActions.GREATWALL_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.ARCHITECT_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.BUILD, CardActions.ARCHITECT, CardActions.ARCHITECT_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.buildCardArchitect, Card.BUILD, CardActions.ARCHITECT, CardActions.ARCHITECT_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.RESERVE_AMOUNT; i++){
             cardList.add(new Card(Assets.cardBlank, Card.BUILD, CardActions.RESERVE, CardActions.RESERVE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
@@ -87,34 +87,34 @@ public class Deck {
 
         //MAGIC CARDS
         for(int i = 0; i < Settings.CREATE_STONES_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.CREATE_STONES, CardActions.CREATE_STONES_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.gemCardCreateStones, Card.MAGIC, CardActions.CREATE_STONES, CardActions.CREATE_STONES_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.CREATE_WEAPONS_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.CREATE_WEAPONS, CardActions.CREATE_WEAPONS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.gemCardCreateWeapons, Card.MAGIC, CardActions.CREATE_WEAPONS, CardActions.CREATE_WEAPONS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.CREATE_GEMS_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.CREATE_GEMS, CardActions.CREATE_GEMS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.gemCardCreateGems, Card.MAGIC, CardActions.CREATE_GEMS, CardActions.CREATE_GEMS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.DESTROY_STONES_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.DESTROY_STONES, CardActions.DESTROY_STONES_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.gemCardDestroyStones, Card.MAGIC, CardActions.DESTROY_STONES, CardActions.DESTROY_STONES_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.DESTROY_WEAPONS_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.DESTROY_WEAPONS, CardActions.DESTROY_WEAPONS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.gemCardDestroyWeapons, Card.MAGIC, CardActions.DESTROY_WEAPONS, CardActions.DESTROY_WEAPONS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.DESTROY_GEMS_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.DESTROY_GEMS, CardActions.DESTROY_GEMS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.gemCardDestroyGems, Card.MAGIC, CardActions.DESTROY_GEMS, CardActions.DESTROY_GEMS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.MAGE_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.MAGE, CardActions.MAGE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.gemCardMage, Card.MAGIC, CardActions.MAGE, CardActions.MAGE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.HAT_TRICK_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.HAT_TRICK, CardActions.HAT_TRICK_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.gemCardHatTrick, Card.MAGIC, CardActions.HAT_TRICK, CardActions.HAT_TRICK_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.LIGHTNING_STRIKE_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.LIGHTNING_STRIKE, CardActions.LIGHTNING_STRIKE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.gemCardLightningStrike, Card.MAGIC, CardActions.LIGHTNING_STRIKE, CardActions.LIGHTNING_STRIKE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for(int i = 0; i < Settings.BLAST_AMOUNT; i++){
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.BLAST, CardActions.BLAST_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.gemCardBlast, Card.MAGIC, CardActions.BLAST, CardActions.BLAST_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
 
         //GOLDEN CARDS
@@ -136,7 +136,9 @@ public class Deck {
     }
 
     public Card drawCard(){
+        Card lastCard = cardList.remove(cardList.size() - 1);
         Collections.shuffle(cardList);
+        cardList.add(lastCard);
         Card drawCard = cardList.get(0);
         cardList.remove(0);
         return drawCard;

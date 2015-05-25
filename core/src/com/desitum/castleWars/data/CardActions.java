@@ -9,7 +9,6 @@ import com.desitum.castleWars.world.GameWorld;
 public class CardActions {
     private GameInterface gi;
 
-
     //region Build Cards
     public static final int REINFORCE = 1; //+6 Castle
     public static final int FORTIFY = 2; //+12 Castle
@@ -88,12 +87,14 @@ public class CardActions {
     public static final int BLAST_COST = 16;
     //endregion
 
-    //region Golden Cards
+    //region GoldenCards
+
     public static final int JERICHO = 300; //Destroy Enemy Wall (ATTACK)
     public static final int TROJAN_HORSE = 301; //Destroy 20 Castle (Ignores Wall) (ATTACK)
     public static final int BLACK_PLAGUE = 302; //-1 of All People (MAGIC)
     public static final int MERLIN = 303; //+32 Attack (MAGIC)
     public static final int DUPLICATE = 304; //Double Existing Wall Height
+
     //endRegion
 
     //region Golden Costs

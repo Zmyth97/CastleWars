@@ -246,4 +246,9 @@ public class MovementAnimator implements Animator {
     public void setOnFinishedListener(OnAnimationFinishedListener listener) {
         this.finishedListener = listener;
     }
+
+    @Override
+    public Sprite getSprite() {
+        return controllingSprite;
+    }
 }

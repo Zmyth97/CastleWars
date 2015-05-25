@@ -33,8 +33,11 @@ public class ColorEffects implements Animator{
     private float currentAlpha;
 
     private boolean transforming;
+    private boolean running;
 
     private OnAnimationFinishedListener finishedListener;
+
+    private float delay;
 
     public ColorEffects(Color startColor, Color endColor, float duration) {
         transforming = false;
@@ -54,7 +57,6 @@ public class ColorEffects implements Animator{
             slopeAlpha = 0;
             return;
         }
-
 
         this.duration = duration;
 
@@ -77,9 +79,24 @@ public class ColorEffects implements Animator{
         endGreen = endColor.g;
         endBlue = endColor.b;
         endAlpha = endColor.a;
+
+        running = false;
+    }
+
+    public ColorEffects(Color startColor, Color endColor, float duration, float delay) {
+        this(startColor, endColor, duration);
+
+        this.delay = delay;
     }
 
     public void update(float delta) {
+        if (!running) {
+            return;
+        }
+        if (delay > 0) {
+            delay -= delta;
+            return;
+        }
         if (transforming) {
             pointInTransition += delta / duration;
 
@@ -108,7 +125,7 @@ public class ColorEffects implements Animator{
 
     @Override
     public void start(boolean isProtected) {
-        transforming = true;
+        running = true;
     }
 
     public Color getCurrentColor() {
@@ -148,6 +165,27 @@ public class ColorEffects implements Animator{
     @Override
     public void setOnFinishedListener(OnAnimationFinishedListener listener) {
         this.finishedListener = listener;
+    }
+
+    @Override
+    public Sprite getSprite() {
+        return controllingSprite;
+    }
+
+    static public boolean colorsMatch(Color color1, Color color2, float marginOfError) {
+        if (color1.equals(color2)) return true;
+
+        float error = 0;
+
+        error += Math.abs(color1.r - color2.r);
+        error += Math.abs(color1.g - color2.g);
+        error += Math.abs(color1.b - color2.b);
+        error += Math.abs(color1.a - color2.a);
+
+        if (error < marginOfError) {
+            return true;
+        }
+        return false;
     }
 }
 

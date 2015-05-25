@@ -1,11 +1,15 @@
 package com.desitum.castleWars.data;
 
-import java.util.ArrayList;
+import com.badlogic.gdx.graphics.Color;
+import com.desitum.castleWars.libraries.animation.ColorEffects;
+import com.desitum.castleWars.libraries.menu.PopupTextLabel;
+import com.desitum.castleWars.world.GameInterface;
 
 /**
  * Created by Zmyth97 on 5/19/2015.
  */
 public class Resources {
+    private GameInterface gi;
 
     private static final int BUILDER = 1;
     private static final int SOLDIER = 2;
@@ -29,7 +33,9 @@ public class Resources {
     private int computerWeapons;
     private int computerGems;
 
-    public Resources(){
+    public Resources(GameInterface gameInterface){
+        this.gi = gameInterface;
+
         playerBuilders = 2;
         playerSoldiers = 2;
         playerWizards = 2;
@@ -46,23 +52,23 @@ public class Resources {
     }
 
     public void changePlayerResources(int builderAmount, int soldierAmount, int wizardAmount, int stoneAmount, int weaponsAmount, int gemsAmount){
-        playerBuilders += builderAmount;
-        playerSoldiers += soldierAmount;
-        playerWizards += wizardAmount;
+        adjustPlayerBuilders(builderAmount);
+        adjustPlayerSoldiers(soldierAmount);
+        adjustPlayerWizards(wizardAmount);
 
-        playerStones += stoneAmount;
-        playerWeapons += weaponsAmount;
-        playerGems += gemsAmount;
+        adjustPlayerStones(stoneAmount);
+        adjustPlayerWeapons(weaponsAmount);
+        adjustPlayerGems(gemsAmount);
     }
 
     public void changeComputerResources(int builderAmount, int soldierAmount, int wizardAmount, int stoneAmount, int weaponsAmount, int gemsAmount){
-        computerBuilders += builderAmount;
-        computerSoldiers += soldierAmount;
-        computerWizards += wizardAmount;
+        adjustComputerBuilders(builderAmount);
+        adjustComputerSoldiers(soldierAmount);
+        adjustComputerWizards(wizardAmount);
 
-        computerStones += stoneAmount;
-        computerWeapons += weaponsAmount;
-        computerGems += gemsAmount;
+        adjustComputerStones(stoneAmount);
+        adjustComputerWeapons(weaponsAmount);
+        adjustComputerGems(gemsAmount);
     }
 
     public int getPlayerBuilders() {
@@ -122,6 +128,7 @@ public class Resources {
         } else {
             playerBuilders += amount;
         }
+        if (difference != 0) gi.addWidgetToWorld(createTextWidget(difference, 20, 100 - 7));
         return difference;
     }
 
@@ -133,6 +140,7 @@ public class Resources {
         } else {
             playerSoldiers += amount;
         }
+        if (difference != 0) gi.addWidgetToWorld(createTextWidget(difference, 20, 100 - 17 - 7));
         return difference;
     }
 
@@ -144,6 +152,7 @@ public class Resources {
         } else {
             playerWizards += amount;
         }
+        if (difference != 0) gi.addWidgetToWorld(createTextWidget(difference, 20, 100 - 34 - 7));
         return difference;
     }
 
@@ -155,6 +164,7 @@ public class Resources {
         } else {
             playerStones += amount;
         }
+        if (difference != 0) gi.addWidgetToWorld(createTextWidget(difference, 20, 100 - 17 - 7));
         return difference;
     }
 
@@ -244,5 +254,23 @@ public class Resources {
             computerGems += amount;
         }
         return difference;
+    }
+
+    private PopupTextLabel createTextWidget (int change, float x, float y) {
+        PopupTextLabel returnLabel = new PopupTextLabel(Assets.invisible, new Color(1, 1, 1, 1), Assets.textFieldFont, 40, 40, 40, 6);
+        ColorEffects fadeIn = new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 2f);
+        fadeIn.start(false);
+        ColorEffects fadeOut = new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 2f, 2f);
+        fadeOut.start(false);
+        returnLabel.addFontColorChanger(fadeIn);
+        returnLabel.addFontColorChanger(fadeOut);
+
+        if (change < 0) {
+            returnLabel.setText("-" + change);
+        } else {
+            returnLabel.setText("+" + change);
+        }
+
+        return returnLabel;
     }
 }

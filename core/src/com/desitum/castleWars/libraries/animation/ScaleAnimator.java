@@ -191,6 +191,11 @@ public class ScaleAnimator implements Animator {
         this.finishedListener = listener;
     }
 
+    @Override
+    public Sprite getSprite() {
+        return controllingSprite;
+    }
+
     private void setupInterpolator(int interpolator){
         if (interpolator == Interpolation.ACCELERATE_INTERPOLATOR){
             this.interpolator = AccelerateInterpolator.$();

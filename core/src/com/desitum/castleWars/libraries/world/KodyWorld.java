@@ -8,9 +8,11 @@ import com.desitum.castleWars.libraries.menu.PopupButton;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupScrollArea;
 import com.desitum.castleWars.libraries.menu.PopupSlider;
+import com.desitum.castleWars.libraries.menu.PopupTextLabel;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 /**
  * Created by kody on 5/21/15.
@@ -23,8 +25,13 @@ public class KodyWorld {
     private Vector3 touchPoint;
     private Viewport cam;
 
+    private ArrayList<PopupWidget> widgetsToAdd;
+    private ArrayList<PopupWidget> widgetsToRem;
+
     public KodyWorld () {
         widgets = new ArrayList<PopupWidget>();
+        widgetsToAdd = new ArrayList<PopupWidget>();
+        widgetsToRem = new ArrayList<PopupWidget>();
         menus = new ArrayList<PopupMenu>();
         touchPoint = new Vector3(0, 0, 0);
     }
@@ -52,32 +59,48 @@ public class KodyWorld {
         this.cam = cam;
     }
 
-    public void updateTouchInput(Vector3 touchPos, boolean clickDown){
-        for (PopupWidget widget: widgets){
-            boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
-            if (widget instanceof PopupButton){
-                PopupButton button = (PopupButton) widget;
-                if (clickInArea && clickDown){
-                    button.onClickDown();
-                } else if (clickInArea) {
-                    button.onClickUp(true);
-                } else {
-                    button.onClickUp(false);
+    public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
+        try {
+            for (PopupWidget widget : widgets) {
+                boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
+                if (widget instanceof PopupButton) {
+                    PopupButton button = (PopupButton) widget;
+                    if (clickInArea && clickDown) {
+                        button.onClickDown();
+                    } else if (clickInArea) {
+                        button.onClickUp(true);
+                    } else {
+                        button.onClickUp(false);
+                    }
+                } else if (widget instanceof PopupSlider) {
+                    PopupSlider slider = (PopupSlider) widget;
+                    if (clickInArea && clickDown) {
+                        slider.onClickDown(touchPos);
+                    } else if (clickInArea) {
+                        slider.onClickUp();
+                    } else {
+                        slider.onClickUp(); // handles if not in area
+                    }
+                } else if (widget instanceof PopupScrollArea) {
+                    PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
+                    popupScrollArea.updateTouchInput(touchPos, clickDown);
                 }
-            } else if (widget instanceof PopupSlider){
-                PopupSlider slider = (PopupSlider) widget;
-                if (clickInArea && clickDown){
-                    slider.onClickDown(touchPos);
-                } else if (clickInArea) {
-                    slider.onClickUp();
-                } else {
-                    slider.onClickUp(); // handles if not in area
-                }
-            } else if (widget instanceof PopupScrollArea){
-                PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
-                popupScrollArea.updateTouchInput(touchPos, clickDown);
             }
+        } catch (ConcurrentModificationException e) {
+            e.printStackTrace();
         }
+
+        for (PopupWidget widget: widgetsToRem) {
+            widgets.remove(widget);
+            System.out.println("rm instanceOf PopupTextLabel: " + (widget instanceof PopupTextLabel));
+        }
+        widgetsToRem.clear();
+
+        for (PopupWidget widget: widgetsToAdd) {
+            widgets.add(widget);
+            System.out.println("ad instanceOf PopupTextLabel: " + (widget instanceof PopupTextLabel));
+        }
+        widgetsToAdd.clear();
 
         for (PopupMenu menu: menus) {
             menu.updateTouchInput(touchPos, clickDown);
@@ -85,7 +108,7 @@ public class KodyWorld {
     }
 
     public void addWidget(PopupWidget widget){
-        widgets.add(widget);
+        widgetsToAdd.add(widget);
     }
 
     public void addPopupMenu(PopupMenu menu) {
@@ -93,7 +116,7 @@ public class KodyWorld {
     }
 
     public void removeWidget(PopupWidget widget) {
-        widgets.remove(widget);
+        widgetsToRem.add(widget);
     }
 
     public ArrayList<PopupWidget> getWidgets() {

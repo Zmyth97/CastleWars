@@ -77,7 +77,6 @@ public class MenuWorld extends KodyWorld {
         popupMenu.moveIn();
     }
 
-
     private void createButtons() {
         //Create the buttons!
         playButton = new PopupButton(Assets.playButtonUp, Assets.playButtonDown, ((MenuScreen.SCREEN_WIDTH/2)* .5f) - 15f, 50, 30, 20);

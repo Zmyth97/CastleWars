@@ -15,4 +15,5 @@ public interface Animator {
     public Animator duplicate();
     public boolean isRunning();
     public void setOnFinishedListener(OnAnimationFinishedListener listener);
+    public Sprite getSprite();
 }

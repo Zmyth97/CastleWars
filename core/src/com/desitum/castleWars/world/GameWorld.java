@@ -9,7 +9,9 @@ import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
+import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
+import com.desitum.castleWars.libraries.menu.PopupTextLabel;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
@@ -19,6 +21,7 @@ import com.desitum.castleWars.screens.MenuScreen;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
+ * can be used by Zmyth97 and people in [Zmyth97}]
  */
 public class GameWorld extends KodyWorld implements GameInterface {
 
@@ -29,19 +32,20 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private Player player1;
     private Player player2;
 
+    private PopupTextLabel playerBuildersLabel;
+    private PopupTextLabel playerSoldiersLabel;
+    private PopupTextLabel playerWizardsLabel;
+    private PopupTextLabel playerStoneLabel;
+    private PopupTextLabel playerWeaponLabel;
+    private PopupTextLabel playerGemLabel;
+    private PopupTextLabel computerBuildersLabel;
+    private PopupTextLabel computerSoldiersLabel;
+    private PopupTextLabel computerWizardsLabel;
+
     private Deck deck;
 
     private Resources myResources;
     private CardActions cardActions;
-
-    private PopupMenu playerBuildMenu;
-    private PopupMenu playerAttackMenu;
-    private PopupMenu playerMagicMenu;
-    private PopupMenu playerCastleMenu;
-    private PopupMenu computerBuildMenu;
-    private PopupMenu computerAttackMenu;
-    private PopupMenu computerMagicMenu;
-    private PopupMenu computerCastleMenu;
 
     private static Color buildColor = new Color(.122f, 0f, .616f, 1);
     private static Color attackColor = new Color(.855f, 0f, .102f, 1);
@@ -75,7 +79,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             });
         }
         cardActions = new CardActions(this);
-        myResources = new Resources();
+        myResources = new Resources(this);
 
         computerDelay = Settings.COMPUTER_DELAY;
 
@@ -87,10 +91,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
             player1.getHand().addCardToHand(drawNewCard(cardX, CARDS_Y, i * 0.2f));
             player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f));
         }
-    }
-
-    public void setGameMode() {
-
     }
 
     public void update(float delta) {
@@ -111,7 +111,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         }
 
         if (addToPlayer1 != null) player1.getHand().addCardToHand(drawNewCard(addToPlayer1.getX(), addToPlayer1.getY(), 0));
-        if (addToPlayer2 != null) player1.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, 0));
+        if (addToPlayer2 != null) player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, 0));
 
         for (Card c: deck.getCardList()) {
             c.update(delta);
@@ -120,7 +120,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
         super.update(delta);
 
         if (playerTurn == PLAYER2) {
-            System.out.println("Computers turn: " + computerDelay);
             computerDelay -= delta;
             if (computerDelay < 0) {
                 computerDelay = Settings.COMPUTER_DELAY;
@@ -130,6 +129,13 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         player1.update(delta);
         player2.update(delta);
+
+        playerBuildersLabel.setText(":" + myResources.getPlayerBuilders());
+        playerSoldiersLabel.setText(":" + myResources.getPlayerSoldiers());
+        playerWizardsLabel.setText(":" + myResources.getPlayerWizards());
+        playerStoneLabel.setText(":" + myResources.getPlayerStones());
+        playerWeaponLabel.setText(":" + myResources.getPlayerWeapons());
+        playerGemLabel.setText(":" + myResources.getPlayerGems());
     }
 
     private void switchTurns(int playerTurn) {
@@ -141,13 +147,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
             myResources.adjustPlayerWeapons(2 * myResources.getPlayerSoldiers());
         } else {
             myResources.adjustComputerStones(2 * myResources.getComputerBuilders());
-            myResources.adjustComputerGems(2 * myResources.getPlayerWizards());
+            myResources.adjustComputerGems(2 * myResources.getComputerWizards());
             myResources.adjustComputerWeapons(2 * myResources.getComputerSoldiers());
         }
-    }
-
-    public void reset() {
-
     }
 
     private void computerTurn() {
@@ -178,24 +180,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private void processTurn(Card card) {
         card.enable();
         deck.addCard(card);
-
-        System.out.println("Card Used: " + card + "Card ID: " + card.getCardID());
-        System.out.println("Player Weapons: " + myResources.getPlayerWeapons());
-        System.out.println("Player Stones: " + myResources.getPlayerStones());
-        System.out.println("Player Gems: " + myResources.getPlayerGems());
-        System.out.println("Computer Weapons: " + myResources.getComputerWeapons());
-        System.out.println("Computer Weapons: " + myResources.getComputerStones());
-        System.out.println("Computer Weapons: " + myResources.getComputerGems());
-        System.out.println("Player Builders: " + myResources.getPlayerBuilders());
-        System.out.println("Player Wizards: " + myResources.getPlayerWizards());
-        System.out.println("Player Soldiers: " + myResources.getPlayerSoldiers());
-        System.out.println("Computer Builders: " + myResources.getComputerBuilders());
-        System.out.println("Computer Wizards: " + myResources.getComputerWizards());
-        System.out.println("Computer Soldiers: " + myResources.getComputerSoldiers());
-        System.out.println("Player Castle: " + player1.getCastle().getHealth());
-        System.out.println("Player Wall: " + player1.getCastle().getWall().getHealth());
-        System.out.println("Computer Castle: " + player2.getCastle().getHealth());
-        System.out.println("Computer Wall: " + player2.getCastle().getWall().getHealth());
     }
 
     private Card drawNewCard(float x, float y, float delay) {
@@ -238,36 +222,70 @@ public class GameWorld extends KodyWorld implements GameInterface {
         removeWidget(card);
     }
 
+    @Override
+    public void removeWidgetFromWorld(PopupWidget widget) {
+        super.removeWidget(widget);
+    }
+
+    @Override
+    public void addWidgetToWorld(PopupWidget widget) {
+        super.addWidget(widget);
+    }
+
     public Deck getDeck() {
         return deck;
     }
 
     private void setupSideMenus() {
         //region player menus
-        playerBuildMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
+        PopupMenu playerBuildMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 16);
         playerBuildMenu.setColor(buildColor);
-        MovementAnimator playerBuildAnimator = new MovementAnimator(playerBuildMenu, 0, 80, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        MovementAnimator playerBuildAnimator = new MovementAnimator(playerBuildMenu, 0, 84, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerBuildMenu.addIncomingAnimator(playerBuildAnimator);
+        playerBuildMenu.addPopupWidget(new PopupImage(Assets.hammer, Assets.invisible, 1, 9, 6, 6, false));
+        playerBuildMenu.addPopupWidget(new PopupImage(Assets.stone, Assets.invisible, 1, 1, 6, 6, false));
+        playerBuildersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, 12, 6);
+        playerBuildersLabel.setText(":" + myResources.getPlayerBuilders());
+        playerStoneLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, 12, 6);
+        playerStoneLabel.setText(":" + myResources.getPlayerStones());
+        playerBuildMenu.addPopupWidget(playerBuildersLabel);
+        playerBuildMenu.addPopupWidget(playerStoneLabel);
         this.addPopupMenu(playerBuildMenu);
 
         //Attack Popup Menu
-        playerAttackMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
+        PopupMenu playerAttackMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 16);
         playerAttackMenu.setColor(attackColor);
-        MovementAnimator playerAttackAnimator = new MovementAnimator(playerAttackMenu, 0, 65, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        MovementAnimator playerAttackAnimator = new MovementAnimator(playerAttackMenu, 0, 67, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerAttackMenu.addIncomingAnimator(playerAttackAnimator);
+        playerAttackMenu.addPopupWidget(new PopupImage(Assets.spear, Assets.invisible, 1, 9, 6, 6, false));
+        playerAttackMenu.addPopupWidget(new PopupImage(Assets.steak, Assets.invisible, 1, 1, 6, 6, false));
+        playerSoldiersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, 12, 6);
+        playerSoldiersLabel.setText(":" + myResources.getPlayerSoldiers());
+        playerWeaponLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, 12, 6);
+        playerWeaponLabel.setText(":" + myResources.getPlayerWeapons());
+        playerAttackMenu.addPopupWidget(playerSoldiersLabel);
+        playerAttackMenu.addPopupWidget(playerWeaponLabel);
         this.addPopupMenu(playerAttackMenu);
 
         //Magic Popup Menu
-        playerMagicMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
+        PopupMenu playerMagicMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 16);
         playerMagicMenu.setColor(magicColor);
         MovementAnimator playerMagicAnimator = new MovementAnimator(playerMagicMenu, 0, 50, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerMagicMenu.addIncomingAnimator(playerMagicAnimator);
+        playerMagicMenu.addPopupWidget(new PopupImage(Assets.wand, Assets.invisible, 1, 9, 6, 6, false));
+        playerMagicMenu.addPopupWidget(new PopupImage(Assets.gem, Assets.invisible, 1, 1, 6, 6, false));
+        playerWizardsLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, 12, 6);
+        playerWizardsLabel.setText(":" + myResources.getPlayerWizards());
+        playerGemLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, 12, 6);
+        playerGemLabel.setText(":" + myResources.getPlayerGems());
+        playerMagicMenu.addPopupWidget(playerWizardsLabel);
+        playerMagicMenu.addPopupWidget(playerGemLabel);
         this.addPopupMenu(playerMagicMenu);
 
         //Castle Popup Menu
-        playerCastleMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
+        PopupMenu playerCastleMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
         playerCastleMenu.setColor(castleColor);
-        MovementAnimator playerCastleAnimator = new MovementAnimator(playerCastleMenu, 0, 35, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        MovementAnimator playerCastleAnimator = new MovementAnimator(playerCastleMenu, 0, 33, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerCastleMenu.addIncomingAnimator(playerCastleAnimator);
         this.addPopupMenu(playerCastleMenu);
 
@@ -276,28 +294,28 @@ public class GameWorld extends KodyWorld implements GameInterface {
         //region Computer Menus
 
         //Build Popup Menu
-        computerBuildMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
+        PopupMenu computerBuildMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
         computerBuildMenu.setColor(buildColor);
         MovementAnimator computerBuildAnimator = new MovementAnimator(computerBuildMenu, 130, 80, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerBuildMenu.addIncomingAnimator(computerBuildAnimator);
         this.addPopupMenu(computerBuildMenu);
 
         //Attack Popup Menu
-        computerAttackMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
+        PopupMenu computerAttackMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
         computerAttackMenu.setColor(attackColor);
         MovementAnimator computerAttackAnimator = new MovementAnimator(computerAttackMenu, 130, 65, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerAttackMenu.addIncomingAnimator(computerAttackAnimator);
         this.addPopupMenu(computerAttackMenu);
 
         //magic Popup Menu
-        computerMagicMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
+        PopupMenu computerMagicMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
         computerMagicMenu.setColor(magicColor);
         MovementAnimator computerMagicAnimator = new MovementAnimator(computerMagicMenu, 130, 50, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerMagicMenu.addIncomingAnimator(computerMagicAnimator);
         this.addPopupMenu(computerMagicMenu);
 
         //Castle Popup Menu
-        computerCastleMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
+        PopupMenu computerCastleMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
         computerCastleMenu.setColor(castleColor);
         MovementAnimator computerCastleAnimator = new MovementAnimator(computerCastleMenu, 130, 35, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerCastleMenu.addIncomingAnimator(computerCastleAnimator);

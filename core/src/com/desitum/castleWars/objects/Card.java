@@ -45,12 +45,16 @@ public class Card extends PopupButton {
         if (colorChanger != null) colorChanger.update(delta);
     }
     public void fadeColor(){
+        if (colorChanger != null && colorChanger.isRunning()) return;
+        if (ColorEffects.colorsMatch(this.getColor(), fadedColor, 0.01f)) return;
         colorChanger = new ColorEffects(regularColor, fadedColor, 0.2f);
         colorChanger.setSprite(this, true, true);
         colorChanger.start(false);
     }
 
     public void restoreColor(){
+        if (colorChanger != null && colorChanger.isRunning()) return;
+        if (ColorEffects.colorsMatch(this.getColor(), regularColor, 0.01f)) return;
         colorChanger = new ColorEffects(fadedColor, regularColor, 0.2f);
         colorChanger.setSprite(this, true, true);
         colorChanger.start(false);
