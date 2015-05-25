@@ -244,6 +244,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerBuildMenu.setColor(buildColor);
         MovementAnimator playerBuildAnimator = new MovementAnimator(playerBuildMenu, 0, 84, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerBuildMenu.addIncomingAnimator(playerBuildAnimator);
+        playerBuildMenu.addPopupWidget(new PopupImage(Assets.hammer, Assets.invisible, 1, 9, 6, 6, false));
+        playerBuildMenu.addPopupWidget(new PopupImage(Assets.stone, Assets.invisible, 1, 1, 6, 6, false));
+        playerBuildersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, 12, 6);
+        playerBuildersLabel.setText(":" + myResources.getPlayerSoldiers());
+        playerStoneLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, 12, 6);
+        playerStoneLabel.setText(":" + myResources.getPlayerWeapons());
+        playerBuildMenu.addPopupWidget(playerBuildersLabel);
+        playerBuildMenu.addPopupWidget(playerStoneLabel);
         this.addPopupMenu(playerBuildMenu);
 
         //Attack Popup Menu
