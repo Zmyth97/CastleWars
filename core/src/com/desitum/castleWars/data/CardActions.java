@@ -10,12 +10,12 @@ public class CardActions {
     private GameInterface gi;
 
     //region Build Cards
-    public static final int REINFORCE = 1; //+6 Castle
-    public static final int FORTIFY = 2; //+12 Castle
-    public static final int CASTLE = 3; //+20 Castle
-    public static final int BARRIER = 4; //+4 Wall
-    public static final int WALL = 5; //+10 Wall
-    public static final int GREATWALL = 6; //+18 Wall
+    public static final int BARRIER = 1; //+4 Wall
+    public static final int WALL = 2; //+10 Wall
+    public static final int GREATWALL = 3; //+18 Wall
+    public static final int REINFORCE = 4; //+6 Castle
+    public static final int FORTIFY = 5; //+12 Castle
+    public static final int CASTLE = 6;//+20 Castle
     public static final int ARCHITECT = 7; //+1 Builder
     public static final int RESERVE = 8; //Castle +8, Wall -4
     public static final int SABOTAGE = 9; //Enemy Castle -4, Castle +8

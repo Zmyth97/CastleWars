@@ -9,7 +9,6 @@ import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
-import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupTextLabel;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
@@ -31,6 +30,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private Player player1;
     private Player player2;
+    private ComputerAI ai;
 
     private PopupTextLabel playerBuildersLabel;
     private PopupTextLabel playerSoldiersLabel;
@@ -242,14 +242,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerBuildMenu.setColor(buildColor);
         MovementAnimator playerBuildAnimator = new MovementAnimator(playerBuildMenu, 0, 84, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerBuildMenu.addIncomingAnimator(playerBuildAnimator);
-        playerBuildMenu.addPopupWidget(new PopupImage(Assets.hammer, Assets.invisible, 1, 9, 6, 6, false));
-        playerBuildMenu.addPopupWidget(new PopupImage(Assets.stone, Assets.invisible, 1, 1, 6, 6, false));
-        playerBuildersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, 12, 6);
-        playerBuildersLabel.setText(":" + myResources.getPlayerBuilders());
-        playerStoneLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, 12, 6);
-        playerStoneLabel.setText(":" + myResources.getPlayerStones());
-        playerBuildMenu.addPopupWidget(playerBuildersLabel);
-        playerBuildMenu.addPopupWidget(playerStoneLabel);
         this.addPopupMenu(playerBuildMenu);
 
         //Attack Popup Menu
