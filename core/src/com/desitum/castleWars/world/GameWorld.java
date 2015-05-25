@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.CardActions;
+import com.desitum.castleWars.data.ComputerAI;
 import com.desitum.castleWars.data.Resources;
 import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
@@ -28,6 +29,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private Player player1;
     private Player player2;
+    private ComputerAI ai;
 
     private Deck deck;
 
@@ -76,6 +78,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         }
         cardActions = new CardActions(this);
         myResources = new Resources();
+        ai = new ComputerAI(this);
 
         computerDelay = Settings.COMPUTER_DELAY;
 
@@ -151,18 +154,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     private void computerTurn() {
-        boolean usedCard = false;
-        for (Card c: player2.getHand().getCardsInHand()) {
-            if (c.isAvailable()) {
-                cardActions.doCardAction(c.getCardID());
-                processTurn(c);
-                usedCard = true;
-            }
-        }
-        if (!usedCard) {
-            Card c = player2.getHand().getCardsInHand().get(0);
-            processTurn(c);
-        }
+        Card chosenCard = ai.processAI();
+        processTurn(chosenCard);
+        cardActions.doCardAction(chosenCard.getCardID());
     }
 
     @Override
