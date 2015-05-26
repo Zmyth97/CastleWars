@@ -60,7 +60,6 @@ public class CastleWars extends Game {
         //Animation in background? Parralax Mapping, Clouds Moving, etc?
         //Trash Can in Corner for Discarding
         //Add dificulty setting gui piece on game start
-        //Make negative resources show in the menus as 0
         //Add the change amount next to the menus to make it more obvious (like the little cloud thing that shows up next to it in the original one)
     //Computer AI
         //Just Test it a Lot, and I'll fine tune it till its actually semi-hard to beat
@@ -73,8 +72,6 @@ public class CastleWars extends Game {
         //Start it :P
     //In App Purchases
         //Probably after adding Multi, but add these
-    //Random Events
-        //Were we still doing this?
     //Sound & Music
         //Are we doing music? If so we should do that before we leave C-Tech probably (Garange Band?)
         //Are we going to search for sounds, or just make some ourselves at my house XD

@@ -11,7 +11,7 @@ public class Player {
     private Hand hand;
 
     public Player(GameInterface gameInterface){
-        castle = new Castle(Assets.cancelButtonDown);
+        castle = new Castle(Assets.playerCastle, gameInterface);
         hand = new Hand(gameInterface);
     }
 

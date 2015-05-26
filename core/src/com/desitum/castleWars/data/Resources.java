@@ -11,14 +11,6 @@ import com.desitum.castleWars.world.GameInterface;
 public class Resources {
     private GameInterface gi;
 
-    private static final int BUILDER = 1;
-    private static final int SOLDIER = 2;
-    private static final int WIZARD = 3;
-
-    private static final int STONES = 4;
-    private static final int SUPPLIES = 5;
-    private static final int GEMS = 6;
-
     private int playerBuilders;
     private int playerSoldiers;
     private int playerWizards;
@@ -49,26 +41,6 @@ public class Resources {
         computerStones = 16;
         computerWeapons = 16;
         computerGems = 16;
-    }
-
-    public void changePlayerResources(int builderAmount, int soldierAmount, int wizardAmount, int stoneAmount, int weaponsAmount, int gemsAmount){
-        adjustPlayerBuilders(builderAmount);
-        adjustPlayerSoldiers(soldierAmount);
-        adjustPlayerWizards(wizardAmount);
-
-        adjustPlayerStones(stoneAmount);
-        adjustPlayerWeapons(weaponsAmount);
-        adjustPlayerGems(gemsAmount);
-    }
-
-    public void changeComputerResources(int builderAmount, int soldierAmount, int wizardAmount, int stoneAmount, int weaponsAmount, int gemsAmount){
-        adjustComputerBuilders(builderAmount);
-        adjustComputerSoldiers(soldierAmount);
-        adjustComputerWizards(wizardAmount);
-
-        adjustComputerStones(stoneAmount);
-        adjustComputerWeapons(weaponsAmount);
-        adjustComputerGems(gemsAmount);
     }
 
     public int getPlayerBuilders() {
@@ -128,7 +100,7 @@ public class Resources {
         } else {
             playerBuilders += amount;
         }
-        if (difference != 0) gi.addWidgetToWorld(createTextWidget(difference, 20, 100 - 7));
+        if (difference != 0) gi.setPlayerBuildersLabelChangeText(difference);
         return difference;
     }
 
@@ -140,7 +112,7 @@ public class Resources {
         } else {
             playerSoldiers += amount;
         }
-        if (difference != 0) gi.addWidgetToWorld(createTextWidget(difference, 20, 100 - 17 - 7));
+        if (difference != 0)  gi.setPlayerSoldiersLabelChangeText(difference);
         return difference;
     }
 
@@ -152,7 +124,7 @@ public class Resources {
         } else {
             playerWizards += amount;
         }
-        if (difference != 0) gi.addWidgetToWorld(createTextWidget(difference, 20, 100 - 34 - 7));
+        if (difference != 0)  gi.setPlayerWizardsLabelChangeText(difference);
         return difference;
     }
 
@@ -164,7 +136,7 @@ public class Resources {
         } else {
             playerStones += amount;
         }
-        if (difference != 0) gi.addWidgetToWorld(createTextWidget(difference, 20, 100 - 17 - 7));
+        if (difference != 0)  gi.setPlayerStoneLabelChangeText(difference);
         return difference;
     }
 
@@ -176,6 +148,7 @@ public class Resources {
         } else {
             playerWeapons += amount;
         }
+        if (difference != 0)  gi.setPlayerWeaponLabelChangeText(difference);
         return difference;
     }
 
@@ -187,6 +160,7 @@ public class Resources {
         } else {
             playerGems += amount;
         }
+        if (difference != 0)  gi.setPlayerGemLabelChangeText(difference);
         return difference;
     }
 
@@ -198,6 +172,7 @@ public class Resources {
         } else {
             computerBuilders += amount;
         }
+        if (difference != 0)  gi.setComputerBuildersLabelChangeText(difference);
         return difference;
     }
 
@@ -209,6 +184,7 @@ public class Resources {
         } else {
             computerSoldiers += amount;
         }
+        if (difference != 0)  gi.setComputerSoldiersLabelChangeText(difference);
         return difference;
     }
 
@@ -220,6 +196,7 @@ public class Resources {
         } else {
             computerWizards += amount;
         }
+        if (difference != 0)  gi.setComputerWizardsLabelChangeText(difference);
         return difference;
     }
 
@@ -231,6 +208,7 @@ public class Resources {
         } else {
             computerStones += amount;
         }
+        if (difference != 0)  gi.setComputerStoneLabelChangeText(difference);
         return difference;
     }
 
@@ -242,6 +220,7 @@ public class Resources {
         } else {
             computerWeapons += amount;
         }
+        if (difference != 0)  gi.setComputerWeaponLabelChangeText(difference);
         return difference;
     }
 
@@ -253,24 +232,7 @@ public class Resources {
         } else {
             computerGems += amount;
         }
+        if (difference != 0)  gi.setComputerGemLabelChangeText(difference);
         return difference;
-    }
-
-    private PopupTextLabel createTextWidget (int change, float x, float y) {
-        PopupTextLabel returnLabel = new PopupTextLabel(Assets.invisible, new Color(1, 1, 1, 1), Assets.textFieldFont, 40, 40, 40, 6);
-        ColorEffects fadeIn = new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 2f);
-        fadeIn.start(false);
-        ColorEffects fadeOut = new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 2f, 2f);
-        fadeOut.start(false);
-        returnLabel.addFontColorChanger(fadeIn);
-        returnLabel.addFontColorChanger(fadeOut);
-
-        if (change < 0) {
-            returnLabel.setText("-" + change);
-        } else {
-            returnLabel.setText("+" + change);
-        }
-
-        return returnLabel;
     }
 }

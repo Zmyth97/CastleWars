@@ -7,6 +7,7 @@ import com.desitum.castleWars.data.CardActions;
 import com.desitum.castleWars.data.ComputerAI;
 import com.desitum.castleWars.data.Resources;
 import com.desitum.castleWars.data.Settings;
+import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
@@ -30,9 +31,12 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
 
-    private int EASY_DIFFICULTY = 0;
-    private int HARD_DIFFICULTY = 1;
+    private static final float FADE_IN_DURATION = 0.2f;
+    private static final float FADE_DELAY = 0.5f;
+    private static final float FADE_OUT_DURATION = 0.3f;
 
+    private static final int EASY_DIFFICULTY = 0;
+    private static final int HARD_DIFFICULTY = 1;
 
     private Player player1;
     private Player player2;
@@ -54,6 +58,23 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupTextLabel computerGemLabel;
     private PopupTextLabel computerCastleLabel;
     private PopupTextLabel computerWallLabel;
+
+    private PopupTextLabel playerBuildersLabelChange;
+    private PopupTextLabel playerSoldiersLabelChange;
+    private PopupTextLabel playerWizardsLabelChange;
+    private PopupTextLabel playerStoneLabelChange;
+    private PopupTextLabel playerWeaponLabelChange;
+    private PopupTextLabel playerGemLabelChange;
+    private PopupTextLabel playerCastleLabelChange;
+    private PopupTextLabel playerWallLabelChange;
+    private PopupTextLabel computerBuildersLabelChange;
+    private PopupTextLabel computerSoldiersLabelChange;
+    private PopupTextLabel computerWizardsLabelChange;
+    private PopupTextLabel computerStoneLabelChange;
+    private PopupTextLabel computerWeaponLabelChange;
+    private PopupTextLabel computerGemLabelChange;
+    private PopupTextLabel computerCastleLabelChange;
+    private PopupTextLabel computerWallLabelChange;
 
     private int difficulty;
 
@@ -404,5 +425,234 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerAttackMenu.moveIn();
         computerMagicMenu.moveIn();
         computerCastleMenu.moveIn();
+
+        playerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerBuildMenu.getY() + 9, 40, 6);
+        playerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        playerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        playerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerBuildMenu.getY() + 1, 40, 6);
+        playerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        playerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        playerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerAttackMenu.getY() + 9, 6, 40);
+        playerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        playerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        playerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerAttackMenu.getY() + 1, 6, 40);
+        playerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        playerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        playerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerMagicMenu.getY() + 9, 6, 40);
+        playerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        playerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        playerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerMagicMenu.getY() + 1, 6, 40);
+        playerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        playerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        playerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerCastleMenu.getY() + 9, 6, 40);
+        playerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        playerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        playerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerCastleMenu.getY() + 1, 6, 40);
+        playerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        playerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+
+        computerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20,computerCastleMenu.getY() + 1, 6, 40);
+        computerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        computerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        computerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerBuildMenu.getY() + 1, 6, 40);
+        computerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        computerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        computerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerAttackMenu.getY() + 9, 6, 40);
+        computerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        computerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        computerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerAttackMenu.getY() + 1, 6, 40);
+        computerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        computerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        computerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerMagicMenu.getY() + 9, 6, 40);
+        computerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        computerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        computerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerMagicMenu.getY() + 1, 6, 40);
+        computerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        computerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        computerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerCastleMenu.getY() + 9, 6, 40);
+        computerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        computerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+        computerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerCastleMenu.getY() + 1, 6, 40);
+        computerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
+        computerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
+
+        this.addWidget(playerBuildersLabelChange);
+        this.addWidget(playerStoneLabelChange);
+        this.addWidget(playerSoldiersLabelChange);
+        this.addWidget(playerWeaponLabelChange);
+        this.addWidget(playerWizardsLabelChange);
+        this.addWidget(playerGemLabelChange);
+        this.addWidget(playerCastleLabelChange);
+        this.addWidget(playerWallLabelChange);
+
+        this.addWidget(computerBuildersLabelChange);
+        this.addWidget(computerStoneLabelChange);
+        this.addWidget(computerSoldiersLabelChange);
+        this.addWidget(computerWeaponLabelChange);
+        this.addWidget(computerWizardsLabelChange);
+        this.addWidget(computerGemLabelChange);
+        this.addWidget(computerCastleLabelChange);
+        this.addWidget(computerWallLabelChange);
+
+    }
+
+    public void setPlayerBuildersLabelChangeText(int change) {
+        if (change > 0) {
+             playerBuildersLabelChange.setText("+" + change);
+            playerBuildersLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            playerBuildersLabelChange.setText("-" + change);
+            playerBuildersLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setPlayerStoneLabelChangeText(int change) {
+        if (change > 0) {
+            playerStoneLabelChange.setText("+" + change);
+            playerStoneLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            playerStoneLabelChange.setText("-" + change);
+            playerStoneLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setPlayerSoldiersLabelChangeText(int change) {
+        if (change > 0) {
+            playerSoldiersLabelChange.setText("+" + change);
+            playerSoldiersLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            playerSoldiersLabelChange.setText("-" + change);
+            playerSoldiersLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setPlayerWeaponLabelChangeText(int change) {
+        if (change > 0) {
+            playerWeaponLabelChange.setText("+" + change);
+            playerWeaponLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            playerWeaponLabelChange.setText("-" + change);
+            playerWeaponLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setPlayerWizardsLabelChangeText(int change) {
+        if (change > 0) {
+            playerWizardsLabelChange.setText("+" + change);
+            playerWizardsLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            playerWizardsLabelChange.setText("-" + change);
+            playerWizardsLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setPlayerGemLabelChangeText(int change) {
+        if (change > 0) {
+            playerGemLabelChange.setText("+" + change);
+            playerGemLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            playerGemLabelChange.setText("-" + change);
+            playerGemLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setPlayerCastleLabelChangeText(int change) {
+        if (change > 0) {
+            playerCastleLabelChange.setText("+" + change);
+            playerCastleLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            playerCastleLabelChange.setText("-" + change);
+            playerCastleLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setPlayerWallLabelChangeText(int change) {
+        if (change > 0) {
+            playerWallLabelChange.setText("+" + change);
+            playerWallLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            playerWallLabelChange.setText("-" + change);
+            playerWallLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setComputerBuildersLabelChangeText(int change) {
+        if (change > 0) {
+            computerBuildersLabelChange.setText("+" + change);
+            computerBuildersLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            computerBuildersLabelChange.setText("-" + change);
+            computerBuildersLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setComputerStoneLabelChangeText(int change) {
+        if (change > 0) {
+            computerStoneLabelChange.setText("+" + change);
+            computerStoneLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            computerStoneLabelChange.setText("-" + change);
+            computerStoneLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setComputerSoldiersLabelChangeText(int change) {
+        if (change > 0) {
+            computerSoldiersLabelChange.setText("+" + change);
+            computerSoldiersLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            computerSoldiersLabelChange.setText("-" + change);
+            computerSoldiersLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setComputerWeaponLabelChangeText(int change) {
+        if (change > 0) {
+            computerWeaponLabelChange.setText("+" + change);
+            computerWeaponLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            computerWeaponLabelChange.setText("-" + change);
+            computerWeaponLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setComputerWizardsLabelChangeText(int change) {
+        if (change > 0) {
+            computerWizardsLabelChange.setText("+" + change);
+            computerWizardsLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            computerWizardsLabelChange.setText("-" + change);
+            computerWizardsLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setComputerGemLabelChangeText(int change) {
+        if (change > 0) {
+            computerGemLabelChange.setText("+" + change);
+            computerGemLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            computerGemLabelChange.setText("-" + change);
+            computerGemLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setComputerCastleLabelChangeText(int change) {
+        if (change > 0) {
+            computerCastleLabelChange.setText("+" + change);
+            computerCastleLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            computerCastleLabelChange.setText("-" + change);
+            computerCastleLabelChange.startTextColorEffects();
+        }
+    }
+
+    public void setComputerWallLabelChangeText(int change) {
+        if (change > 0) {
+            computerWallLabelChange.setText("+" + change);
+            computerWallLabelChange.startTextColorEffects();
+        } else if (change < 0) {
+            computerWallLabelChange.setText("-" + change);
+            computerWallLabelChange.startTextColorEffects();
+        }
     }
 }
