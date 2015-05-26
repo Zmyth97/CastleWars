@@ -92,7 +92,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public static final float DRAW_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
     public static final float DISCARD_PILE_X = MenuScreen.SCREEN_WIDTH/2 + 1.25f;
     public static final float DISCARD_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
-    public static final float CARD_SPACING = 2.5f;
+    public static final float CARD_SPACING = 0.5f;
     public static final float CARDS_Y = 5;
 
     private float computerDelay;
@@ -108,7 +108,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
             card.setButtonListener(new OnClickListener() {
                 @Override
                 public void onClick(PopupWidget widget) {
-                    System.out.println("Clicked on");
                     Card card = (Card) widget;
                     onClickCard(card);
                 }
