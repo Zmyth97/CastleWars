@@ -16,7 +16,7 @@ public class Wall extends Sprite {
 
     public Wall(Texture wallImage){
         super(wallImage, 0, 0, wallImage.getWidth(), wallImage.getHeight());
-        health = 30;
+        health = 10;
     }
 
     public void doDamage(float damage){

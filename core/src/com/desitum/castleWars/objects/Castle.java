@@ -18,7 +18,7 @@ public class Castle extends Sprite {
 
     public Castle(Texture castleImage){
         super(castleImage, 0, 0, castleImage.getWidth(), castleImage.getHeight());
-        health = 30;
+        health = 40;
         wall = new Wall(Assets.cancelButtonUp);
     }
 
