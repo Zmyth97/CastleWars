@@ -35,6 +35,7 @@ public class Castle extends Sprite {
                 wall.doDamage(damage);
                 doDamage(extraDamage);
                 if (this.equals(gi.getPlayer1())) {
+                    System.out.println("Called GameInter for Castle Extra-Damage: " + extraDamage);
                     gi.setPlayerCastleLabelChangeText((int)extraDamage);
                 } else {
                     gi.setComputerCastleLabelChangeText((int)extraDamage);
@@ -42,6 +43,7 @@ public class Castle extends Sprite {
             } else {
                 health -= damage;
                 if (this.equals(gi.getPlayer1())) {
+                    System.out.println("Called GameInter for Castle Damage: " + damage);
                     gi.setPlayerCastleLabelChangeText((int)damage);
                 } else {
                     gi.setComputerCastleLabelChangeText((int)damage);
@@ -56,7 +58,7 @@ public class Castle extends Sprite {
 
     public void repair(float amount){
         health += amount;
-        if (this.equals(gi.getPlayer1())) {
+        if (this.equals(gi.getPlayer1().getCastle())) {
             gi.setPlayerCastleLabelChangeText((int)amount);
         } else {
             gi.setComputerCastleLabelChangeText((int)amount);

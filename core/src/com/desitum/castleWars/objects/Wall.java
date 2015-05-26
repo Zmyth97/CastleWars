@@ -27,7 +27,7 @@ public class Wall extends Sprite {
 
     public void doDamage(float damage){
         health -= damage;
-        if (this.equals(gi.getPlayer1())) {
+        if (this.equals(gi.getPlayer1().getCastle().getWall())) {
             gi.setPlayerWallLabelChangeText((int)damage);
         } else {
             gi.setComputerWallLabelChangeText((int)damage);
