@@ -9,6 +9,7 @@ import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by kody on 5/23/15.
@@ -22,6 +23,7 @@ public class PopupTextLabel extends PopupWidget{
 
     private ArrayList<Animator> comingInAnimators;
     private ArrayList<Animator> goingOutAnimators;
+    private ArrayList<ColorEffects> colorEffects;
 
     private boolean beenDown;
 
@@ -29,12 +31,12 @@ public class PopupTextLabel extends PopupWidget{
 
     private String text;
     private BitmapFont.HAlignment alignment;
+    private Color currentColor;
 
     private float cursorBlink;
     private float cursorMaxBlink;
+    private float fontSize;
     private boolean cursorOn = false;
-
-    private ColorEffects colorEffects;
 
     public PopupTextLabel(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height) {
         super(backgroundTexture, width, height, x, y);
@@ -54,6 +56,9 @@ public class PopupTextLabel extends PopupWidget{
 
         this.comingInAnimators = new ArrayList<Animator>();
         this.goingOutAnimators = new ArrayList<Animator>();
+        this.colorEffects = new ArrayList<ColorEffects>();
+
+        this.currentColor = new Color(1, 1, 1, 1);
 
         setupFontSize();
     }
@@ -76,6 +81,7 @@ public class PopupTextLabel extends PopupWidget{
 
         this.comingInAnimators = new ArrayList<Animator>();
         this.goingOutAnimators = new ArrayList<Animator>();
+        this.colorEffects = new ArrayList<ColorEffects>();
 
         setupFontSize();
     }
@@ -98,8 +104,15 @@ public class PopupTextLabel extends PopupWidget{
 
         this.comingInAnimators = new ArrayList<Animator>();
         this.goingOutAnimators = new ArrayList<Animator>();
+        this.colorEffects = new ArrayList<ColorEffects>();
 
         setupFontSize();
+    }
+
+    public void startTextColorEffects() {
+        for (ColorEffects effects: colorEffects) {
+            effects.start(false);
+        }
     }
 
     private void setupFontSize() {
@@ -112,7 +125,8 @@ public class PopupTextLabel extends PopupWidget{
             font.setScale(z);
             x = font.getBounds("THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG 123456789").height;
         }
-        System.out.println(y);
+
+        this.fontSize = y;
     }
 
     public void setCursorBlink(float blinkTime) {
@@ -145,9 +159,9 @@ public class PopupTextLabel extends PopupWidget{
             anim.update(delta);
         }
 
-        if (colorEffects != null) {
-            colorEffects.update(delta);
-            if (colorEffects.isRunning()) font.setColor(colorEffects.getCurrentColor());
+        for (ColorEffects effects: colorEffects) {
+            effects.update(delta);
+            if (effects.isRunning()) currentColor = effects.getCurrentColor();
         }
 
         cursorBlink -= delta;
@@ -184,7 +198,7 @@ public class PopupTextLabel extends PopupWidget{
     }
 
     public void addFontColorChanger(ColorEffects colorEffects) {
-        this.colorEffects = colorEffects;
+        this.colorEffects.add(colorEffects);
     }
 
     public void setButtonListener(OnClickListener buttonListener) {
@@ -204,6 +218,8 @@ public class PopupTextLabel extends PopupWidget{
 
     public void draw(SpriteBatch batch) {
         super.draw(batch);
+        font.setScale(fontSize);
+        font.setColor(currentColor);
         if (cursorOn) {
             font.drawWrapped(batch, text, getTextX(), getTextY(), getWidth(), alignment);
         } else {
