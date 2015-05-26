@@ -24,7 +24,7 @@ public class CardActions {
 
     //region Build Costs
     public static final int REINFORCE_COST = 10;
-    public static final int FORTIFY_COST = 22;
+    public static final int FORTIFY_COST = 20;
     public static final int CASTLE_COST = 36;
     public static final int BARRIER_COST = 8;
     public static final int WALL_COST = 20;
@@ -104,6 +104,8 @@ public class CardActions {
     public static final int MERLIN_COST = 64;
     public static final int DUPLICATE_COST = 52;
     //endregion
+
+
 
     public CardActions(GameInterface gi){
         this.gi = gi;

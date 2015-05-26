@@ -42,7 +42,7 @@ public class CastleWars extends Game {
         getScreen().dispose();
     }
 
-    //CheckList!!!//
+    //TODO: CheckList!!!//
 
     //CardActions
         //Fix Cards Moving Around to Show a Computer Hand Too? (Like original Castle Wars, maybe change the background color a bit between the two or something? idk)
@@ -61,7 +61,7 @@ public class CastleWars extends Game {
         //Trash Can in Corner for Discarding
         //Add dificulty setting gui piece on game start
         //Make negative resources show in the menus as 0
-        //Add the change amount next to the menus to make it more obcious (like the little cloud thing that shows up next to it in the original one)
+        //Add the change amount next to the menus to make it more obvious (like the little cloud thing that shows up next to it in the original one)
     //Computer AI
         //Just Test it a Lot, and I'll fine tune it till its actually semi-hard to beat
     //Dev Console
@@ -75,6 +75,10 @@ public class CastleWars extends Game {
         //Probably after adding Multi, but add these
     //Random Events
         //Were we still doing this?
+    //Sound & Music
+        //Are we doing music? If so we should do that before we leave C-Tech probably (Garange Band?)
+        //Are we going to search for sounds, or just make some ourselves at my house XD
+        //Add them to game!
     //Build your Deck
         //Not too hard since you added the amounts to settings, but still need to form the screen/gui for it
     //Textures/Cards for The Skin/Card Packs
