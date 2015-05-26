@@ -96,6 +96,8 @@ public class ColorEffects implements Animator{
         if (delay > 0) {
             delay -= delta;
             return;
+        } else {
+            transforming = true;
         }
         if (transforming) {
             pointInTransition += delta / duration;
