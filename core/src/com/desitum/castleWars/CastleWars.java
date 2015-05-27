@@ -48,11 +48,10 @@ public class CastleWars extends Game {
         //Fix Cards Moving Around to Show a Computer Hand Too? (Like original Castle Wars, maybe change the background color a bit between the two or something? idk)
         //Slow down card movements
         //Make sure the Draw Pile shows the Backs of Cards
-        //Fix the Card Fade/Restore to be work
+        //Make Card not Fade once its sent to the Discard Pile (Looks weird ish?)
     //GUI
         //Castle Texture & Animations, Particle Effects?
         //Wall Texture & Animations, Particle Effects?
-        //Background (Is the one we have to keep, or just till you like another one better?)
         //Finish Card Images
         //Change Button Images? (You said you didn't like them earlier, so are we changing those?)
         //MenuScreen Additions (Animations, Store Button, Leaderboard Button in Corner, etc)?

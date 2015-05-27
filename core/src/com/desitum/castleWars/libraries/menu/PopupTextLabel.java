@@ -161,7 +161,9 @@ public class PopupTextLabel extends PopupWidget{
 
         for (ColorEffects effects: colorEffects) {
             effects.update(delta);
-            if (effects.isRunning()) currentColor = effects.getCurrentColor();
+            if (effects.isRunning()){
+                currentColor = effects.getCurrentColor();
+            }
         }
 
         cursorBlink -= delta;

@@ -94,7 +94,7 @@ public class Resources {
 
     public int adjustPlayerBuilders(int amount) {
         int difference = amount;
-        if (playerBuilders > Math.abs(difference) && amount < 0) {
+        if (playerBuilders < Math.abs(difference) && amount < 0) {
             difference = -playerBuilders;
             playerBuilders = 0;
         } else {
@@ -106,7 +106,7 @@ public class Resources {
 
     public int adjustPlayerSoldiers(int amount) {
         int difference = amount;
-        if (playerSoldiers > Math.abs(difference) && amount < 0) {
+        if (playerSoldiers < Math.abs(difference) && amount < 0) {
             difference = -playerSoldiers;
             playerSoldiers = 0;
         } else {
@@ -118,7 +118,7 @@ public class Resources {
 
     public int adjustPlayerWizards(int amount) {
         int difference = amount;
-        if (playerWizards > Math.abs(difference) && amount < 0) {
+        if (playerWizards < Math.abs(difference) && amount < 0) {
             difference = -playerWizards;
             playerWizards = 0;
         } else {
@@ -130,7 +130,7 @@ public class Resources {
 
     public int adjustPlayerStones(int amount) {
         int difference = amount;
-        if (playerStones > Math.abs(difference) && amount < 0) {
+        if (playerStones < Math.abs(difference) && amount < 0) {
             difference = -playerStones;
             playerStones = 0;
         } else {
@@ -142,7 +142,7 @@ public class Resources {
 
     public int adjustPlayerWeapons(int amount) {
         int difference = amount;
-        if (playerWeapons > Math.abs(difference) && amount < 0) {
+        if (playerWeapons < Math.abs(difference) && amount < 0) {
             difference = -playerWeapons;
             playerWeapons = 0;
         } else {
@@ -154,7 +154,7 @@ public class Resources {
 
     public int adjustPlayerGems(int amount) {
         int difference = amount;
-        if (playerGems > Math.abs(difference) && amount < 0) {
+        if (playerGems < Math.abs(difference) && amount < 0) {
             difference = -playerGems;
             playerGems = 0;
         } else {
@@ -166,7 +166,7 @@ public class Resources {
 
     public int adjustComputerBuilders(int amount) {
         int difference = amount;
-        if (computerBuilders > Math.abs(difference) && amount < 0) {
+        if (computerBuilders < Math.abs(difference) && amount < 0) {
             difference = -computerBuilders;
             computerBuilders = 0;
         } else {
@@ -178,7 +178,7 @@ public class Resources {
 
     public int adjustComputerSoldiers(int amount) {
         int difference = amount;
-        if (computerSoldiers > Math.abs(difference) && amount < 0) {
+        if (computerSoldiers < Math.abs(difference) && amount < 0) {
             difference = -computerSoldiers;
             computerSoldiers = 0;
         } else {
@@ -190,7 +190,7 @@ public class Resources {
 
     public int adjustComputerWizards(int amount) {
         int difference = amount;
-        if (computerWizards > Math.abs(difference) && amount < 0) {
+        if (computerWizards < Math.abs(difference) && amount < 0) {
             difference = -computerWizards;
             computerWizards = 0;
         } else {
@@ -202,7 +202,7 @@ public class Resources {
 
     public int adjustComputerStones(int amount) {
         int difference = amount;
-        if (computerStones > Math.abs(difference) && amount < 0) {
+        if (computerStones < Math.abs(difference) && amount < 0) {
             difference = -computerStones;
             computerStones = 0;
         } else {
@@ -214,7 +214,7 @@ public class Resources {
 
     public int adjustComputerWeapons(int amount) {
         int difference = amount;
-        if (computerWeapons > Math.abs(difference) && amount < 0) {
+        if (computerWeapons < Math.abs(difference) && amount < 0) {
             difference = -computerWeapons;
             computerWeapons = 0;
         } else {
@@ -226,7 +226,7 @@ public class Resources {
 
     public int adjustComputerGems(int amount) {
         int difference = amount;
-        if (computerGems > Math.abs(difference) && amount < 0) {
+        if (computerGems < Math.abs(difference) && amount < 0) {
             difference = -computerGems;
             computerGems = 0;
         } else {
