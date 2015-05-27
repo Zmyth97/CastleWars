@@ -35,6 +35,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static final float FADE_DELAY = 0.5f;
     private static final float FADE_OUT_DURATION = 0.3f;
 
+    private static final float TEXT_WIDTH = 40;
+    private static final float TEXT_HEIGHT = 6;
+
     private static final int EASY_DIFFICULTY = 0;
     private static final int HARD_DIFFICULTY = 1;
 
@@ -184,6 +187,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerGemLabel.setText(":" + myResources.getComputerGems());
         computerCastleLabel.setText(":" +(int)  player2.getCastle().getHealth());
         computerWallLabel.setText(":" +(int)  player2.getCastle().getWall().getHealth());
+
+
     }
 
     private void switchTurns(int playerTurn) {
@@ -425,53 +430,53 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerMagicMenu.moveIn();
         computerCastleMenu.moveIn();
 
-        playerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerBuildMenu.getY() + 9, 40, 6);
+        playerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerBuildMenu.getY() + 9, TEXT_WIDTH, TEXT_HEIGHT);
         playerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerBuildMenu.getY() + 1, 40, 6);
+        playerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerBuildMenu.getY() + 1, TEXT_WIDTH, TEXT_HEIGHT);
         playerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerAttackMenu.getY() + 9, 6, 40);
+        playerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerAttackMenu.getY() + 9, TEXT_WIDTH, TEXT_HEIGHT);
         playerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerAttackMenu.getY() + 1, 6, 40);
+        playerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerAttackMenu.getY() + 1, TEXT_WIDTH, TEXT_HEIGHT);
         playerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerMagicMenu.getY() + 9, 6, 40);
+        playerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerMagicMenu.getY() + 9, TEXT_WIDTH, TEXT_HEIGHT);
         playerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerMagicMenu.getY() + 1, 6, 40);
+        playerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerMagicMenu.getY() + 1, TEXT_WIDTH, TEXT_HEIGHT);
         playerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerCastleMenu.getY() + 9, 6, 40);
+        playerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerCastleMenu.getY() + 9, TEXT_WIDTH, TEXT_HEIGHT);
         playerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerCastleMenu.getY() + 1, 6, 40);
+        playerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerCastleMenu.getY() + 1, TEXT_WIDTH, TEXT_HEIGHT);
         playerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
 
-        computerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20,computerCastleMenu.getY() + 1, 6, 40);
+        computerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80,computerCastleMenu.getY() + 1, TEXT_WIDTH, TEXT_HEIGHT);
         computerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerBuildMenu.getY() + 1, 6, 40);
+        computerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerBuildMenu.getY() + 1, TEXT_WIDTH, TEXT_HEIGHT);
         computerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerAttackMenu.getY() + 9, 6, 40);
+        computerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerAttackMenu.getY() + 9, TEXT_WIDTH, TEXT_HEIGHT);
         computerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerAttackMenu.getY() + 1, 6, 40);
+        computerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerAttackMenu.getY() + 1, TEXT_WIDTH, TEXT_HEIGHT);
         computerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerMagicMenu.getY() + 9, 6, 40);
+        computerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerMagicMenu.getY() + 9, TEXT_WIDTH, TEXT_HEIGHT);
         computerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerMagicMenu.getY() + 1, 6, 40);
+        computerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerMagicMenu.getY() + 1, TEXT_WIDTH, TEXT_HEIGHT);
         computerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerCastleMenu.getY() + 9, 6, 40);
+        computerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerCastleMenu.getY() + 9, TEXT_WIDTH, TEXT_HEIGHT);
         computerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerCastleMenu.getY() + 1, 6, 40);
+        computerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerCastleMenu.getY() + 1, TEXT_WIDTH, TEXT_HEIGHT);
         computerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
 

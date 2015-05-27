@@ -211,7 +211,6 @@ public class FlamePack {
                 gi.getResources().adjustPlayerSoldiers(2);
                 gi.getResources().adjustPlayerWeapons(-PHEONIX_COST); //Cost
             } else {
-                gi.getPlayer1().getCastle().getWall().doDamage(gi.getPlayer1().getCastle().getWall().getHealth());
                 gi.getResources().adjustPlayerSoldiers(-1);
                 gi.getResources().adjustComputerSoldiers(2);
                 gi.getResources().adjustComputerWeapons(-PHEONIX_COST); //Cost

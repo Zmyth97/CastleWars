@@ -92,13 +92,11 @@ public class KodyWorld {
 
         for (PopupWidget widget: widgetsToRem) {
             widgets.remove(widget);
-            System.out.println("rm instanceOf PopupTextLabel: " + (widget instanceof PopupTextLabel));
         }
         widgetsToRem.clear();
 
         for (PopupWidget widget: widgetsToAdd) {
             widgets.add(widget);
-            System.out.println("ad instanceOf PopupTextLabel: " + (widget instanceof PopupTextLabel));
         }
         widgetsToAdd.clear();
 
