@@ -39,6 +39,12 @@ public class GameRenderer {
         }
         for (PopupWidget widget : this.world.getWidgets()) {
             widget.draw(gameBatch);
+
+            if (widget instanceof Card) {
+                if (world.isDiscarding()) {
+                    gameBatch.draw(Assets.discard, widget.getX(), widget.getY(), widget.getWidth(), widget.getHeight());
+                }
+            }
         }
 
     }
@@ -51,15 +57,8 @@ public class GameRenderer {
     }
 
     private void drawCards(){
-        for(Card card:world.getDeck().getCardList()){
+        for(Card card:world.getDeck().getCardList()) {
             card.draw(gameBatch);
-        }
-
-        for (Card card: world.getPlayer1().getHand().getCardsInHand()) {
-            card.draw(gameBatch);
-            if (world.isDiscarding()) {
-                gameBatch.draw(Assets.discard, card.getX(), card.getY(), card.getWidth(), card.getHeight());
-            }
         }
         for (Card card: world.getPlayer2().getHand().getCardsInHand()) {
             card.draw(gameBatch);
