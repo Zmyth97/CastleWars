@@ -49,7 +49,7 @@ public class FlamePack {
     public static final int FIREBALL = 415; //+16 Attack
     //endregion
 
-    //region Magic Costs
+    //region Magic Costsfire
     public static final int FIRE_SHAMAN_COST = 32;
     public static final int LAVA_FLOW_COST = 14;
     public static final int COAL_COST = 14;
