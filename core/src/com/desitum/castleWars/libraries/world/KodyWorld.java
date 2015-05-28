@@ -5,10 +5,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupScrollArea;
 import com.desitum.castleWars.libraries.menu.PopupSlider;
-import com.desitum.castleWars.libraries.menu.PopupTextLabel;
+import com.desitum.castleWars.libraries.menu.PopupSpinner;
+import com.desitum.castleWars.libraries.menu.PopupToggleButton;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 
 import java.util.ArrayList;
@@ -84,6 +86,27 @@ public class KodyWorld {
                 } else if (widget instanceof PopupScrollArea) {
                     PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
                     popupScrollArea.updateTouchInput(touchPos, clickDown);
+                } else if (widget instanceof PopupImage) {
+                    PopupImage image = (PopupImage) widget;
+                    if (clickInArea && clickDown) {
+                        image.onClickDown();
+                    } else if (clickInArea) {
+                        image.onClickUp(true);
+                    } else {
+                        image.onClickUp(false);
+                    }
+                } else if (widget instanceof PopupToggleButton) {
+                    PopupToggleButton button = (PopupToggleButton) widget;
+                    if (clickInArea && clickDown) {
+                        button.onClickDown();
+                    } else if (clickInArea) {
+                        button.onClickUp(true);
+                    } else {
+                        button.onClickUp(false);
+                    }
+                } else if (widget instanceof PopupSpinner) {
+                    PopupSpinner spinner = (PopupSpinner) widget;
+                    spinner.updateTouchInput(touchPos, clickDown);
                 }
             }
         } catch (ConcurrentModificationException e) {

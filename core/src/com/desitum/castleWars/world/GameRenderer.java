@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
-import com.desitum.castleWars.libraries.menu.PopupTextLabel;
+import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.screens.MenuScreen;
@@ -37,6 +37,9 @@ public class GameRenderer {
         for (PopupMenu menu: this.world.getMenus()) {
             menu.draw(gameBatch);
         }
+        for (PopupWidget widget : this.world.getWidgets()) {
+            widget.draw(gameBatch);
+        }
 
     }
 
@@ -51,8 +54,12 @@ public class GameRenderer {
         for(Card card:world.getDeck().getCardList()){
             card.draw(gameBatch);
         }
+
         for (Card card: world.getPlayer1().getHand().getCardsInHand()) {
             card.draw(gameBatch);
+            if (world.isDiscarding()) {
+                gameBatch.draw(Assets.discard, card.getX(), card.getY(), card.getWidth(), card.getHeight());
+            }
         }
         for (Card card: world.getPlayer2().getHand().getCardsInHand()) {
             card.draw(gameBatch);

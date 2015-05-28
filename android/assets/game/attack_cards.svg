@@ -26,14 +26,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="766.96454"
-     inkscape:cy="114.94513"
+     inkscape:zoom="1.979899"
+     inkscape:cx="91.190169"
+     inkscape:cy="826.74081"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1535"
-     inkscape:window-height="848"
+     inkscape:window-height="876"
      inkscape:window-x="65"
      inkscape:window-y="24"
      inkscape:window-maximized="1" />
@@ -442,7 +442,7 @@
          id="tspan4346-6-8"
          x="296.16342"
          y="926.13031"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1">16</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1">4</tspan></text>
     <image
        y="909.4917"
        x="207.8239"
@@ -491,8 +491,8 @@
        height="74.608833"
        width="73.918015"
        inkscape:export-filename="/home/kody/AndroidStudioProjects/create_weapons.png"
-       inkscape:export-xdpi="180"
-       inkscape:export-ydpi="180" />
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <rect
        style="opacity:1;fill:#da001a;fill-opacity:1;stroke:#af0014;stroke-width:2.13936949;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4156-3-2-1-5"
@@ -502,8 +502,8 @@
        y="903.43188"
        rx="5.7458506"
        ry="0"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:23.72991943px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -512,13 +512,13 @@
        id="text4344-5-68-9"
        sodipodi:linespacing="125%"
        transform="scale(0.9995433,1.0004569)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          id="tspan4346-6-8-4"
          x="496.25479"
          y="926.13031"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1">16</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1">12</tspan></text>
     <image
        y="909.4917"
        x="407.82388"
@@ -527,8 +527,8 @@
        preserveAspectRatio="none"
        height="14"
        width="16"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:19.27756691px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -537,8 +537,8 @@
        id="text4404-6-1"
        sodipodi:linespacing="125%"
        transform="scale(0.83854573,1.1925408)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          id="tspan4406-5-4"
          x="535.51031"
@@ -551,15 +551,17 @@
        y="1042.0497"
        id="text4404-1-5-5"
        sodipodi:linespacing="125%"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          id="tspan4406-9-6-9"
          x="449.39941"
          y="1042.0497"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1">-2 Enemy</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1">-6 Enemy</tspan></text>
     <g
-       id="g11390">
+       id="g11390"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180">
       <rect
          rx="2.855227"
          y="994.99084"
@@ -652,8 +654,8 @@
        y="903.43188"
        rx="5.7458506"
        ry="0"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:23.72991943px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -662,13 +664,13 @@
        id="text4344-5-68-9-6"
        sodipodi:linespacing="125%"
        transform="scale(0.9995433,1.0004569)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          id="tspan4346-6-8-4-9"
          x="696.34619"
          y="926.13031"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1">16</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1">24</tspan></text>
     <image
        y="909.4917"
        x="607.82391"
@@ -677,8 +679,8 @@
        preserveAspectRatio="none"
        height="14"
        width="16"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:19.27756691px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -687,8 +689,8 @@
        id="text4404-6-1-8"
        sodipodi:linespacing="125%"
        transform="scale(0.83854573,1.1925408)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          id="tspan4406-5-4-4"
          x="774.01849"
@@ -701,16 +703,18 @@
        y="1042.0497"
        id="text4404-1-5-5-5"
        sodipodi:linespacing="125%"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          id="tspan4406-9-6-9-5"
          x="649.39941"
          y="1042.0497"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1">-2 Enemy</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1">-12 Enemy</tspan></text>
     <g
        id="g11505"
-       transform="translate(1.1082954,0)">
+       transform="translate(1.1082954,0)"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180">
       <rect
          inkscape:transform-center-y="-4.4467319"
          transform="matrix(0.88112569,-0.47288214,0,1,0,0)"
@@ -782,8 +786,8 @@
        y="903.43188"
        rx="5.7458506"
        ry="0"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:23.72991943px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -792,13 +796,13 @@
        id="text4344-5-68-9-6-6"
        sodipodi:linespacing="125%"
        transform="scale(0.9995433,1.0004569)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          id="tspan4346-6-8-4-9-9"
          x="896.43756"
          y="926.13031"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1">16</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1">30</tspan></text>
     <image
        y="909.4917"
        x="807.82391"
@@ -807,8 +811,8 @@
        preserveAspectRatio="none"
        height="14"
        width="16"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:19.27756691px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -817,8 +821,8 @@
        id="text4404-6-1-8-4"
        sodipodi:linespacing="125%"
        transform="scale(0.83854573,1.1925408)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          x="1012.5266"
          y="797.99689"
@@ -831,19 +835,21 @@
        y="1042.0497"
        id="text4404-1-5-5-5-3"
        sodipodi:linespacing="125%"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          id="tspan4406-9-6-9-5-4"
          x="849.39941"
          y="1042.0497"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1">-2 Enemy</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1">-16 Enemy</tspan></text>
     <path
-       style="fill:#ff9e20;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#ff9101;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 850.60983,990.79766 15.28411,-4.09537 0,10.27854 -8.7642,2.34836 0,17.69581 17.30129,-4.6359 c 0,0 6.97127,-51.4457 -24.47629,-51.4457 -31.44756,0 -24.35908,51.0083 -24.35908,51.0083 l 17.51999,4.6945 0,-17.82208 -10.1802,-2.72778 0,-10.40421 z"
        id="path11591"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="czc" />
+       sodipodi:nodetypes="czc"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180" />
     <rect
        style="opacity:1;fill:#da001a;fill-opacity:1;stroke:#af0014;stroke-width:2.13936949;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4156-3-2-1-5-2-3-5"
@@ -853,8 +859,8 @@
        y="903.43188"
        rx="5.7458506"
        ry="0"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:23.72991943px;line-height:125%;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -863,13 +869,13 @@
        id="text4344-5-68-9-6-6-8"
        sodipodi:linespacing="125%"
        transform="scale(0.9995433,1.0004569)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          id="tspan4346-6-8-4-9-9-0"
          x="1096.5289"
          y="926.13031"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1">16</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:end;text-anchor:end;fill:#ffffff;fill-opacity:1">40</tspan></text>
     <image
        y="909.4917"
        x="1007.8239"
@@ -878,23 +884,23 @@
        preserveAspectRatio="none"
        height="14"
        width="16"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:19.27756691px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="1251.0348"
-       y="797.99689"
+       style="font-style:normal;font-weight:normal;font-size:18.03188705px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1337.4563"
+       y="746.43182"
        id="text4404-6-1-8-4-1"
        sodipodi:linespacing="125%"
-       transform="scale(0.83854573,1.1925408)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       transform="scale(0.78436051,1.274924)"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
-         x="1251.0348"
-         y="797.99689"
+         x="1337.4563"
+         y="746.43182"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1"
-         id="tspan11608-4">Legion</tspan></text>
+         id="tspan11608-4">Trebuchet</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:22.98928642px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -902,16 +908,18 @@
        y="1042.0497"
        id="text4404-1-5-5-5-3-2"
        sodipodi:linespacing="125%"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"><tspan
          sodipodi:role="line"
          id="tspan4406-9-6-9-5-4-5"
          x="1049.3994"
          y="1042.0497"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1">-2 Enemy</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1">-20 Enemy</tspan></text>
     <g
        id="g11764"
-       transform="matrix(0.52522592,0,0,0.52522592,439.19776,470.19003)">
+       transform="matrix(0.52522592,0,0,0.52522592,439.19776,470.19003)"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180">
       <rect
          inkscape:transform-center-y="17.992376"
          inkscape:transform-center-x="-0.99725328"
@@ -983,6 +991,101 @@
          id="path11760"
          d="M 1212.183,961.95355 Z"
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <rect
+       style="opacity:0.5;fill:#525252;fill-opacity:0.58563536;stroke:#313131;stroke-width:2.13936949;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4156-37"
+       width="97.860634"
+       height="147.86063"
+       x="201.06969"
+       y="503.43188"
+       rx="5.7458506"
+       ry="0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/kody/AndroidStudioProjects/CastleWars/android/assets/game/cards/discard.png" />
+    <rect
+       style="opacity:0.5;fill:#525252;fill-opacity:1;stroke:#313131;stroke-width:1.01368785;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4156-37-6"
+       width="98.986313"
+       height="32.818768"
+       x="200.50685"
+       y="560.95282"
+       rx="5.8119445"
+       ry="0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/kody/AndroidStudioProjects/CastleWars/android/assets/game/cards/discard.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.27660179px;line-height:125%;font-family:'Copperplate Gothic Bold';-inkscape-font-specification:'Copperplate Gothic Bold, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.791;"
+       x="240.67351"
+       y="499.17245"
+       id="text11820"
+       sodipodi:linespacing="125%"
+       transform="scale(0.85137525,1.1745702)"
+       inkscape:export-filename="/home/kody/AndroidStudioProjects/CastleWars/android/assets/game/cards/discard.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan11822"
+         x="240.67351"
+         y="499.17245">Discard</tspan></text>
+    <rect
+       style="opacity:1;fill:#525252;fill-opacity:1;stroke:none;stroke-width:1.88732517;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4156-7"
+       width="98.112679"
+       height="114.77763"
+       x="0.94366258"
+       y="336.6409"
+       rx="5.7606492"
+       ry="0"
+       inkscape:export-xdpi="91.014771"
+       inkscape:export-ydpi="91.014771" />
+    <path
+       style="opacity:1;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.76554626;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 50,307.78874 c 9.799347,0.23206 49.342282,4.68019 49.617254,9.6281 l 0,12.05806 c 0,1.83181 -2.598627,3.3065 -5.826517,3.3065 l -87.5814734,0 c -3.2278904,0 -5.82651705,-1.47469 -5.82651705,-3.3065 l 0,-12.05806 C 2.6434796,311.83129 40.200653,307.55667 50,307.78874 Z"
+       id="rect4156-7-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="zcsssscz"
+       inkscape:export-xdpi="91.014771"
+       inkscape:export-ydpi="91.014771" />
+    <path
+       style="opacity:1;fill:#525252;fill-opacity:1;stroke:none;stroke-width:0.19532605;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 50,303.09328 c 2.500264,0.0592 12.589485,1.19414 12.659643,2.45658 l 0,3.07656 c 0,0.46738 -0.663029,0.84364 -1.486612,0.84364 l -22.346061,0 c -0.823583,0 -1.486613,-0.37626 -1.486613,-0.84364 l 0,-3.07656 C 37.917174,304.12472 47.499736,303.03407 50,303.09328 Z"
+       id="rect4156-7-8-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="zcsssscz"
+       inkscape:export-xdpi="91.014771"
+       inkscape:export-ydpi="91.014771" />
+    <rect
+       style="opacity:0.79100001;fill:#525252;fill-opacity:0.58563538;stroke:#ffffff;stroke-width:7.71836329;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect11915"
+       width="209.91875"
+       height="337.70303"
+       x="208.94553"
+       y="-277.15457"
+       rx="5.6870055" />
+    <g
+       id="g11917"
+       inkscape:export-xdpi="88.046608"
+       inkscape:export-ydpi="88.046608">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         ry="0"
+         rx="5.7606492"
+         y="141.68146"
+         x="102.57612"
+         height="114.77763"
+         width="98.112679"
+         id="rect4156-7-87"
+         style="opacity:1;fill:#525252;fill-opacity:1;stroke:#ffffff;stroke-width:5;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="rect4156-7-8-6"
+         d="m 151.63239,108.13431 c -2.50026,-0.0592 -12.08334,1.03189 -12.66016,2.45703 l 0,2.96875 c -14.74957,1.42975 -35.3018,4.80693 -36.95703,8.89649 l 0,12.05859 c 0,1.83181 2.59828,3.30664 5.82617,3.30664 l 87.58203,0 c 3.22789,0 5.82618,-1.47483 5.82618,-3.30664 l 0,-12.05859 c -0.20282,-3.64958 -21.74967,-7.02033 -36.98633,-8.63477 0.0164,-0.0503 0.0293,-0.10119 0.0293,-0.1543 l 0,-3.07617 c -0.0702,-1.26244 -10.15988,-2.39783 -12.66015,-2.45703 z"
+         style="opacity:1;fill:#525252;fill-opacity:1;stroke:#ffffff;stroke-width:5;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
   </g>
 </svg>

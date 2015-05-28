@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 /**
  * Created by dvan6234 on 2/17/2015.
  */
-public class ColorEffects implements Animator{
+public class ColorEffects implements Animator {
     private Sprite controllingSprite;
 
     private float pointInTransition;
@@ -89,6 +89,22 @@ public class ColorEffects implements Animator{
         this.delay = delay;
     }
 
+    static public boolean colorsMatch(Color color1, Color color2, float marginOfError) {
+        if (color1.equals(color2)) return true;
+
+        float error = 0;
+
+        error += Math.abs(color1.r - color2.r);
+        error += Math.abs(color1.g - color2.g);
+        error += Math.abs(color1.b - color2.b);
+        error += Math.abs(color1.a - color2.a);
+
+        if (error < marginOfError) {
+            return true;
+        }
+        return false;
+    }
+
     public void update(float delta) {
         if (!running) {
             return;
@@ -109,6 +125,7 @@ public class ColorEffects implements Animator{
 
             if (pointInTransition >= 1) {
                 transforming = false;
+                running = false;
 
                 if (finishedListener != null) {
                     finishedListener.onAnimationFinished(this);
@@ -118,6 +135,7 @@ public class ColorEffects implements Animator{
                 currentGreen = endGreen;
                 currentBlue = endBlue;
                 currentAlpha = endAlpha;
+                pointInTransition = 0;
             }
         }
         if (controllingSprite != null) {
@@ -135,7 +153,7 @@ public class ColorEffects implements Animator{
     }
 
     @Override
-    public void setSprite(Sprite control, boolean x, boolean y){
+    public void setSprite(Sprite control, boolean x, boolean y) {
         controllingSprite = control;
     }
 
@@ -160,7 +178,7 @@ public class ColorEffects implements Animator{
     }
 
     @Override
-    public boolean isRunning(){
+    public boolean isRunning() {
         return transforming;
     }
 
@@ -172,22 +190,6 @@ public class ColorEffects implements Animator{
     @Override
     public Sprite getSprite() {
         return controllingSprite;
-    }
-
-    static public boolean colorsMatch(Color color1, Color color2, float marginOfError) {
-        if (color1.equals(color2)) return true;
-
-        float error = 0;
-
-        error += Math.abs(color1.r - color2.r);
-        error += Math.abs(color1.g - color2.g);
-        error += Math.abs(color1.b - color2.b);
-        error += Math.abs(color1.a - color2.a);
-
-        if (error < marginOfError) {
-            return true;
-        }
-        return false;
     }
 }
 

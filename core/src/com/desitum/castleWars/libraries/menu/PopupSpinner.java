@@ -1,7 +1,8 @@
 package com.desitum.castleWars.libraries.menu;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.CollisionDetection;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * Created by kody on 4/18/15.
  * can be used by kody and people in [Zack, Kody]
  */
-public class PopupMenu extends Sprite {
+public class PopupSpinner extends PopupWidget {
 
     private ArrayList<PopupWidget> widgets;
     private ArrayList<Animator> incomingAnimators;
@@ -22,9 +23,11 @@ public class PopupMenu extends Sprite {
     private ArrayList<Animator> incomingAnimatorsToAdd;
     private ArrayList<Animator> outgoingAnimatorsToAdd;
 
+    private PopupTextLabel label;
+
     private Texture background;
 
-    private int commandToSend;
+    private int value = 0;
 
     /**
      * Create new Popup Menu with a blank canvas
@@ -37,7 +40,7 @@ public class PopupMenu extends Sprite {
      * @param width      the width of the PopupMenu
      * @param height     the height of the PopupMenu
      */
-    public PopupMenu(Texture background, float x, float y, float width, float height) {
+    public PopupSpinner(Texture background, Texture buttonClickUp, Texture buttonClickDown, BitmapFont font, float x, float y, float width, float height) {
         super(background, 0, 0, background.getWidth(), background.getHeight());
         widgets = new ArrayList<PopupWidget>();
         incomingAnimators = new ArrayList<Animator>();
@@ -49,6 +52,27 @@ public class PopupMenu extends Sprite {
 
         setPosition(x, y);
         this.setSize(width, height);
+
+        PopupButton clickUp = new PopupButton(buttonClickUp, buttonClickDown, 0, height / 2, height / 2, height / 2);
+        clickUp.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                value += 1;
+            }
+        });
+        addPopupWidget(clickUp);
+        PopupButton clickDown = new PopupButton(buttonClickUp, buttonClickDown, 0, 0, height / 2, height / 2);
+        clickDown.flip(false, true);
+        clickDown.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                value -= 1;
+            }
+        });
+        addPopupWidget(clickDown);
+
+        label = new PopupTextLabel(background, Color.BLACK, font, height / 2, 0, width - height / 2, height);
+        addPopupWidget(label);
     }
 
     /**
@@ -126,18 +150,9 @@ public class PopupMenu extends Sprite {
      * @param posMatters if your mouse position matters
      */
     public void udpateScrollInput(int amount, Vector3 mousePos, boolean posMatters) {
-        for (PopupWidget widget : widgets) {
-            if (!widget.getClass().equals(PopupScrollArea.class)) {
-                continue;
-            }
-            if (posMatters) {
-                if (CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), mousePos)) {
-                    PopupScrollArea scrollArea = (PopupScrollArea) widget;
-                    scrollArea.updateScrollInput(amount);
-                }
-            } else {
-                PopupScrollArea scrollArea = (PopupScrollArea) widget;
-                scrollArea.updateScrollInput(amount);
+        if (posMatters) {
+            if (CollisionDetection.pointInRectangle(this.getBoundingRectangle(), mousePos)) {
+                value += amount;
             }
         }
     }
@@ -151,6 +166,8 @@ public class PopupMenu extends Sprite {
         for (PopupWidget widget : widgets) {
             widget.update(delta);
         }
+
+        label.setText("" + value);
 
         updateAnimation(delta);
     }
@@ -196,7 +213,7 @@ public class PopupMenu extends Sprite {
      *
      * @param toAdd
      */
-    public void addPopupWidget(PopupWidget toAdd) {
+    private void addPopupWidget(PopupWidget toAdd) {
         for (Animator anim : incomingAnimatorsToAdd) {
             Animator dupAnim = anim.duplicate();
             if (dupAnim.getClass().equals(MovementAnimator.class)) {
@@ -236,7 +253,8 @@ public class PopupMenu extends Sprite {
     /**
      * start animators added to incomingAnimators
      */
-    public void moveIn() {
+    @Override
+    public void startIncomingAnimators() {
         for (PopupWidget widget : widgets) {
             widget.startIncomingAnimators();
         }
@@ -248,7 +266,8 @@ public class PopupMenu extends Sprite {
     /**
      * start animators added to outgoingAnimators
      */
-    public void moveOut() {
+    @Override
+    public void startOutgoingAnimators() {
         for (PopupWidget widget : widgets) {
             widget.startOutgoingAnimators();
         }
@@ -257,4 +276,3 @@ public class PopupMenu extends Sprite {
         }
     }
 }
-

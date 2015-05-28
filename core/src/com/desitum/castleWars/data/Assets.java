@@ -12,6 +12,9 @@ import com.desitum.castleWars.libraries.Drawing;
 public class Assets {
 
     public static Texture invisible;
+    public static Texture discard;
+    public static Texture trashCan;
+    public static Texture trashCanSelected;
 
     //Button Textures
     public static Texture playButtonUp;
@@ -45,6 +48,9 @@ public class Assets {
     public static Texture buildCardWall;
     public static Texture buildCardGreatWall;
     public static Texture buildCardArchitect;
+    public static Texture buildCardReserve;
+    public static Texture buildCardSabotage;
+    public static Texture buildCardStronghold;
 
     public static Texture gemCardCreateStones;
     public static Texture gemCardCreateWeapons;
@@ -57,24 +63,19 @@ public class Assets {
     public static Texture gemCardLightningStrike;
     public static Texture gemCardBlast;
 
+    public static Texture attackCardRecruiter;
+    public static Texture attackCardSpearman;
+    public static Texture attackCardRam;
+    public static Texture attackCardCatapult;
+    public static Texture attackCardLegion;
+    public static Texture attackCardTrebuchet;
+
     public static Texture hammer;
     public static Texture stone;
     public static Texture spear;
     public static Texture steak;
     public static Texture wand;
     public static Texture gem;
-
-//    public static final int CREATE_STONES = 200; //+16 Stones
-//    public static final int CREATE_WEAPONS = 201; //+16 Weapons
-//    public static final int CREATE_GEMS = 202; //+16 Gems
-//    public static final int DESTROY_STONES = 203; //-16 Stones
-//    public static final int DESTROY_WEAPONS = 204; //-16 Weapons
-//    public static final int DESTROY_GEMS = 205; //-16 Gems
-//    public static final int MAGE = 206; //+1 Wizard
-//    public static final int HAT_TRICK = 207; //+4 all res
-//    public static final int LIGHTNING_STRIKE = 208; //+16 Attack
-//    public static final int BLAST = 209; //+8 Attack
-
 
     //Misc Textures
     public static BitmapFont textFieldFont;
@@ -115,6 +116,10 @@ public class Assets {
         steak = new Texture("game/steak.png");
         wand = new Texture("game/wand.png");
         gem = new Texture("game/gem.png");
+
+        discard = new Texture("game/cards/discard.png");
+        trashCan = new Texture("game/trash_unselected.png");
+        trashCanSelected = new Texture("game/trash_selected.png");
     }
 
     public static void loadCards() {
@@ -131,10 +136,18 @@ public class Assets {
         buildCardWall = new Texture("game/cards/wall.png");
         buildCardGreatWall = new Texture("game/cards/great_wall.png");
         buildCardArchitect = new Texture("game/cards/architect.png");
+        buildCardReserve = new Texture("game/cards/reserve.png");
+        buildCardSabotage = new Texture("game/cards/sabotage.png");
+        buildCardStronghold = new Texture("game/cards/stronghold.png");
     }
 
     private static void loadAttackCards() {
-
+        attackCardRecruiter = new Texture("game/cards/recruiter.png");
+        attackCardSpearman = new Texture("game/cards/spearman.png");
+        attackCardRam = new Texture("game/cards/ram.png");
+        attackCardCatapult = new Texture("game/cards/catapult.png");
+        attackCardLegion = new Texture("game/cards/legion.png");
+        attackCardTrebuchet = new Texture("game/cards/trebuchet.png");
     }
 
     private static void loadGemCards() {
@@ -150,11 +163,11 @@ public class Assets {
         gemCardBlast = new Texture("game/cards/blast.png");
     }
 
-    public static void loadSounds(){
+    public static void loadSounds() {
 
     }
 
-    public static void dispose(){
+    public static void dispose() {
         //TODO Add Disposals
     }
 }

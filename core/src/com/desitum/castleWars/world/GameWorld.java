@@ -1,6 +1,7 @@
 package com.desitum.castleWars.world;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.CardActions;
@@ -14,6 +15,7 @@ import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupTextLabel;
+import com.desitum.castleWars.libraries.menu.PopupToggleButton;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
@@ -21,33 +23,39 @@ import com.desitum.castleWars.objects.Deck;
 import com.desitum.castleWars.objects.Player;
 import com.desitum.castleWars.screens.MenuScreen;
 
+import java.util.ArrayList;
+
 /**
  * Created by Zmyth97 on 2/25/2015.
  * can be used by Zmyth97 and people in [Zmyth97}]
  */
 public class GameWorld extends KodyWorld implements GameInterface {
 
-    private int playerTurn;
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
-
-    private static final float FADE_IN_DURATION = 0.2f;
-    private static final float FADE_DELAY = 0.5f;
+    public static final float DRAW_PILE_X = MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH - 1.25f;
+    public static final float DRAW_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
+    public static final float DISCARD_PILE_X = MenuScreen.SCREEN_WIDTH / 2 + 1.25f;
+    public static final float DISCARD_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
+    public static final float CARD_SPACING = 0.5f;
+    public static final float CARDS_Y = 5;
+    private static final float FADE_IN_DURATION = 1f;
+    private static final float FADE_DELAY = 02f;
     private static final float FADE_OUT_DURATION = 0.3f;
-
     private static final float CHANGE_TEXT_WIDTH = 40;
     private static final float CHANGE_TEXT_HEIGHT = 6;
-
-    private static final float MENU_TEXT_WIDTH = 10;
+    private static final float MENU_TEXT_WIDTH = 15;
     private static final float MENU_TEXT_HEIGHT = 6;
-
     private static final int EASY_DIFFICULTY = 0;
     private static final int HARD_DIFFICULTY = 1;
-
+    private static Color buildColor = new Color(.122f, 0f, .616f, 1);
+    private static Color attackColor = new Color(.855f, 0f, .102f, 1);
+    private static Color magicColor = new Color(.035f, .722f, 0, 1);
+    private static Color castleColor = new Color(0.278f, 0.278f, 0.322f, 1);
+    private int playerTurn;
     private Player player1;
     private Player player2;
     private ComputerAI ai;
-
     private PopupTextLabel playerBuildersLabel;
     private PopupTextLabel playerSoldiersLabel;
     private PopupTextLabel playerWizardsLabel;
@@ -64,7 +72,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupTextLabel computerGemLabel;
     private PopupTextLabel computerCastleLabel;
     private PopupTextLabel computerWallLabel;
-
     private PopupTextLabel playerBuildersLabelChange;
     private PopupTextLabel playerSoldiersLabelChange;
     private PopupTextLabel playerWizardsLabelChange;
@@ -81,34 +88,26 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupTextLabel computerGemLabelChange;
     private PopupTextLabel computerCastleLabelChange;
     private PopupTextLabel computerWallLabelChange;
-
+    private PopupToggleButton discardToggle;
     private int difficulty;
-
     private Deck deck;
-
     private Resources myResources;
     private CardActions cardActions;
-
-    private static Color buildColor = new Color(.122f, 0f, .616f, 1);
-    private static Color attackColor = new Color(.855f, 0f, .102f, 1);
-    private static Color magicColor = new Color(.035f, .722f, 0, 1);
-    private static Color castleColor = new Color(0.278f, 0.278f, 0.322f, 1);
-
-    public static final float DRAW_PILE_X = MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH - 1.25f;
-    public static final float DRAW_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
-    public static final float DISCARD_PILE_X = MenuScreen.SCREEN_WIDTH/2 + 1.25f;
-    public static final float DISCARD_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
-    public static final float CARD_SPACING = 0.5f;
-    public static final float CARDS_Y = 5;
-
     private float computerDelay;
+
+    private ArrayList<Card> cardsToReplaceFromPlayer;
+    private ArrayList<Card> cardsToReplaceFromComputer;
 
     public GameWorld(Viewport cam) {
         super();
         super.setCam(cam);
-        playerTurn = PLAYER2;
+
+        cardsToReplaceFromPlayer = new ArrayList<Card>();
+        cardsToReplaceFromComputer = new ArrayList<Card>();
+
         player1 = new Player(this);
         player2 = new Player(this);
+
         deck = new Deck();
         for (Card card: deck.getCardList()) {
             card.setButtonListener(new OnClickListener() {
@@ -125,7 +124,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
         difficulty = 0;
 
         ai = new ComputerAI(this);
-        computerDelay = Settings.COMPUTER_DELAY;
 
         setupSideMenus();
 
@@ -138,24 +136,21 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     public void update(float delta) {
-        Card addToPlayer1 = null;
-        Card addToPlayer2 = null;
-        for (Card card : this.getDeck().getCardList()) {
-            if (player1.containsCard(card)) {
-                card.startOutgoingAnimators();
-                player1.getHand().removeCardFromHand(card);
-                addToPlayer1 = card;
-                switchTurns(PLAYER2);
-            } else if (player2.containsCard(card)) {
-                card.startOutgoingAnimators();
-                player2.getHand().removeCardFromHand(card);
-                addToPlayer2 = card;
-                switchTurns(PLAYER);
-            }
+        for (Card c : cardsToReplaceFromPlayer) {
+            player1.getHand().removeCardFromHand(c);
+            player1.getHand().addCardToHand(drawNewCard(c.getX(), c.getY(), 0));
+            deck.addCard(c);
+            c.startOutgoingAnimators();
         }
+        cardsToReplaceFromPlayer.clear();
 
-        if (addToPlayer1 != null) player1.getHand().addCardToHand(drawNewCard(addToPlayer1.getX(), addToPlayer1.getY(), 0));
-        if (addToPlayer2 != null) player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, 0));
+        for (Card c : cardsToReplaceFromComputer) {
+            player2.getHand().removeCardFromHand(c);
+            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
+            deck.addCard(c);
+            c.startOutgoingAnimators();
+        }
+        cardsToReplaceFromComputer.clear();
 
         for (Card c: deck.getCardList()) {
             c.update(delta);
@@ -196,8 +191,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private void switchTurns(int playerTurn) {
         this.playerTurn = playerTurn;
+        discardToggle.turnOff();
 
-        if (getPlayerTurn() == PLAYER) {
+        if (playerTurn == PLAYER) {
             myResources.adjustPlayerStones(2 * myResources.getPlayerBuilders());
             myResources.adjustPlayerGems(2 * myResources.getPlayerWizards());
             myResources.adjustPlayerWeapons(2 * myResources.getPlayerSoldiers());
@@ -209,39 +205,46 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     private void computerTurn() {
+        Card c = null;
         if(difficulty == EASY_DIFFICULTY){
             boolean usedCard = false;
-            for (Card c: player2.getHand().getCardsInHand()) {
-                if (c.isAvailable()) {
-                    cardActions.doCardAction(c.getCardID());
+            for (Card card : player2.getHand().getCardsInHand()) {
+                if (card.isAvailable()) {
+                    c = card;
+                    cardActions.doCardAction(card.getCardID());
                     processTurn(c);
                     usedCard = true;
+                    break;
                 }
             }
             if (!usedCard) {
-                Card c = player2.getHand().getCardsInHand().get(0);
+                c = player2.getHand().getCardsInHand().get(0);
                 processTurn(c);
             }
         } else if(difficulty == HARD_DIFFICULTY) {
             Card chosenCard = ai.processAI();
             processTurn(chosenCard);
             cardActions.doCardAction(chosenCard.getCardID());
+            c = chosenCard;
         }
+        switchTurns(PLAYER);
+        cardsToReplaceFromComputer.add(c);
     }
 
     @Override
     public void onClickCard(Card card) {
-        System.out.println(card.isAvailable());
-        System.out.println(playerTurn == PLAYER);
-        if (card.isAvailable() && playerTurn == PLAYER) {
-            cardActions.doCardAction(card.getCardID());
+        if ((card.isAvailable() || isDiscarding()) && playerTurn == PLAYER) {
+            if (!isDiscarding()) {
+                cardActions.doCardAction(card.getCardID());
+            }
             processTurn(card);
+            cardsToReplaceFromPlayer.add(card);
+            switchTurns(PLAYER2);
         }
     }
 
     private void processTurn(Card card) {
-        card.enable();
-        deck.addCard(card);
+        card.disable();
     }
 
     private Card drawNewCard(float x, float y, float delay) {
@@ -433,53 +436,57 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerMagicMenu.moveIn();
         computerCastleMenu.moveIn();
 
-        playerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerBuildMenu.getY() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        float playerLabelX = 22;
+
+        playerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerBuildAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerBuildMenu.getY() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 22, playerBuildAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerAttackMenu.getY() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerAttackAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerAttackMenu.getY() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerAttackAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerMagicMenu.getY() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerMagicAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerMagicMenu.getY() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerMagicAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerCastleMenu.getY() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerCastleAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, playerCastleMenu.getY() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerCastleAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
 
-        computerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80,computerCastleMenu.getY() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        float computerLabelX = computerAttackMenu.getX() - CHANGE_TEXT_WIDTH - 2;
+
+        computerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerBuildAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerBuildMenu.getY() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        computerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerBuildAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerAttackMenu.getY() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        computerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerAttackAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 20, computerAttackMenu.getY() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        computerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerAttackAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerMagicMenu.getY() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        computerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerMagicAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerMagicMenu.getY() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        computerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerMagicAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerCastleMenu.getY() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        computerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerCastleAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 80, computerCastleMenu.getY() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        computerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerCastleAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
 
@@ -501,6 +508,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.addWidget(computerCastleLabelChange);
         this.addWidget(computerWallLabelChange);
 
+        this.discardToggle = new PopupToggleButton(Assets.trashCanSelected, Assets.trashCan, 5, 5, 10, 15, false);
+
+        this.addWidgetToWorld(discardToggle);
     }
 
     public void setPlayerBuildersLabelChangeText(int change) {
@@ -508,7 +518,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
              playerBuildersLabelChange.setText("+" + change);
             playerBuildersLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            playerBuildersLabelChange.setText("-" + change);
+            playerBuildersLabelChange.setText("" + change);
             playerBuildersLabelChange.startTextColorEffects();
         }
     }
@@ -518,7 +528,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             playerStoneLabelChange.setText("+" + change);
             playerStoneLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            playerStoneLabelChange.setText("-" + change);
+            playerStoneLabelChange.setText("" + change);
             playerStoneLabelChange.startTextColorEffects();
         }
     }
@@ -528,7 +538,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             playerSoldiersLabelChange.setText("+" + change);
             playerSoldiersLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            playerSoldiersLabelChange.setText("-" + change);
+            playerSoldiersLabelChange.setText("" + change);
             playerSoldiersLabelChange.startTextColorEffects();
         }
     }
@@ -538,7 +548,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             playerWeaponLabelChange.setText("+" + change);
             playerWeaponLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            playerWeaponLabelChange.setText("-" + change);
+            playerWeaponLabelChange.setText("" + change);
             playerWeaponLabelChange.startTextColorEffects();
         }
     }
@@ -548,7 +558,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             playerWizardsLabelChange.setText("+" + change);
             playerWizardsLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            playerWizardsLabelChange.setText("-" + change);
+            playerWizardsLabelChange.setText("" + change);
             playerWizardsLabelChange.startTextColorEffects();
         }
     }
@@ -558,7 +568,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             playerGemLabelChange.setText("+" + change);
             playerGemLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            playerGemLabelChange.setText("-" + change);
+            playerGemLabelChange.setText("" + change);
             playerGemLabelChange.startTextColorEffects();
         }
     }
@@ -568,7 +578,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             playerCastleLabelChange.setText("+" + change);
             playerCastleLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            playerCastleLabelChange.setText("-" + change);
+            playerCastleLabelChange.setText("" + change);
             playerCastleLabelChange.startTextColorEffects();
         }
     }
@@ -578,7 +588,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             playerWallLabelChange.setText("+" + change);
             playerWallLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            playerWallLabelChange.setText("-" + change);
+            playerWallLabelChange.setText("" + change);
             playerWallLabelChange.startTextColorEffects();
         }
     }
@@ -588,7 +598,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             computerBuildersLabelChange.setText("+" + change);
             computerBuildersLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            computerBuildersLabelChange.setText("-" + change);
+            computerBuildersLabelChange.setText("" + change);
             computerBuildersLabelChange.startTextColorEffects();
         }
     }
@@ -598,7 +608,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             computerStoneLabelChange.setText("+" + change);
             computerStoneLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            computerStoneLabelChange.setText("-" + change);
+            computerStoneLabelChange.setText("" + change);
             computerStoneLabelChange.startTextColorEffects();
         }
     }
@@ -608,7 +618,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             computerSoldiersLabelChange.setText("+" + change);
             computerSoldiersLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            computerSoldiersLabelChange.setText("-" + change);
+            computerSoldiersLabelChange.setText("" + change);
             computerSoldiersLabelChange.startTextColorEffects();
         }
     }
@@ -618,7 +628,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             computerWeaponLabelChange.setText("+" + change);
             computerWeaponLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            computerWeaponLabelChange.setText("-" + change);
+            computerWeaponLabelChange.setText("" + change);
             computerWeaponLabelChange.startTextColorEffects();
         }
     }
@@ -628,7 +638,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             computerWizardsLabelChange.setText("+" + change);
             computerWizardsLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            computerWizardsLabelChange.setText("-" + change);
+            computerWizardsLabelChange.setText("" + change);
             computerWizardsLabelChange.startTextColorEffects();
         }
     }
@@ -638,7 +648,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             computerGemLabelChange.setText("+" + change);
             computerGemLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            computerGemLabelChange.setText("-" + change);
+            computerGemLabelChange.setText("" + change);
             computerGemLabelChange.startTextColorEffects();
         }
     }
@@ -648,7 +658,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             computerCastleLabelChange.setText("+" + change);
             computerCastleLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            computerCastleLabelChange.setText("-" + change);
+            computerCastleLabelChange.setText("" + change);
             computerCastleLabelChange.startTextColorEffects();
         }
     }
@@ -658,8 +668,12 @@ public class GameWorld extends KodyWorld implements GameInterface {
             computerWallLabelChange.setText("+" + change);
             computerWallLabelChange.startTextColorEffects();
         } else if (change < 0) {
-            computerWallLabelChange.setText("-" + change);
+            computerWallLabelChange.setText("" + change);
             computerWallLabelChange.startTextColorEffects();
         }
+    }
+
+    public boolean isDiscarding() {
+        return discardToggle.isOn();
     }
 }

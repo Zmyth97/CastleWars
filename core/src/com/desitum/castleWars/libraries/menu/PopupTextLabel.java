@@ -9,7 +9,6 @@ import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by kody on 5/23/15.
@@ -82,6 +81,7 @@ public class PopupTextLabel extends PopupWidget{
         this.comingInAnimators = new ArrayList<Animator>();
         this.goingOutAnimators = new ArrayList<Animator>();
         this.colorEffects = new ArrayList<ColorEffects>();
+        this.currentColor = new Color(1, 1, 1, 1);
 
         setupFontSize();
     }
@@ -105,6 +105,7 @@ public class PopupTextLabel extends PopupWidget{
         this.comingInAnimators = new ArrayList<Animator>();
         this.goingOutAnimators = new ArrayList<Animator>();
         this.colorEffects = new ArrayList<ColorEffects>();
+        this.currentColor = new Color(1, 1, 1, 1);
 
         setupFontSize();
     }
@@ -215,6 +216,9 @@ public class PopupTextLabel extends PopupWidget{
 
     private float getTextX() {
         float textX = getX();
+        if (alignment.equals(BitmapFont.HAlignment.RIGHT)) {
+            textX = getX() + getWidth() - font.getBounds(text).width;
+        }
         return textX;
     }
 
@@ -222,19 +226,23 @@ public class PopupTextLabel extends PopupWidget{
         super.draw(batch);
         font.setScale(fontSize);
         font.setColor(currentColor);
-        if (cursorOn) {
+        if (font.getBounds(text).width > getWidth()) {
             font.drawWrapped(batch, text, getTextX(), getTextY(), getWidth(), alignment);
         } else {
-            font.drawWrapped(batch, text, getTextX(), getTextY(), getWidth(), alignment);
+            font.draw(batch, text, getTextX(), getTextY());
         }
+    }
+
+    public String getText() {
+        return this.text;
     }
 
     public void setText(String text) {
         this.text = text;
     }
 
-    public String getText(String text) {
-        return this.text;
+    public ColorEffects getColorEffect1() {
+        return colorEffects.get(0);
     }
 }
 
