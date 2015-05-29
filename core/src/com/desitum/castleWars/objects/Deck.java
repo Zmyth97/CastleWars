@@ -3,6 +3,7 @@ package com.desitum.castleWars.objects;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.CardActions;
 import com.desitum.castleWars.data.Settings;
+import com.desitum.castleWars.packs.FlamePack;
 import com.desitum.castleWars.world.GameWorld;
 
 import java.util.ArrayList;
@@ -14,10 +15,15 @@ import java.util.Collections;
 public class Deck {
 
     private ArrayList<Card> cardList;
+    private boolean boughtFlamePack; //Place Holder Till Real Code
 
     public Deck() {
+        boughtFlamePack = true; //Place Holder Till Real Code
         cardList = new ArrayList<Card>();
         fillDeck();
+        if(boughtFlamePack){
+            addFlameCards();
+        }
     }
 
     private void fillDeck() {
@@ -132,6 +138,70 @@ public class Deck {
         }
         for (int i = 0; i < Settings.DUPLICATE_AMOUNT; i++) {
             cardList.add(new Card(Assets.cardBlank, Card.BUILD, CardActions.DUPLICATE, CardActions.DUPLICATE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+    }
+
+    private void addFlameCards() {
+        //BUILD CARDS
+        for (int i = 0; i < FlamePack.WALL_OF_FIRE_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameBuildCardWallOfFire, Card.BUILD, FlamePack.WALL_OF_FIRE, FlamePack.WALL_OF_FIRE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.CAMPFIRE_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameBuildCardCampfire, Card.BUILD, FlamePack.CAMPFIRE, FlamePack.CAMPFIRE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.FORGE_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameBuildCardForge, Card.BUILD, FlamePack.FORGE, FlamePack.FORGE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.BOILING_OIL_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameBuildCardBoilingOil, Card.BUILD, FlamePack.BOILING_OIL, FlamePack.BOILING_OIL_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.BONFIRE_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameBuildCardBonfire, Card.BUILD, FlamePack.BONFIRE, FlamePack.BONFIRE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+
+        //ATTACK CARDS
+        for (int i = 0; i < FlamePack.FIRE_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameAttackCardFire, Card.ATTACK, FlamePack.FIRE, FlamePack.FIRE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.FIRE_ARROWS_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameAttackCardFireArrows, Card.ATTACK, FlamePack.FIRE_ARROWS, FlamePack.FIRE_ARROWS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.FLAMING_AXE_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameAttackCardFlamingAxe, Card.ATTACK, FlamePack.FLAMING_AXE, FlamePack.FLAMING_AXE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.FLAMING_SHOT_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameAttackCardFlamingShot, Card.ATTACK, FlamePack.FLAMING_SHOT, FlamePack.FLAMING_SHOT_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.FLAME_LEGION_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameAttackCardFlameLegion, Card.ATTACK, FlamePack.FLAME_LEGION, FlamePack.FLAME_LEGION_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+
+        //MAGIC CARDS
+        for (int i = 0; i < FlamePack.FIRE_SHAMAN_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameGemCardFireShaman, Card.MAGIC, FlamePack.FIRE_SHAMAN, FlamePack.FIRE_SHAMAN_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.LAVA_FLOW_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameGemCardLavaFlow, Card.MAGIC, FlamePack.LAVA_FLOW, FlamePack.LAVA_FLOW_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.COAL_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameGemCardCoal, Card.MAGIC, FlamePack.COAL, FlamePack.COAL_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.BLACKSMITH_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameGemCardBlacksmith, Card.MAGIC, FlamePack.BLACKSMITH, FlamePack.BLACKSMITH_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.FIREBALL_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameGemCardFireball, Card.MAGIC, FlamePack.FIREBALL, FlamePack.FIREBALL_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+
+        //GOLDEN CARDS
+        for (int i = 0; i < FlamePack.PHOENIX_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameGoldCardPhoenix, Card.ATTACK, FlamePack.PHEONIX, FlamePack.PHEONIX_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.METEORS_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameGoldCardMeteors, Card.MAGIC, FlamePack.METEORS, FlamePack.METEORS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < FlamePack.INFERNO_AMOUNT; i++) {
+            cardList.add(new Card(Assets.flameGoldCardInferno, Card.MAGIC, FlamePack.INFERNO, FlamePack.INFERNO_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
     }
 

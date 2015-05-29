@@ -77,6 +77,30 @@ public class Assets {
     public static Texture wand;
     public static Texture gem;
 
+    //region Flame Cards
+    public static Texture flameBuildCardWallOfFire;
+    public static Texture flameBuildCardCampfire;
+    public static Texture flameBuildCardForge;
+    public static Texture flameBuildCardBoilingOil;
+    public static Texture flameBuildCardBonfire;
+
+    public static Texture flameAttackCardFire;
+    public static Texture flameAttackCardFireArrows;
+    public static Texture flameAttackCardFlamingAxe;
+    public static Texture flameAttackCardFlamingShot;
+    public static Texture flameAttackCardFlameLegion;
+
+    public static Texture flameGemCardFireShaman;
+    public static Texture flameGemCardLavaFlow;
+    public static Texture flameGemCardCoal;
+    public static Texture flameGemCardBlacksmith;
+    public static Texture flameGemCardFireball;
+
+    public static Texture flameGoldCardPhoenix;
+    public static Texture flameGoldCardMeteors;
+    public static Texture flameGoldCardInferno;
+    //endregion
+
     //Misc Textures
     public static BitmapFont textFieldFont;
 
@@ -126,6 +150,7 @@ public class Assets {
         loadBuildCards();
         loadAttackCards();
         loadGemCards();
+        loadFlameCards();
     }
 
     private static void loadBuildCards() {
@@ -161,6 +186,30 @@ public class Assets {
         gemCardHatTrick = new Texture("game/cards/top_hat.png");
         gemCardLightningStrike = new Texture("game/cards/lightning_strike.png");
         gemCardBlast = new Texture("game/cards/blast.png");
+    }
+
+    private static void loadFlameCards() {
+        flameBuildCardWallOfFire = new Texture("game/flame_pack/wall_of_fire.png");
+        flameBuildCardCampfire = new Texture("game/flame_pack/campfire.png");
+        flameBuildCardForge = new Texture("game/flame_pack/forge.png");
+        flameBuildCardBoilingOil = new Texture("game/flame_pack/boiling_oil.png");
+        flameBuildCardBonfire = new Texture("game/flame_pack/bonfire.png");
+
+        flameAttackCardFire = new Texture("game/flame_pack/fire.png");
+        flameAttackCardFireArrows = new Texture("game/flame_pack/fire_arrows.png");
+        flameAttackCardFlamingAxe = new Texture("game/flame_pack/flaming_axe.png");
+        flameAttackCardFlamingShot = new Texture("game/flame_pack/flaming_shot.png");
+        flameAttackCardFlameLegion = new Texture("game/flame_pack/flame_legion.png");
+
+        flameGemCardFireShaman = new Texture("game/flame_pack/fire_shaman.png");
+        flameGemCardLavaFlow = new Texture("game/flame_pack/lava_flow.png");
+        flameGemCardCoal = new Texture("game/flame_pack/coal.png");
+        flameGemCardBlacksmith = new Texture("game/flame_pack/blacksmith.png");
+        flameGemCardFireball = new Texture("game/flame_pack/fireball.png");
+
+        flameGoldCardPhoenix = new Texture("game/flame_pack/phoenix.png");
+        flameGoldCardMeteors = new Texture("game/flame_pack/meteors.png");
+        flameGoldCardInferno = new Texture("game/flame_pack/inferno.png");
     }
 
     public static void loadSounds() {

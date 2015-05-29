@@ -249,6 +249,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private Card drawNewCard(float x, float y, float delay) {
         Card card = deck.drawCard();
+        if(this.playerTurn == PLAYER2 && card.getCardID() > 399){
+            drawNewCard(x, y, delay); //Note To Kody: Not sure if this is where you'd want this, almost put it in deck but the interface isn't passed
+                                      //to it and not sure if you would rather it here or in deck and add the interface to it. Up to you sir!
+        }
         card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_X, x, 1f, delay, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
         card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_Y, y, 1f, delay, Interpolation.DECELERATE_INTERPOLATOR, false, true));
         card.addOutgoingAnimator(new MovementAnimator(card, x, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));

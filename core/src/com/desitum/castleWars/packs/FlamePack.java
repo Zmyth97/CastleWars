@@ -69,6 +69,30 @@ public class FlamePack {
     public static final int INFERNO_COST = 56;
     //endregion
 
+    //region Flame CardAmounts
+    public static int WALL_OF_FIRE_AMOUNT = 2;
+    public static int CAMPFIRE_AMOUNT = 2;
+    public static int FORGE_AMOUNT = 2;
+    public static int BOILING_OIL_AMOUNT = 2;
+    public static int BONFIRE_AMOUNT = 2;
+
+    public static int FIRE_AMOUNT = 2;
+    public static int FIRE_ARROWS_AMOUNT = 2;
+    public static int FLAMING_AXE_AMOUNT = 2;
+    public static int FLAMING_SHOT_AMOUNT = 2;
+    public static int FLAME_LEGION_AMOUNT = 2;
+
+    public static int FIRE_SHAMAN_AMOUNT = 2;
+    public static int LAVA_FLOW_AMOUNT = 2;
+    public static int COAL_AMOUNT = 2;
+    public static int BLACKSMITH_AMOUNT = 2;
+    public static int FIREBALL_AMOUNT = 2;
+
+    public static int PHOENIX_AMOUNT = 2;
+    public static int METEORS_AMOUNT = 2;
+    public static int INFERNO_AMOUNT = 2;
+    //endregion
+
     public FlamePack(GameInterface gi){
         this.gi = gi;
     }
