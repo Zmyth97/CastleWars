@@ -7,6 +7,7 @@ import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupSlider;
 import com.desitum.castleWars.libraries.menu.PopupSliderListener;
@@ -71,6 +72,8 @@ public class MenuWorld extends KodyWorld {
         this.addPopupMenu(popupMenu);
         //endregion
 
+        PopupButtonMaterial material = new PopupButtonMaterial(Assets.cardBlank, 0, 5, 5, 25, 15);
+        this.addWidget(material);
     }
 
     public void getMenuMove(){

@@ -8,6 +8,7 @@ import com.desitum.castleWars.libraries.interpolation.BounceInterpolator;
 import com.desitum.castleWars.libraries.interpolation.DecelerateInterpolator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.interpolation.Interpolator;
+import com.desitum.castleWars.libraries.interpolation.LinearInterpolator;
 import com.desitum.castleWars.libraries.interpolation.OvershootInterpolator;
 
 /**
@@ -41,6 +42,8 @@ public class ScaleAnimator implements Animator {
         this.duration = duration;
         this.startScale = startScale;
         this.endScale = endScale;
+
+        scaleSize = startScale;
 
         this.controllingSprite = null;
 
@@ -117,6 +120,7 @@ public class ScaleAnimator implements Animator {
         }
 
         if (growing){
+            System.out.println(scaleSize + ", " + startScale + ", " + endScale + ", " + interpolator + ", " + timeInAnimation);
             scaleSize = startScale + (endScale - startScale) * interpolator.getInterpolation(timeInAnimation);
         } else {
             scaleSize = startScale - (startScale - endScale) * interpolator.getInterpolation(timeInAnimation);
@@ -163,6 +167,8 @@ public class ScaleAnimator implements Animator {
             running = true;
         } else  if (!isProtected) {
             running = true;
+            currentDelay = animationDelay;
+            timeInAnimation = 0;
         }
         ran = true;
     }
@@ -209,6 +215,8 @@ public class ScaleAnimator implements Animator {
             this.interpolator = AccelerateDecelerateInterpolator.$();
         } else if (interpolator == Interpolation.BOUNCE_INTERPOLATOR){
             this.interpolator = BounceInterpolator.$();
+        } else if (interpolator == Interpolation.LINEAR_INTERPOLATOR) {
+            this.interpolator = LinearInterpolator.$();
         }
     }
 

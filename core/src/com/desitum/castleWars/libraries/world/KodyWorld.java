@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
 import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupScrollArea;
@@ -82,6 +83,15 @@ public class KodyWorld {
                         slider.onClickUp();
                     } else {
                         slider.onClickUp(); // handles if not in area
+                    }
+                } else if (widget instanceof PopupButtonMaterial) {
+                    PopupButtonMaterial button = (PopupButtonMaterial) widget;
+                    if (clickInArea && clickDown) {
+                        button.onClickDown(touchPos);
+                    } else if (clickInArea) {
+                        button.onClickUp(true);
+                    } else {
+                        button.onClickUp(false); // handles if not in area
                     }
                 } else if (widget instanceof PopupScrollArea) {
                     PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
