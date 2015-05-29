@@ -43,7 +43,7 @@ public class JapanesePack {
 
     //region Magic Cards
     public static final int SHRINE = 411; //+2 Wizards
-    public static final int STONE_MINE = 412; //+24 Stone
+    public static final int QUARRY = 412; //+24 Stone
     public static final int TEMPLE = 413; //+24 Gems
     public static final int RICE_PADDY = 414; //+24 weapons (Supplies)
     public static final int SEPPUKU= 415; //-1 Soldier, + 2 Wizard? (Maybe + 50 or so Supplies?)
@@ -51,7 +51,7 @@ public class JapanesePack {
 
     //region Magic Costs
     public static final int SHRINE_COST = 32;
-    public static final int STONE_MINE_COST = 14;
+    public static final int QUARRY_COST = 14;
     public static final int TEMPLE_COST = 14;
     public static final int RICE_PADDY_COST = 14;
     public static final int SEPPUKU_COST = 30;
@@ -60,7 +60,7 @@ public class JapanesePack {
     //region GoldenCards
     public static final int NINJA = 416; //Kill 3 Enemy Wizards
     public static final int DRAGON = 417; //+40 Attack
-    public static final int SHOGUN = 418; //Add 24 of Each Enemy Resource
+    public static final int SHOGUN = 418; //Add 24 of Each Resource
     //endRegion
 
     //region Golden Costs
@@ -170,13 +170,13 @@ public class JapanesePack {
                 gi.getResources().adjustComputerWizards(2);
                 gi.getResources().adjustComputerGems(-SHRINE_COST); //Cost
             }
-        } else if(cardID == STONE_MINE){
+        } else if(cardID == QUARRY){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerStones(24);
-                gi.getResources().adjustPlayerGems(-STONE_MINE_COST); //Cost
+                gi.getResources().adjustPlayerGems(-QUARRY_COST); //Cost
             } else {
                 gi.getResources().adjustComputerStones(24);
-                gi.getResources().adjustComputerGems(-STONE_MINE_COST); //Cost
+                gi.getResources().adjustComputerGems(-QUARRY_COST); //Cost
             }
         } else if(cardID == TEMPLE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
