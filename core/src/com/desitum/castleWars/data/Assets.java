@@ -76,6 +76,7 @@ public class Assets {
     public static Texture steak;
     public static Texture wand;
     public static Texture gem;
+    public static Texture helmet;
 
     //region Flame Cards
     public static Texture flameBuildCardWallOfFire;
@@ -140,6 +141,7 @@ public class Assets {
         steak = new Texture("game/steak.png");
         wand = new Texture("game/wand.png");
         gem = new Texture("game/gem.png");
+        helmet = new Texture("game/helmet.png");
 
         discard = new Texture("game/cards/discard.png");
         trashCan = new Texture("game/trash_unselected.png");

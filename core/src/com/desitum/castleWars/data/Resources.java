@@ -235,4 +235,28 @@ public class Resources {
         if (difference != 0)  gi.setComputerGemLabelChangeText(difference);
         return difference;
     }
+
+    public void addPlayerWeapons(int amount){
+        playerWeapons += amount;
+    }
+
+    public void addPlayerStones(int amount){
+        playerStones += amount;
+    }
+
+    public void addPlayerGems(int amount){
+        playerGems += amount;
+    }
+
+    public void addComputerWeapons(int amount){
+        playerWeapons += amount;
+    }
+
+    public void addComputerStones(int amount){
+        playerStones += amount;
+    }
+
+    public void addComputerGems(int amount){
+        playerGems += amount;
+    }
 }

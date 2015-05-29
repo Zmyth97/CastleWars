@@ -193,14 +193,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.playerTurn = playerTurn;
         discardToggle.turnOff();
 
-        if (playerTurn == PLAYER) {
-            myResources.adjustPlayerStones(2 * myResources.getPlayerBuilders());
-            myResources.adjustPlayerGems(2 * myResources.getPlayerWizards());
-            myResources.adjustPlayerWeapons(2 * myResources.getPlayerSoldiers());
+        if (playerTurn == PLAYER2) {
+            myResources.addPlayerStones(2 * myResources.getPlayerBuilders());
+            myResources.addPlayerGems(2 * myResources.getPlayerWizards());
+            myResources.addPlayerWeapons(2 * myResources.getPlayerSoldiers());
         } else {
-            myResources.adjustComputerStones(2 * myResources.getComputerBuilders());
-            myResources.adjustComputerGems(2 * myResources.getComputerWizards());
-            myResources.adjustComputerWeapons(2 * myResources.getComputerSoldiers());
+            myResources.addComputerStones(2 * myResources.getComputerBuilders());
+            myResources.addComputerGems(2 * myResources.getComputerWizards());
+            myResources.addComputerWeapons(2 * myResources.getComputerSoldiers());
         }
     }
 
@@ -326,8 +326,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerAttackMenu.setColor(attackColor);
         MovementAnimator playerAttackAnimator = new MovementAnimator(playerAttackMenu, 0, 67, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerAttackMenu.addIncomingAnimator(playerAttackAnimator);
-        playerAttackMenu.addPopupWidget(new PopupImage(Assets.spear, Assets.invisible, 1, 9, 6, 6, false));
-        playerAttackMenu.addPopupWidget(new PopupImage(Assets.steak, Assets.invisible, 1, 1, 6, 6, false));
+        playerAttackMenu.addPopupWidget(new PopupImage(Assets.helmet, Assets.invisible, 1, 9, 6, 6, false));
+        playerAttackMenu.addPopupWidget(new PopupImage(Assets.spear, Assets.invisible, 1, 1, 6, 6, false));
         playerSoldiersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerSoldiersLabel.setText(":" + myResources.getPlayerSoldiers());
         playerWeaponLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
@@ -390,8 +390,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerAttackMenu.setColor(attackColor);
         MovementAnimator computerAttackAnimator = new MovementAnimator(computerAttackMenu, 130, 67, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerAttackMenu.addIncomingAnimator(computerAttackAnimator);
-        computerAttackMenu.addPopupWidget(new PopupImage(Assets.spear, Assets.invisible, 1, 9, 6, 6, false));
-        computerAttackMenu.addPopupWidget(new PopupImage(Assets.steak, Assets.invisible, 1, 1, 6, 6, false));
+        computerAttackMenu.addPopupWidget(new PopupImage(Assets.helmet, Assets.invisible, 1, 8, 6, 6, false));
+        computerAttackMenu.addPopupWidget(new PopupImage(Assets.spear, Assets.invisible, 1, 1, 6, 6, false));
         computerSoldiersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         computerSoldiersLabel.setText(":" + myResources.getComputerSoldiers());
         computerWeaponLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
