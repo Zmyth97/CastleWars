@@ -71,9 +71,6 @@ public class MenuWorld extends KodyWorld {
         popupMenu.addPopupWidget(okButton);
         this.addPopupMenu(popupMenu);
         //endregion
-
-        PopupButtonMaterial material = new PopupButtonMaterial(Assets.cardBlank, 0, 5, 5, 25, 15);
-        this.addWidget(material);
     }
 
     public void getMenuMove(){
