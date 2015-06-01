@@ -46,7 +46,6 @@ public class CastleWars extends Game {
 
     //CardActions
         //Fix Cards Moving Around to Show a Computer Hand Too? (Like original Castle Wars, maybe change the background color a bit between the two or something? idk)
-        //Slow down card movements
         //Make sure the Draw Pile shows the Backs of Cards
         //Make Card not Fade once its sent to the Discard Pile (Looks weird ish?)
     //GUI
@@ -57,9 +56,7 @@ public class CastleWars extends Game {
         //MenuScreen Additions (Animations, Store Button, Leaderboard Button in Corner, etc)?
         //Maybe something at the top showing the left side is you, right side is the computer or player2?
         //Animation in background? Parralax Mapping, Clouds Moving, etc?
-        //Trash Can in Corner for Discarding
         //Add dificulty setting gui piece on game start
-        //Add the change amount next to the menus to make it more obvious (like the little cloud thing that shows up next to it in the original one)
     //Computer AI
         //Just Test it a Lot, and I'll fine tune it till its actually semi-hard to beat
     //Dev Console
