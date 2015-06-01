@@ -3,7 +3,7 @@ minParticles:10
 maxParticles:20
 emitCircle:true
 emitRadius:1
-emitWidth:1
+emitWidth:25
 emitHeight:1
 PARTICLE
 isSquare:true
@@ -11,10 +11,10 @@ minWidth:1.0f
 maxWidth:5.0f
 minHeight:0.2f
 maxHeight:0.9f
-minDegree:230
-maxDegree:310
-minDistance:15
-maxDistance:40
-minDuration:1f
-maxDuration:1.5f
-textureLocation:game/particles/fire_particles.png
+minDegree:0
+maxDegree:180
+minDistance:1
+maxDistance:4
+minDuration:0.5f
+maxDuration:1.0f
+textureLocation:game/particles/dirt_particle.png

@@ -21,6 +21,7 @@ import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Deck;
 import com.desitum.castleWars.objects.Player;
+import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.screens.MenuScreen;
 
 import java.util.ArrayList;
@@ -105,8 +106,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
         cardsToReplaceFromPlayer = new ArrayList<Card>();
         cardsToReplaceFromComputer = new ArrayList<Card>();
 
-        player1 = new Player(this);
-        player2 = new Player(this);
+        player1 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 - 50));
+        player2 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 + 25));
 
         deck = new Deck();
         for (Card card: deck.getCardList()) {

@@ -70,6 +70,8 @@ public class ParticleEmitter {
 
     private Texture emitterTexture;
 
+    private boolean on;
+
     public ParticleEmitter (float x, float y, String particleFile) {
 
         this.particles = new ArrayList<Particle>();
@@ -177,7 +179,7 @@ public class ParticleEmitter {
             particles.remove(particle);
         }
 
-        if (particles.size() < maxParticles) {
+        if (particles.size() < maxParticles && on) {
             for (int i = particles.size(); i < maxParticles; i++) {
                 particles.add(createNewParticle());
             }
@@ -195,6 +197,18 @@ public class ParticleEmitter {
         for (Particle particle: particles) {
             particle.draw(batch);
         }
+    }
+
+    public void turnOn() {
+        on = true;
+    }
+
+    public void turnOff() {
+        on = false;
+    }
+
+    public void toggleOnOff() {
+        on = !on;
     }
 //EMITTER
 //minParticles:10

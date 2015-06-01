@@ -1,6 +1,7 @@
 package com.desitum.castleWars.objects;
 
 import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.world.GameInterface;
 
 /**
@@ -10,8 +11,8 @@ public class Player {
     private Castle castle;
     private Hand hand;
 
-    public Player(GameInterface gameInterface){
-        castle = new Castle(Assets.playerCastle, gameInterface);
+    public Player(GameInterface gameInterface, float castleX){
+        castle = new Castle(Assets.playerCastle, gameInterface, castleX);
         hand = new Hand(gameInterface);
     }
 
@@ -39,5 +40,6 @@ public class Player {
 
     public void update(float delta) {
         hand.update(delta);
+        castle.update(delta);
     }
 }

@@ -51,7 +51,7 @@ public class GameRenderer {
 
     private void drawWorld(){
         gameBatch.draw(Assets.gameSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
-        gameBatch.draw(Assets.playerCastle, (GameScreen.SCREEN_WIDTH / 2 + 25), 0, 25, 50);
+        world.getPlayer1().getCastle().draw(gameBatch);
         gameBatch.draw(Assets.computerCastle, (GameScreen.SCREEN_WIDTH / 2 - 50), 0, 25, 50);
         gameBatch.draw(Assets.gameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT / 4 + 8));
     }
