@@ -7,7 +7,6 @@ import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupButton;
-import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupSlider;
 import com.desitum.castleWars.libraries.menu.PopupSliderListener;
@@ -47,7 +46,7 @@ public class MenuWorld extends KodyWorld {
         cancelButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
-                popupMenu.moveOut();
+                popupMenu.startOutgoingAnimators();
             }
         });
         popupMenu.addPopupWidget(cancelButton);
@@ -65,7 +64,7 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Settings.setVolume(volumeSlider.getPosition());
-                popupMenu.moveOut();
+                popupMenu.startOutgoingAnimators();
             }
         });
         popupMenu.addPopupWidget(okButton);
@@ -74,7 +73,7 @@ public class MenuWorld extends KodyWorld {
     }
 
     public void getMenuMove(){
-        popupMenu.moveIn();
+        popupMenu.startIncomingAnimators();
     }
 
     private void createButtons() {

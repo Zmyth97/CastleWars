@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by kody on 4/18/15.
  * can be used by kody and people in [Zack, Kody]
  */
-public class PopupMenu extends Sprite {
+public class PopupMenu extends PopupWidget {
 
     private ArrayList<PopupWidget> widgets;
     private ArrayList<Animator> incomingAnimators;
@@ -171,7 +171,7 @@ public class PopupMenu extends Sprite {
     }
 
     /**
-     * adds an animator that should be run when called moveIn
+     * adds an animator that should be run when called
      *
      * @param anim - animator to add
      */
@@ -181,7 +181,7 @@ public class PopupMenu extends Sprite {
     }
 
     /**
-     * adds an animator that should be run when called moveOut
+     * adds an animator that should be run when called
      *
      * @param anim - animator to add
      */
@@ -236,7 +236,8 @@ public class PopupMenu extends Sprite {
     /**
      * start animators added to incomingAnimators
      */
-    public void moveIn() {
+    @Override
+    public void startIncomingAnimators() {
         for (PopupWidget widget : widgets) {
             widget.startIncomingAnimators();
         }
@@ -248,7 +249,8 @@ public class PopupMenu extends Sprite {
     /**
      * start animators added to outgoingAnimators
      */
-    public void moveOut() {
+    @Override
+    public void startOutgoingAnimators() {
         for (PopupWidget widget : widgets) {
             widget.startOutgoingAnimators();
         }

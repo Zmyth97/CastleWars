@@ -431,14 +431,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.addPopupMenu(computerCastleMenu);
         //endregion
 
-        playerBuildMenu.moveIn();
-        playerAttackMenu.moveIn();
-        playerMagicMenu.moveIn();
-        playerCastleMenu.moveIn();
-        computerBuildMenu.moveIn();
-        computerAttackMenu.moveIn();
-        computerMagicMenu.moveIn();
-        computerCastleMenu.moveIn();
+        playerBuildMenu.startIncomingAnimators();
+        playerAttackMenu.startIncomingAnimators();
+        playerMagicMenu.startIncomingAnimators();
+        playerCastleMenu.startIncomingAnimators();
+        computerBuildMenu.startIncomingAnimators();
+        computerAttackMenu.startIncomingAnimators();
+        computerMagicMenu.startIncomingAnimators();
+        computerCastleMenu.startIncomingAnimators();
 
         float playerLabelX = 22;
 

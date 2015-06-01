@@ -188,7 +188,7 @@ public class PopupSpinner extends PopupWidget {
     }
 
     /**
-     * adds an animator that should be run when called moveIn
+     * adds an animator that should be run when called
      *
      * @param anim - animator to add
      */
@@ -198,7 +198,7 @@ public class PopupSpinner extends PopupWidget {
     }
 
     /**
-     * adds an animator that should be run when called moveOut
+     * adds an animator that should be run when called
      *
      * @param anim - animator to add
      */
