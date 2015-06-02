@@ -21,6 +21,8 @@ import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Deck;
 import com.desitum.castleWars.objects.Player;
+import com.desitum.castleWars.packs.FlamePack;
+import com.desitum.castleWars.packs.JapanesePack;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.screens.MenuScreen;
 
@@ -41,7 +43,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public static final float CARD_SPACING = 0.5f;
     public static final float CARDS_Y = 5;
     private static final float FADE_IN_DURATION = 1f;
-    private static final float FADE_DELAY = 02f;
+    private static final float FADE_DELAY = 04f;
     private static final float FADE_OUT_DURATION = 0.3f;
     private static final float CHANGE_TEXT_WIDTH = 40;
     private static final float CHANGE_TEXT_HEIGHT = 6;
@@ -94,6 +96,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private Deck deck;
     private Resources myResources;
     private CardActions cardActions;
+    private FlamePack flamePack;
+    private JapanesePack japanesePack;
     private float computerDelay;
 
     private ArrayList<Card> cardsToReplaceFromPlayer;
@@ -120,6 +124,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
             });
         }
         cardActions = new CardActions(this);
+        flamePack = new FlamePack(this);
+        japanesePack = new JapanesePack(this);
         myResources = new Resources(this);
 
         difficulty = 0;
@@ -169,6 +175,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         player1.update(delta);
         player2.update(delta);
+
 
         playerBuildersLabel.setText(":" + myResources.getPlayerBuilders());
         playerSoldiersLabel.setText(":" + myResources.getPlayerSoldiers());
@@ -236,7 +243,13 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public void onClickCard(Card card) {
         if ((card.isAvailable() || isDiscarding()) && playerTurn == PLAYER) {
             if (!isDiscarding()) {
-                cardActions.doCardAction(card.getCardID());
+                if(card.getCardID() > 500){
+                    japanesePack.doCardAction(card.getCardID());
+                } else if(card.getCardID() > 400){
+                    flamePack.doCardAction(card.getCardID());
+                } else {
+                    cardActions.doCardAction(card.getCardID());
+                }
             }
             processTurn(card);
             cardsToReplaceFromPlayer.add(card);

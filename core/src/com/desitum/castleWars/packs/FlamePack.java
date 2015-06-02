@@ -137,7 +137,7 @@ public class FlamePack {
                 gi.getPlayer1().getCastle().repair(15);
                 gi.getResources().adjustPlayerStones(-BONFIRE_COST); //Cost
             } else {
-                gi.getPlayer1().getCastle().repair(15);
+                gi.getPlayer2().getCastle().repair(15);
                 gi.getResources().adjustComputerStones(-BONFIRE_COST); //Cost
             }
         }

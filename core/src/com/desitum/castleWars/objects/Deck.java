@@ -4,6 +4,7 @@ import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.CardActions;
 import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.packs.FlamePack;
+import com.desitum.castleWars.packs.JapanesePack;
 import com.desitum.castleWars.world.GameWorld;
 
 import java.util.ArrayList;
@@ -16,13 +17,19 @@ public class Deck {
 
     private ArrayList<Card> cardList;
     private boolean boughtFlamePack; //Place Holder Till Real Code
+    private boolean boughtJapanesePack; //Place Holder Till Real Code
 
     public Deck() {
         boughtFlamePack = true; //Place Holder Till Real Code
+        boughtJapanesePack = true; //Place Holder Till Real Code
+
         cardList = new ArrayList<Card>();
         fillDeck();
         if(boughtFlamePack){
             addFlameCards();
+        }
+        if(boughtJapanesePack){
+            addJapaneseCards();
         }
     }
 
@@ -202,6 +209,70 @@ public class Deck {
         }
         for (int i = 0; i < FlamePack.INFERNO_AMOUNT; i++) {
             cardList.add(new Card(Assets.flameGoldCardInferno, Card.MAGIC, FlamePack.INFERNO, FlamePack.INFERNO_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+    }
+
+    private void addJapaneseCards() {
+        //BUILD CARDS
+        for (int i = 0; i < JapanesePack.STOCKADE_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseBuildCardStockade, Card.BUILD, JapanesePack.STOCKADE, JapanesePack.STOCKADE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.FORTRESS_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseBuildCardFortress, Card.BUILD, JapanesePack.FORTRESS, JapanesePack.FORTRESS_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.MONASTERY_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseBuildCardMonastery, Card.BUILD, JapanesePack.MONASTERY, JapanesePack.MONASTERY_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.RAMPART_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseBuildCardRampart, Card.BUILD, JapanesePack.RAMPART, JapanesePack.RAMPART_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.CITADEL_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseBuildCardCitadel, Card.BUILD, JapanesePack.CITADEL, JapanesePack.CITADEL_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+
+        //ATTACK CARDS
+        for (int i = 0; i < JapanesePack.ASHIGARU_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseAttackCardAshigaru, Card.ATTACK, JapanesePack.ASHIGARU, JapanesePack.ASHIGARU_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.SHURIKEN_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseAttackCardShuriken, Card.ATTACK, JapanesePack.SHURIKEN, JapanesePack.SHURIKEN_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.KATANA_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseAttackCardKatana, Card.ATTACK, JapanesePack.KATANA, JapanesePack.KATANA_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.SAMURAI_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseAttackCardSamurai, Card.ATTACK, JapanesePack.SAMURAI, JapanesePack.SAMURAI_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.DOJO_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseAttackCardDojo, Card.ATTACK, JapanesePack.DOJO, JapanesePack.DOJO_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+
+        //MAGIC CARDS
+        for (int i = 0; i < JapanesePack.SHRINE_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseGemCardShrine, Card.MAGIC, JapanesePack.SHRINE, JapanesePack.SHRINE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.QUARRY_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseGemCardQuarry, Card.MAGIC, JapanesePack.QUARRY, JapanesePack.QUARRY_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.TEMPLE_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseGemCardTemple, Card.MAGIC, JapanesePack.TEMPLE, JapanesePack.TEMPLE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.RICE_PADDY_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseGemCardRicePaddy, Card.MAGIC, JapanesePack.RICE_PADDY, JapanesePack.RICE_PADDY_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.SEPPUKU_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseGemCardSeppuku, Card.MAGIC, JapanesePack.SEPPUKU, JapanesePack.SEPPUKU_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+
+        //GOLDEN CARDS
+        for (int i = 0; i < JapanesePack.NINJA_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseGoldCardNinja, Card.ATTACK, JapanesePack.NINJA, JapanesePack.NINJA_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.DRAGON_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseGoldCardDragon, Card.MAGIC, JapanesePack.DRAGON, JapanesePack.DRAGON_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+        }
+        for (int i = 0; i < JapanesePack.SHOGUN_AMOUNT; i++) {
+            cardList.add(new Card(Assets.japaneseGoldCardShogun, Card.MAGIC, JapanesePack.SHOGUN, JapanesePack.SHOGUN_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
     }
 

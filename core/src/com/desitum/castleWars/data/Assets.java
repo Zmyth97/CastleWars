@@ -101,6 +101,30 @@ public class Assets {
     public static Texture flameGoldCardMeteors;
     public static Texture flameGoldCardInferno;
     //endregion
+    public static Texture japaneseBuildCardStockade;
+    public static Texture japaneseBuildCardFortress;
+    public static Texture japaneseBuildCardMonastery;
+    public static Texture japaneseBuildCardRampart;
+    public static Texture japaneseBuildCardCitadel;
+
+    public static Texture japaneseAttackCardAshigaru;
+    public static Texture japaneseAttackCardShuriken;
+    public static Texture japaneseAttackCardKatana;
+    public static Texture japaneseAttackCardSamurai;
+    public static Texture japaneseAttackCardDojo;
+
+    public static Texture japaneseGemCardShrine;
+    public static Texture japaneseGemCardQuarry;
+    public static Texture japaneseGemCardTemple;
+    public static Texture japaneseGemCardRicePaddy;
+    public static Texture japaneseGemCardSeppuku;
+
+    public static Texture japaneseGoldCardNinja;
+    public static Texture japaneseGoldCardDragon;
+    public static Texture japaneseGoldCardShogun;
+    //region Japanese Cards
+
+    //endregion
 
     //Misc Textures
     public static BitmapFont textFieldFont;
@@ -153,6 +177,7 @@ public class Assets {
         loadAttackCards();
         loadGemCards();
         loadFlameCards();
+        loadJapaneseCards();
     }
 
     private static void loadBuildCards() {
@@ -212,6 +237,30 @@ public class Assets {
         flameGoldCardPhoenix = new Texture("game/flame_pack/phoenix.png");
         flameGoldCardMeteors = new Texture("game/flame_pack/meteors.png");
         flameGoldCardInferno = new Texture("game/flame_pack/inferno.png");
+    }
+
+    private static void loadJapaneseCards(){
+        japaneseBuildCardStockade = new Texture("game/japanese_pack/stockade.png");
+        japaneseBuildCardFortress = new Texture("game/japanese_pack/fortress.png");
+        japaneseBuildCardMonastery = new Texture("game/japanese_pack/monastery.png");
+        japaneseBuildCardRampart = new Texture("game/japanese_pack/rampart.png");
+        japaneseBuildCardCitadel = new Texture("game/japanese_pack/citadel.png");
+
+        japaneseAttackCardAshigaru = new Texture("game/japanese_pack/ashigaru.png");
+        japaneseAttackCardShuriken = new Texture("game/japanese_pack/shuriken.png");
+        japaneseAttackCardKatana = new Texture("game/japanese_pack/katana.png");
+        japaneseAttackCardSamurai = new Texture("game/japanese_pack/samurai.png");
+        japaneseAttackCardDojo = new Texture("game/japanese_pack/dojo.png");
+
+        japaneseGemCardShrine = new Texture("game/japanese_pack/shrine.png");
+        japaneseGemCardQuarry = new Texture("game/japanese_pack/quarry.png");
+        japaneseGemCardTemple = new Texture("game/japanese_pack/temple.png");
+        japaneseGemCardRicePaddy = new Texture("game/japanese_pack/rice_paddy.png");
+        japaneseGemCardSeppuku = new Texture("game/japanese_pack/seppuku.png");
+
+        japaneseGoldCardNinja = new Texture("game/japanese_pack/ninja.png");
+        japaneseGoldCardDragon = new Texture("game/japanese_pack/dragon.png");
+        japaneseGoldCardShogun = new Texture("game/japanese_pack/shogun.png");
     }
 
     public static void loadSounds() {

@@ -151,7 +151,7 @@ public class CardActions {
                 gi.getPlayer1().getCastle().getWall().repair(10);
                 gi.getResources().adjustPlayerStones(-WALL_COST); //Cost
             } else {
-                gi.getPlayer1().getCastle().getWall().repair(10);
+                gi.getPlayer2().getCastle().getWall().repair(10);
                 gi.getResources().adjustComputerStones(-WALL_COST); //Cost
             }
         } else if(cardID == GREATWALL){
@@ -377,14 +377,14 @@ public class CardActions {
             }
         } else if(cardID == HAT_TRICK){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
-                gi.getResources().adjustComputerStones(gi.getResources().adjustPlayerStones(4));
-                gi.getResources().adjustComputerWeapons(gi.getResources().adjustPlayerWeapons(4));
-                gi.getResources().adjustComputerGems(gi.getResources().adjustPlayerGems(4));
+                gi.getResources().adjustPlayerStones(4);
+                gi.getResources().adjustPlayerWeapons(4);
+                gi.getResources().adjustPlayerGems(4);
                 gi.getResources().adjustPlayerGems(-HAT_TRICK_COST); //Cost
             } else {
-                gi.getResources().adjustPlayerStones(gi.getResources().adjustComputerStones(4));
-                gi.getResources().adjustPlayerWeapons(gi.getResources().adjustComputerWeapons(4));
-                gi.getResources().adjustPlayerGems(gi.getResources().adjustComputerGems(4));
+                gi.getResources().adjustComputerStones(4);
+                gi.getResources().adjustComputerWeapons(4);
+                gi.getResources().adjustComputerGems(4);
                 gi.getResources().adjustComputerGems(-HAT_TRICK_COST); //Cost
             }
         } else if(cardID == LIGHTNING_STRIKE){

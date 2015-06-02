@@ -248,43 +248,78 @@ public class BuildScreen implements Screen {
 
         //region BasicMenus
         PopupMenu barrierMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(barrierMenu);
         PopupMenu wallMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(wallMenu);
         PopupMenu greatWallMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(greatWallMenu);
         PopupMenu reinforceMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(reinforceMenu);
         PopupMenu fortifyMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(fortifyMenu);
         PopupMenu castlesMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(castlesMenu);
         PopupMenu architectMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(architectMenu);
         PopupMenu reserveMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(reserveMenu);
         PopupMenu sabotageMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(sabotageMenu);
         PopupMenu strongholdMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(strongholdMenu);
 
         PopupMenu recruiterMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(recruiterMenu);
         PopupMenu spearmanMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(spearmanMenu);
         PopupMenu ramMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(ramMenu);
         PopupMenu catapultMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(catapultMenu);
         PopupMenu legionMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(legionMenu);
         PopupMenu trebuchetMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(trebuchetMenu);
         PopupMenu assassinMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(assassinMenu);
         PopupMenu burglarMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(burglarMenu);
         PopupMenu thiefMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(thiefMenu);
         PopupMenu raidMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(raidMenu);
 
         PopupMenu createStonesMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(createStonesMenu);
         PopupMenu createWeaponsMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(createWeaponsMenu);
         PopupMenu createGemsMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(createGemsMenu);
         PopupMenu destroyStonesMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(destroyStonesMenu);
         PopupMenu destroyWeaponsMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(destroyWeaponsMenu);
         PopupMenu destroyGemsMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(destroyGemsMenu);
         PopupMenu mageMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(mageMenu);
         PopupMenu hatTrickMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(hatTrickMenu);
         PopupMenu lightningMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(lightningMenu);
         PopupMenu blastMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(blastMenu);
 
         PopupMenu jerichoMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(jerichoMenu);
         PopupMenu trojanHorseMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(trojanHorseMenu);
         PopupMenu blackPlagueMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(blackPlagueMenu);
         PopupMenu merlinMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(merlinMenu);
         PopupMenu duplicateMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea.addWidget(duplicateMenu);
         //endregion
         //region Basic Spinners
         barrierSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, barrierMenu.getX(), barrierMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
@@ -297,6 +332,7 @@ public class BuildScreen implements Screen {
         reserveSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, reserveMenu.getX(), reserveMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
         sabotageSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, sabotageMenu.getX(), sabotageMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
         strongHoldSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, strongholdMenu.getX(), strongholdMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+
 
         recruiterSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, recruiterMenu.getX(), recruiterMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
         spearmanSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, spearmanMenu.getX(), spearmanMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
@@ -325,6 +361,46 @@ public class BuildScreen implements Screen {
         blackPlagueSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, blackPlagueMenu.getX(), blackPlagueMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
         merlinSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, merlinMenu.getX(), merlinMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
         duplicateSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, duplicateMenu.getX(), duplicateMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+
+        barrierMenu.addPopupWidget(barrierSpinner);
+        wallMenu.addPopupWidget(wallSpinner);
+        greatWallMenu.addPopupWidget(greatWallSpinner);
+        reinforceMenu.addPopupWidget(reinforceSpinner);
+        fortifyMenu.addPopupWidget(fortifySpinner);
+        castlesMenu.addPopupWidget(castleSpinner);
+        architectMenu.addPopupWidget(architectSpinner);
+        reserveMenu.addPopupWidget(reserveSpinner);
+        sabotageMenu.addPopupWidget(sabotageSpinner);
+        strongholdMenu.addPopupWidget(strongHoldSpinner);
+
+        recruiterMenu.addPopupWidget(recruiterSpinner);
+        spearmanMenu.addPopupWidget(spearmanSpinner);
+        ramMenu.addPopupWidget(ramSpinner);
+        catapultMenu.addPopupWidget(catapultSpinner);
+        legionMenu.addPopupWidget(legionSpinner);
+        trebuchetMenu.addPopupWidget(trebuchetSpinner);
+        assassinMenu.addPopupWidget(assassinSpinner);
+        burglarMenu.addPopupWidget(burglarSpinner);
+        thiefMenu.addPopupWidget(thiefSpinner);
+        raidMenu.addPopupWidget(raidSpinner);
+
+        createStonesMenu.addPopupWidget(createStonesSpinner);
+        createWeaponsMenu.addPopupWidget(createWeaponsSpinner);
+        createGemsMenu.addPopupWidget(createGemsSpinner);
+        destroyStonesMenu.addPopupWidget(destroyStonesSpinner);
+        destroyWeaponsMenu.addPopupWidget(destroyWeaponsSpinner);
+        destroyGemsMenu.addPopupWidget(destroyGemsSpinner);
+        mageMenu.addPopupWidget(mageSpinner);
+        hatTrickMenu.addPopupWidget(hatTrickSpinner);
+        lightningMenu.addPopupWidget(lightningSpinner);
+        blastMenu.addPopupWidget(blastSpinner);
+
+        jerichoMenu.addPopupWidget(jerichoSpinner);
+        trojanHorseMenu.addPopupWidget(trojanHorseSpinner);
+        blackPlagueMenu.addPopupWidget(blackPlagueSpinner);
+        merlinMenu.addPopupWidget(merlinSpinner);
+        duplicateMenu.addPopupWidget(duplicateSpinner);
+
         //endregion
         //region Basic PopupImages
         barrierImage = new PopupImage(Assets.buildCardBarrier, Assets.invisible, barrierMenu.getX(), barrierMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
@@ -365,6 +441,45 @@ public class BuildScreen implements Screen {
         blackPlagueImage = new PopupImage(Assets.cardBlank, Assets.invisible, blackPlagueMenu.getX(), blackPlagueMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
         merlinImage = new PopupImage(Assets.cardBlank, Assets.invisible, merlinMenu.getX(), merlinMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
         duplicateImage = new PopupImage(Assets.cardBlank, Assets.invisible, duplicateMenu.getX(), duplicateMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+
+        barrierMenu.addPopupWidget(barrierImage);
+        wallMenu.addPopupWidget(wallImage);
+        greatWallMenu.addPopupWidget(greatWallImage);
+        reinforceMenu.addPopupWidget(reinforceImage);
+        fortifyMenu.addPopupWidget(fortifyImage);
+        castlesMenu.addPopupWidget(castleImage);
+        architectMenu.addPopupWidget(architectImage);
+        reserveMenu.addPopupWidget(reserveImage);
+        sabotageMenu.addPopupWidget(sabotageImage);
+        strongholdMenu.addPopupWidget(strongHoldImage);
+
+        recruiterMenu.addPopupWidget(recruiterImage);
+        spearmanMenu.addPopupWidget(spearmanImage);
+        ramMenu.addPopupWidget(ramImage);
+        catapultMenu.addPopupWidget(catapultImage);
+        legionMenu.addPopupWidget(legionImage);
+        trebuchetMenu.addPopupWidget(trebuchetImage);
+        assassinMenu.addPopupWidget(assassinImage);
+        burglarMenu.addPopupWidget(burglarImage);
+        thiefMenu.addPopupWidget(thiefImage);
+        raidMenu.addPopupWidget(raidImage);
+
+        createStonesMenu.addPopupWidget(createStonesImage);
+        createWeaponsMenu.addPopupWidget(createWeaponsImage);
+        createGemsMenu.addPopupWidget(createGemsImage);
+        destroyStonesMenu.addPopupWidget(destroyStonesImage);
+        destroyWeaponsMenu.addPopupWidget(destroyWeaponsImage);
+        destroyGemsMenu.addPopupWidget(destroyGemsImage);
+        mageMenu.addPopupWidget(mageImage);
+        hatTrickMenu.addPopupWidget(hatTrickImage);
+        lightningMenu.addPopupWidget(lightningImage);
+        blastMenu.addPopupWidget(blastImage);
+
+        jerichoMenu.addPopupWidget(jerichoImage);
+        trojanHorseMenu.addPopupWidget(trojanHorseImage);
+        blackPlagueMenu.addPopupWidget(blackPlagueImage);
+        merlinMenu.addPopupWidget(merlinImage);
+        duplicateMenu.addPopupWidget(duplicateImage);
         //endregion
 
         //region FlamePack Menus
@@ -389,6 +504,31 @@ public class BuildScreen implements Screen {
         PopupMenu phoenixMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
         PopupMenu meteorsMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
         PopupMenu infernoMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+
+        boolean hasBoughtFlamePack = true;
+        if(hasBoughtFlamePack){
+            cardScrollArea.addWidget(wallOfFireMenu);
+            cardScrollArea.addWidget(campfireMenu);
+            cardScrollArea.addWidget(forgeMenu);
+            cardScrollArea.addWidget(boilingOilMenu);
+            cardScrollArea.addWidget(bonfireMenu);
+
+            cardScrollArea.addWidget(fireMenu);
+            cardScrollArea.addWidget(fireArrowsMenu);
+            cardScrollArea.addWidget(flamingAxeMenu);
+            cardScrollArea.addWidget(flamingShotMenu);
+            cardScrollArea.addWidget(flameLegionMenu);
+
+            cardScrollArea.addWidget(fireShamanMenu);
+            cardScrollArea.addWidget(lavaFlowMenu);
+            cardScrollArea.addWidget(coalMenu);
+            cardScrollArea.addWidget(blacksmithMenu);
+            cardScrollArea.addWidget(fireballMenu);
+
+            cardScrollArea.addWidget(phoenixMenu);
+            cardScrollArea.addWidget(meteorsMenu);
+            cardScrollArea.addWidget(infernoMenu);
+        }
         //endregion
         //region FlamePack Spinners
         wallOfFireSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, wallOfFireMenu.getX(), wallOfFireMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
@@ -412,6 +552,28 @@ public class BuildScreen implements Screen {
         phoenixSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, phoenixMenu.getX(), phoenixMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
         meteorsSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, meteorsMenu.getX(), meteorsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
         infernoSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, infernoMenu.getX(), infernoMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+
+        wallOfFireMenu.addPopupWidget(wallOfFireSpinner);
+        campfireMenu.addPopupWidget(campfireSpinner);
+        forgeMenu.addPopupWidget(forgeSpinner);
+        boilingOilMenu.addPopupWidget(boilingOilSpinner);
+        bonfireMenu.addPopupWidget(bonfireSpinner);
+
+        fireMenu.addPopupWidget(fireSpinner);
+        fireArrowsMenu.addPopupWidget(fireArrowsSpinner);
+        flamingAxeMenu.addPopupWidget(flamingAxeSpinner);
+        flamingShotMenu.addPopupWidget(flamingShotSpinner);
+        flameLegionMenu.addPopupWidget(flameLegionSpinner);
+
+        fireShamanMenu.addPopupWidget(fireShamanSpinner);
+        lavaFlowMenu.addPopupWidget(lavaFlowSpinner);
+        coalMenu.addPopupWidget(coalSpinner);
+        blacksmithMenu.addPopupWidget(blacksmithSpinner);
+        fireballMenu.addPopupWidget(fireballSpinner);
+
+        phoenixMenu.addPopupWidget(phoenixSpinner);
+        meteorsMenu.addPopupWidget(trojanHorseSpinner);
+        reinforceMenu.addPopupWidget(infernoSpinner);
         //endregion
         //region FlamePack PopupImages
         wallOfFireImage = new PopupImage(Assets.flameBuildCardWallOfFire, Assets.invisible, wallOfFireMenu.getX(), wallOfFireMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
@@ -435,6 +597,28 @@ public class BuildScreen implements Screen {
         phoenixImage = new PopupImage(Assets.flameGoldCardPhoenix, Assets.invisible, phoenixMenu.getX(), phoenixMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
         meteorsImage = new PopupImage(Assets.flameGoldCardMeteors, Assets.invisible, meteorsMenu.getX(), meteorsMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
         infernoImage = new PopupImage(Assets.flameGoldCardInferno, Assets.invisible, infernoMenu.getX(), infernoMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+
+        wallOfFireMenu.addPopupWidget(wallOfFireImage);
+        campfireMenu.addPopupWidget(campfireImage);
+        forgeMenu.addPopupWidget(forgeImage);
+        boilingOilMenu.addPopupWidget(boilingOilImage);
+        bonfireMenu.addPopupWidget(bonfireImage);
+
+        fireMenu.addPopupWidget(fireSpinner);
+        fireArrowsMenu.addPopupWidget(fireArrowsImage);
+        flamingAxeMenu.addPopupWidget(flamingAxeImage);
+        flamingShotMenu.addPopupWidget(flamingShotImage);
+        flameLegionMenu.addPopupWidget(flameLegionImage);
+
+        fireShamanMenu.addPopupWidget(fireShamanImage);
+        lavaFlowMenu.addPopupWidget(lavaFlowImage);
+        coalMenu.addPopupWidget(coalImage);
+        blacksmithMenu.addPopupWidget(blacksmithImage);
+        fireballMenu.addPopupWidget(fireballImage);
+
+        phoenixMenu.addPopupWidget(phoenixImage);
+        meteorsMenu.addPopupWidget(trojanHorseImage);
+        reinforceMenu.addPopupWidget(infernoImage);
         //endregion
 
         //region JapanesePack Menus
@@ -459,6 +643,31 @@ public class BuildScreen implements Screen {
         PopupMenu ninjaMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
         PopupMenu dragonMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
         PopupMenu shogunMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+
+        boolean hasBoughtJapanesePack = true;
+        if(hasBoughtJapanesePack){
+            cardScrollArea.addWidget(stockadeMenu);
+            cardScrollArea.addWidget(fortressMenu);
+            cardScrollArea.addWidget(monasteryMenu);
+            cardScrollArea.addWidget(rampartMenu);
+            cardScrollArea.addWidget(citadelMenu);
+
+            cardScrollArea.addWidget(ashigaruMenu);
+            cardScrollArea.addWidget(shurikenMenu);
+            cardScrollArea.addWidget(katanaMenu);
+            cardScrollArea.addWidget(samuraiMenu);
+            cardScrollArea.addWidget(dojoMenu);
+
+            cardScrollArea.addWidget(shrineMenu);
+            cardScrollArea.addWidget(quarryMenu);
+            cardScrollArea.addWidget(templeMenu);
+            cardScrollArea.addWidget(ricePaddyMenu);
+            cardScrollArea.addWidget(seppukuMenu);
+
+            cardScrollArea.addWidget(ninjaMenu);
+            cardScrollArea.addWidget(dragonMenu);
+            cardScrollArea.addWidget(shogunMenu);
+        }
         //endregion
         //region JapanesePack Spinners
         stockadeSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, stockadeMenu.getX(), stockadeMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
@@ -482,34 +691,74 @@ public class BuildScreen implements Screen {
         ninjaSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, ninjaMenu.getX(), ninjaMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
         dragonSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, dragonMenu.getX(), dragonMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
         shogunSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, shogunMenu.getX(), shogunMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+
+        stockadeMenu.addPopupWidget(stockadeSpinner);
+        fortressMenu.addPopupWidget(fortressSpinner);
+        monasteryMenu.addPopupWidget(monasterySpinner);
+        rampartMenu.addPopupWidget(rampartSpinner);
+        citadelMenu.addPopupWidget(citadelSpinner);
+
+        ashigaruMenu.addPopupWidget(ashigaruSpinner);
+        shurikenMenu.addPopupWidget(shurikenSpinner);
+        katanaMenu.addPopupWidget(katanaSpinner);
+        samuraiMenu.addPopupWidget(samuraiSpinner);
+        dojoMenu.addPopupWidget(dojoSpinner);
+
+        shrineMenu.addPopupWidget(shrineSpinner);
+        quarryMenu.addPopupWidget(quarrySpinner);
+        templeMenu.addPopupWidget(templeSpinner);
+        ricePaddyMenu.addPopupWidget(ricePaddySpinner);
+        seppukuMenu.addPopupWidget(seppukuSpinner);
+
+        ninjaMenu.addPopupWidget(ninjaSpinner);
+        dragonMenu.addPopupWidget(dragonSpinner);
+        shogunMenu.addPopupWidget(shogunSpinner);
         //endregion
         //region JapanesePack PopupImages
-        stockadeImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        fortressImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        monasteryImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        rampartImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        citadelImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        stockadeImage = new PopupImage(Assets.cardBlank, Assets.invisible, stockadeMenu.getX(), stockadeMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        fortressImage = new PopupImage(Assets.cardBlank, Assets.invisible, fortressMenu.getX(), fortressMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        monasteryImage = new PopupImage(Assets.cardBlank, Assets.invisible, monasteryMenu.getX(), monasteryMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        rampartImage = new PopupImage(Assets.cardBlank, Assets.invisible, rampartMenu.getX(), rampartMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        citadelImage = new PopupImage(Assets.cardBlank, Assets.invisible, citadelMenu.getX(), citadelMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
 
-        ashigaruImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        shurikenImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        katanaImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        samuraiImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        dojoImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        ashigaruImage = new PopupImage(Assets.cardBlank, Assets.invisible, ashigaruMenu.getX(), ashigaruMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        shurikenImage = new PopupImage(Assets.cardBlank, Assets.invisible, shurikenMenu.getX(), shurikenMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        katanaImage = new PopupImage(Assets.cardBlank, Assets.invisible, katanaMenu.getX(), katanaMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        samuraiImage = new PopupImage(Assets.cardBlank, Assets.invisible, samuraiMenu.getX(), samuraiMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        dojoImage = new PopupImage(Assets.cardBlank, Assets.invisible, dojoMenu.getX(), dojoMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
 
-        shrineImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        quarryImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        templeImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        ricePaddyImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        seppukuImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        shrineImage = new PopupImage(Assets.cardBlank, Assets.invisible, shrineMenu.getX(), shrineMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        quarryImage = new PopupImage(Assets.cardBlank, Assets.invisible, quarryMenu.getX(), quarryMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        templeImage = new PopupImage(Assets.cardBlank, Assets.invisible, templeMenu.getX(), templeMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        ricePaddyImage = new PopupImage(Assets.cardBlank, Assets.invisible, ricePaddyMenu.getX(), ricePaddyMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        seppukuImage = new PopupImage(Assets.cardBlank, Assets.invisible, seppukuMenu.getX(), seppukuMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
 
-        ninjaImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        dragonImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        shogunImage = new PopupImage(Assets.cardBlank, Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        ninjaImage = new PopupImage(Assets.cardBlank, Assets.invisible, ninjaMenu.getX(), ninjaMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        dragonImage = new PopupImage(Assets.cardBlank, Assets.invisible, dragonMenu.getX(), dragonMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        shogunImage = new PopupImage(Assets.cardBlank, Assets.invisible, shogunMenu.getX(), shogunMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+
+        stockadeMenu.addPopupWidget(stockadeImage);
+        fortressMenu.addPopupWidget(fortressImage);
+        monasteryMenu.addPopupWidget(monasteryImage);
+        rampartMenu.addPopupWidget(rampartImage);
+        citadelMenu.addPopupWidget(citadelImage);
+
+        ashigaruMenu.addPopupWidget(ashigaruImage);
+        shurikenMenu.addPopupWidget(shurikenImage);
+        katanaMenu.addPopupWidget(katanaImage);
+        samuraiMenu.addPopupWidget(samuraiImage);
+        dojoMenu.addPopupWidget(dojoImage);
+
+        shrineMenu.addPopupWidget(shrineImage);
+        quarryMenu.addPopupWidget(quarryImage);
+        templeMenu.addPopupWidget(templeImage);
+        ricePaddyMenu.addPopupWidget(ricePaddyImage);
+        seppukuMenu.addPopupWidget(seppukuImage);
+
+        ninjaMenu.addPopupWidget(ninjaImage);
+        dragonMenu.addPopupWidget(dragonImage);
+        shogunMenu.addPopupWidget(shogunImage);
         //endregion
-
-    }
-
-    private void buildScreen(SpriteBatch batch){
 
     }
 
@@ -526,7 +775,7 @@ public class BuildScreen implements Screen {
     }
 
     public void update(float delta){
-
+        cardScrollArea.update(delta);
     }
 
     public void draw(){
@@ -534,7 +783,7 @@ public class BuildScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(cam.combined);
         batch.begin();
-        buildScreen(batch);
+        cardScrollArea.draw(batch);
         batch.setProjectionMatrix(cam.combined);
         batch.end();
     }

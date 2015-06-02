@@ -10,11 +10,11 @@ public class JapanesePack {
     private GameInterface gi;
 
     //region Build Cards
-    public static final int STOCKADE = 401; //+8 Wall
-    public static final int FORTRESS = 402; //+8 Castle
-    public static final int MONASTERY = 403; //+2 Builders
-    public static final int RAMPART = 404; //+15 Wall
-    public static final int CITADEL = 405; //+15 Castle
+    public static final int STOCKADE = 501; //+8 Wall
+    public static final int FORTRESS = 502; //+8 Castle
+    public static final int MONASTERY = 503; //+2 Builders
+    public static final int RAMPART = 504; //+15 Wall
+    public static final int CITADEL = 505; //+15 Castle
     //endregion
 
     //region Build Costs
@@ -26,11 +26,11 @@ public class JapanesePack {
     //endregion
 
     //region Attack Cards
-    public static final int ASHIGARU = 406; //+6 Attack
-    public static final int SHURIKEN = 407; //+10 Attack
-    public static final int KATANA = 408; //+12 Attack
-    public static final int SAMURAI = 409; //+18 Attack
-    public static final int DOJO = 410; //+2 Soldier
+    public static final int ASHIGARU = 506; //+6 Attack
+    public static final int SHURIKEN = 507; //+10 Attack
+    public static final int KATANA = 508; //+12 Attack
+    public static final int SAMURAI = 509; //+18 Attack
+    public static final int DOJO = 510; //+2 Soldier
     //endregion
 
     //region Attack Costs
@@ -42,11 +42,11 @@ public class JapanesePack {
     //endregion
 
     //region Magic Cards
-    public static final int SHRINE = 411; //+2 Wizards
-    public static final int QUARRY = 412; //+24 Stone
-    public static final int TEMPLE = 413; //+24 Gems
-    public static final int RICE_PADDY = 414; //+24 weapons (Supplies)
-    public static final int SEPPUKU= 415; //-1 Soldier, + 2 Wizard? (Maybe + 50 or so Supplies?)
+    public static final int SHRINE = 511; //+2 Wizards
+    public static final int QUARRY = 512; //+24 Stone
+    public static final int TEMPLE = 513; //+24 Gems
+    public static final int RICE_PADDY = 514; //+24 weapons (Supplies)
+    public static final int SEPPUKU = 515; //-1 Soldier, + 2 Wizard? (Maybe + 50 or so Supplies?)
     //endregion
 
     //region Magic Costs
@@ -58,15 +58,39 @@ public class JapanesePack {
     //endregion
 
     //region GoldenCards
-    public static final int NINJA = 416; //Kill 3 Enemy Wizards
-    public static final int DRAGON = 417; //+40 Attack
-    public static final int SHOGUN = 418; //Add 24 of Each Resource
+    public static final int NINJA = 516; //Kill 3 Enemy Wizards
+    public static final int DRAGON = 517; //+40 Attack
+    public static final int SHOGUN = 518; //Add 24 of Each Resource
     //endRegion
 
     //region Golden Costs
     public static final int NINJA_COST = 64;
     public static final int DRAGON_COST = 74;
     public static final int SHOGUN_COST = 48;
+    //endregion
+
+    //region Japanese CardAmounts
+    public static int STOCKADE_AMOUNT = 2;
+    public static int FORTRESS_AMOUNT = 2;
+    public static int MONASTERY_AMOUNT = 2;
+    public static int RAMPART_AMOUNT = 2;
+    public static int CITADEL_AMOUNT = 2;
+
+    public static int ASHIGARU_AMOUNT = 2;
+    public static int SHURIKEN_AMOUNT = 2;
+    public static int KATANA_AMOUNT = 2;
+    public static int SAMURAI_AMOUNT = 2;
+    public static int DOJO_AMOUNT = 2;
+
+    public static int SHRINE_AMOUNT = 2;
+    public static int QUARRY_AMOUNT = 2;
+    public static int TEMPLE_AMOUNT = 2;
+    public static int RICE_PADDY_AMOUNT = 2;
+    public static int SEPPUKU_AMOUNT = 2;
+
+    public static int NINJA_AMOUNT = 2;
+    public static int DRAGON_AMOUNT = 2;
+    public static int SHOGUN_AMOUNT = 2;
     //endregion
 
     public JapanesePack(GameInterface gi){
@@ -113,7 +137,7 @@ public class JapanesePack {
                 gi.getPlayer1().getCastle().repair(15);
                 gi.getResources().adjustPlayerStones(-CITADEL_COST); //Cost
             } else {
-                gi.getPlayer1().getCastle().repair(15);
+                gi.getPlayer2().getCastle().repair(15);
                 gi.getResources().adjustComputerStones(-CITADEL_COST); //Cost
             }
         }

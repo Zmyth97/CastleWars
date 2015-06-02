@@ -12,7 +12,7 @@ public class Settings {
     public static int highscore;
 
     public static int CARDS_DEALT = 6;
-    public static float COMPUTER_DELAY = 3f;
+    public static float COMPUTER_DELAY = 4f;
 
     //region CardAmounts
     public static int REINFORCE_AMOUNT = 2;

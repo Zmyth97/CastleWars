@@ -78,7 +78,7 @@ public class MenuScreen implements Screen, MenuInterface {
     }
     @Override
     public void buildDeck() {
-        //For when they can choose their own deck
+        castleWars.setScreen(new BuildScreen(castleWars));
     }
     @Override
     public void show() {

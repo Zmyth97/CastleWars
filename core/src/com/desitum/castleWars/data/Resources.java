@@ -31,9 +31,9 @@ public class Resources {
         playerBuilders = 2;
         playerSoldiers = 2;
         playerWizards = 2;
-        playerStones = 16;
-        playerWeapons = 16;
-        playerGems = 16;
+        playerStones = 200;
+        playerWeapons = 200;
+        playerGems = 200;
 
         computerBuilders = 2;
         computerSoldiers = 2;
@@ -249,14 +249,14 @@ public class Resources {
     }
 
     public void addComputerWeapons(int amount){
-        playerWeapons += amount;
+        computerWeapons += amount;
     }
 
     public void addComputerStones(int amount){
-        playerStones += amount;
+        computerStones += amount;
     }
 
     public void addComputerGems(int amount){
-        playerGems += amount;
+        computerGems += amount;
     }
 }
