@@ -56,6 +56,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static Color magicColor = new Color(.035f, .722f, 0, 1);
     private static Color castleColor = new Color(0.278f, 0.278f, 0.322f, 1);
     private int playerTurn;
+    private float timer;
     private Player player1;
     private Player player2;
     private ComputerAI ai;
@@ -100,15 +101,15 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private JapanesePack japanesePack;
     private float computerDelay;
 
-    private ArrayList<Card> cardsToReplaceFromPlayer;
-    private ArrayList<Card> cardsToReplaceFromComputer;
+    //private ArrayList<Card> cardsToReplaceFromPlayer;
+   // private ArrayList<Card> cardsToReplaceFromComputer;
 
     public GameWorld(Viewport cam) {
         super();
         super.setCam(cam);
 
-        cardsToReplaceFromPlayer = new ArrayList<Card>();
-        cardsToReplaceFromComputer = new ArrayList<Card>();
+        //cardsToReplaceFromPlayer = new ArrayList<Card>();
+        //cardsToReplaceFromComputer = new ArrayList<Card>();
 
         player1 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 - 50));
         player2 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 + 25));
@@ -129,7 +130,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         myResources = new Resources(this);
 
         difficulty = 0;
-
+        timer = 0;
         ai = new ComputerAI(this);
 
         setupSideMenus();
@@ -143,21 +144,22 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     public void update(float delta) {
-        for (Card c : cardsToReplaceFromPlayer) {
-            player1.getHand().removeCardFromHand(c);
-            player1.getHand().addCardToHand(drawNewCard(c.getX(), c.getY(), 0));
-            deck.addCard(c);
-            c.startOutgoingAnimators();
-        }
-        cardsToReplaceFromPlayer.clear();
-
-        for (Card c : cardsToReplaceFromComputer) {
-            player2.getHand().removeCardFromHand(c);
-            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
-            deck.addCard(c);
-            c.startOutgoingAnimators();
-        }
-        cardsToReplaceFromComputer.clear();
+//        for (Card c : cardsToReplaceFromPlayer) {
+//            player1.getHand().removeCardFromHand(c);
+//            player1.getHand().addCardToHand(drawNewCard(c.getX(), c.getY(), 0));
+//            deck.addCard(c);
+//            c.startOutgoingAnimators();
+//        }
+//
+//        cardsToReplaceFromPlayer.clear();
+//
+//        for (Card c : cardsToReplaceFromComputer) {
+//            player2.getHand().removeCardFromHand(c);
+//            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
+//            deck.addCard(c);
+//            c.startOutgoingAnimators();
+//        }
+//        cardsToReplaceFromComputer.clear();
 
         for (Card c: deck.getCardList()) {
             c.update(delta);
@@ -172,7 +174,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 computerTurn();
             }
         }
-
         player1.update(delta);
         player2.update(delta);
 
@@ -201,7 +202,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.playerTurn = playerTurn;
         discardToggle.turnOff();
 
-        if (playerTurn == PLAYER2) {
+        if (playerTurn == PLAYER) {
             myResources.addPlayerStones(2 * myResources.getPlayerBuilders());
             myResources.addPlayerGems(2 * myResources.getPlayerWizards());
             myResources.addPlayerWeapons(2 * myResources.getPlayerSoldiers());
@@ -219,7 +220,12 @@ public class GameWorld extends KodyWorld implements GameInterface {
             for (Card card : player2.getHand().getCardsInHand()) {
                 if (card.isAvailable()) {
                     c = card;
+                    c.startOutgoingAnimators();
+                    //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
                     cardActions.doCardAction(card.getCardID());
+                    player2.getHand().removeCardFromHand(c);
+                    player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
+                    deck.addCard(c);
                     processTurn(c);
                     usedCard = true;
                     break;
@@ -231,28 +237,37 @@ public class GameWorld extends KodyWorld implements GameInterface {
             }
         } else if(difficulty == HARD_DIFFICULTY) {
             Card chosenCard = ai.processAI();
-            processTurn(chosenCard);
+            chosenCard.startOutgoingAnimators();
+            //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
             cardActions.doCardAction(chosenCard.getCardID());
+            player2.getHand().removeCardFromHand(chosenCard);
+            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
+            deck.addCard(chosenCard);
+            processTurn(chosenCard);
             c = chosenCard;
         }
         switchTurns(PLAYER);
-        cardsToReplaceFromComputer.add(c);
+        //cardsToReplaceFromComputer.add(c);
     }
 
     @Override
     public void onClickCard(Card card) {
         if ((card.isAvailable() || isDiscarding()) && playerTurn == PLAYER) {
+            card.startOutgoingAnimators();
+            //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
             if (!isDiscarding()) {
                 if(card.getCardID() > 500){
                     japanesePack.doCardAction(card.getCardID());
-                } else if(card.getCardID() > 400){
+                } else if(card.getCardID() > 400) {
                     flamePack.doCardAction(card.getCardID());
                 } else {
                     cardActions.doCardAction(card.getCardID());
                 }
+                player1.getHand().removeCardFromHand(card);
+                player1.getHand().addCardToHand(drawNewCard(card.getX(), card.getY(), 0));
+                deck.addCard(card);
             }
             processTurn(card);
-            cardsToReplaceFromPlayer.add(card);
             switchTurns(PLAYER2);
         }
     }

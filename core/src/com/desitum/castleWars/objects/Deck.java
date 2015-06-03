@@ -86,16 +86,16 @@ public class Deck {
             cardList.add(new Card(Assets.attackCardTrebuchet, Card.ATTACK, CardActions.TREBUCHET, CardActions.TREBUCHET_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for (int i = 0; i < Settings.ASSASSIN_AMOUNT; i++) {
-            cardList.add(new Card(Assets.cardBlank, Card.ATTACK, CardActions.ASSASSIN, CardActions.ASSASSIN_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.attackCardAssassin, Card.ATTACK, CardActions.ASSASSIN, CardActions.ASSASSIN_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for (int i = 0; i < Settings.BURGLAR_AMOUNT; i++) {
-            cardList.add(new Card(Assets.cardBlank, Card.ATTACK, CardActions.BURGLAR, CardActions.BURGLAR_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.attackCardBurglar, Card.ATTACK, CardActions.BURGLAR, CardActions.BURGLAR_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for (int i = 0; i < Settings.THIEF_AMOUNT; i++) {
-            cardList.add(new Card(Assets.cardBlank, Card.ATTACK, CardActions.THIEF, CardActions.THIEF_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.attackCardThief, Card.ATTACK, CardActions.THIEF, CardActions.THIEF_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for (int i = 0; i < Settings.RAID_AMOUNT; i++) {
-            cardList.add(new Card(Assets.cardBlank, Card.ATTACK, CardActions.RAID, CardActions.RAID_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.attackCardRaid, Card.ATTACK, CardActions.RAID, CardActions.RAID_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
 
         //MAGIC CARDS
@@ -132,19 +132,19 @@ public class Deck {
 
         //GOLDEN CARDS
         for (int i = 0; i < Settings.JERICHO_AMOUNT; i++) {
-            cardList.add(new Card(Assets.cardBlank, Card.ATTACK, CardActions.JERICHO, CardActions.JERICHO_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.goldCardJericho, Card.ATTACK, CardActions.JERICHO, CardActions.JERICHO_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for (int i = 0; i < Settings.TROJAN_HORSE_AMOUNT; i++) {
-            cardList.add(new Card(Assets.cardBlank, Card.ATTACK, CardActions.TROJAN_HORSE, CardActions.TROJAN_HORSE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.goldCardTrojanHorse, Card.ATTACK, CardActions.TROJAN_HORSE, CardActions.TROJAN_HORSE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for (int i = 0; i < Settings.BLACK_PLAGUE_AMOUNT; i++) {
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.BLACK_PLAGUE, CardActions.BLACK_PLAGUE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.goldCardBlackPlague, Card.MAGIC, CardActions.BLACK_PLAGUE, CardActions.BLACK_PLAGUE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for (int i = 0; i < Settings.MERLIN_AMOUNT; i++) {
-            cardList.add(new Card(Assets.cardBlank, Card.MAGIC, CardActions.MERLIN, CardActions.MERLIN_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.goldCardMerlin, Card.MAGIC, CardActions.MERLIN, CardActions.MERLIN_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for (int i = 0; i < Settings.DUPLICATE_AMOUNT; i++) {
-            cardList.add(new Card(Assets.cardBlank, Card.BUILD, CardActions.DUPLICATE, CardActions.DUPLICATE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
+            cardList.add(new Card(Assets.goldCardDuplicate, Card.BUILD, CardActions.DUPLICATE, CardActions.DUPLICATE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
     }
 

@@ -420,10 +420,10 @@ public class BuildScreen implements Screen {
         catapultImage = new PopupImage(Assets.attackCardCatapult, Assets.invisible, catapultMenu.getX(), catapultMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
         legionImage = new PopupImage(Assets.attackCardLegion, Assets.invisible, legionMenu.getX(), legionMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
         trebuchetImage = new PopupImage(Assets.attackCardTrebuchet, Assets.invisible, trebuchetMenu.getX(), trebuchetMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        assassinImage = new PopupImage(Assets.cardBlank, Assets.invisible, assassinMenu.getX(), assassinMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        burglarImage = new PopupImage(Assets.cardBlank, Assets.invisible, burglarMenu.getX(), burglarMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        thiefImage = new PopupImage(Assets.cardBlank, Assets.invisible, thiefMenu.getX(), thiefMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        raidImage = new PopupImage(Assets.cardBlank, Assets.invisible, raidMenu.getX(), raidMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        assassinImage = new PopupImage(Assets.attackCardAssassin, Assets.invisible, assassinMenu.getX(), assassinMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        burglarImage = new PopupImage(Assets.attackCardBurglar, Assets.invisible, burglarMenu.getX(), burglarMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        thiefImage = new PopupImage(Assets.attackCardThief, Assets.invisible, thiefMenu.getX(), thiefMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        raidImage = new PopupImage(Assets.attackCardRaid, Assets.invisible, raidMenu.getX(), raidMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
 
         createStonesImage = new PopupImage(Assets.gemCardCreateStones, Assets.invisible, createStonesMenu.getX(), createStonesMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
         createWeaponsImage = new PopupImage(Assets.gemCardCreateWeapons, Assets.invisible, createWeaponsMenu.getX(), createWeaponsMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
@@ -436,11 +436,11 @@ public class BuildScreen implements Screen {
         lightningImage = new PopupImage(Assets.gemCardLightningStrike, Assets.invisible, lightningMenu.getX(), lightningMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
         blastImage = new PopupImage(Assets.gemCardBlast, Assets.invisible, blastMenu.getX(), blastMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
 
-        jerichoImage = new PopupImage(Assets.cardBlank, Assets.invisible, jerichoMenu.getX(), jerichoMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        trojanHorseImage = new PopupImage(Assets.cardBlank, Assets.invisible, trojanHorseMenu.getX(), trojanHorseMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        blackPlagueImage = new PopupImage(Assets.cardBlank, Assets.invisible, blackPlagueMenu.getX(), blackPlagueMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        merlinImage = new PopupImage(Assets.cardBlank, Assets.invisible, merlinMenu.getX(), merlinMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        duplicateImage = new PopupImage(Assets.cardBlank, Assets.invisible, duplicateMenu.getX(), duplicateMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        jerichoImage = new PopupImage(Assets.goldCardJericho, Assets.invisible, jerichoMenu.getX(), jerichoMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        trojanHorseImage = new PopupImage(Assets.goldCardTrojanHorse, Assets.invisible, trojanHorseMenu.getX(), trojanHorseMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        blackPlagueImage = new PopupImage(Assets.goldCardBlackPlague, Assets.invisible, blackPlagueMenu.getX(), blackPlagueMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        merlinImage = new PopupImage(Assets.goldCardMerlin, Assets.invisible, merlinMenu.getX(), merlinMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        duplicateImage = new PopupImage(Assets.goldCardDuplicate, Assets.invisible, duplicateMenu.getX(), duplicateMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
 
         barrierMenu.addPopupWidget(barrierImage);
         wallMenu.addPopupWidget(wallImage);
@@ -715,27 +715,27 @@ public class BuildScreen implements Screen {
         shogunMenu.addPopupWidget(shogunSpinner);
         //endregion
         //region JapanesePack PopupImages
-        stockadeImage = new PopupImage(Assets.cardBlank, Assets.invisible, stockadeMenu.getX(), stockadeMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        fortressImage = new PopupImage(Assets.cardBlank, Assets.invisible, fortressMenu.getX(), fortressMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        monasteryImage = new PopupImage(Assets.cardBlank, Assets.invisible, monasteryMenu.getX(), monasteryMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        rampartImage = new PopupImage(Assets.cardBlank, Assets.invisible, rampartMenu.getX(), rampartMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        citadelImage = new PopupImage(Assets.cardBlank, Assets.invisible, citadelMenu.getX(), citadelMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        stockadeImage = new PopupImage(Assets.japaneseBuildCardStockade, Assets.invisible, stockadeMenu.getX(), stockadeMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        fortressImage = new PopupImage(Assets.japaneseBuildCardFortress, Assets.invisible, fortressMenu.getX(), fortressMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        monasteryImage = new PopupImage(Assets.japaneseBuildCardMonastery, Assets.invisible, monasteryMenu.getX(), monasteryMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        rampartImage = new PopupImage(Assets.japaneseBuildCardRampart, Assets.invisible, rampartMenu.getX(), rampartMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        citadelImage = new PopupImage(Assets.japaneseBuildCardCitadel, Assets.invisible, citadelMenu.getX(), citadelMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
 
-        ashigaruImage = new PopupImage(Assets.cardBlank, Assets.invisible, ashigaruMenu.getX(), ashigaruMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        shurikenImage = new PopupImage(Assets.cardBlank, Assets.invisible, shurikenMenu.getX(), shurikenMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        katanaImage = new PopupImage(Assets.cardBlank, Assets.invisible, katanaMenu.getX(), katanaMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        samuraiImage = new PopupImage(Assets.cardBlank, Assets.invisible, samuraiMenu.getX(), samuraiMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        dojoImage = new PopupImage(Assets.cardBlank, Assets.invisible, dojoMenu.getX(), dojoMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        ashigaruImage = new PopupImage(Assets.japaneseAttackCardAshigaru, Assets.invisible, ashigaruMenu.getX(), ashigaruMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        shurikenImage = new PopupImage(Assets.japaneseAttackCardShuriken, Assets.invisible, shurikenMenu.getX(), shurikenMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        katanaImage = new PopupImage(Assets.japaneseAttackCardKatana, Assets.invisible, katanaMenu.getX(), katanaMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        samuraiImage = new PopupImage(Assets.japaneseAttackCardSamurai, Assets.invisible, samuraiMenu.getX(), samuraiMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        dojoImage = new PopupImage(Assets.japaneseAttackCardDojo, Assets.invisible, dojoMenu.getX(), dojoMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
 
-        shrineImage = new PopupImage(Assets.cardBlank, Assets.invisible, shrineMenu.getX(), shrineMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        quarryImage = new PopupImage(Assets.cardBlank, Assets.invisible, quarryMenu.getX(), quarryMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        templeImage = new PopupImage(Assets.cardBlank, Assets.invisible, templeMenu.getX(), templeMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        ricePaddyImage = new PopupImage(Assets.cardBlank, Assets.invisible, ricePaddyMenu.getX(), ricePaddyMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        seppukuImage = new PopupImage(Assets.cardBlank, Assets.invisible, seppukuMenu.getX(), seppukuMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        shrineImage = new PopupImage(Assets.japaneseGemCardShrine, Assets.invisible, shrineMenu.getX(), shrineMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        quarryImage = new PopupImage(Assets.japaneseGemCardQuarry, Assets.invisible, quarryMenu.getX(), quarryMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        templeImage = new PopupImage(Assets.japaneseGemCardTemple, Assets.invisible, templeMenu.getX(), templeMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        ricePaddyImage = new PopupImage(Assets.japaneseGemCardRicePaddy, Assets.invisible, ricePaddyMenu.getX(), ricePaddyMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        seppukuImage = new PopupImage(Assets.japaneseGemCardSeppuku, Assets.invisible, seppukuMenu.getX(), seppukuMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
 
-        ninjaImage = new PopupImage(Assets.cardBlank, Assets.invisible, ninjaMenu.getX(), ninjaMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        dragonImage = new PopupImage(Assets.cardBlank, Assets.invisible, dragonMenu.getX(), dragonMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
-        shogunImage = new PopupImage(Assets.cardBlank, Assets.invisible, shogunMenu.getX(), shogunMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        ninjaImage = new PopupImage(Assets.japaneseGoldCardNinja, Assets.invisible, ninjaMenu.getX(), ninjaMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        dragonImage = new PopupImage(Assets.japaneseGoldCardDragon, Assets.invisible, dragonMenu.getX(), dragonMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
+        shogunImage = new PopupImage(Assets.japaneseGoldCardShogun, Assets.invisible, shogunMenu.getX(), shogunMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);
 
         stockadeMenu.addPopupWidget(stockadeImage);
         fortressMenu.addPopupWidget(fortressImage);
