@@ -16,12 +16,14 @@ public class ComputerAI {
     private static final int MAX_BUILD = 20;
 
     GameInterface gi;
+    private boolean discarding;
 
     ArrayList<Integer> possibleCards;
 
     public ComputerAI(GameInterface gi) {
         this.gi = gi;
         possibleCards = new ArrayList<Integer>();
+        discarding = false;
     }
 
     public Card processAI() {
@@ -34,6 +36,7 @@ public class ComputerAI {
             }
         }
         if(possibleCards.size() > 0) {
+            discarding = false;
             System.out.println("Possible Cards Amonut: " + possibleCards.size());
             System.out.println("Starting AI");
             Collections.sort(possibleCards);
@@ -49,7 +52,8 @@ public class ComputerAI {
             chosenCard = chooseCard(card);
             System.out.println("Chosen Card: " + chosenCard.getCardID());
         } else {
-            //TODO Method for Discard
+            findBestToDiscard();
+            discarding = true;
         }
 
         return chosenCard;
@@ -344,5 +348,19 @@ public class ComputerAI {
             }
         }
         return theCard;
+    }
+
+    private Card findBestToDiscard(){
+        Card toDiscard = null;
+        //Add Logic for which is best to discard here
+
+        //Placeholder
+        toDiscard = gi.getPlayer2().getHand().getCardsInHand().get(0);
+
+        return toDiscard;
+    }
+
+    public boolean isDiscarding() {
+        return discarding;
     }
 }

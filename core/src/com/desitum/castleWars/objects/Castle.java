@@ -35,11 +35,11 @@ public class Castle extends Sprite {
 
         this.setOriginCenter();
         this.setSize(25.0f, 100.0f);
-        this.setPosition(x, ZERO - getHeight());
+        this.setPosition(x, ZERO - (getHeight()));
 
         particles = new ParticleEmitter(getX(), ZERO, "game/particles/particles.prt");
 
-        ratio = getHeight() / (GameScreen.SCREEN_HEIGHT - GameScreen.SCREEN_HEIGHT / 4 + 8 - 20);
+        ratio =  0.6f;//getHeight() / (GameScreen.SCREEN_HEIGHT - GameScreen.SCREEN_HEIGHT / 4 + 8 - 20);
 
         animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);
         animators.start(false);

@@ -1,5 +1,7 @@
 package com.desitum.castleWars.data;
 
+import com.desitum.castleWars.packs.FlamePack;
+import com.desitum.castleWars.packs.JapanesePack;
 import com.desitum.castleWars.world.GameInterface;
 import com.desitum.castleWars.world.GameWorld;
 
@@ -457,6 +459,331 @@ public class CardActions {
             }
         }
 
+        //region FlamePack
+        //region BUILD CARDS
+        if (cardID == FlamePack.WALL_OF_FIRE) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer1().getCastle().getWall().repair(8);
+                gi.getResources().adjustPlayerStones(-FlamePack.WALL_OF_FIRE_COST); //Cost
+            } else {
+                gi.getPlayer2().getCastle().getWall().repair(8);
+                gi.getResources().adjustComputerStones(-FlamePack.WALL_OF_FIRE_COST); //Cost
+            }
+        } else if (cardID == FlamePack.CAMPFIRE) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer1().getCastle().repair(8);
+                gi.getResources().adjustPlayerStones(-FlamePack.CAMPFIRE_COST); //Cost
+            } else {
+                gi.getPlayer2().getCastle().repair(8);
+                gi.getResources().adjustComputerStones(-FlamePack.CAMPFIRE_COST); //Cost
+            }
+        } else if (cardID == FlamePack.FORGE) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerBuilders(2);
+                gi.getResources().adjustPlayerStones(-FlamePack.FORGE_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerBuilders(2);
+                gi.getResources().adjustComputerStones(-FlamePack.FORGE_COST); //Cost
+            }
+        } else if (cardID == FlamePack.BOILING_OIL) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer1().getCastle().getWall().repair(15);
+                gi.getResources().adjustPlayerStones(-FlamePack.BOILING_OIL_COST); //Cost
+            } else {
+                gi.getPlayer2().getCastle().getWall().repair(15);
+                gi.getResources().adjustComputerStones(-FlamePack.BOILING_OIL_COST); //Cost
+            }
+        } else if (cardID == FlamePack.BONFIRE) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer1().getCastle().repair(15);
+                gi.getResources().adjustPlayerStones(-FlamePack.BONFIRE_COST); //Cost
+            } else {
+                gi.getPlayer2().getCastle().repair(15);
+                gi.getResources().adjustComputerStones(-FlamePack.BONFIRE_COST); //Cost
+            }
+        }
+
+        //ATTACK CARDS
+        else if (cardID == FlamePack.FIRE) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(6);
+                gi.getResources().adjustPlayerWeapons(-FlamePack.FIRE_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(6);
+                gi.getResources().adjustComputerWeapons(-FlamePack.FIRE_COST); //Cost
+            }
+        } else if (cardID == FlamePack.FIRE_ARROWS) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(10);
+                gi.getResources().adjustPlayerWeapons(-FlamePack.FIRE_ARROWS_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(10);
+                gi.getResources().adjustComputerWeapons(-FlamePack.FIRE_ARROWS_COST); //Cost
+            }
+        } else if (cardID == FlamePack.FLAMING_AXE) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(12);
+                gi.getResources().adjustPlayerWeapons(-FlamePack.FLAMING_AXE_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(12);
+                gi.getResources().adjustComputerWeapons(-FlamePack.FLAMING_AXE_COST); //Cost
+            }
+        } else if (cardID == FlamePack.FLAMING_SHOT) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(18);
+                gi.getResources().adjustPlayerWeapons(-FlamePack.FLAMING_SHOT_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(18);
+                gi.getResources().adjustComputerWeapons(-FlamePack.FLAMING_SHOT_COST); //Cost
+            }
+        } else if (cardID == FlamePack.FLAME_LEGION) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerSoldiers(2);
+                gi.getResources().adjustPlayerWeapons(-FlamePack.FLAME_LEGION_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerSoldiers(2);
+                gi.getResources().adjustComputerWeapons(-FlamePack.FLAME_LEGION_COST); //Cost
+            }
+        }
+
+        //MAGIC CARDS
+        else if(cardID == FlamePack.FIRE_SHAMAN){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerWizards(2);
+                gi.getResources().adjustPlayerGems(-FlamePack.FIRE_SHAMAN_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerWizards(2);
+                gi.getResources().adjustComputerGems(-FlamePack.FIRE_SHAMAN_COST); //Cost
+            }
+        } else if(cardID == FlamePack.LAVA_FLOW){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerStones(24);
+                gi.getResources().adjustPlayerGems(-FlamePack.LAVA_FLOW_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerStones(24);
+                gi.getResources().adjustComputerGems(-FlamePack.LAVA_FLOW_COST); //Cost
+            }
+        } else if(cardID == FlamePack.COAL){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerGems(24);
+                gi.getResources().adjustPlayerGems(-FlamePack.COAL_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerGems(24);
+                gi.getResources().adjustComputerGems(-FlamePack.COAL_COST); //Cost
+            }
+        } else if(cardID == FlamePack.BLACKSMITH){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerWeapons(24);
+                gi.getResources().adjustPlayerGems(-FlamePack.BLACKSMITH_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerWeapons(24);
+                gi.getResources().adjustComputerGems(-FlamePack.BLACKSMITH_COST); //Cost
+            }
+        } else if(cardID == FlamePack.FIREBALL){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(16);
+                gi.getResources().adjustPlayerGems(-FlamePack.FIREBALL_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(16);
+                gi.getResources().adjustComputerGems(-FlamePack.FIREBALL_COST); //Cost
+            }
+        }
+
+        //GOLDEN CARDS
+        else if(cardID == FlamePack.PHEONIX){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustComputerSoldiers(-1);
+                gi.getResources().adjustPlayerSoldiers(2);
+                gi.getResources().adjustPlayerWeapons(-FlamePack.PHEONIX_COST); //Cost
+            } else {
+                gi.getResources().adjustPlayerSoldiers(-1);
+                gi.getResources().adjustComputerSoldiers(2);
+                gi.getResources().adjustComputerWeapons(-FlamePack.PHEONIX_COST); //Cost
+            }
+        }else if(cardID == FlamePack.METEORS){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(40);
+                gi.getResources().adjustPlayerGems(-FlamePack.METEORS_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(40);
+                gi.getResources().adjustComputerGems(-FlamePack.METEORS_COST); //Cost
+            }
+        }else if(cardID == FlamePack.INFERNO){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustComputerWeapons(-24);
+                gi.getResources().adjustComputerStones(-24);
+                gi.getResources().adjustComputerGems(-24);
+                gi.getResources().adjustPlayerGems(-FlamePack.INFERNO_COST); //Cost
+            } else {
+                gi.getResources().adjustPlayerWeapons(-24);
+                gi.getResources().adjustPlayerStones(-24);
+                gi.getResources().adjustPlayerGems(-24);
+                gi.getResources().adjustComputerGems(-FlamePack.INFERNO_COST); //Cost
+            }
+        }
+        //endregion
+        //region JapanesePack
+        if (cardID == JapanesePack.STOCKADE) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer1().getCastle().getWall().repair(8);
+                gi.getResources().adjustPlayerStones(-JapanesePack.STOCKADE_COST); //Cost
+            } else {
+                gi.getPlayer2().getCastle().getWall().repair(8);
+                gi.getResources().adjustComputerStones(-JapanesePack.STOCKADE_COST); //Cost
+            }
+        } else if (cardID == JapanesePack.FORTRESS) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer1().getCastle().repair(8);
+                gi.getResources().adjustPlayerStones(-JapanesePack.FORTRESS_COST); //Cost
+            } else {
+                gi.getPlayer2().getCastle().repair(8);
+                gi.getResources().adjustComputerStones(-JapanesePack.FORTRESS_COST); //Cost
+            }
+        } else if (cardID == JapanesePack.MONASTERY) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerBuilders(2);
+                gi.getResources().adjustPlayerStones(-JapanesePack.MONASTERY_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerBuilders(2);
+                gi.getResources().adjustComputerStones(-JapanesePack.MONASTERY_COST); //Cost
+            }
+        } else if (cardID == JapanesePack.RAMPART) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer1().getCastle().getWall().repair(15);
+                gi.getResources().adjustPlayerStones(-JapanesePack.RAMPART_COST); //Cost
+            } else {
+                gi.getPlayer2().getCastle().getWall().repair(15);
+                gi.getResources().adjustComputerStones(-JapanesePack.RAMPART_COST); //Cost
+            }
+        } else if (cardID == JapanesePack.CITADEL) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer1().getCastle().repair(15);
+                gi.getResources().adjustPlayerStones(-JapanesePack.CITADEL_COST); //Cost
+            } else {
+                gi.getPlayer2().getCastle().repair(15);
+                gi.getResources().adjustComputerStones(-JapanesePack.CITADEL_COST); //Cost
+            }
+        }
+
+        //ATTACK CARDS
+        else if (cardID == JapanesePack.ASHIGARU) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(6);
+                gi.getResources().adjustPlayerWeapons(-JapanesePack.ASHIGARU_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(6);
+                gi.getResources().adjustComputerWeapons(-JapanesePack.ASHIGARU_COST); //Cost
+            }
+        } else if (cardID == JapanesePack.SHURIKEN) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(10);
+                gi.getResources().adjustPlayerWeapons(-JapanesePack.SHURIKEN_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(10);
+                gi.getResources().adjustComputerWeapons(-JapanesePack.SHURIKEN_COST); //Cost
+            }
+        } else if (cardID == JapanesePack.KATANA) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(12);
+                gi.getResources().adjustPlayerWeapons(-JapanesePack.KATANA_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(12);
+                gi.getResources().adjustComputerWeapons(-JapanesePack.KATANA_COST); //Cost
+            }
+        } else if (cardID == JapanesePack.SAMURAI) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(18);
+                gi.getResources().adjustPlayerWeapons(-JapanesePack.SAMURAI_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(18);
+                gi.getResources().adjustComputerWeapons(-JapanesePack.SAMURAI_COST); //Cost
+            }
+        } else if (cardID == JapanesePack.DOJO) {
+            if (gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerSoldiers(2);
+                gi.getResources().adjustPlayerWeapons(-JapanesePack.DOJO_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerSoldiers(2);
+                gi.getResources().adjustComputerWeapons(-JapanesePack.DOJO_COST); //Cost
+            }
+        }
+
+        //MAGIC CARDS
+        else if(cardID == JapanesePack.SHRINE){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerWizards(2);
+                gi.getResources().adjustPlayerGems(-JapanesePack.SHRINE_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerWizards(2);
+                gi.getResources().adjustComputerGems(-JapanesePack.SHRINE_COST); //Cost
+            }
+        } else if(cardID == JapanesePack.QUARRY){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerStones(24);
+                gi.getResources().adjustPlayerGems(-JapanesePack.QUARRY_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerStones(24);
+                gi.getResources().adjustComputerGems(-JapanesePack.QUARRY_COST); //Cost
+            }
+        } else if(cardID == JapanesePack.TEMPLE){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerGems(24);
+                gi.getResources().adjustPlayerGems(-JapanesePack.TEMPLE_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerGems(24);
+                gi.getResources().adjustComputerGems(-JapanesePack.TEMPLE_COST); //Cost
+            }
+        } else if(cardID == JapanesePack.RICE_PADDY){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerWeapons(24);
+                gi.getResources().adjustPlayerGems(-JapanesePack.RICE_PADDY_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerWeapons(24);
+                gi.getResources().adjustComputerGems(-JapanesePack.RICE_PADDY_COST); //Cost
+            }
+        } else if(cardID == JapanesePack.SEPPUKU){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerSoldiers(-1);
+                gi.getResources().adjustPlayerWizards(2);
+                gi.getResources().adjustPlayerGems(-JapanesePack.SEPPUKU_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerSoldiers(-1);
+                gi.getResources().adjustComputerWizards(2);
+                gi.getResources().adjustComputerGems(-JapanesePack.SEPPUKU_COST); //Cost
+            }
+        }
+
+        //GOLDEN CARDS
+        else if(cardID == JapanesePack.NINJA){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustComputerWizards(-3);
+                gi.getResources().adjustPlayerWeapons(-JapanesePack.NINJA_COST); //Cost
+            } else {
+                gi.getResources().adjustPlayerWizards(-3);
+                gi.getResources().adjustComputerWeapons(-JapanesePack.NINJA_COST); //Cost
+            }
+        }else if(cardID == JapanesePack.DRAGON){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getPlayer2().getCastle().doDamage(40);
+                gi.getResources().adjustPlayerGems(-JapanesePack.DRAGON_COST); //Cost
+            } else {
+                gi.getPlayer1().getCastle().doDamage(40);
+                gi.getResources().adjustComputerGems(-JapanesePack.DRAGON_COST); //Cost
+            }
+        }else if(cardID == JapanesePack.SHOGUN){
+            if(gi.getPlayerTurn() == GameWorld.PLAYER) {
+                gi.getResources().adjustPlayerWeapons(24);
+                gi.getResources().adjustPlayerStones(24);
+                gi.getResources().adjustPlayerGems(24);
+                gi.getResources().adjustPlayerGems(-JapanesePack.SHOGUN_COST); //Cost
+            } else {
+                gi.getResources().adjustComputerWeapons(24);
+                gi.getResources().adjustComputerStones(24);
+                gi.getResources().adjustComputerGems(24);
+                gi.getResources().adjustComputerGems(-JapanesePack.SHOGUN_COST); //Cost
+            }
+        }
+        //endregion
     }
 
 }

@@ -101,15 +101,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private JapanesePack japanesePack;
     private float computerDelay;
 
-    //private ArrayList<Card> cardsToReplaceFromPlayer;
-   // private ArrayList<Card> cardsToReplaceFromComputer;
-
     public GameWorld(Viewport cam) {
         super();
         super.setCam(cam);
-
-        //cardsToReplaceFromPlayer = new ArrayList<Card>();
-        //cardsToReplaceFromComputer = new ArrayList<Card>();
 
         player1 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 - 50));
         player2 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 + 25));
@@ -144,22 +138,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     public void update(float delta) {
-//        for (Card c : cardsToReplaceFromPlayer) {
-//            player1.getHand().removeCardFromHand(c);
-//            player1.getHand().addCardToHand(drawNewCard(c.getX(), c.getY(), 0));
-//            deck.addCard(c);
-//            c.startOutgoingAnimators();
-//        }
-//
-//        cardsToReplaceFromPlayer.clear();
-//
-//        for (Card c : cardsToReplaceFromComputer) {
-//            player2.getHand().removeCardFromHand(c);
-//            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
-//            deck.addCard(c);
-//            c.startOutgoingAnimators();
-//        }
-//        cardsToReplaceFromComputer.clear();
 
         for (Card c: deck.getCardList()) {
             c.update(delta);
@@ -192,7 +170,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerStoneLabel.setText(":" + myResources.getComputerStones());
         computerWeaponLabel.setText(":" + myResources.getComputerWeapons());
         computerGemLabel.setText(":" + myResources.getComputerGems());
-        computerCastleLabel.setText(":" +(int)  player2.getCastle().getHealth());
+        computerCastleLabel.setText(":" + (int) player2.getCastle().getHealth());
         computerWallLabel.setText(":" +(int)  player2.getCastle().getWall().getHealth());
 
 
@@ -239,7 +217,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
             Card chosenCard = ai.processAI();
             chosenCard.startOutgoingAnimators();
             //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
-            cardActions.doCardAction(chosenCard.getCardID());
+            if(!ai.isDiscarding()) {
+                cardActions.doCardAction(chosenCard.getCardID());
+            }
             player2.getHand().removeCardFromHand(chosenCard);
             player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
             deck.addCard(chosenCard);
@@ -256,13 +236,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             card.startOutgoingAnimators();
             //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
             if (!isDiscarding()) {
-                if(card.getCardID() > 500){
-                    japanesePack.doCardAction(card.getCardID());
-                } else if(card.getCardID() > 400) {
-                    flamePack.doCardAction(card.getCardID());
-                } else {
-                    cardActions.doCardAction(card.getCardID());
-                }
+                cardActions.doCardAction(card.getCardID());
                 player1.getHand().removeCardFromHand(card);
                 player1.getHand().addCardToHand(drawNewCard(card.getX(), card.getY(), 0));
                 deck.addCard(card);

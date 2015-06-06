@@ -44,13 +44,19 @@ public class CastleWars extends Game {
 
     //TODO: CheckList!!!//
 
+    //GLITCHES:
+    //Cards in Hand randomly Glitch up then back
+    //Card Actions you click on does it for computer
+    //Card Actions do another cards action
+    //Card Actions do wrong amount
     //CardActions
         //Fix Cards Moving Around to Show a Computer Hand Too? (Like original Castle Wars, maybe change the background color a bit between the two or something? idk)
         //Make sure the Draw Pile shows the Backs of Cards
         //Make Card not Fade once its sent to the Discard Pile (Looks weird ish?)
+        //Change Text to Show only the Card Changes, not the card cost or resource add ons (reduce confusion)
     //GUI
-        //Castle Texture & Animations, Particle Effects?
-        //Wall Texture & Animations, Particle Effects?
+        //Castle Texture
+        //Wall Texture & Animations, Particle Effects
         //Finish Card Images
         //Change Button Images? (You said you didn't like them earlier, so are we changing those?)
         //MenuScreen Additions (Animations, Store Button, Leaderboard Button in Corner, etc)?
