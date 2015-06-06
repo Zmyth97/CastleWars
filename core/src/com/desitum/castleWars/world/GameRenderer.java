@@ -57,7 +57,8 @@ public class GameRenderer {
     }
 
     private void drawCards() {
-        for (Card card : world.getDeck().getCardList()) {
+        for (int x = world.getDeck().getCardList().size() - 2; x < world.getDeck().getCardList().size(); x++) {
+            Card card = world.getDeck().getCardList().get(x);
             card.draw(gameBatch);
         }
         for (Card card : world.getPlayer2().getHand().getCardsInHand()) {
