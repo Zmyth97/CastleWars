@@ -28,7 +28,7 @@ public class ParticleSettings {
     private MovementAnimator yAnimator;
     private ColorEffects colorAnimator;
 
-    public ParticleSettings(float x, float y, float objectWidth, float objectHeight, float minDirection, float maxDirection, float minDuration, float maxDuration, float minDistance, float maxDistance){
+    public ParticleSettings(float x, float y, float objectWidth, float objectHeight, float minDirection, float maxDirection, float minDuration, float maxDuration, float minDistance, float maxDistance) {
 
         animators = new ArrayList<Animator>();
 
@@ -72,8 +72,6 @@ public class ParticleSettings {
 
         changeX = (float) Math.cos(direction) * distance;
         changeY = (float) Math.sin(direction) * distance;
-        if (direction < 180) System.out.println(direction);
-        System.out.println(direction + " : " + changeY + " : " + distance);
         float startPosX = 0;
         float startPosY = 0;
         if (pe.isEmitCircle()) {
@@ -100,11 +98,11 @@ public class ParticleSettings {
         return animators;
     }
 
-    public Animator getXAnimator(){
+    public Animator getXAnimator() {
         return xAnimator;
     }
 
-    public Animator getYAnimator(){
+    public Animator getYAnimator() {
         return yAnimator;
     }
 

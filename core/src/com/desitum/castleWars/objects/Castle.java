@@ -11,9 +11,6 @@ import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.particles.ParticleEmitter;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.world.GameInterface;
-import com.desitum.castleWars.world.GameWorld;
-
-import java.util.ArrayList;
 
 /**
  * Created by Zmyth97 on 5/18/2015.
@@ -35,11 +32,13 @@ public class Castle extends Sprite {
         health = 40;
         wall = new Wall(Assets.cancelButtonUp, gi);
 
+
+        this.setOriginCenter();
+        this.setSize(25.0f, 100.0f);
+        this.setPosition(x, ZERO - getHeight());
+
         particles = new ParticleEmitter(getX(), ZERO, "game/particles/particles.prt");
 
-
-        this.setSize(25, 100);
-        setPosition(x, ZERO - getHeight());
         ratio = getHeight() / (GameScreen.SCREEN_HEIGHT - GameScreen.SCREEN_HEIGHT / 4 + 8 - 20);
 
         animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);
@@ -50,11 +49,8 @@ public class Castle extends Sprite {
     }
 
     public void update(float delta) {
-        System.out.println("WHY?");
         if (animators != null) {
-            System.out.println("WHY?");
             if (animators.isRunning()) animators.update(delta);
-            System.out.println("WHY?------------------");
         }
         particles.update(delta);
     }
@@ -66,7 +62,6 @@ public class Castle extends Sprite {
                 wall.doDamage(damage);
                 doDamage(extraDamage);
                 if (this.equals(gi.getPlayer1())) {
-                    System.out.println("Called GameInter for Castle Extra-Damage: " + extraDamage);
                     gi.setPlayerCastleLabelChangeText((int)extraDamage);
                 } else {
                     gi.setComputerCastleLabelChangeText((int)extraDamage);
@@ -74,7 +69,6 @@ public class Castle extends Sprite {
             } else {
                 health -= damage;
                 if (this.equals(gi.getPlayer1())) {
-                    System.out.println("Called GameInter for Castle Damage: " + damage);
                     gi.setPlayerCastleLabelChangeText((int)damage);
                 } else {
                     gi.setComputerCastleLabelChangeText((int)damage);
@@ -84,9 +78,12 @@ public class Castle extends Sprite {
                 animators.setOnFinishedListener(new OnAnimationFinishedListener() {
                     @Override
                     public void onAnimationFinished(Animator anim) {
+                        System.out.println("Welll......");
                         particles.turnOff();
+                        System.out.println("Particles are... " + (particles.isOn() ? "On" : "Off"));
                     }
                 });
+                animators.start(false);
             }
         }
         if(health <= 0){
@@ -106,9 +103,11 @@ public class Castle extends Sprite {
         animators.setOnFinishedListener(new OnAnimationFinishedListener() {
             @Override
             public void onAnimationFinished(Animator anim) {
+                System.out.println("Yay?");
                 particles.turnOff();
             }
         });
+        animators.start(false);
         if(health >= 100){
             //End Game!
         }
@@ -116,6 +115,10 @@ public class Castle extends Sprite {
 
     public float getHealth() {
         return health;
+    }
+
+    public void setHealth(float health) {
+        this.health = health;
     }
 
     public Wall getWall() {
@@ -126,13 +129,9 @@ public class Castle extends Sprite {
         animators = anim;
     }
 
-    public void setHealth(float health) {
-        this.health = health;
-    }
-
     public void draw(SpriteBatch gameBatch) {
         super.draw(gameBatch);
-        wall.draw(gameBatch);
+        //wall.draw(gameBatch);
         particles.draw(gameBatch);
     }
 }

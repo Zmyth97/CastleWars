@@ -15,16 +15,12 @@ import java.util.Scanner;
  */
 public class ParticleEmitter {
 
-    private ArrayList<Particle> particles;
-    private ArrayList<Particle> particlesToRemove;
-
     public static final String MIN_PARTICLES = "minParticles";
     public static final String MAX_PARTICLES = "maxParticles";
     public static final String EMIT_CIRCLE = "emitCircle";
     public static final String EMIT_RADIUS = "emitRadius";
     public static final String EMIT_WIDTH = "emitWidth";
     public static final String EMIT_HEIGHT = "emitHeight";
-
     public static final String IS_SQUARE = "isSquare";
     public static final String MIN_PARTICLE_WIDTH = "minWidth";
     public static final String MAX_PARTICLE_WIDTH = "maxWidth";
@@ -36,9 +32,9 @@ public class ParticleEmitter {
     public static final String MAX_PARTICLE_DISTANCE = "maxDistance";
     public static final String MIN_PARTICLE_DURATION = "minDuration";
     public static final String MAX_PARTICLE_DURATION = "maxDuration";
-
     public static final String TEXTURE_LOCATION = "textureLocation";
-
+    private ArrayList<Particle> particles;
+    private ArrayList<Particle> particlesToRemove;
     private float x;
     private float y;
 
@@ -72,7 +68,7 @@ public class ParticleEmitter {
 
     private boolean on;
 
-    public ParticleEmitter (float x, float y, String particleFile) {
+    public ParticleEmitter(float x, float y, String particleFile) {
 
         this.particles = new ArrayList<Particle>();
         this.particlesToRemove = new ArrayList<Particle>();
@@ -171,15 +167,15 @@ public class ParticleEmitter {
     }
 
     public void update(float delta) {
-        for (Particle particle: particles) {
+        for (Particle particle : particles) {
             particle.update(delta);
         }
 
-        for (Particle particle: particlesToRemove) {
+        for (Particle particle : particlesToRemove) {
             particles.remove(particle);
         }
 
-        if (particles.size() < maxParticles && on) {
+        if ((particles.size() < maxParticles) && on) {
             for (int i = particles.size(); i < maxParticles; i++) {
                 particles.add(createNewParticle());
             }
@@ -194,7 +190,7 @@ public class ParticleEmitter {
     }
 
     public void draw(SpriteBatch batch) {
-        for (Particle particle: particles) {
+        for (Particle particle : particles) {
             particle.draw(batch);
         }
     }
@@ -234,20 +230,20 @@ public class ParticleEmitter {
         this.particlesToRemove.add(p);
     }
 
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
     public float getX() {
         return x;
     }
 
+    public void setX(float x) {
+        this.x = x;
+    }
+
     public float getY() {
         return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
     }
 
     public boolean isSquare() {
@@ -316,5 +312,9 @@ public class ParticleEmitter {
 
     public float getParticleMaxDuration() {
         return particleMaxDuration;
+    }
+
+    public boolean isOn() {
+        return on;
     }
 }

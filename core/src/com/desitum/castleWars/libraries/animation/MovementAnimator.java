@@ -87,6 +87,7 @@ public class MovementAnimator implements Animator {
         timeInAnimation += delta/duration;
         if (timeInAnimation >= 1){
             timeInAnimation = 1;
+            if (finishedListener != null) finishedListener.onAnimationFinished(this);
             stop();
         }
 

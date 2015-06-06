@@ -26,7 +26,7 @@ public class GameRenderer {
         gameCam.position.set(GameScreen.SCREEN_WIDTH / 2, GameScreen.SCREEN_WIDTH / 2, 0);
     }
 
-    public void draw(){
+    public void draw() {
         gameCam.position.set(MenuScreen.SCREEN_WIDTH / 2, MenuScreen.SCREEN_HEIGHT / 2, 0);
         gameCam.update();
         gameBatch.setProjectionMatrix(gameCam.combined);
@@ -34,7 +34,7 @@ public class GameRenderer {
         drawWorld();
         drawCards();
 
-        for (PopupMenu menu: this.world.getMenus()) {
+        for (PopupMenu menu : this.world.getMenus()) {
             menu.draw(gameBatch);
         }
         for (PopupWidget widget : this.world.getWidgets()) {
@@ -49,21 +49,22 @@ public class GameRenderer {
 
     }
 
-    private void drawWorld(){
+    private void drawWorld() {
         gameBatch.draw(Assets.gameSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
         world.getPlayer1().getCastle().draw(gameBatch);
-        gameBatch.draw(Assets.computerCastle, (GameScreen.SCREEN_WIDTH / 2 - 50), 0, 25, 50);
+        world.getPlayer2().getCastle().draw(gameBatch);
         gameBatch.draw(Assets.gameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT / 4 + 8));
     }
 
-    private void drawCards(){
-        for(Card card:world.getDeck().getCardList()) {
+    private void drawCards() {
+        for (Card card : world.getDeck().getCardList()) {
             card.draw(gameBatch);
         }
-        for (Card card: world.getPlayer2().getHand().getCardsInHand()) {
+        for (Card card : world.getPlayer2().getHand().getCardsInHand()) {
             card.draw(gameBatch);
         }
     }
+
     public OrthographicCamera getCam() {
         return gameCam;
     }

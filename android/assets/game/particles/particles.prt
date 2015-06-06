@@ -1,7 +1,7 @@
 EMITTER
 minParticles:10
-maxParticles:20
-emitCircle:true
+maxParticles:40
+emitCircle:false
 emitRadius:1
 emitWidth:25
 emitHeight:1

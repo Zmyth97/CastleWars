@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by kody on 5/23/15.
  * can be used by kody and people in [kody}]
  */
-public class PopupEditText extends PopupWidget{
+public class PopupEditText extends PopupWidget {
 
     private Texture backgroundTexture;
     private Color highlightColor;
@@ -114,7 +114,6 @@ public class PopupEditText extends PopupWidget{
             font.setScale(z);
             x = font.getBounds("THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG 123456789").height;
         }
-        System.out.println(y);
     }
 
     public void setCursorBlink(float blinkTime) {
@@ -122,28 +121,28 @@ public class PopupEditText extends PopupWidget{
         this.cursorMaxBlink = blinkTime;
     }
 
-    public void onClickDown(Vector3 touchPos){
+    public void onClickDown(Vector3 touchPos) {
         beenDown = true;
     }
 
-    public void onClickUp(boolean clicked){
+    public void onClickUp(boolean clicked) {
         this.setTexture(backgroundTexture);
-        if (buttonListener != null && clicked && beenDown){
+        if (buttonListener != null && clicked && beenDown) {
             buttonListener.onClick(this);
         }
         beenDown = false;
     }
 
-    public void resetState(){
+    public void resetState() {
     }
 
     @Override
-    public void update(float delta){
-        for (Animator anim: comingInAnimators){
+    public void update(float delta) {
+        for (Animator anim : comingInAnimators) {
             anim.update(delta);
         }
 
-        for (Animator anim: goingOutAnimators){
+        for (Animator anim : goingOutAnimators) {
             anim.update(delta);
         }
 
@@ -163,57 +162,57 @@ public class PopupEditText extends PopupWidget{
 
     public void updateTextInput() {
         String toAppend = "";
-        if (Gdx.input.isKeyJustPressed(Input.Keys.A)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             toAppend = "a";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.B)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
             toAppend = "b";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.C)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             toAppend = "c";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.D)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
             toAppend = "d";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.E)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             toAppend = "e";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.F)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             toAppend = "f";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.G)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             toAppend = "g";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.H)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
             toAppend = "h";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.I)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             toAppend = "i";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.J)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
             toAppend = "j";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.K)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.K)) {
             toAppend = "k";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.L)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
             toAppend = "l";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.M)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
             toAppend = "m";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.N)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
             toAppend = "n";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.O)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
             toAppend = "o";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             toAppend = "p";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.Q)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             toAppend = "q";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.R)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             toAppend = "r";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.S)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             toAppend = "s";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.T)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.T)) {
             toAppend = "t";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.U)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.U)) {
             toAppend = "u";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.V)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.V)) {
             toAppend = "v";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
             toAppend = "w";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.X)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
             toAppend = "x";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.Y)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.Y)) {
             toAppend = "y";
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.Z)){
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
             toAppend = "z";
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             toAppend = " ";
@@ -229,27 +228,27 @@ public class PopupEditText extends PopupWidget{
     }
 
     @Override
-    public void addIncomingAnimator(Animator anim){
+    public void addIncomingAnimator(Animator anim) {
         anim.setSprite(this, anim.updateX(), anim.updateY());
         this.comingInAnimators.add(anim);
     }
 
     @Override
-    public void addOutgoingAnimator(Animator anim){
+    public void addOutgoingAnimator(Animator anim) {
         anim.setSprite(this, anim.updateX(), anim.updateY());
         this.goingOutAnimators.add(anim);
     }
 
     @Override
-    public void startIncomingAnimators(){
-        for (Animator anim: comingInAnimators){
+    public void startIncomingAnimators() {
+        for (Animator anim : comingInAnimators) {
             anim.start(false);
         }
     }
 
     @Override
-    public void startOutgoingAnimators(){
-        for (Animator anim: goingOutAnimators){
+    public void startOutgoingAnimators() {
+        for (Animator anim : goingOutAnimators) {
             anim.start(false);
         }
     }
