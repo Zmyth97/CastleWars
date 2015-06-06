@@ -57,7 +57,7 @@ public class CardActions {
     public static final int TREBUCHET_COST = 40;
     public static final int ASSASSIN_COST = 20;
     public static final int BURGLAR_COST = 18;
-    public static final int THIEF_COST = 64;
+    public static final int THIEF_COST = 54;
     public static final int RAID_COST = 14;
     //endregion
 

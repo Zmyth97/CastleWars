@@ -69,6 +69,16 @@ public class Assets {
     public static Texture attackCardCatapult;
     public static Texture attackCardLegion;
     public static Texture attackCardTrebuchet;
+    public static Texture attackCardAssassin;
+    public static Texture attackCardBurglar;
+    public static Texture attackCardThief;
+    public static Texture attackCardRaid;
+
+    public static Texture goldCardJericho;
+    public static Texture goldCardTrojanHorse;
+    public static Texture goldCardBlackPlague;
+    public static Texture goldCardMerlin;
+    public static Texture goldCardDuplicate;
 
     public static Texture hammer;
     public static Texture stone;
@@ -176,6 +186,7 @@ public class Assets {
         loadBuildCards();
         loadAttackCards();
         loadGemCards();
+        loadGoldCards();
         loadFlameCards();
         loadJapaneseCards();
     }
@@ -200,6 +211,10 @@ public class Assets {
         attackCardCatapult = new Texture("game/cards/catapult.png");
         attackCardLegion = new Texture("game/cards/legion.png");
         attackCardTrebuchet = new Texture("game/cards/trebuchet.png");
+        attackCardAssassin = new Texture("game/cards/assassin.png");
+        attackCardBurglar = new Texture("game/cards/burglar.png");
+        attackCardThief = new Texture("game/cards/thief.png");
+        attackCardRaid = new Texture("game/cards/raid.png");
     }
 
     private static void loadGemCards() {
@@ -213,6 +228,14 @@ public class Assets {
         gemCardHatTrick = new Texture("game/cards/top_hat.png");
         gemCardLightningStrike = new Texture("game/cards/lightning_strike.png");
         gemCardBlast = new Texture("game/cards/blast.png");
+    }
+
+    private static void loadGoldCards() {
+        goldCardJericho = new Texture("game/cards/jericho.png");
+        goldCardTrojanHorse = new Texture("game/cards/trojan_horse.png");
+        goldCardBlackPlague = new Texture("game/cards/black_plague.png");
+        goldCardMerlin = new Texture("game/cards/merlin.png");
+        goldCardDuplicate = new Texture("game/cards/duplicate.png");
     }
 
     private static void loadFlameCards() {
