@@ -32,14 +32,13 @@ public class Castle extends Sprite {
         health = 40;
         wall = new Wall(Assets.cancelButtonUp, gi);
 
-
         this.setOriginCenter();
-        this.setSize(25.0f, 100.0f);
+        this.setSize(25.0f, 60.0f);
         this.setPosition(x, ZERO - (getHeight()));
 
         particles = new ParticleEmitter(getX(), ZERO, "game/particles/particles.prt");
 
-        ratio =  0.6f;//getHeight() / (GameScreen.SCREEN_HEIGHT - GameScreen.SCREEN_HEIGHT / 4 + 8 - 20);
+        ratio = getHeight() / GameScreen.SCREEN_HEIGHT;
 
         animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);
         animators.start(false);
