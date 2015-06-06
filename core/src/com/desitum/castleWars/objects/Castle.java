@@ -30,7 +30,7 @@ public class Castle extends Sprite {
     public Castle(Texture castleImage, GameInterface gi, float x){
         super(castleImage, 0, 0, castleImage.getWidth(), castleImage.getHeight());
         health = 40;
-        wall = new Wall(Assets.cancelButtonUp, gi);
+        wall = new Wall(Assets.cancelButtonUp, this, gi);
 
         this.setOriginCenter();
         this.setSize(25.0f, 60.0f);
@@ -43,8 +43,6 @@ public class Castle extends Sprite {
         animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);
         animators.start(false);
         this.gi = gi;
-
-
     }
 
     public void update(float delta) {
@@ -56,34 +54,21 @@ public class Castle extends Sprite {
 
     public void doDamage(float damage){
         if(wall.getHealth() > 0){
-            if(damage > wall.getHealth()){
-                float extraDamage = damage - wall.getHealth();
-                wall.doDamage(damage);
-                doDamage(extraDamage);
-                if (this.equals(gi.getPlayer1())) {
-                    gi.setPlayerCastleLabelChangeText(-(int)extraDamage);
-                } else {
-                    gi.setComputerCastleLabelChangeText(-(int)extraDamage);
-                }
+            if (this.equals(gi.getPlayer1().getCastle())) {
+                gi.setPlayerCastleLabelChangeText((int) -damage);
             } else {
-                health -= damage;
-                if (this.equals(gi.getPlayer1())) {
-                    gi.setPlayerCastleLabelChangeText((int)damage);
-                } else {
-                    gi.setComputerCastleLabelChangeText((int)damage);
-                }
-                animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);
-                particles.turnOn();
-                animators.setOnFinishedListener(new OnAnimationFinishedListener() {
-                    @Override
-                    public void onAnimationFinished(Animator anim) {
-                        System.out.println("Welll......");
-                        particles.turnOff();
-                        System.out.println("Particles are... " + (particles.isOn() ? "On" : "Off"));
-                    }
-                });
-                animators.start(false);
+                gi.setComputerCastleLabelChangeText((int) -damage);
             }
+            health -= damage;
+            animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);
+            particles.turnOn();
+            animators.setOnFinishedListener(new OnAnimationFinishedListener() {
+                @Override
+                public void onAnimationFinished(Animator anim) {
+                    particles.turnOff();
+                }
+            });
+            animators.start(false);
         }
         if(health <= 0){
             //End game!
@@ -97,19 +82,18 @@ public class Castle extends Sprite {
         } else {
             gi.setComputerCastleLabelChangeText((int)amount);
         }
+        if (health >= 100) {
+            health = 100;
+        }
         animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);
         particles.turnOn();
         animators.setOnFinishedListener(new OnAnimationFinishedListener() {
             @Override
             public void onAnimationFinished(Animator anim) {
-                System.out.println("Yay?");
                 particles.turnOff();
             }
         });
         animators.start(false);
-        if(health >= 100){
-            //End Game!
-        }
     }
 
     public float getHealth() {

@@ -15,19 +15,17 @@ import java.util.ArrayList;
  */
 public class PopupScrollArea extends PopupWidget {
 
+    public static final int VERTICAL = 0;
+    public static final int HORIZONTAL = 1;
     ArrayList<Animator> comingInAnimators;
     ArrayList<Animator> goingOutAnimators;
     ArrayList<Animator> comingInAnimatorsToAdd;
     ArrayList<Animator> goingOutAnimatorsToAdd;
-
     ArrayList<PopupWidget> widgets;
-
-    public static final int VERTICAL = 0;
-    public static final int HORIZONTAL = 1;
-
     private float scrollAmount;
     private int scrollDirection;
     private int columns;
+    private int rows;
     private float widgetSize;
     private float spacing;
     private float activeWidth;
@@ -35,7 +33,7 @@ public class PopupScrollArea extends PopupWidget {
 
     private MovementAnimator slideAnimator;
 
-    public PopupScrollArea (Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, float spacing, float widgetSize){
+    public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, int rows, float spacing, float widgetSize) {
         super(background, width, height, x, y);
 
         comingInAnimators = new ArrayList<Animator>();
@@ -48,6 +46,7 @@ public class PopupScrollArea extends PopupWidget {
         scrollAmount = 0;
         this.scrollDirection = scrollDirection;
         this.columns = columns;
+        if (scrollDirection == VERTICAL) this.columns = rows;
         this.widgetSize = widgetSize;
         this.spacing = spacing;
         this.activeWidth = activeWidth;
@@ -184,11 +183,14 @@ public class PopupScrollArea extends PopupWidget {
         toAdd.setSize(widgetSize, widgetSize);
 
         if (scrollDirection == HORIZONTAL) {
-            toAdd.setX(getX() + getWidth()/2 + (widgets.size() / columns) * (widgetSize + spacing));
+            toAdd.setX(getX() + getWidth() / 2 + (widgets.size() / columns) * (widgetSize + spacing));
             toAdd.setY(getY() + (widgets.size() % columns) * (widgetSize + spacing));
+        } else if (scrollDirection == VERTICAL) {
+            toAdd.setY(getY() + getHeight() / 2 + (widgets.size() / columns) * (widgetSize + spacing));
+            toAdd.setX(getX() + (widgets.size() % columns) * (widgetSize + spacing));
         }
 
-        if (scrollDirection == HORIZONTAL){
+        if (scrollDirection == HORIZONTAL || scrollDirection == VERTICAL) {
             for (Animator anim: comingInAnimatorsToAdd){
                 Animator dupAnim = anim.duplicate();
                 if (dupAnim.getClass().equals(MovementAnimator.class)){

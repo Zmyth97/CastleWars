@@ -14,10 +14,11 @@ public class Wall extends Sprite {
     GameInterface gi;
 
     private float health; //Health = height in this game haha
+    private Castle castle;
 
     private ArrayList<Animator> animators;
 
-    public Wall(Texture wallImage, GameInterface gi){
+    public Wall(Texture wallImage, Castle castle, GameInterface gi) {
         super(wallImage, 0, 0, wallImage.getWidth(), wallImage.getHeight());
 
         this.gi = gi;
@@ -25,7 +26,7 @@ public class Wall extends Sprite {
         health = 10;
     }
 
-    public void doDamage(float damage){
+    public void doDamage(float damage, boolean justWalls) {
         health -= damage;
         if (this.equals(gi.getPlayer1().getCastle().getWall())) {
             gi.setPlayerWallLabelChangeText(-(int)damage);
@@ -33,6 +34,7 @@ public class Wall extends Sprite {
             gi.setComputerWallLabelChangeText(-(int)damage);
         }
         if(health <= 0){
+            castle.doDamage(-health);
             health = 0;
         }
     }

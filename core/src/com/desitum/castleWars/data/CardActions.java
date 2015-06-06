@@ -9,8 +9,6 @@ import com.desitum.castleWars.world.GameWorld;
  * Created by Zmyth97 on 5/20/2015.
  */
 public class CardActions {
-    private GameInterface gi;
-
     //region Build Cards
     public static final int BARRIER = 1; //+4 Wall
     public static final int WALL = 2; //+10 Wall
@@ -22,10 +20,9 @@ public class CardActions {
     public static final int RESERVE = 8; //Castle +8, Wall -4
     public static final int SABOTAGE = 9; //Enemy Castle -4, Castle +8
     public static final int STRONGHOLD = 10; //Castle + 10, Wall + 10
-    //endregion
-
     //region Build Costs
     public static final int REINFORCE_COST = 10;
+    //endregion
     public static final int FORTIFY_COST = 20;
     public static final int CASTLE_COST = 36;
     public static final int BARRIER_COST = 8;
@@ -35,10 +32,9 @@ public class CardActions {
     public static final int RESERVE_COST = 8;
     public static final int SABOTAGE_COST = 20;
     public static final int STRONGHOLD_COST = 36;
-    //endregion
-
     //region Attack Cards
     public static final int RECRUITER = 100; //+1 Soldier
+    //endregion
     public static final int SPEARMAN = 101; //+2 Attack
     public static final int RAM = 102; //+6 Attack
     public static final int CATAPULT = 103; //+12 Attack
@@ -48,10 +44,9 @@ public class CardActions {
     public static final int BURGLAR = 106; //Steal 8 of each resource
     public static final int THIEF = 107; //Steal 24 of each resource
     public static final int RAID = 108; //Destroy 24 of a resource
-    //endregion
-
     //region Attack Costs
     public static final int RECRUITER_COST = 16;
+    //endregion
     public static final int SPEARMAN_COST = 4;
     public static final int RAM_COST = 12;
     public static final int CATAPULT_COST = 24;
@@ -61,10 +56,9 @@ public class CardActions {
     public static final int BURGLAR_COST = 18;
     public static final int THIEF_COST = 54;
     public static final int RAID_COST = 14;
-    //endregion
-
     //region Magic Cards
     public static final int CREATE_STONES = 200; //+16 Stones
+    //endregion
     public static final int CREATE_WEAPONS = 201; //+16 Weapons
     public static final int CREATE_GEMS = 202; //+16 Gems
     public static final int DESTROY_STONES = 203; //-16 Stones
@@ -74,10 +68,9 @@ public class CardActions {
     public static final int HAT_TRICK = 207; //+4 all res
     public static final int LIGHTNING_STRIKE = 208; //+16 Attack
     public static final int BLAST = 209; //+8 Attack
-    //endregion
-
     //region Magic Costs
     public static final int CREATE_STONES_COST = 10;
+    //endregion
     public static final int CREATE_WEAPONS_COST = 10;
     public static final int CREATE_GEMS_COST = 10;
     public static final int DESTROY_STONES_COST = 10;
@@ -87,24 +80,23 @@ public class CardActions {
     public static final int HAT_TRICK_COST = 4;
     public static final int LIGHTNING_STRIKE_COST = 32;
     public static final int BLAST_COST = 16;
+    public static final int JERICHO = 300; //Destroy Enemy Wall (ATTACK)
     //endregion
 
     //region GoldenCards
-
-    public static final int JERICHO = 300; //Destroy Enemy Wall (ATTACK)
     public static final int TROJAN_HORSE = 301; //Destroy 20 Castle (Ignores Wall) (ATTACK)
     public static final int BLACK_PLAGUE = 302; //-1 of All People (MAGIC)
     public static final int MERLIN = 303; //+32 Attack (MAGIC)
     public static final int DUPLICATE = 304; //Double Existing Wall Height
-
-    //endRegion
-
     //region Golden Costs
     public static final int JERICHO_COST = 64;
+
+    //endRegion
     public static final int TROJAN_HORSE_COST = 56;
     public static final int BLACK_PLAGUE_COST = 72;
     public static final int MERLIN_COST = 64;
     public static final int DUPLICATE_COST = 52;
+    private GameInterface gi;
     //endregion
 
 
@@ -175,11 +167,11 @@ public class CardActions {
         }else if(cardID == RESERVE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(8);
-                gi.getPlayer1().getCastle().getWall().doDamage(4);
+                gi.getPlayer1().getCastle().getWall().doDamage(4, true);
                 gi.getResources().subtractPlayerStones(RESERVE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(8);
-                gi.getPlayer2().getCastle().getWall().doDamage(4);
+                gi.getPlayer2().getCastle().getWall().doDamage(4, true);
                 gi.getResources().subtractComputerStones(RESERVE_COST); //Cost
             }
         }else if(cardID == SABOTAGE){
@@ -410,10 +402,10 @@ public class CardActions {
         //GOLDEN CARDS
         else if(cardID == JERICHO){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
-                gi.getPlayer2().getCastle().getWall().doDamage(gi.getPlayer2().getCastle().getWall().getHealth());
+                gi.getPlayer2().getCastle().getWall().doDamage(gi.getPlayer2().getCastle().getWall().getHealth(), true);
                 gi.getResources().subtractPlayerWeapons(JERICHO_COST); //Cost
             } else {
-                gi.getPlayer1().getCastle().getWall().doDamage(gi.getPlayer1().getCastle().getWall().getHealth());
+                gi.getPlayer1().getCastle().getWall().doDamage(gi.getPlayer1().getCastle().getWall().getHealth(), true);
                 gi.getResources().subtractComputerWeapons(JERICHO_COST); //Cost
             }
         }else if(cardID == TROJAN_HORSE){

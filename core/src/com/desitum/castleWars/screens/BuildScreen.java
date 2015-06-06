@@ -16,8 +16,6 @@ import com.desitum.castleWars.libraries.menu.PopupSpinner;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.world.GameWorld;
 
-import java.awt.Color;
-
 /**
  * Created by Zmyth97 on 6/1/2015.
  */
@@ -244,7 +242,7 @@ public class BuildScreen implements Screen {
 
         castleWars = cw;
 
-        cardScrollArea = new PopupScrollArea(Assets.invisible, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, PopupScrollArea.HORIZONTAL, 8, GameWorld.CARD_SPACING, Card.CARD_WIDTH);
+        cardScrollArea = new PopupScrollArea(Assets.invisible, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, PopupScrollArea.VERTICAL, 4, 4, GameWorld.CARD_SPACING, Card.CARD_WIDTH);
 
         //region BasicMenus
         PopupMenu barrierMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
