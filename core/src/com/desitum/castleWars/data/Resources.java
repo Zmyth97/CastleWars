@@ -95,8 +95,8 @@ public class Resources {
     public int adjustPlayerBuilders(int amount) {
         int difference = amount;
         if (playerBuilders < Math.abs(difference) && amount < 0) {
-            difference = -playerBuilders;
-            playerBuilders = 0;
+            difference = -playerBuilders + 1;
+            playerBuilders = 1;
         } else {
             playerBuilders += amount;
         }
@@ -107,8 +107,8 @@ public class Resources {
     public int adjustPlayerSoldiers(int amount) {
         int difference = amount;
         if (playerSoldiers < Math.abs(difference) && amount < 0) {
-            difference = -playerSoldiers;
-            playerSoldiers = 0;
+            difference = -playerSoldiers + 1;
+            playerSoldiers = 1;
         } else {
             playerSoldiers += amount;
         }
@@ -119,8 +119,8 @@ public class Resources {
     public int adjustPlayerWizards(int amount) {
         int difference = amount;
         if (playerWizards < Math.abs(difference) && amount < 0) {
-            difference = -playerWizards;
-            playerWizards = 0;
+            difference = -playerWizards + 1;
+            playerWizards = 1;
         } else {
             playerWizards += amount;
         }
@@ -167,8 +167,8 @@ public class Resources {
     public int adjustComputerBuilders(int amount) {
         int difference = amount;
         if (computerBuilders < Math.abs(difference) && amount < 0) {
-            difference = -computerBuilders;
-            computerBuilders = 0;
+            difference = -computerBuilders + 1;
+            computerBuilders = 1;
         } else {
             computerBuilders += amount;
         }
@@ -179,8 +179,8 @@ public class Resources {
     public int adjustComputerSoldiers(int amount) {
         int difference = amount;
         if (computerSoldiers < Math.abs(difference) && amount < 0) {
-            difference = -computerSoldiers;
-            computerSoldiers = 0;
+            difference = -computerSoldiers + 1;
+            computerSoldiers = 1;
         } else {
             computerSoldiers += amount;
         }
@@ -191,8 +191,8 @@ public class Resources {
     public int adjustComputerWizards(int amount) {
         int difference = amount;
         if (computerWizards < Math.abs(difference) && amount < 0) {
-            difference = -computerWizards;
-            computerWizards = 0;
+            difference = -computerWizards + 1;
+            computerWizards = 1;
         } else {
             computerWizards += amount;
         }
@@ -258,5 +258,29 @@ public class Resources {
 
     public void addComputerGems(int amount){
         computerGems += amount;
+    }
+
+    public void subtractPlayerWeapons(int amount){
+        playerWeapons -= amount;
+    }
+
+    public void subtractPlayerStones(int amount){
+        playerStones -= amount;
+    }
+
+    public void subtractPlayerGems(int amount){
+        playerGems -= amount;
+    }
+
+    public void subtractComputerWeapons(int amount){
+        computerWeapons -= amount;
+    }
+
+    public void subtractComputerStones(int amount){
+        computerStones -= amount;
+    }
+
+    public void subtractComputerGems(int amount){
+        computerGems -= amount;
     }
 }

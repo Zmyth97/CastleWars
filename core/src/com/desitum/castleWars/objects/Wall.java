@@ -28,9 +28,9 @@ public class Wall extends Sprite {
     public void doDamage(float damage){
         health -= damage;
         if (this.equals(gi.getPlayer1().getCastle().getWall())) {
-            gi.setPlayerWallLabelChangeText((int)damage);
+            gi.setPlayerWallLabelChangeText(-(int)damage);
         } else {
-            gi.setComputerWallLabelChangeText((int)damage);
+            gi.setComputerWallLabelChangeText(-(int)damage);
         }
         if(health <= 0){
             health = 0;
@@ -39,7 +39,7 @@ public class Wall extends Sprite {
 
     public void repair(float amount){
         health += amount;
-        if (this.equals(gi.getPlayer1())) {
+        if (this.equals(gi.getPlayer1().getCastle().getWall())) {
             gi.setPlayerWallLabelChangeText((int)amount);
         } else {
             gi.setComputerWallLabelChangeText((int)amount);

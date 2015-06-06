@@ -62,9 +62,9 @@ public class Castle extends Sprite {
                 wall.doDamage(damage);
                 doDamage(extraDamage);
                 if (this.equals(gi.getPlayer1())) {
-                    gi.setPlayerCastleLabelChangeText((int)extraDamage);
+                    gi.setPlayerCastleLabelChangeText(-(int)extraDamage);
                 } else {
-                    gi.setComputerCastleLabelChangeText((int)extraDamage);
+                    gi.setComputerCastleLabelChangeText(-(int)extraDamage);
                 }
             } else {
                 health -= damage;

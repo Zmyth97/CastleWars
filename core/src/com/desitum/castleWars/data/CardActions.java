@@ -119,143 +119,143 @@ public class CardActions {
         if(cardID == REINFORCE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(6);
-                gi.getResources().adjustPlayerStones(-REINFORCE_COST); //Cost
+                gi.getResources().subtractPlayerStones(REINFORCE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(6);
-                gi.getResources().adjustComputerStones(-REINFORCE_COST); //Cost
+                gi.getResources().subtractComputerStones(REINFORCE_COST); //Cost
             }
         } else if(cardID == FORTIFY){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(12);
-                gi.getResources().adjustPlayerStones(-FORTIFY_COST); //Cost
+                gi.getResources().subtractPlayerStones(FORTIFY_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(12);
-                gi.getResources().adjustComputerStones(-FORTIFY_COST); //Cost
+                gi.getResources().subtractComputerStones(FORTIFY_COST); //Cost
             }
         } else if(cardID == CASTLE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(20);
-                gi.getResources().adjustPlayerStones(-CASTLE_COST); //Cost
+                gi.getResources().subtractPlayerStones(CASTLE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(20);
-                gi.getResources().adjustComputerStones(-CASTLE_COST); //Cost
+                gi.getResources().subtractComputerStones(CASTLE_COST); //Cost
             }
         } else if(cardID == BARRIER){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().getWall().repair(4);
-                gi.getResources().adjustPlayerStones(-BARRIER_COST); //Cost
+                gi.getResources().subtractPlayerStones(BARRIER_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().getWall().repair(4);
-                gi.getResources().adjustComputerStones(-BARRIER_COST); //Cost
+                gi.getResources().subtractComputerStones(BARRIER_COST); //Cost
             }
         } else if(cardID == WALL){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().getWall().repair(10);
-                gi.getResources().adjustPlayerStones(-WALL_COST); //Cost
+                gi.getResources().subtractPlayerStones(WALL_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().getWall().repair(10);
-                gi.getResources().adjustComputerStones(-WALL_COST); //Cost
+                gi.getResources().subtractComputerStones(WALL_COST); //Cost
             }
         } else if(cardID == GREATWALL){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().getWall().repair(18);
-                gi.getResources().adjustPlayerStones(-GREATWALL_COST); //Cost
+                gi.getResources().subtractPlayerStones(GREATWALL_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().getWall().repair(18);
-                gi.getResources().adjustComputerStones(-GREATWALL_COST); //Cost
+                gi.getResources().subtractComputerStones(GREATWALL_COST); //Cost
             }
         } else if(cardID == ARCHITECT){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerBuilders(1);
-                gi.getResources().adjustPlayerStones(-ARCHITECT_COST); //Cost
+                gi.getResources().subtractPlayerStones(ARCHITECT_COST); //Cost
             } else {
                 gi.getResources().adjustComputerBuilders(1);
-                gi.getResources().adjustComputerStones(-ARCHITECT_COST); //Cost
+                gi.getResources().subtractComputerStones(ARCHITECT_COST); //Cost
             }
         }else if(cardID == RESERVE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(8);
                 gi.getPlayer1().getCastle().getWall().doDamage(4);
-                gi.getResources().adjustPlayerStones(-RESERVE_COST); //Cost
+                gi.getResources().subtractPlayerStones(RESERVE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(8);
                 gi.getPlayer2().getCastle().getWall().doDamage(4);
-                gi.getResources().adjustComputerStones(-RESERVE_COST); //Cost
+                gi.getResources().subtractComputerStones(RESERVE_COST); //Cost
             }
         }else if(cardID == SABOTAGE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(8);
                 gi.getPlayer2().getCastle().doDamage(4);
-                gi.getResources().adjustPlayerStones(-SABOTAGE_COST); //Cost
+                gi.getResources().subtractPlayerStones(SABOTAGE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(8);
                 gi.getPlayer1().getCastle().doDamage(4);
-                gi.getResources().adjustComputerStones(-SABOTAGE_COST); //Cost
+                gi.getResources().subtractComputerStones(SABOTAGE_COST); //Cost
             }
         }else if(cardID == STRONGHOLD){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(10);
                 gi.getPlayer1().getCastle().getWall().repair(10);
-                gi.getResources().adjustPlayerStones(-STRONGHOLD_COST); //Cost
+                gi.getResources().subtractPlayerStones(STRONGHOLD_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(10);
                 gi.getPlayer2().getCastle().getWall().repair(10);
-                gi.getResources().adjustComputerStones(-STRONGHOLD_COST); //Cost
+                gi.getResources().subtractComputerStones(STRONGHOLD_COST); //Cost
             }
         }
         //ATTACK CARDS
         else if(cardID == RECRUITER){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerSoldiers(1);
-                gi.getResources().adjustPlayerWeapons(-RECRUITER_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(RECRUITER_COST); //Cost
             } else {
                 gi.getResources().adjustComputerSoldiers(1);
-                gi.getResources().adjustComputerWeapons(-RECRUITER_COST); //Cost
+                gi.getResources().subtractComputerWeapons(RECRUITER_COST); //Cost
             }
         } else if(cardID == SPEARMAN){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(2);
-                gi.getResources().adjustPlayerWeapons(-SPEARMAN_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(SPEARMAN_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(2);
-                gi.getResources().adjustComputerWeapons(-SPEARMAN_COST); //Cost
+                gi.getResources().subtractComputerWeapons(SPEARMAN_COST); //Cost
             }
         } else if(cardID == RAM){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(6);
-                gi.getResources().adjustPlayerWeapons(-RAM_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(RAM_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(6);
-                gi.getResources().adjustComputerWeapons(-RAM_COST); //Cost
+                gi.getResources().subtractComputerWeapons(RAM_COST); //Cost
             }
         } else if(cardID == CATAPULT){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(12);
-                gi.getResources().adjustPlayerWeapons(-CATAPULT_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(CATAPULT_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(12);
-                gi.getResources().adjustComputerWeapons(-CATAPULT_COST); //Cost
+                gi.getResources().subtractComputerWeapons(CATAPULT_COST); //Cost
             }
         } else if(cardID == LEGION) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(16);
-                gi.getResources().adjustPlayerWeapons(-LEGION_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(LEGION_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(16);
-                gi.getResources().adjustComputerWeapons(-LEGION_COST); //Cost
+                gi.getResources().subtractComputerWeapons(LEGION_COST); //Cost
             }
         }else if(cardID == TREBUCHET){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(20);
-                gi.getResources().adjustPlayerWeapons(-TREBUCHET_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(TREBUCHET_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(20);
-                gi.getResources().adjustComputerWeapons(-TREBUCHET_COST); //Cost
+                gi.getResources().subtractComputerWeapons(TREBUCHET_COST); //Cost
             }
         } else if(cardID == ASSASSIN){
             int randomInt = (int)(Math.random() * 2);
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
-                gi.getResources().adjustPlayerWeapons(-ASSASSIN_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(ASSASSIN_COST); //Cost
                 if(randomInt == 0){
                     gi.getResources().adjustComputerBuilders(-1);
                 } else if (randomInt == 1){
@@ -264,7 +264,7 @@ public class CardActions {
                     gi.getResources().adjustComputerWizards(-1);
                 }
             } else {
-                gi.getResources().adjustComputerWeapons(-ASSASSIN_COST); //Cost
+                gi.getResources().subtractComputerWeapons(ASSASSIN_COST); //Cost
                 if(randomInt == 0){
                     gi.getResources().adjustPlayerBuilders(-1);
                 } else if (randomInt == 1){
@@ -275,33 +275,33 @@ public class CardActions {
             }
         }else if(cardID == BURGLAR){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
-                gi.getResources().adjustPlayerWeapons(-BURGLAR_COST); //Cost
-                gi.getResources().adjustPlayerStones(gi.getResources().adjustComputerStones(-8));
-                gi.getResources().adjustPlayerWeapons(gi.getResources().adjustComputerWeapons(-8));
-                gi.getResources().adjustPlayerGems(gi.getResources().adjustComputerGems(-8));
+                gi.getResources().subtractPlayerWeapons(BURGLAR_COST); //Cost
+                gi.getResources().adjustPlayerStones(Math.abs(gi.getResources().adjustComputerStones(-8)));
+                gi.getResources().adjustPlayerWeapons(Math.abs(gi.getResources().adjustComputerWeapons(-8)));
+                gi.getResources().adjustPlayerGems(Math.abs(gi.getResources().adjustComputerGems(-8)));
             } else {
-                gi.getResources().adjustComputerWeapons(-BURGLAR_COST); //Cost
-                gi.getResources().adjustComputerStones(gi.getResources().adjustPlayerStones(-8));
-                gi.getResources().adjustComputerWeapons(gi.getResources().adjustPlayerWeapons(-8));
-                gi.getResources().adjustComputerGems(gi.getResources().adjustPlayerGems(-8));
+                gi.getResources().subtractComputerWeapons(BURGLAR_COST); //Cost
+                gi.getResources().adjustComputerStones(Math.abs(gi.getResources().adjustPlayerStones(-8)));
+                gi.getResources().adjustComputerWeapons(Math.abs(gi.getResources().adjustPlayerWeapons(-8)));
+                gi.getResources().adjustComputerGems(Math.abs(gi.getResources().adjustPlayerGems(-8)));
 
             }
         }else if(cardID == THIEF){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
-                gi.getResources().adjustPlayerWeapons(-THIEF_COST); //Cost
-                gi.getResources().adjustPlayerStones(gi.getResources().adjustComputerStones(-24));
-                gi.getResources().adjustPlayerWeapons(gi.getResources().adjustComputerWeapons(-24));
-                gi.getResources().adjustPlayerGems(gi.getResources().adjustComputerGems(-24));
+                gi.getResources().subtractPlayerWeapons(THIEF_COST); //Cost
+                gi.getResources().adjustPlayerStones(Math.abs(gi.getResources().adjustComputerStones(-24)));
+                gi.getResources().adjustPlayerWeapons(Math.abs(gi.getResources().adjustComputerWeapons(-24)));
+                gi.getResources().adjustPlayerGems(Math.abs(gi.getResources().adjustComputerGems(-24)));
             } else {
-                gi.getResources().adjustComputerWeapons(-THIEF_COST); //Cost
-                gi.getResources().adjustComputerStones(gi.getResources().adjustPlayerStones(-24));
-                gi.getResources().adjustComputerWeapons(gi.getResources().adjustPlayerWeapons(-24));
-                gi.getResources().adjustComputerGems(gi.getResources().adjustPlayerGems(-24));
+                gi.getResources().subtractComputerWeapons(THIEF_COST); //Cost
+                gi.getResources().adjustComputerStones(Math.abs(gi.getResources().adjustPlayerStones(-24)));
+                gi.getResources().adjustComputerWeapons(Math.abs(gi.getResources().adjustPlayerWeapons(-24)));
+                gi.getResources().adjustComputerGems(Math.abs(gi.getResources().adjustPlayerGems(-24)));
             }
         } else if(cardID == RAID){
             int randomInt = (int)(Math.random() * 2);
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
-                gi.getResources().adjustPlayerWeapons(-RAID_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(RAID_COST); //Cost
                 if(randomInt == 0){
                     gi.getResources().adjustComputerStones(-24);
                 } else if (randomInt == 1){
@@ -310,7 +310,7 @@ public class CardActions {
                     gi.getResources().adjustComputerGems(-24);
                 }
             } else {
-                gi.getResources().adjustComputerWeapons(-RAID_COST); //Cost
+                gi.getResources().subtractComputerWeapons(RAID_COST); //Cost
                 if(randomInt == 0){
                     gi.getResources().adjustPlayerStones(-24);
                 } else if (randomInt == 1){
@@ -324,86 +324,86 @@ public class CardActions {
         else if(cardID == CREATE_STONES){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerStones(16);
-                gi.getResources().adjustPlayerGems(-CREATE_STONES_COST); //Cost
+                gi.getResources().subtractPlayerGems(CREATE_STONES_COST); //Cost
             } else {
                 gi.getResources().adjustComputerStones(16);
-                gi.getResources().adjustComputerGems(-CREATE_STONES_COST); //Cost
+                gi.getResources().subtractComputerGems(CREATE_STONES_COST); //Cost
             }
         } else if(cardID == CREATE_WEAPONS){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerWeapons(16);
-                gi.getResources().adjustPlayerGems(-CREATE_WEAPONS_COST); //Cost
+                gi.getResources().subtractPlayerGems(CREATE_WEAPONS_COST); //Cost
             } else {
                 gi.getResources().adjustComputerWeapons(16);
-                gi.getResources().adjustComputerGems(-CREATE_WEAPONS_COST); //Cost
+                gi.getResources().subtractComputerGems(CREATE_WEAPONS_COST); //Cost
             }
         } else if(cardID == CREATE_GEMS){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerGems(16);
-                gi.getResources().adjustPlayerGems(-CREATE_GEMS_COST); //Cost
+                gi.getResources().subtractPlayerGems(CREATE_GEMS_COST); //Cost
             } else {
                 gi.getResources().adjustComputerGems(16);
-                gi.getResources().adjustComputerGems(-CREATE_GEMS_COST); //Cost
+                gi.getResources().subtractComputerGems(CREATE_GEMS_COST); //Cost
             }
         } else if(cardID == DESTROY_STONES){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustComputerStones(-16);
-                gi.getResources().adjustPlayerGems(-DESTROY_STONES_COST); //Cost
+                gi.getResources().subtractPlayerGems(DESTROY_STONES_COST); //Cost
             } else {
                 gi.getResources().adjustPlayerStones(-16);
-                gi.getResources().adjustComputerGems(-DESTROY_STONES_COST); //Cost
+                gi.getResources().subtractComputerGems(DESTROY_STONES_COST); //Cost
             }
         } else if(cardID == DESTROY_WEAPONS){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustComputerWeapons(-16);
-                gi.getResources().adjustPlayerGems(-DESTROY_WEAPONS_COST); //Cost
+                gi.getResources().subtractPlayerGems(DESTROY_WEAPONS_COST); //Cost
             } else {
                 gi.getResources().adjustPlayerWeapons(-16);
-                gi.getResources().adjustComputerGems(-DESTROY_WEAPONS_COST); //Cost
+                gi.getResources().subtractComputerGems(DESTROY_WEAPONS_COST); //Cost
             }
         } else if(cardID == DESTROY_GEMS){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustComputerGems(-16);
-                gi.getResources().adjustPlayerGems(-DESTROY_GEMS_COST); //Cost
+                gi.getResources().subtractPlayerGems(DESTROY_GEMS_COST); //Cost
             } else {
                 gi.getResources().adjustPlayerGems(-16);
-                gi.getResources().adjustComputerGems(-DESTROY_GEMS_COST); //Cost
+                gi.getResources().subtractComputerGems(DESTROY_GEMS_COST); //Cost
             }
         } else if(cardID == MAGE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerWizards(1);
-                gi.getResources().adjustPlayerGems(-MAGE_COST); //Cost
+                gi.getResources().subtractPlayerGems(MAGE_COST); //Cost
             } else {
                 gi.getResources().adjustComputerWizards(1);
-                gi.getResources().adjustComputerGems(-MAGE_COST); //Cost
+                gi.getResources().subtractComputerGems(MAGE_COST); //Cost
             }
         } else if(cardID == HAT_TRICK){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerStones(4);
                 gi.getResources().adjustPlayerWeapons(4);
                 gi.getResources().adjustPlayerGems(4);
-                gi.getResources().adjustPlayerGems(-HAT_TRICK_COST); //Cost
+                gi.getResources().subtractPlayerGems(HAT_TRICK_COST); //Cost
             } else {
                 gi.getResources().adjustComputerStones(4);
                 gi.getResources().adjustComputerWeapons(4);
                 gi.getResources().adjustComputerGems(4);
-                gi.getResources().adjustComputerGems(-HAT_TRICK_COST); //Cost
+                gi.getResources().subtractComputerGems(HAT_TRICK_COST); //Cost
             }
         } else if(cardID == LIGHTNING_STRIKE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(16);
-                gi.getResources().adjustPlayerGems(-LIGHTNING_STRIKE_COST); //Cost
+                gi.getResources().subtractPlayerGems(LIGHTNING_STRIKE_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(16);
-                gi.getResources().adjustComputerGems(-LIGHTNING_STRIKE_COST); //Cost
+                gi.getResources().subtractComputerGems(LIGHTNING_STRIKE_COST); //Cost
             }
         } else if(cardID == BLAST){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(8);
-                gi.getResources().adjustPlayerGems(-BLAST_COST); //Cost
+                gi.getResources().subtractPlayerGems(BLAST_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(8);
-                gi.getResources().adjustComputerGems(-BLAST_COST); //Cost
+                gi.getResources().subtractComputerGems(BLAST_COST); //Cost
             }
         }
 
@@ -411,10 +411,10 @@ public class CardActions {
         else if(cardID == JERICHO){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().getWall().doDamage(gi.getPlayer2().getCastle().getWall().getHealth());
-                gi.getResources().adjustPlayerWeapons(-JERICHO_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(JERICHO_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().getWall().doDamage(gi.getPlayer1().getCastle().getWall().getHealth());
-                gi.getResources().adjustComputerWeapons(-JERICHO_COST); //Cost
+                gi.getResources().subtractComputerWeapons(JERICHO_COST); //Cost
             }
         }else if(cardID == TROJAN_HORSE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
@@ -422,84 +422,84 @@ public class CardActions {
                 gi.getPlayer2().getCastle().doDamage(20 + temp);
                 gi.getPlayer2().getCastle().getWall().repair(temp);
                 //NOTE FOR KODY: Probably change the three lines above to just 1 and add a Castle.setHealth() along with doDamage to avoid make it more simple
-                gi.getResources().adjustPlayerWeapons(-TROJAN_HORSE_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(TROJAN_HORSE_COST); //Cost
             } else {
                 float temp = gi.getPlayer1().getCastle().getWall().getHealth();
                 gi.getPlayer1().getCastle().doDamage(20 + temp);
                 gi.getPlayer1().getCastle().getWall().repair(temp);
-                gi.getResources().adjustComputerWeapons(-TROJAN_HORSE_COST); //Cost
+                gi.getResources().subtractComputerWeapons(TROJAN_HORSE_COST); //Cost
             }
         }else if(cardID == BLACK_PLAGUE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustComputerBuilders(-1);
                 gi.getResources().adjustComputerSoldiers(-1);
                 gi.getResources().adjustComputerWizards(-1);
-                gi.getResources().adjustPlayerGems(-BLACK_PLAGUE_COST); //Cost
+                gi.getResources().subtractPlayerGems(BLACK_PLAGUE_COST); //Cost
             } else {
                 gi.getResources().adjustPlayerBuilders(-1);
                 gi.getResources().adjustPlayerSoldiers(-1);
                 gi.getResources().adjustPlayerWizards(-1);
-                gi.getResources().adjustComputerGems(-BLACK_PLAGUE_COST); //Cost
+                gi.getResources().subtractComputerGems(BLACK_PLAGUE_COST); //Cost
             }
         }else if(cardID == MERLIN){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(32);
-                gi.getResources().adjustPlayerGems(-MERLIN_COST); //Cost
+                gi.getResources().subtractPlayerGems(MERLIN_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(32);
-                gi.getResources().adjustComputerGems(-MERLIN_COST); //Cost
+                gi.getResources().subtractComputerGems(MERLIN_COST); //Cost
             }
         }else if(cardID == DUPLICATE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().getWall().repair(gi.getPlayer1().getCastle().getWall().getHealth());
-                gi.getResources().adjustPlayerStones(-DUPLICATE_COST); //Cost
+                gi.getResources().subtractPlayerStones(DUPLICATE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().getWall().repair(gi.getPlayer2().getCastle().getWall().getHealth());
-                gi.getResources().adjustComputerStones(-DUPLICATE_COST); //Cost
+                gi.getResources().subtractComputerStones(DUPLICATE_COST); //Cost
             }
         }
 
         //region FlamePack
-        //region BUILD CARDS
+
         if (cardID == FlamePack.WALL_OF_FIRE) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().getWall().repair(8);
-                gi.getResources().adjustPlayerStones(-FlamePack.WALL_OF_FIRE_COST); //Cost
+                gi.getResources().subtractPlayerStones(FlamePack.WALL_OF_FIRE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().getWall().repair(8);
-                gi.getResources().adjustComputerStones(-FlamePack.WALL_OF_FIRE_COST); //Cost
+                gi.getResources().subtractComputerStones(FlamePack.WALL_OF_FIRE_COST); //Cost
             }
         } else if (cardID == FlamePack.CAMPFIRE) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(8);
-                gi.getResources().adjustPlayerStones(-FlamePack.CAMPFIRE_COST); //Cost
+                gi.getResources().subtractPlayerStones(FlamePack.CAMPFIRE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(8);
-                gi.getResources().adjustComputerStones(-FlamePack.CAMPFIRE_COST); //Cost
+                gi.getResources().subtractComputerStones(FlamePack.CAMPFIRE_COST); //Cost
             }
         } else if (cardID == FlamePack.FORGE) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerBuilders(2);
-                gi.getResources().adjustPlayerStones(-FlamePack.FORGE_COST); //Cost
+                gi.getResources().subtractPlayerStones(FlamePack.FORGE_COST); //Cost
             } else {
                 gi.getResources().adjustComputerBuilders(2);
-                gi.getResources().adjustComputerStones(-FlamePack.FORGE_COST); //Cost
+                gi.getResources().subtractComputerStones(FlamePack.FORGE_COST); //Cost
             }
         } else if (cardID == FlamePack.BOILING_OIL) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().getWall().repair(15);
-                gi.getResources().adjustPlayerStones(-FlamePack.BOILING_OIL_COST); //Cost
+                gi.getResources().subtractPlayerStones(-FlamePack.BOILING_OIL_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().getWall().repair(15);
-                gi.getResources().adjustComputerStones(-FlamePack.BOILING_OIL_COST); //Cost
+                gi.getResources().subtractComputerStones(FlamePack.BOILING_OIL_COST); //Cost
             }
         } else if (cardID == FlamePack.BONFIRE) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(15);
-                gi.getResources().adjustPlayerStones(-FlamePack.BONFIRE_COST); //Cost
+                gi.getResources().subtractPlayerStones(FlamePack.BONFIRE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(15);
-                gi.getResources().adjustComputerStones(-FlamePack.BONFIRE_COST); //Cost
+                gi.getResources().subtractComputerStones(FlamePack.BONFIRE_COST); //Cost
             }
         }
 
@@ -507,42 +507,42 @@ public class CardActions {
         else if (cardID == FlamePack.FIRE) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(6);
-                gi.getResources().adjustPlayerWeapons(-FlamePack.FIRE_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(FlamePack.FIRE_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(6);
-                gi.getResources().adjustComputerWeapons(-FlamePack.FIRE_COST); //Cost
+                gi.getResources().subtractComputerWeapons(FlamePack.FIRE_COST); //Cost
             }
         } else if (cardID == FlamePack.FIRE_ARROWS) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(10);
-                gi.getResources().adjustPlayerWeapons(-FlamePack.FIRE_ARROWS_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(FlamePack.FIRE_ARROWS_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(10);
-                gi.getResources().adjustComputerWeapons(-FlamePack.FIRE_ARROWS_COST); //Cost
+                gi.getResources().subtractComputerWeapons(FlamePack.FIRE_ARROWS_COST); //Cost
             }
         } else if (cardID == FlamePack.FLAMING_AXE) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(12);
-                gi.getResources().adjustPlayerWeapons(-FlamePack.FLAMING_AXE_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(FlamePack.FLAMING_AXE_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(12);
-                gi.getResources().adjustComputerWeapons(-FlamePack.FLAMING_AXE_COST); //Cost
+                gi.getResources().subtractComputerWeapons(FlamePack.FLAMING_AXE_COST); //Cost
             }
         } else if (cardID == FlamePack.FLAMING_SHOT) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(18);
-                gi.getResources().adjustPlayerWeapons(-FlamePack.FLAMING_SHOT_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(FlamePack.FLAMING_SHOT_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(18);
-                gi.getResources().adjustComputerWeapons(-FlamePack.FLAMING_SHOT_COST); //Cost
+                gi.getResources().subtractComputerWeapons(FlamePack.FLAMING_SHOT_COST); //Cost
             }
         } else if (cardID == FlamePack.FLAME_LEGION) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerSoldiers(2);
-                gi.getResources().adjustPlayerWeapons(-FlamePack.FLAME_LEGION_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(FlamePack.FLAME_LEGION_COST); //Cost
             } else {
                 gi.getResources().adjustComputerSoldiers(2);
-                gi.getResources().adjustComputerWeapons(-FlamePack.FLAME_LEGION_COST); //Cost
+                gi.getResources().subtractComputerWeapons(FlamePack.FLAME_LEGION_COST); //Cost
             }
         }
 
@@ -550,42 +550,42 @@ public class CardActions {
         else if(cardID == FlamePack.FIRE_SHAMAN){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerWizards(2);
-                gi.getResources().adjustPlayerGems(-FlamePack.FIRE_SHAMAN_COST); //Cost
+                gi.getResources().subtractPlayerGems(FlamePack.FIRE_SHAMAN_COST); //Cost
             } else {
                 gi.getResources().adjustComputerWizards(2);
-                gi.getResources().adjustComputerGems(-FlamePack.FIRE_SHAMAN_COST); //Cost
+                gi.getResources().subtractComputerGems(FlamePack.FIRE_SHAMAN_COST); //Cost
             }
         } else if(cardID == FlamePack.LAVA_FLOW){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerStones(24);
-                gi.getResources().adjustPlayerGems(-FlamePack.LAVA_FLOW_COST); //Cost
+                gi.getResources().subtractPlayerGems(FlamePack.LAVA_FLOW_COST); //Cost
             } else {
                 gi.getResources().adjustComputerStones(24);
-                gi.getResources().adjustComputerGems(-FlamePack.LAVA_FLOW_COST); //Cost
+                gi.getResources().subtractComputerGems(FlamePack.LAVA_FLOW_COST); //Cost
             }
         } else if(cardID == FlamePack.COAL){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerGems(24);
-                gi.getResources().adjustPlayerGems(-FlamePack.COAL_COST); //Cost
+                gi.getResources().subtractPlayerGems(FlamePack.COAL_COST); //Cost
             } else {
                 gi.getResources().adjustComputerGems(24);
-                gi.getResources().adjustComputerGems(-FlamePack.COAL_COST); //Cost
+                gi.getResources().adjustComputerGems(FlamePack.COAL_COST); //Cost
             }
         } else if(cardID == FlamePack.BLACKSMITH){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerWeapons(24);
-                gi.getResources().adjustPlayerGems(-FlamePack.BLACKSMITH_COST); //Cost
+                gi.getResources().subtractPlayerGems(FlamePack.BLACKSMITH_COST); //Cost
             } else {
                 gi.getResources().adjustComputerWeapons(24);
-                gi.getResources().adjustComputerGems(-FlamePack.BLACKSMITH_COST); //Cost
+                gi.getResources().subtractComputerGems(FlamePack.BLACKSMITH_COST); //Cost
             }
         } else if(cardID == FlamePack.FIREBALL){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(16);
-                gi.getResources().adjustPlayerGems(-FlamePack.FIREBALL_COST); //Cost
+                gi.getResources().subtractPlayerGems(FlamePack.FIREBALL_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(16);
-                gi.getResources().adjustComputerGems(-FlamePack.FIREBALL_COST); //Cost
+                gi.getResources().subtractComputerGems(FlamePack.FIREBALL_COST); //Cost
             }
         }
 
@@ -594,31 +594,31 @@ public class CardActions {
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustComputerSoldiers(-1);
                 gi.getResources().adjustPlayerSoldiers(2);
-                gi.getResources().adjustPlayerWeapons(-FlamePack.PHEONIX_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(FlamePack.PHEONIX_COST); //Cost
             } else {
                 gi.getResources().adjustPlayerSoldiers(-1);
                 gi.getResources().adjustComputerSoldiers(2);
-                gi.getResources().adjustComputerWeapons(-FlamePack.PHEONIX_COST); //Cost
+                gi.getResources().subtractComputerWeapons(FlamePack.PHEONIX_COST); //Cost
             }
         }else if(cardID == FlamePack.METEORS){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(40);
-                gi.getResources().adjustPlayerGems(-FlamePack.METEORS_COST); //Cost
+                gi.getResources().subtractPlayerGems(FlamePack.METEORS_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(40);
-                gi.getResources().adjustComputerGems(-FlamePack.METEORS_COST); //Cost
+                gi.getResources().subtractComputerGems(FlamePack.METEORS_COST); //Cost
             }
         }else if(cardID == FlamePack.INFERNO){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustComputerWeapons(-24);
                 gi.getResources().adjustComputerStones(-24);
                 gi.getResources().adjustComputerGems(-24);
-                gi.getResources().adjustPlayerGems(-FlamePack.INFERNO_COST); //Cost
+                gi.getResources().subtractPlayerGems(FlamePack.INFERNO_COST); //Cost
             } else {
                 gi.getResources().adjustPlayerWeapons(-24);
                 gi.getResources().adjustPlayerStones(-24);
                 gi.getResources().adjustPlayerGems(-24);
-                gi.getResources().adjustComputerGems(-FlamePack.INFERNO_COST); //Cost
+                gi.getResources().subtractComputerGems(FlamePack.INFERNO_COST); //Cost
             }
         }
         //endregion
@@ -626,42 +626,42 @@ public class CardActions {
         if (cardID == JapanesePack.STOCKADE) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().getWall().repair(8);
-                gi.getResources().adjustPlayerStones(-JapanesePack.STOCKADE_COST); //Cost
+                gi.getResources().subtractPlayerStones(JapanesePack.STOCKADE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().getWall().repair(8);
-                gi.getResources().adjustComputerStones(-JapanesePack.STOCKADE_COST); //Cost
+                gi.getResources().subtractComputerStones(JapanesePack.STOCKADE_COST); //Cost
             }
         } else if (cardID == JapanesePack.FORTRESS) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(8);
-                gi.getResources().adjustPlayerStones(-JapanesePack.FORTRESS_COST); //Cost
+                gi.getResources().subtractPlayerStones(JapanesePack.FORTRESS_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(8);
-                gi.getResources().adjustComputerStones(-JapanesePack.FORTRESS_COST); //Cost
+                gi.getResources().subtractComputerStones(JapanesePack.FORTRESS_COST); //Cost
             }
         } else if (cardID == JapanesePack.MONASTERY) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerBuilders(2);
-                gi.getResources().adjustPlayerStones(-JapanesePack.MONASTERY_COST); //Cost
+                gi.getResources().subtractPlayerStones(JapanesePack.MONASTERY_COST); //Cost
             } else {
                 gi.getResources().adjustComputerBuilders(2);
-                gi.getResources().adjustComputerStones(-JapanesePack.MONASTERY_COST); //Cost
+                gi.getResources().subtractComputerStones(JapanesePack.MONASTERY_COST); //Cost
             }
         } else if (cardID == JapanesePack.RAMPART) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().getWall().repair(15);
-                gi.getResources().adjustPlayerStones(-JapanesePack.RAMPART_COST); //Cost
+                gi.getResources().subtractPlayerStones(JapanesePack.RAMPART_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().getWall().repair(15);
-                gi.getResources().adjustComputerStones(-JapanesePack.RAMPART_COST); //Cost
+                gi.getResources().subtractComputerStones(JapanesePack.RAMPART_COST); //Cost
             }
         } else if (cardID == JapanesePack.CITADEL) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().repair(15);
-                gi.getResources().adjustPlayerStones(-JapanesePack.CITADEL_COST); //Cost
+                gi.getResources().subtractPlayerStones(JapanesePack.CITADEL_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().repair(15);
-                gi.getResources().adjustComputerStones(-JapanesePack.CITADEL_COST); //Cost
+                gi.getResources().subtractComputerStones(JapanesePack.CITADEL_COST); //Cost
             }
         }
 
@@ -669,42 +669,42 @@ public class CardActions {
         else if (cardID == JapanesePack.ASHIGARU) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(6);
-                gi.getResources().adjustPlayerWeapons(-JapanesePack.ASHIGARU_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(JapanesePack.ASHIGARU_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(6);
-                gi.getResources().adjustComputerWeapons(-JapanesePack.ASHIGARU_COST); //Cost
+                gi.getResources().subtractComputerWeapons(JapanesePack.ASHIGARU_COST); //Cost
             }
         } else if (cardID == JapanesePack.SHURIKEN) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(10);
-                gi.getResources().adjustPlayerWeapons(-JapanesePack.SHURIKEN_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(JapanesePack.SHURIKEN_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(10);
-                gi.getResources().adjustComputerWeapons(-JapanesePack.SHURIKEN_COST); //Cost
+                gi.getResources().subtractComputerWeapons(JapanesePack.SHURIKEN_COST); //Cost
             }
         } else if (cardID == JapanesePack.KATANA) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(12);
-                gi.getResources().adjustPlayerWeapons(-JapanesePack.KATANA_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(JapanesePack.KATANA_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(12);
-                gi.getResources().adjustComputerWeapons(-JapanesePack.KATANA_COST); //Cost
+                gi.getResources().subtractComputerWeapons(JapanesePack.KATANA_COST); //Cost
             }
         } else if (cardID == JapanesePack.SAMURAI) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(18);
-                gi.getResources().adjustPlayerWeapons(-JapanesePack.SAMURAI_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(JapanesePack.SAMURAI_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(18);
-                gi.getResources().adjustComputerWeapons(-JapanesePack.SAMURAI_COST); //Cost
+                gi.getResources().subtractComputerWeapons(JapanesePack.SAMURAI_COST); //Cost
             }
         } else if (cardID == JapanesePack.DOJO) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerSoldiers(2);
-                gi.getResources().adjustPlayerWeapons(-JapanesePack.DOJO_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(JapanesePack.DOJO_COST); //Cost
             } else {
                 gi.getResources().adjustComputerSoldiers(2);
-                gi.getResources().adjustComputerWeapons(-JapanesePack.DOJO_COST); //Cost
+                gi.getResources().subtractComputerWeapons(JapanesePack.DOJO_COST); //Cost
             }
         }
 
@@ -712,44 +712,44 @@ public class CardActions {
         else if(cardID == JapanesePack.SHRINE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerWizards(2);
-                gi.getResources().adjustPlayerGems(-JapanesePack.SHRINE_COST); //Cost
+                gi.getResources().subtractPlayerGems(JapanesePack.SHRINE_COST); //Cost
             } else {
                 gi.getResources().adjustComputerWizards(2);
-                gi.getResources().adjustComputerGems(-JapanesePack.SHRINE_COST); //Cost
+                gi.getResources().subtractComputerGems(JapanesePack.SHRINE_COST); //Cost
             }
         } else if(cardID == JapanesePack.QUARRY){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerStones(24);
-                gi.getResources().adjustPlayerGems(-JapanesePack.QUARRY_COST); //Cost
+                gi.getResources().subtractPlayerGems(JapanesePack.QUARRY_COST); //Cost
             } else {
                 gi.getResources().adjustComputerStones(24);
-                gi.getResources().adjustComputerGems(-JapanesePack.QUARRY_COST); //Cost
+                gi.getResources().subtractComputerGems(JapanesePack.QUARRY_COST); //Cost
             }
         } else if(cardID == JapanesePack.TEMPLE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerGems(24);
-                gi.getResources().adjustPlayerGems(-JapanesePack.TEMPLE_COST); //Cost
+                gi.getResources().subtractPlayerGems(JapanesePack.TEMPLE_COST); //Cost
             } else {
                 gi.getResources().adjustComputerGems(24);
-                gi.getResources().adjustComputerGems(-JapanesePack.TEMPLE_COST); //Cost
+                gi.getResources().subtractComputerGems(JapanesePack.TEMPLE_COST); //Cost
             }
         } else if(cardID == JapanesePack.RICE_PADDY){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerWeapons(24);
-                gi.getResources().adjustPlayerGems(-JapanesePack.RICE_PADDY_COST); //Cost
+                gi.getResources().subtractPlayerGems(JapanesePack.RICE_PADDY_COST); //Cost
             } else {
                 gi.getResources().adjustComputerWeapons(24);
-                gi.getResources().adjustComputerGems(-JapanesePack.RICE_PADDY_COST); //Cost
+                gi.getResources().subtractComputerGems(JapanesePack.RICE_PADDY_COST); //Cost
             }
         } else if(cardID == JapanesePack.SEPPUKU){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerSoldiers(-1);
                 gi.getResources().adjustPlayerWizards(2);
-                gi.getResources().adjustPlayerGems(-JapanesePack.SEPPUKU_COST); //Cost
+                gi.getResources().subtractPlayerGems(JapanesePack.SEPPUKU_COST); //Cost
             } else {
                 gi.getResources().adjustComputerSoldiers(-1);
                 gi.getResources().adjustComputerWizards(2);
-                gi.getResources().adjustComputerGems(-JapanesePack.SEPPUKU_COST); //Cost
+                gi.getResources().subtractComputerGems(JapanesePack.SEPPUKU_COST); //Cost
             }
         }
 
@@ -757,30 +757,30 @@ public class CardActions {
         else if(cardID == JapanesePack.NINJA){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustComputerWizards(-3);
-                gi.getResources().adjustPlayerWeapons(-JapanesePack.NINJA_COST); //Cost
+                gi.getResources().subtractPlayerWeapons(JapanesePack.NINJA_COST); //Cost
             } else {
                 gi.getResources().adjustPlayerWizards(-3);
-                gi.getResources().adjustComputerWeapons(-JapanesePack.NINJA_COST); //Cost
+                gi.getResources().subtractComputerWeapons(JapanesePack.NINJA_COST); //Cost
             }
         }else if(cardID == JapanesePack.DRAGON){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(40);
-                gi.getResources().adjustPlayerGems(-JapanesePack.DRAGON_COST); //Cost
+                gi.getResources().subtractPlayerGems(JapanesePack.DRAGON_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(40);
-                gi.getResources().adjustComputerGems(-JapanesePack.DRAGON_COST); //Cost
+                gi.getResources().subtractComputerGems(JapanesePack.DRAGON_COST); //Cost
             }
         }else if(cardID == JapanesePack.SHOGUN){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerWeapons(24);
                 gi.getResources().adjustPlayerStones(24);
                 gi.getResources().adjustPlayerGems(24);
-                gi.getResources().adjustPlayerGems(-JapanesePack.SHOGUN_COST); //Cost
+                gi.getResources().subtractPlayerGems(JapanesePack.SHOGUN_COST); //Cost
             } else {
                 gi.getResources().adjustComputerWeapons(24);
                 gi.getResources().adjustComputerStones(24);
                 gi.getResources().adjustComputerGems(24);
-                gi.getResources().adjustComputerGems(-JapanesePack.SHOGUN_COST); //Cost
+                gi.getResources().subtractComputerGems(JapanesePack.SHOGUN_COST); //Cost
             }
         }
         //endregion
