@@ -1,5 +1,6 @@
 package com.desitum.castleWars.objects;
 
+import com.badlogic.gdx.Game;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.world.GameInterface;
@@ -12,7 +13,13 @@ public class Player {
     private Hand hand;
 
     public Player(GameInterface gameInterface, float castleX){
-        castle = new Castle(Assets.playerCastle, gameInterface, castleX);
+        if(GameScreen.SCREEN_WIDTH/2 > castleX) {
+            castle = new Castle(Assets.playerCastle, gameInterface, castleX);
+        } else {
+            castle = new Castle(Assets.computerCastle, gameInterface, castleX);
+
+        }
+
         hand = new Hand(gameInterface);
     }
 

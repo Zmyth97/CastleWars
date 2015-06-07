@@ -8,8 +8,10 @@ import com.desitum.castleWars.data.CardActions;
 import com.desitum.castleWars.data.ComputerAI;
 import com.desitum.castleWars.data.Resources;
 import com.desitum.castleWars.data.Settings;
+import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
+import com.desitum.castleWars.libraries.animation.OnAnimationFinishedListener;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupImage;
@@ -56,7 +58,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static Color magicColor = new Color(.035f, .722f, 0, 1);
     private static Color castleColor = new Color(0.278f, 0.278f, 0.322f, 1);
     private int playerTurn;
-    private float timer;
     private Player player1;
     private Player player2;
     private ComputerAI ai;
@@ -108,6 +109,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
         player1 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 - 50));
         player2 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 + 25));
 
+        playerTurn = PLAYER;
+        computerDelay = Settings.COMPUTER_DELAY;
+
         deck = new Deck();
         for (Card card: deck.getCardList()) {
             card.setButtonListener(new OnClickListener() {
@@ -124,7 +128,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
         myResources = new Resources(this);
 
         difficulty = 0;
-        timer = 0;
         ai = new ComputerAI(this);
 
         setupSideMenus();
@@ -178,6 +181,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private void switchTurns(int playerTurn) {
         this.playerTurn = playerTurn;
+        System.out.println("Turn: " + playerTurn);
         discardToggle.turnOff();
 
         if (playerTurn == PLAYER) {
@@ -193,6 +197,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private void computerTurn() {
         Card c = null;
+        System.out.println("Computer Turn Started");
         if(difficulty == EASY_DIFFICULTY){
             boolean usedCard = false;
             for (Card card : player2.getHand().getCardsInHand()) {
@@ -200,18 +205,19 @@ public class GameWorld extends KodyWorld implements GameInterface {
                     c = card;
                     c.startOutgoingAnimators();
                     //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
+                    System.out.println("Do Computer Card Action");
                     cardActions.doCardAction(card.getCardID());
                     player2.getHand().removeCardFromHand(c);
                     player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
                     deck.addCard(c);
-                    processTurn(c);
+                    disableCard(c);
                     usedCard = true;
                     break;
                 }
             }
             if (!usedCard) {
                 c = player2.getHand().getCardsInHand().get(0);
-                processTurn(c);
+                disableCard(c);
             }
         } else if(difficulty == HARD_DIFFICULTY) {
             Card chosenCard = ai.processAI();
@@ -223,11 +229,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
             player2.getHand().removeCardFromHand(chosenCard);
             player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
             deck.addCard(chosenCard);
-            processTurn(chosenCard);
+            disableCard(chosenCard);
             c = chosenCard;
         }
         switchTurns(PLAYER);
-        //cardsToReplaceFromComputer.add(c);
     }
 
     @Override
@@ -236,17 +241,18 @@ public class GameWorld extends KodyWorld implements GameInterface {
             card.startOutgoingAnimators();
             //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
             if (!isDiscarding()) {
+                System.out.println("Do Player Card Action");
                 cardActions.doCardAction(card.getCardID());
                 player1.getHand().removeCardFromHand(card);
                 player1.getHand().addCardToHand(drawNewCard(card.getX(), card.getY(), 0));
                 deck.addCard(card);
             }
-            processTurn(card);
+            disableCard(card);
             switchTurns(PLAYER2);
         }
     }
 
-    private void processTurn(Card card) {
+    private void disableCard(Card card) {
         card.disable();
     }
 
@@ -271,7 +277,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     @Override
     public int getPlayerTurn() {
-        return PLAYER;
+        return playerTurn;
     }
 
     @Override

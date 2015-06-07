@@ -38,6 +38,7 @@ public class KodyWorld {
         menus = new ArrayList<PopupMenu>();
         touchPoint = new Vector3(0, 0, 0);
     }
+
     public void update(float delta) {
         for (PopupWidget widget: widgets) {
             widget.update(delta);

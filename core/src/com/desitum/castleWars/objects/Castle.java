@@ -30,7 +30,13 @@ public class Castle extends Sprite {
     public Castle(Texture castleImage, GameInterface gi, float x){
         super(castleImage, 0, 0, castleImage.getWidth(), castleImage.getHeight());
         health = 40;
-        wall = new Wall(Assets.cancelButtonUp, this, gi);
+        if(GameScreen.SCREEN_WIDTH/2 > x) {
+            wall = new Wall(Assets.playerWall, this, x, gi);
+        } else {
+            wall = new Wall(Assets.computerWall, this, x, gi);
+
+        }
+
 
         this.setOriginCenter();
         this.setSize(25.0f, 60.0f);
@@ -50,10 +56,11 @@ public class Castle extends Sprite {
             if (animators.isRunning()) animators.update(delta);
         }
         particles.update(delta);
+        this.getWall().update(delta);
     }
 
     public void doDamage(float damage){
-        if(wall.getHealth() > 0){
+        if(wall.getHealth() <= 0){
             if (this.equals(gi.getPlayer1().getCastle())) {
                 gi.setPlayerCastleLabelChangeText((int) -damage);
             } else {
@@ -69,9 +76,11 @@ public class Castle extends Sprite {
                 }
             });
             animators.start(false);
+        } else {
+                this.getWall().doDamage(damage, false);
         }
         if(health <= 0){
-            //End game!
+            health = 0;
         }
     }
 
@@ -100,21 +109,34 @@ public class Castle extends Sprite {
         return health;
     }
 
-    public void setHealth(float health) {
-        this.health = health;
+    public void castleDamage(float damage) {
+        health -= damage;
+        if (this.equals(gi.getPlayer1().getCastle())) {
+            gi.setPlayerCastleLabelChangeText((int)-damage);
+        } else {
+            gi.setComputerCastleLabelChangeText((int)-damage);
+        }
+        animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);
+        particles.turnOn();
+        animators.setOnFinishedListener(new OnAnimationFinishedListener() {
+            @Override
+            public void onAnimationFinished(Animator anim) {
+                particles.turnOff();
+            }
+        });
+        animators.start(false);
+        if(health <= 0){
+            health = 0;
+        }
     }
 
     public Wall getWall() {
         return wall;
     }
 
-    public void addAnimator(Animator anim) {
-        animators = anim;
-    }
-
     public void draw(SpriteBatch gameBatch) {
         super.draw(gameBatch);
-        //wall.draw(gameBatch);
+        wall.draw(gameBatch);
         particles.draw(gameBatch);
     }
 }

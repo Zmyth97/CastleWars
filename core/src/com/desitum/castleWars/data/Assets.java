@@ -34,7 +34,9 @@ public class Assets {
 
     //Game Textures
     public static Texture playerCastle;
+    public static Texture playerWall;
     public static Texture computerCastle;
+    public static Texture computerWall;
     public static Texture gameGround;
     public static Texture gameSky;
     public static Texture menuArea;
@@ -162,7 +164,9 @@ public class Assets {
 
     public static void loadGameTextures() {
         playerCastle = new Texture("game/castle1.png");
+        playerWall = new Texture("game/wall1.png");
         computerCastle = new Texture("game/castle2.png");
+        computerWall = new Texture("game/wall2.png");
         gameGround = new Texture("game/ground.png");
         gameSky = new Texture("game/sky.png");
         menuArea = new Texture("game/area.png");

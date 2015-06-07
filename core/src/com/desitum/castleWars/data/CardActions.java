@@ -410,15 +410,10 @@ public class CardActions {
             }
         }else if(cardID == TROJAN_HORSE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
-                float temp = gi.getPlayer2().getCastle().getWall().getHealth();
-                gi.getPlayer2().getCastle().doDamage(20 + temp);
-                gi.getPlayer2().getCastle().getWall().repair(temp);
-                //NOTE FOR KODY: Probably change the three lines above to just 1 and add a Castle.setHealth() along with doDamage to avoid make it more simple
+                gi.getPlayer2().getCastle().castleDamage(20);
                 gi.getResources().subtractPlayerWeapons(TROJAN_HORSE_COST); //Cost
             } else {
-                float temp = gi.getPlayer1().getCastle().getWall().getHealth();
-                gi.getPlayer1().getCastle().doDamage(20 + temp);
-                gi.getPlayer1().getCastle().getWall().repair(temp);
+                gi.getPlayer1().getCastle().castleDamage(20);
                 gi.getResources().subtractComputerWeapons(TROJAN_HORSE_COST); //Cost
             }
         }else if(cardID == BLACK_PLAGUE){
