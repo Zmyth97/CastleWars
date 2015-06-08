@@ -1,6 +1,5 @@
 package com.desitum.castleWars.data;
 
-import com.badlogic.gdx.Game;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.world.GameInterface;
 
@@ -16,9 +15,8 @@ public class ComputerAI {
     private static final int MAX_BUILD = 20;
 
     GameInterface gi;
-    private boolean discarding;
-
     ArrayList<Integer> possibleCards;
+    private boolean discarding;
 
     public ComputerAI(GameInterface gi) {
         this.gi = gi;
@@ -35,24 +33,24 @@ public class ComputerAI {
                 possibleCards.add(c.getCardID());
             }
         }
-        if(possibleCards.size() > 0) {
+        if (possibleCards.size() > 0) {
             discarding = false;
             System.out.println("Possible Cards Amonut: " + possibleCards.size());
             System.out.println("Starting AI");
             Collections.sort(possibleCards);
             System.out.println("Possible Cards: ");
-            for(int card: possibleCards){
+            for (int card : possibleCards) {
                 System.out.println(card);
             }
             int card = determineStrategy();
             System.out.println("Card ID: " + card);
-            if(card == 0){
+            if (card == 0) {
                 card = possibleCards.get(0);
             }
             chosenCard = chooseCard(card);
             System.out.println("Chosen Card: " + chosenCard.getCardID());
         } else {
-            findBestToDiscard();
+            chosenCard = findBestToDiscard();
             discarding = true;
         }
 
@@ -229,8 +227,8 @@ public class ComputerAI {
             card = buildEconomy();
         }
 
-        if(card == 0){
-            if(attack) {
+        if (card == 0) {
+            if (attack) {
                 System.out.println("Attack Failed, On to Build");
                 card = buildEconomy();
             } else {
@@ -256,11 +254,11 @@ public class ComputerAI {
             chosenCard = CardActions.LIGHTNING_STRIKE;
         } else if (possibleCards.contains(CardActions.CATAPULT)) {
             chosenCard = CardActions.CATAPULT;
-        }  else if (possibleCards.contains(CardActions.RAID)) {
+        } else if (possibleCards.contains(CardActions.RAID)) {
             chosenCard = CardActions.RAID;
-        }else if (possibleCards.contains(CardActions.BLAST)) {
+        } else if (possibleCards.contains(CardActions.BLAST)) {
             chosenCard = CardActions.BLAST;
-        } else if (possibleCards.contains(CardActions.JERICHO ) && gi.getPlayer1().getCastle().getWall().getHealth() > 40) {
+        } else if (possibleCards.contains(CardActions.JERICHO) && gi.getPlayer1().getCastle().getWall().getHealth() > 40) {
             chosenCard = CardActions.JERICHO;
         } else if (possibleCards.contains(CardActions.RAM)) {
             chosenCard = CardActions.RAM;
@@ -302,13 +300,13 @@ public class ComputerAI {
             chosenCard = CardActions.STRONGHOLD;
         } else if (possibleCards.contains(CardActions.GREATWALL)) {
             chosenCard = CardActions.GREATWALL;
-        }  else if (possibleCards.contains(CardActions.RESERVE)) {
+        } else if (possibleCards.contains(CardActions.RESERVE)) {
             chosenCard = CardActions.RESERVE;
-        }  else if (possibleCards.contains(CardActions.WALL)) {
+        } else if (possibleCards.contains(CardActions.WALL)) {
             chosenCard = CardActions.WALL;
         } else if (possibleCards.contains(CardActions.BARRIER)) {
             chosenCard = CardActions.BARRIER;
-        } else if (possibleCards.contains(CardActions.CREATE_STONES )) {
+        } else if (possibleCards.contains(CardActions.CREATE_STONES)) {
             chosenCard = CardActions.CREATE_STONES;
         } else if (possibleCards.contains(CardActions.CREATE_GEMS)) {
             chosenCard = CardActions.CREATE_GEMS;
@@ -350,7 +348,7 @@ public class ComputerAI {
         return theCard;
     }
 
-    private Card findBestToDiscard(){
+    private Card findBestToDiscard() {
         Card toDiscard = null;
         //Add Logic for which is best to discard here
 

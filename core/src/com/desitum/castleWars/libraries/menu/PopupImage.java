@@ -2,10 +2,6 @@ package com.desitum.castleWars.libraries.menu;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.desitum.castleWars.libraries.animation.Animator;
-import com.desitum.castleWars.libraries.animation.MovementAnimator;
-
-import java.util.ArrayList;
 
 /**
  * Created by kody on 4/19/15.
@@ -15,9 +11,6 @@ public class PopupImage extends PopupWidget {
     private Texture downTexture;
     private Texture upTexture;
 
-    private ArrayList<Animator> comingInAnimators;
-    private ArrayList<Animator> goingOutAnimators;
-
     private boolean beenDown;
     private boolean enabledClicking;
 
@@ -26,12 +19,13 @@ public class PopupImage extends PopupWidget {
     /**
      * PopupImage can have a highlighted area showing it is selected,
      * Extends PopupWidget and has all the animations you need
-     * @param upTexture image to turn into a PopupImage
-     * @param highlight texture to use as a highlight
-     * @param x x position in relation to the parent (if applicable)
-     * @param y y position in relation to the parent (if applicable)
-     * @param width width of the PopupImage
-     * @param height height of the PopupImage
+     *
+     * @param upTexture       image to turn into a PopupImage
+     * @param highlight       texture to use as a highlight
+     * @param x               x position in relation to the parent (if applicable)
+     * @param y               y position in relation to the parent (if applicable)
+     * @param width           width of the PopupImage
+     * @param height          height of the PopupImage
      * @param enabledClicking whether you can click on it to highlight it
      */
     public PopupImage(Texture upTexture, Texture highlight, float x, float y, float width, float height, boolean enabledClicking) {
@@ -45,80 +39,39 @@ public class PopupImage extends PopupWidget {
 
         this.setOriginCenter();
 
-        this.comingInAnimators = new ArrayList<Animator>();
-        this.goingOutAnimators = new ArrayList<Animator>();
-
         this.enabledClicking = enabledClicking;
     }
 
-    public void onClickDown(){
-        if (enabledClicking && !beenDown){
+    public void onClickDown() {
+        if (enabledClicking && !beenDown) {
             beenDown = true;
         } else {
             beenDown = false;
         }
     }
 
-    public void onClickUp(boolean clicked){
-        if (buttonListener != null && clicked && beenDown){
+    public void onClickUp(boolean clicked) {
+        if (buttonListener != null && clicked && beenDown) {
             buttonListener.onClick(this);
         }
     }
 
-    public void resetState(){
+    public void resetState() {
         this.setTexture(downTexture);
     }
 
     @Override
-    public void update(float delta){
-        for (Animator anim: comingInAnimators){
-            anim.update(delta);
-        }
-
-        for (Animator anim: goingOutAnimators){
-            anim.update(delta);
-        }
-
-    }
-
-    @Override
-    public void addIncomingAnimator(Animator anim){
-        anim.setSprite(this, anim.updateX(), anim.updateY());
-        this.comingInAnimators.add(anim);
-    }
-
-    @Override
-    public void addOutgoingAnimator(Animator anim){
-        anim.setSprite(this, anim.updateX(), anim.updateY());
-        this.goingOutAnimators.add(anim);
-    }
-
-    @Override
-    public void startIncomingAnimators(){
-        for (Animator anim2: comingInAnimators){
-            MovementAnimator anim = (MovementAnimator) anim2;
-            anim.start(false);
-        }
-    }
-
-    @Override
-    public void startOutgoingAnimators(){
-        for (Animator anim: goingOutAnimators){
-            anim.start(false);
-        }
-    }
-
-    @Override
-    public void draw(SpriteBatch batch){
+    public void draw(SpriteBatch batch) {
         super.draw(batch);
-        if (this.beenDown) batch.draw(downTexture, this.getX() + getWidth()/2 - (getWidth()/2) * getScaleX(), this.getY(), this.getWidth() * getScaleX(), this.getHeight());
+        if (this.beenDown)
+            batch.draw(downTexture, this.getX() + getWidth() / 2 - (getWidth() / 2) * getScaleX(), this.getY(), this.getWidth() * getScaleX(), this.getHeight());
     }
 
-    public void setActive(){
+    public void setActive() {
         beenDown = true;
     }
 
-    public void deactivate(){
+    public void deactivate() {
         beenDown = false;
     }
 

@@ -23,8 +23,9 @@ public class FlipEffect implements Animator {
 
     private static final Integer[] directions = new Integer[]{VERTICAL, HORIZONTAl};
 
-    Sprite sprite;
-    Texture texture;
+    private Sprite sprite;
+    private Texture texture;
+    private Texture toTexture;
 
     private float duration;
     private float currentState;
@@ -40,12 +41,15 @@ public class FlipEffect implements Animator {
 
     private OnAnimationFinishedListener finishedListener;
 
-    public FlipEffect(final Sprite sprite, final Texture toTexture, float duration, int flipDirection) {
+    public FlipEffect(Sprite sprite1, final Texture toTexture1, float duration, int flipDirection) {
         if (!contains(directions, flipDirection)) {
             throw new EnumConstantNotPresentException(Directions.class, "flipDirection");
         }
 
-        this.sprite = sprite;
+        this.animators = new ArrayList<Animator>();
+
+        this.sprite = sprite1;
+        this.toTexture = toTexture1;
         this.duration = duration;
         this.currentState = 0;
         this.running = false;
@@ -60,8 +64,13 @@ public class FlipEffect implements Animator {
                 }
             });
             animators.add(firstScale);
-            animators.add(new ScaleAnimator(sprite, duration / 2, duration / 2, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, flipDirection == HORIZONTAl, flipDirection == VERTICAL));
+            animators.add(new ScaleAnimator(sprite, duration / 2, duration / 2, 0, 1, Interpolation.DECELERATE_INTERPOLATOR, flipDirection == HORIZONTAl, flipDirection == VERTICAL));
         }
+    }
+
+    public FlipEffect(Sprite sprite, Texture fromTexture, Texture toTexture, float duration, int flipDirection) {
+        this(sprite, toTexture, duration, flipDirection);
+        sprite.setTexture(fromTexture);
     }
 
     public FlipEffect(Texture fromTexture, final Texture toTexture, Rectangle rectangle, float duration, int flipDirection) {
@@ -78,7 +87,7 @@ public class FlipEffect implements Animator {
             }
         });
         animators.add(firstScale);
-        animators.add(new ScaleAnimator(duration / 2, duration / 2, 1, 0, Interpolation.DECELERATE_INTERPOLATOR));
+        animators.add(new ScaleAnimator(duration / 2, duration / 2, 0, 1, Interpolation.DECELERATE_INTERPOLATOR));
     }
 
     @Override
@@ -86,8 +95,11 @@ public class FlipEffect implements Animator {
         if (running) {
             currentState += delta;
 
-            if (currentState == duration) {
-                if (finishedListener != null) finishedListener.onAnimationFinished(this);
+            if (currentState >= duration) {
+                if (finishedListener != null) {
+                    finishedListener.onAnimationFinished(this);
+                    running = false;
+                }
             }
         }
 
@@ -103,11 +115,19 @@ public class FlipEffect implements Animator {
             running = true;
 
             currentState = 0;
+
+            for (Animator animator : animators) {
+                animator.start(isProtected);
+            }
         } else if (!isProtected) {
             ran = true;
             running = true;
 
             currentState = 0;
+
+            for (Animator animator : animators) {
+                animator.start(isProtected);
+            }
         }
     }
 

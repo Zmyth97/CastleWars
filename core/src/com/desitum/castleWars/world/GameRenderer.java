@@ -35,9 +35,6 @@ public class GameRenderer {
         drawWorld();
         drawCards();
 
-        for (PopupMenu menu : this.world.getMenus()) {
-            menu.draw(gameBatch);
-        }
         for (PopupWidget widget : this.world.getWidgets()) {
             widget.draw(gameBatch);
 
@@ -46,6 +43,10 @@ public class GameRenderer {
                     gameBatch.draw(Assets.discard, widget.getX(), widget.getY(), widget.getWidth(), widget.getHeight());
                 }
             }
+        }
+
+        for (PopupMenu menu : this.world.getMenus()) {
+            menu.draw(gameBatch);
         }
 
     }
@@ -63,6 +64,7 @@ public class GameRenderer {
     }
 
     private void drawCards() {
+        gameBatch.draw(Assets.cardBack, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y, Card.CARD_WIDTH, Card.CARD_HEIGHT);
         for (int x = world.getDeck().getCardList().size() - 2; x < world.getDeck().getCardList().size(); x++) {
             Card card = world.getDeck().getCardList().get(x);
             card.draw(gameBatch);

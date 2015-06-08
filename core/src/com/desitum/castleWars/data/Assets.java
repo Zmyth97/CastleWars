@@ -193,10 +193,10 @@ public class Assets {
     }
 
     public static void loadGameTextures() {
-        playerCastle = new Texture("game/castle1.png");
-        playerWall = new Texture("game/wall1.png");
-        computerCastle = new Texture("game/castle2.png");
-        computerWall = new Texture("game/wall2.png");
+        playerCastle = new Texture("game/player_castle.png");
+        playerWall = new Texture("game/player_wall.png");
+        computerCastle = new Texture("game/computer_castle.png");
+        computerWall = new Texture("game/computer_wall.png");
         gameGround = new Texture("game/ground.png");
         gameSky = new Texture("game/sky.png");
         cloud1 = new Texture("game/cloud1.png");

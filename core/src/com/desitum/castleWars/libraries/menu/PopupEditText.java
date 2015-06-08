@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
-
-import java.util.ArrayList;
 
 /**
  * Created by kody on 5/23/15.
@@ -21,9 +18,6 @@ public class PopupEditText extends PopupWidget {
     private Texture backgroundTexture;
     private Color highlightColor;
     private BitmapFont font;
-
-    private ArrayList<Animator> comingInAnimators;
-    private ArrayList<Animator> goingOutAnimators;
 
     private boolean beenDown;
 
@@ -54,9 +48,6 @@ public class PopupEditText extends PopupWidget {
 
         this.setOriginCenter();
 
-        this.comingInAnimators = new ArrayList<Animator>();
-        this.goingOutAnimators = new ArrayList<Animator>();
-
         setupFontSize();
     }
 
@@ -76,9 +67,6 @@ public class PopupEditText extends PopupWidget {
 
         this.setOriginCenter();
 
-        this.comingInAnimators = new ArrayList<Animator>();
-        this.goingOutAnimators = new ArrayList<Animator>();
-
         setupFontSize();
     }
 
@@ -97,9 +85,6 @@ public class PopupEditText extends PopupWidget {
         this.setPosition(x, y);
 
         this.setOriginCenter();
-
-        this.comingInAnimators = new ArrayList<Animator>();
-        this.goingOutAnimators = new ArrayList<Animator>();
 
         setupFontSize();
     }
@@ -138,13 +123,7 @@ public class PopupEditText extends PopupWidget {
 
     @Override
     public void update(float delta) {
-        for (Animator anim : comingInAnimators) {
-            anim.update(delta);
-        }
-
-        for (Animator anim : goingOutAnimators) {
-            anim.update(delta);
-        }
+        super.update(delta);
 
         if (colorEffects != null) {
             colorEffects.update(delta);
@@ -225,32 +204,6 @@ public class PopupEditText extends PopupWidget {
             toAppend = toAppend.toUpperCase();
         }
         text += toAppend;
-    }
-
-    @Override
-    public void addIncomingAnimator(Animator anim) {
-        anim.setSprite(this, anim.updateX(), anim.updateY());
-        this.comingInAnimators.add(anim);
-    }
-
-    @Override
-    public void addOutgoingAnimator(Animator anim) {
-        anim.setSprite(this, anim.updateX(), anim.updateY());
-        this.goingOutAnimators.add(anim);
-    }
-
-    @Override
-    public void startIncomingAnimators() {
-        for (Animator anim : comingInAnimators) {
-            anim.start(false);
-        }
-    }
-
-    @Override
-    public void startOutgoingAnimators() {
-        for (Animator anim : goingOutAnimators) {
-            anim.start(false);
-        }
     }
 
     public void addFontColorChanger(ColorEffects colorEffects) {

@@ -25,10 +25,10 @@ public class Deck {
 
         cardList = new ArrayList<Card>();
         fillDeck();
-        if(boughtFlamePack){
+        if (boughtFlamePack) {
             addFlameCards();
         }
-        if(boughtJapanesePack){
+        if (boughtJapanesePack) {
             addJapaneseCards();
         }
     }
@@ -277,12 +277,13 @@ public class Deck {
     }
 
     public Card drawCard() {
+        System.out.println("Deck size: " + cardList.size());
         Card lastCard = cardList.remove(cardList.size() - 1);
         Collections.shuffle(cardList);
         cardList.add(lastCard);
-        Card drawCard = cardList.get(0);
+        Card cardDrawn = cardList.get(0);
         cardList.remove(0);
-        return drawCard;
+        return cardDrawn;
     }
 
     public ArrayList<Card> getCardList() {

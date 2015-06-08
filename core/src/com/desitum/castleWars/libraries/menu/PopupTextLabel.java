@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 
 import java.util.ArrayList;
@@ -14,14 +13,12 @@ import java.util.ArrayList;
  * Created by kody on 5/23/15.
  * can be used by kody and people in [kody}]
  */
-public class PopupTextLabel extends PopupWidget{
+public class PopupTextLabel extends PopupWidget {
 
     private Texture backgroundTexture;
     private Color highlightColor;
     private BitmapFont font;
 
-    private ArrayList<Animator> comingInAnimators;
-    private ArrayList<Animator> goingOutAnimators;
     private ArrayList<ColorEffects> colorEffects;
 
     private boolean beenDown;
@@ -53,8 +50,6 @@ public class PopupTextLabel extends PopupWidget{
 
         this.setOriginCenter();
 
-        this.comingInAnimators = new ArrayList<Animator>();
-        this.goingOutAnimators = new ArrayList<Animator>();
         this.colorEffects = new ArrayList<ColorEffects>();
 
         this.currentColor = new Color(1, 1, 1, 1);
@@ -78,8 +73,6 @@ public class PopupTextLabel extends PopupWidget{
 
         this.setOriginCenter();
 
-        this.comingInAnimators = new ArrayList<Animator>();
-        this.goingOutAnimators = new ArrayList<Animator>();
         this.colorEffects = new ArrayList<ColorEffects>();
         this.currentColor = new Color(1, 1, 1, 1);
 
@@ -102,8 +95,6 @@ public class PopupTextLabel extends PopupWidget{
 
         this.setOriginCenter();
 
-        this.comingInAnimators = new ArrayList<Animator>();
-        this.goingOutAnimators = new ArrayList<Animator>();
         this.colorEffects = new ArrayList<ColorEffects>();
         this.currentColor = new Color(1, 1, 1, 1);
 
@@ -111,7 +102,7 @@ public class PopupTextLabel extends PopupWidget{
     }
 
     public void startTextColorEffects() {
-        for (ColorEffects effects: colorEffects) {
+        for (ColorEffects effects : colorEffects) {
             effects.start(false);
         }
     }
@@ -135,34 +126,28 @@ public class PopupTextLabel extends PopupWidget{
         this.cursorMaxBlink = blinkTime;
     }
 
-    public void onClickDown(Vector3 touchPos){
+    public void onClickDown(Vector3 touchPos) {
         beenDown = true;
     }
 
-    public void onClickUp(boolean clicked){
+    public void onClickUp(boolean clicked) {
         this.setTexture(backgroundTexture);
-        if (buttonListener != null && clicked && beenDown){
+        if (buttonListener != null && clicked && beenDown) {
             buttonListener.onClick(this);
         }
         beenDown = false;
     }
 
-    public void resetState(){
+    public void resetState() {
     }
 
     @Override
-    public void update(float delta){
-        for (Animator anim: comingInAnimators){
-            anim.update(delta);
-        }
+    public void update(float delta) {
+        super.update(delta);
 
-        for (Animator anim: goingOutAnimators){
-            anim.update(delta);
-        }
-
-        for (ColorEffects effects: colorEffects) {
+        for (ColorEffects effects : colorEffects) {
             effects.update(delta);
-            if (effects.isRunning()){
+            if (effects.isRunning()) {
                 currentColor = effects.getCurrentColor();
             }
         }
@@ -171,32 +156,6 @@ public class PopupTextLabel extends PopupWidget{
         if (cursorBlink < 0) {
             cursorOn = !cursorOn;
             cursorBlink = cursorMaxBlink;
-        }
-    }
-
-    @Override
-    public void addIncomingAnimator(Animator anim){
-        anim.setSprite(this, anim.updateX(), anim.updateY());
-        this.comingInAnimators.add(anim);
-    }
-
-    @Override
-    public void addOutgoingAnimator(Animator anim){
-        anim.setSprite(this, anim.updateX(), anim.updateY());
-        this.goingOutAnimators.add(anim);
-    }
-
-    @Override
-    public void startIncomingAnimators(){
-        for (Animator anim: comingInAnimators){
-            anim.start(false);
-        }
-    }
-
-    @Override
-    public void startOutgoingAnimators(){
-        for (Animator anim: goingOutAnimators){
-            anim.start(false);
         }
     }
 

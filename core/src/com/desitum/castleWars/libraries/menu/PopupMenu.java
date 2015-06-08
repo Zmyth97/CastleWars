@@ -16,8 +16,6 @@ import java.util.ArrayList;
 public class PopupMenu extends PopupWidget {
 
     private ArrayList<PopupWidget> widgets;
-    private ArrayList<Animator> incomingAnimators;
-    private ArrayList<Animator> outgoingAnimators;
     private ArrayList<Animator> incomingAnimatorsToAdd;
     private ArrayList<Animator> outgoingAnimatorsToAdd;
 
@@ -39,8 +37,6 @@ public class PopupMenu extends PopupWidget {
     public PopupMenu(Texture background, float x, float y, float width, float height) {
         super(background, 0, 0, background.getWidth(), background.getHeight());
         widgets = new ArrayList<PopupWidget>();
-        incomingAnimators = new ArrayList<Animator>();
-        outgoingAnimators = new ArrayList<Animator>();
         incomingAnimatorsToAdd = new ArrayList<Animator>();
         outgoingAnimatorsToAdd = new ArrayList<Animator>();
 
@@ -169,13 +165,7 @@ public class PopupMenu extends PopupWidget {
      * @param delta - time since last frame
      */
     private void updateAnimation(float delta) {
-        for (Animator anim : incomingAnimators) {
-            anim.update(delta);
-        }
-
-        for (Animator anim : outgoingAnimators) {
-            anim.update(delta);
-        }
+        super.update(delta);
     }
 
     /**
@@ -184,7 +174,7 @@ public class PopupMenu extends PopupWidget {
      * @param anim - animator to add
      */
     public void addIncomingAnimator(Animator anim) {
-        incomingAnimators.add(anim);
+        super.addIncomingAnimator(anim);
         incomingAnimatorsToAdd.add(anim);
     }
 
@@ -194,7 +184,7 @@ public class PopupMenu extends PopupWidget {
      * @param anim - animator to add
      */
     public void addOutgoingAnimator(Animator anim) {
-        outgoingAnimators.add(anim);
+        super.addOutgoingAnimator(anim);
         outgoingAnimatorsToAdd.add(anim);
     }
 
@@ -207,7 +197,7 @@ public class PopupMenu extends PopupWidget {
     public void addPopupWidget(PopupWidget toAdd) {
         for (Animator anim : incomingAnimatorsToAdd) {
             Animator dupAnim = anim.duplicate();
-            if (dupAnim.getClass().equals(MovementAnimator.class)) {
+            if (dupAnim instanceof MovementAnimator) {
                 MovementAnimator dupMov = (MovementAnimator) dupAnim;
                 if (dupMov.isControllingX()) {
                     dupMov.setStartPos(toAdd.getX() + dupMov.getStartPos());
@@ -246,11 +236,9 @@ public class PopupMenu extends PopupWidget {
      */
     @Override
     public void startIncomingAnimators() {
+        super.startIncomingAnimators();
         for (PopupWidget widget : widgets) {
             widget.startIncomingAnimators();
-        }
-        for (Animator anim : incomingAnimators) {
-            anim.start(false);
         }
     }
 
@@ -259,11 +247,9 @@ public class PopupMenu extends PopupWidget {
      */
     @Override
     public void startOutgoingAnimators() {
+        super.startOutgoingAnimators();
         for (PopupWidget widget : widgets) {
             widget.startOutgoingAnimators();
-        }
-        for (Animator anim : outgoingAnimators) {
-            anim.start(false);
         }
     }
 }

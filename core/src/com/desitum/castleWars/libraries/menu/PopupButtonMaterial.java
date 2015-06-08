@@ -7,13 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.data.Assets;
-import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
-import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.animation.ScaleAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
-
-import java.util.ArrayList;
 
 /**
  * Created by kody on 4/19/15.
@@ -25,13 +21,8 @@ public class PopupButtonMaterial extends PopupWidget {
     private Texture touchShadow;
     private Pixmap shadowMap;
 
-    private ArrayList<Animator> comingInAnimators;
-    private ArrayList<Animator> goingOutAnimators;
-
     private boolean beenDown;
 
-    private float x;
-    private float y;
     private float z;
 
     private float originalX;
@@ -48,8 +39,6 @@ public class PopupButtonMaterial extends PopupWidget {
 
         this.upTexture = upTexture;
 
-        this.x = x;
-        this.y = y;
         this.z = z;
 
         this.originalX = x;
@@ -65,9 +54,6 @@ public class PopupButtonMaterial extends PopupWidget {
 
         this.setOriginCenter();
 
-        this.comingInAnimators = new ArrayList<Animator>();
-        this.goingOutAnimators = new ArrayList<Animator>();
-
         touchPos = new Vector3(0, 0, 0);
         touchScale = new ScaleAnimator(1, 0, 1, Interpolation.LINEAR_INTERPOLATOR);
         touchColor = new ColorEffects(Color.GRAY, new Color(0.5f, 0.5f, 0.5f, 0), 1);
@@ -76,7 +62,7 @@ public class PopupButtonMaterial extends PopupWidget {
     public void onClickDown(Vector3 pos){
         this.touchPos.set(pos.x - getX(), pos.y - getY(), 0);
 
-        setPosition(x, y - z * 0.4f);
+        setPosition(getX(), getY() - z * 0.4f);
 
         touchScale.start(false);
         touchColor.start(false);
@@ -93,59 +79,6 @@ public class PopupButtonMaterial extends PopupWidget {
         beenDown = false;
     }
 
-    @Override
-    public void update(float delta){
-        for (Animator anim: comingInAnimators){
-            if (anim instanceof MovementAnimator) {
-                if (((MovementAnimator) anim).isControllingX()) {
-
-                } else if (((MovementAnimator) anim).isControllingY()) {
-
-                }
-            }
-            anim.update(delta);
-        }
-
-        for (Animator anim: goingOutAnimators){
-            anim.update(delta);
-        }
-
-        touchScale.update(delta);
-        touchColor.update(delta);
-        if (touchScale.isRunning()) {
-            shadowMap = new Pixmap((int) getWidth() * 10, (int) getHeight() * 10, Pixmap.Format.RGBA8888);
-            shadowMap.setColor(touchColor.getCurrentColor());
-            shadowMap.fillCircle((int) touchPos.x * 10, (int) (shadowMap.getHeight() - touchPos.y * 10), (int) (touchScale.getAmount() * getHeight() * 0.75f * 10));
-            touchShadow = new Texture(shadowMap);
-        }
-    }
-
-    @Override
-    public void addIncomingAnimator(Animator anim){
-        anim.setSprite(this, anim.updateX(), anim.updateY());
-        this.comingInAnimators.add(anim);
-    }
-
-    @Override
-    public void addOutgoingAnimator(Animator anim){
-        anim.setSprite(this, anim.updateX(), anim.updateY());
-        this.goingOutAnimators.add(anim);
-    }
-
-    @Override
-    public void startIncomingAnimators(){
-        for (Animator anim: comingInAnimators){
-            anim.start(false);
-        }
-    }
-
-    @Override
-    public void startOutgoingAnimators(){
-        for (Animator anim: goingOutAnimators){
-            anim.start(false);
-        }
-    }
-
     public void setButtonListener(OnClickListener buttonListener) {
         this.buttonListener = buttonListener;
     }
@@ -154,5 +87,15 @@ public class PopupButtonMaterial extends PopupWidget {
         batch.draw(shadow, getX() + z * 0.2f, getY() - z * 0.5f, getWidth(), getHeight());
         super.draw(batch);
         batch.draw(touchShadow, getX(), getY(), getWidth(), getHeight());
+    }
+
+    public void setX(float x) {
+        super.setX(x);
+        originalX = x;
+    }
+
+    public void setY(float y) {
+        super.setY(y);
+        originalY = y;
     }
 }

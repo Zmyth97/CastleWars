@@ -45,6 +45,10 @@ public abstract class PopupWidget extends Sprite {
     public void addOutgoingAnimator(Animator anim) {
         anim.setSprite(this, anim.updateX(), anim.updateY());
         this.goingOutAnimators.add(anim);
+
+        if (this instanceof PopupButtonMaterial) {
+            System.out.println("I'm a PopupButtonMaterial!");
+        }
     }
 
     public void startIncomingAnimators() {
@@ -59,15 +63,15 @@ public abstract class PopupWidget extends Sprite {
         }
     }
 
-    public void setOriginCenter(){
+    public void setOriginCenter() {
         this.setOrigin(this.getWidth() / 2, this.getHeight() / 2);
     }
-    
-    public void setAlpha(float alpha){
-    	super.setColor(1, 1, 1, alpha);
+
+    public void setAlpha(float alpha) {
+        super.setColor(1, 1, 1, alpha);
     }
 
-    public void draw(SpriteBatch batch){
+    public void draw(SpriteBatch batch) {
         super.draw(batch);
     }
 
@@ -80,6 +84,7 @@ public abstract class PopupWidget extends Sprite {
     }
 
     public void clearAllAnimators() {
-        this.comingInAnimators = new ArrayList<Animator>();
+        this.clearIncomingAnimators();
+        this.clearOutgoingAnimators();
     }
 }

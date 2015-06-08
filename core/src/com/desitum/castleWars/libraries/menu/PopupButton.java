@@ -33,7 +33,7 @@ public class PopupButton extends PopupWidget {
     }
 
     public void onClickUp(boolean clicked){
-        this.setTexture(upTexture);
+        if (beenDown) this.setTexture(upTexture);
         if (buttonListener != null && clicked && beenDown){
             buttonListener.onClick(this);
         }
@@ -42,11 +42,6 @@ public class PopupButton extends PopupWidget {
 
     public void resetState(){
         this.setTexture(downTexture);
-    }
-
-    @Override
-    public void update(float delta){
-        super.update(delta);
     }
 
     public void setButtonListener(OnClickListener buttonListener) {

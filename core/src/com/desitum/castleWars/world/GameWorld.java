@@ -10,9 +10,9 @@ import com.desitum.castleWars.data.Resources;
 import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
+import com.desitum.castleWars.libraries.effects.FlipEffect;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
-import com.desitum.castleWars.libraries.menu.PopupButton;
 import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
 import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
@@ -261,11 +261,20 @@ public class GameWorld extends KodyWorld implements GameInterface {
             if (!isDiscarding()) {
                 cardActions.doCardAction(card.getCardID());
                 player1.getHand().removeCardFromHand(card);
-                for (int i = 0; i <= player1.getHand().getCardsInHand().size(); i++) {
+                int iRange = player1.getHand().getCardsInHand().size();
+                for (int i = 0; i <= iRange; i++) {
                     float cardX = MenuScreen.SCREEN_WIDTH / 2 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
-
-                    if (i == player1.getHand().getCardsInHand().size())
+                    if (i == player1.getHand().getCardsInHand().size()) {
                         player1.getHand().addCardToHand(drawNewCard(cardX, card.getY(), 0));
+                    } else {
+                        Card card1 = player1.getHand().getCardsInHand().get(i);
+                        card1.clearAllAnimators();
+                        card1.addIncomingAnimator(new MovementAnimator(card, card1.getX(), cardX, 1f, i * 0.1f, Interpolation.ACCELERATE_DECELERATE_INTERPOLATOR, true, false));
+                        card1.addIncomingAnimator(new MovementAnimator(card, card1.getY(), CARDS_Y, 1f, i * 0.1f, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+                        card1.addOutgoingAnimator(new MovementAnimator(card, cardX, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
+                        card1.addOutgoingAnimator(new MovementAnimator(card, card1.getY(), DISCARD_PILE_Y, 1f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+                        card1.startIncomingAnimators();
+                    }
                 }
                 deck.addCard(card);
             }
@@ -281,6 +290,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private Card drawNewCard(float x, float y, float delay) {
         Card card = deck.drawCard();
         if(this.playerTurn == PLAYER2 && card.getCardID() > 399){
+            deck.addCard(card);
+            System.out.println("Getting new Card: " + card.getCardID());
             drawNewCard(x, y, delay); //Note To Kody: Not sure if this is where you'd want this, almost put it in deck but the interface isn't passed
                                       //to it and not sure if you would rather it here or in deck and add the interface to it. Up to you sir!
         }
@@ -290,13 +301,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         card.addOutgoingAnimator(new MovementAnimator(card, x, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
         card.addOutgoingAnimator(new MovementAnimator(card, y, DISCARD_PILE_Y, 1f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
         card.startIncomingAnimators();
+        card.setFlipEffect(new FlipEffect(card, Assets.cardBack, card.getTexture(), 1.0f, FlipEffect.HORIZONTAl));
         return card;
     }
 
     private void makeCloud(){
         int randomY = (int)(Math.random() * 28) + 60;
         int randomSize = (int)(Math.random() * 10) + 20;
-        float randomSpeed = (float)(Math.random() * 3) + 2;
+        float randomSpeed = ((int) (Math.random() * 3.0f)) * 2.0f;
         int randomTexture = (int)(Math.random() * 2);
 
         if(randomTexture == 1){
@@ -600,7 +612,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         easyLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/7, (menuHeight/3) *2, menuWidth/4, (menuHeight/8), "Easy");
         normalLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/4 * 2.3f, (menuHeight/3)*2, menuWidth/3f, (menuHeight/8), "Normal");
-        okButton = new PopupButtonMaterial(Assets.okButton, menuWidth/2  - (menuWidth/4)/1.75f, menuHeight/4 - menuHeight/6, 5, menuWidth/4, menuHeight/6);
+        okButton = new PopupButtonMaterial(Assets.okButton, menuWidth / 2 - (menuWidth / 4) / 1.75f, menuHeight / 4 - menuHeight / 6, 2, menuWidth / 4, menuHeight / 6);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {

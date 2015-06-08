@@ -2,8 +2,10 @@ package com.desitum.castleWars.objects;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
+import com.desitum.castleWars.libraries.effects.FlipEffect;
 import com.desitum.castleWars.libraries.menu.PopupButton;
 
 
@@ -14,15 +16,12 @@ public class Card extends PopupButton {
 
     public static final float CARD_WIDTH = 14;
     public static final float CARD_HEIGHT = 21;
-
     public static final int BUILD = 1;
     public static final int ATTACK = 2;
     public static final int MAGIC = 3;
-
     private static Color regularColor = new Color(1f, 1f, 1f, 1);
-
     private static Color fadedColor = new Color(0.5f, 0.5f, 0.5f, 1);
-
+    private FlipEffect flipEffect;
     private int cardType;
     private boolean available;
     private int cardCost;
@@ -42,8 +41,10 @@ public class Card extends PopupButton {
 
     public void update(float delta) {
         super.update(delta);
+        if (flipEffect != null) flipEffect.update(delta);
         if (colorChanger != null) colorChanger.update(delta);
     }
+
     public void fadeColor(){
         if (colorChanger != null && colorChanger.isRunning()) return;
         if (ColorEffects.colorsMatch(this.getColor(), fadedColor, 0.01f)) return;
@@ -88,5 +89,22 @@ public class Card extends PopupButton {
 
     public void enable() {
         setAvailable(true);
+    }
+
+    public void draw(SpriteBatch batch) {
+        if (flipEffect != null && flipEffect.isRunning()) {
+            flipEffect.draw(batch);
+        } else {
+            super.draw(batch);
+        }
+    }
+
+    public void setFlipEffect(FlipEffect effect) {
+        this.flipEffect = effect;
+        this.flipEffect.start(true);
+    }
+
+    public void setTexture(Texture texture) {
+        super.setTexture(texture);
     }
 }
