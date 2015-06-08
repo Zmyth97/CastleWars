@@ -83,7 +83,7 @@ public class PopupMenu extends PopupWidget {
                     button.onClickUp(false);
                 }
             } else if (widget instanceof PopupButtonMaterial) {
-                PopupButtonMaterial button = button = (PopupButtonMaterial) widget;
+                PopupButtonMaterial button = (PopupButtonMaterial) widget;
                 if (clickInArea && clickDown) {
                     button.onClickDown(touchPos);
                 } else if (clickInArea) {

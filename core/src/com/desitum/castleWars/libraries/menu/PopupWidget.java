@@ -5,11 +5,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.libraries.animation.Animator;
 
+import java.util.ArrayList;
+
 /**
  * Created by kody on 4/18/15.
  * can be used by kody and people in []
  */
 public abstract class PopupWidget extends Sprite {
+
+    private ArrayList<Animator> comingInAnimators;
+    private ArrayList<Animator> goingOutAnimators;
 
     public PopupWidget(Texture texture, float width, float height, float x, float y) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
@@ -17,17 +22,42 @@ public abstract class PopupWidget extends Sprite {
         setSize(width, height);
         setX(x);
         setY(y);
+
+        this.comingInAnimators = new ArrayList<Animator>();
+        this.goingOutAnimators = new ArrayList<Animator>();
     }
 
-    public abstract void update(float delta);
+    public void update(float delta) {
+        for (Animator anim : comingInAnimators) {
+            anim.update(delta);
+        }
 
-    public abstract void addIncomingAnimator(Animator anim);
+        for (Animator anim : goingOutAnimators) {
+            anim.update(delta);
+        }
+    }
 
-    public abstract void addOutgoingAnimator(Animator anim);
+    public void addIncomingAnimator(Animator anim) {
+        anim.setSprite(this, anim.updateX(), anim.updateY());
+        this.comingInAnimators.add(anim);
+    }
 
-    public abstract void startIncomingAnimators();
+    public void addOutgoingAnimator(Animator anim) {
+        anim.setSprite(this, anim.updateX(), anim.updateY());
+        this.goingOutAnimators.add(anim);
+    }
 
-    public abstract void startOutgoingAnimators();
+    public void startIncomingAnimators() {
+        for (Animator anim : comingInAnimators) {
+            anim.start(false);
+        }
+    }
+
+    public void startOutgoingAnimators() {
+        for (Animator anim : goingOutAnimators) {
+            anim.start(false);
+        }
+    }
 
     public void setOriginCenter(){
         this.setOrigin(this.getWidth() / 2, this.getHeight() / 2);
@@ -39,5 +69,17 @@ public abstract class PopupWidget extends Sprite {
 
     public void draw(SpriteBatch batch){
         super.draw(batch);
+    }
+
+    public void clearIncomingAnimators() {
+        this.comingInAnimators = new ArrayList<Animator>();
+    }
+
+    public void clearOutgoingAnimators() {
+        this.comingInAnimators = new ArrayList<Animator>();
+    }
+
+    public void clearAllAnimators() {
+        this.comingInAnimators = new ArrayList<Animator>();
     }
 }
