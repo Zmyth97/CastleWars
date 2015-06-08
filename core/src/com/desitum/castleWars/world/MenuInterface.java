@@ -9,4 +9,5 @@ public interface MenuInterface {
     public void settings();
     public void multiplayer();
     public void buildDeck();
+    public void leaderboard();
 }

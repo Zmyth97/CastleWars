@@ -320,45 +320,45 @@ public class BuildScreen implements Screen {
         cardScrollArea.addWidget(duplicateMenu);
         //endregion
         //region Basic Spinners
-        barrierSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, barrierMenu.getX(), barrierMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        wallSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, wallMenu.getX(), wallMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        greatWallSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, greatWallMenu.getX(), greatWallMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        reinforceSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, reinforceMenu.getX(), reinforceMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        fortifySpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, fortifyMenu.getX(), fortifyMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        castleSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, castlesMenu.getX(), castlesMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        architectSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, architectMenu.getX(), architectMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        reserveSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, reserveMenu.getX(), reserveMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        sabotageSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, sabotageMenu.getX(), sabotageMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        strongHoldSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, strongholdMenu.getX(), strongholdMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        barrierSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, barrierMenu.getX(), barrierMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        wallSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, wallMenu.getX(), wallMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        greatWallSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, greatWallMenu.getX(), greatWallMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        reinforceSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, reinforceMenu.getX(), reinforceMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fortifySpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fortifyMenu.getX(), fortifyMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        castleSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, castlesMenu.getX(), castlesMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        architectSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, architectMenu.getX(), architectMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        reserveSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, reserveMenu.getX(), reserveMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        sabotageSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, sabotageMenu.getX(), sabotageMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        strongHoldSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, strongholdMenu.getX(), strongholdMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
 
-        recruiterSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, recruiterMenu.getX(), recruiterMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        spearmanSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, spearmanMenu.getX(), spearmanMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        ramSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, ramMenu.getX(), ramMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        catapultSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, catapultMenu.getX(), catapultMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        legionSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, legionMenu.getX(), legionMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        trebuchetSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, trebuchetMenu.getX(), trebuchetMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        assassinSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, assassinMenu.getX(), assassinMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        burglarSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, burglarMenu.getX(), burglarMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        thiefSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, thiefMenu.getX(), thiefMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        raidSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, raidMenu.getX(), raidMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        recruiterSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, recruiterMenu.getX(), recruiterMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        spearmanSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, spearmanMenu.getX(), spearmanMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        ramSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, ramMenu.getX(), ramMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        catapultSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, catapultMenu.getX(), catapultMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        legionSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, legionMenu.getX(), legionMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        trebuchetSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, trebuchetMenu.getX(), trebuchetMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        assassinSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, assassinMenu.getX(), assassinMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        burglarSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, burglarMenu.getX(), burglarMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        thiefSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, thiefMenu.getX(), thiefMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        raidSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, raidMenu.getX(), raidMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
-        createStonesSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, createStonesMenu.getX(), createStonesMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        createWeaponsSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, createWeaponsMenu.getX(), createWeaponsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        createGemsSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, createGemsMenu.getX(), createGemsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        destroyStonesSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, destroyStonesMenu.getX(), destroyStonesMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        destroyWeaponsSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, destroyWeaponsMenu.getX(), destroyWeaponsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        destroyGemsSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, destroyGemsMenu.getX(), destroyGemsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        mageSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, mageMenu.getX(), mageMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        hatTrickSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, hatTrickMenu.getX(), hatTrickMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        lightningSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, lightningMenu.getX(), lightningMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        blastSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, blastMenu.getX(), blastMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        createStonesSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, createStonesMenu.getX(), createStonesMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        createWeaponsSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, createWeaponsMenu.getX(), createWeaponsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        createGemsSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, createGemsMenu.getX(), createGemsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        destroyStonesSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, destroyStonesMenu.getX(), destroyStonesMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        destroyWeaponsSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, destroyWeaponsMenu.getX(), destroyWeaponsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        destroyGemsSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, destroyGemsMenu.getX(), destroyGemsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        mageSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, mageMenu.getX(), mageMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        hatTrickSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, hatTrickMenu.getX(), hatTrickMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        lightningSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, lightningMenu.getX(), lightningMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        blastSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, blastMenu.getX(), blastMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
-        jerichoSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, jerichoMenu.getX(), jerichoMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        trojanHorseSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, trojanHorseMenu.getX(), trojanHorseMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        blackPlagueSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, blackPlagueMenu.getX(), blackPlagueMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        merlinSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, merlinMenu.getX(), merlinMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        duplicateSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, duplicateMenu.getX(), duplicateMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        jerichoSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, jerichoMenu.getX(), jerichoMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        trojanHorseSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, trojanHorseMenu.getX(), trojanHorseMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        blackPlagueSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, blackPlagueMenu.getX(), blackPlagueMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        merlinSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, merlinMenu.getX(), merlinMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        duplicateSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, duplicateMenu.getX(), duplicateMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
         barrierMenu.addPopupWidget(barrierSpinner);
         wallMenu.addPopupWidget(wallSpinner);
@@ -529,27 +529,27 @@ public class BuildScreen implements Screen {
         }
         //endregion
         //region FlamePack Spinners
-        wallOfFireSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, wallOfFireMenu.getX(), wallOfFireMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        campfireSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, campfireMenu.getX(), campfireMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        forgeSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, forgeMenu.getX(), forgeMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        boilingOilSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, boilingOilMenu.getX(), boilingOilMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        bonfireSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, bonfireMenu.getX(), bonfireMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        wallOfFireSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, wallOfFireMenu.getX(), wallOfFireMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        campfireSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, campfireMenu.getX(), campfireMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        forgeSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, forgeMenu.getX(), forgeMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        boilingOilSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, boilingOilMenu.getX(), boilingOilMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        bonfireSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, bonfireMenu.getX(), bonfireMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
-        fireSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, fireMenu.getX(), fireMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        fireArrowsSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, fireArrowsMenu.getX(), fireArrowsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        flamingAxeSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, flamingAxeMenu.getX(), flamingAxeMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        flamingShotSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, flamingShotMenu.getX(), flamingShotMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        flameLegionSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, flameLegionMenu.getX(), flameLegionMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireMenu.getX(), fireMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireArrowsSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireArrowsMenu.getX(), fireArrowsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        flamingAxeSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, flamingAxeMenu.getX(), flamingAxeMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        flamingShotSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, flamingShotMenu.getX(), flamingShotMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        flameLegionSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, flameLegionMenu.getX(), flameLegionMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
-        fireShamanSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, fireShamanMenu.getX(), fireShamanMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        lavaFlowSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, lavaFlowMenu.getX(), lavaFlowMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        coalSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, coalMenu.getX(), coalMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        blacksmithSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, blacksmithMenu.getX(), blacksmithMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        fireballSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, fireballMenu.getX(), fireballMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireShamanSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireShamanMenu.getX(), fireShamanMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        lavaFlowSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, lavaFlowMenu.getX(), lavaFlowMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        coalSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, coalMenu.getX(), coalMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        blacksmithSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, blacksmithMenu.getX(), blacksmithMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireballSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireballMenu.getX(), fireballMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
-        phoenixSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, phoenixMenu.getX(), phoenixMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        meteorsSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, meteorsMenu.getX(), meteorsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        infernoSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, infernoMenu.getX(), infernoMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        phoenixSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, phoenixMenu.getX(), phoenixMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        meteorsSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, meteorsMenu.getX(), meteorsMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        infernoSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, infernoMenu.getX(), infernoMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
         wallOfFireMenu.addPopupWidget(wallOfFireSpinner);
         campfireMenu.addPopupWidget(campfireSpinner);
@@ -668,27 +668,27 @@ public class BuildScreen implements Screen {
         }
         //endregion
         //region JapanesePack Spinners
-        stockadeSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, stockadeMenu.getX(), stockadeMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        fortressSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, fortressMenu.getX(), fortressMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        monasterySpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, monasteryMenu.getX(), monasteryMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        rampartSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, rampartMenu.getX(), rampartMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        citadelSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, citadelMenu.getX(), citadelMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        stockadeSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, stockadeMenu.getX(), stockadeMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fortressSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fortressMenu.getX(), fortressMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        monasterySpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, monasteryMenu.getX(), monasteryMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        rampartSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, rampartMenu.getX(), rampartMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        citadelSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, citadelMenu.getX(), citadelMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
-        ashigaruSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, ashigaruMenu.getX(), ashigaruMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        shurikenSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, shurikenMenu.getX(), shurikenMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        katanaSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, katanaMenu.getX(), katanaMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        samuraiSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, samuraiMenu.getX(), samuraiMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        dojoSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, dojoMenu.getX(), dojoMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        ashigaruSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, ashigaruMenu.getX(), ashigaruMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        shurikenSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, shurikenMenu.getX(), shurikenMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        katanaSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, katanaMenu.getX(), katanaMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        samuraiSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, samuraiMenu.getX(), samuraiMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        dojoSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, dojoMenu.getX(), dojoMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
-        shrineSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, shrineMenu.getX(), shrineMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        quarrySpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, quarryMenu.getX(), quarryMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        templeSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, templeMenu.getX(), templeMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        ricePaddySpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, ricePaddyMenu.getX(), ricePaddyMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        seppukuSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, seppukuMenu.getX(), seppukuMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        shrineSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, shrineMenu.getX(), shrineMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        quarrySpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, quarryMenu.getX(), quarryMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        templeSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, templeMenu.getX(), templeMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        ricePaddySpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, ricePaddyMenu.getX(), ricePaddyMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        seppukuSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, seppukuMenu.getX(), seppukuMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
-        ninjaSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, ninjaMenu.getX(), ninjaMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        dragonSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, dragonMenu.getX(), dragonMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        shogunSpinner = new PopupSpinner(Assets.invisible, Assets.okButtonUp, Assets.okButtonDown, Assets.textFieldFont, shogunMenu.getX(), shogunMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        ninjaSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, ninjaMenu.getX(), ninjaMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        dragonSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, dragonMenu.getX(), dragonMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
+        shogunSpinner = new PopupSpinner(Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, shogunMenu.getX(), shogunMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
 
         stockadeMenu.addPopupWidget(stockadeSpinner);
         fortressMenu.addPopupWidget(fortressSpinner);

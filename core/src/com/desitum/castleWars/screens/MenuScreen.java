@@ -77,6 +77,10 @@ public class MenuScreen implements Screen, MenuInterface {
         //For when we add multiplayer
     }
     @Override
+    public void leaderboard() {
+        //For when we add leaderboards
+    }
+    @Override
     public void buildDeck() {
         castleWars.setScreen(new BuildScreen(castleWars));
     }

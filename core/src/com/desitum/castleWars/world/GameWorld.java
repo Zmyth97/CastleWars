@@ -13,6 +13,7 @@ import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
 import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupTextLabel;
@@ -110,7 +111,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupToggleButton normalButton;
     private PopupTextLabel easyLabel;
     private PopupTextLabel normalLabel;
-    private PopupButton okButton;
+    private PopupButtonMaterial okButton;
 
     public GameWorld(Viewport cam) {
         super();
@@ -187,8 +188,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerStoneLabel.setText(":" + myResources.getPlayerStones());
         playerWeaponLabel.setText(":" + myResources.getPlayerWeapons());
         playerGemLabel.setText(":" + myResources.getPlayerGems());
-        playerCastleLabel.setText(":" +(int)  player1.getCastle().getHealth());
-        playerWallLabel.setText(":" +(int)  player1.getCastle().getWall().getHealth());
+        playerCastleLabel.setText(":" + (int)  player1.getCastle().getHealth());
+        playerWallLabel.setText(":" + (int)  player1.getCastle().getWall().getHealth());
         computerBuildersLabel.setText(":" + myResources.getComputerBuilders());
         computerSoldiersLabel.setText(":" + myResources.getComputerSoldiers());
         computerWizardsLabel.setText(":" + myResources.getComputerWizards());
@@ -196,9 +197,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerWeaponLabel.setText(":" + myResources.getComputerWeapons());
         computerGemLabel.setText(":" + myResources.getComputerGems());
         computerCastleLabel.setText(":" + (int) player2.getCastle().getHealth());
-        computerWallLabel.setText(":" +(int)  player2.getCastle().getWall().getHealth());
-
-
+        computerWallLabel.setText(":" + (int)  player2.getCastle().getWall().getHealth());
     }
 
     private void switchTurns(int playerTurn) {
@@ -246,7 +245,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 cardActions.doCardAction(chosenCard.getCardID());
             }
             player2.getHand().removeCardFromHand(chosenCard);
-            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
+            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, - Card.CARD_HEIGHT, 0));
             deck.addCard(chosenCard);
             disableCard(chosenCard);
             c = chosenCard;
@@ -579,39 +578,35 @@ public class GameWorld extends KodyWorld implements GameInterface {
         difficultyMenu.addOutgoingAnimator(yAnimator2);
 
 
-        easyButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth/6, (menuHeight/3), menuWidth/6, (menuHeight/6), false);
+        easyButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth/6, (menuHeight/3), menuWidth/6, (menuWidth/6), false);
         easyButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
                 easyButton.turnOn();
                 if(normalButton.isOn()){
                     normalButton.turnOff();
-                }
-                System.out.println("Turn Easy On");
-            }
+                }}
         });
-        normalButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth/4 * 2.5f, (menuHeight/3), menuWidth/6, (menuHeight/6), false);
+        normalButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth/4 * 2.5f, (menuHeight/3), menuWidth/6, (menuWidth/6), false);
         normalButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
                     normalButton.turnOn();
                     if(easyButton.isOn()){
                         easyButton.turnOff();
-                    }
-                    System.out.println("Turn Normal On");
-                }
+                    }             }
 
         });
 
         easyLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/7, (menuHeight/3) *2, menuWidth/4, (menuHeight/8), "Easy");
         normalLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/4 * 2.3f, (menuHeight/3)*2, menuWidth/3f, (menuHeight/8), "Normal");
-        okButton = new PopupButton(Assets.okButtonUp, Assets.okButtonDown, menuWidth/2  - (menuWidth/4)/1.75f, menuHeight/4 - menuHeight/6, menuWidth/4, menuHeight/6);
+        okButton = new PopupButtonMaterial(Assets.okButton, menuWidth/2  - (menuWidth/4)/1.75f, menuHeight/4 - menuHeight/6, 5, menuWidth/4, menuHeight/6);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
                 if (easyButton.isOn()) {
                     difficulty = EASY_DIFFICULTY;
-                } else {
+                } {
                     difficulty = NORMAL_DIFFICULTY;
                 }
                 difficultyMenu.startOutgoingAnimators();
@@ -624,9 +619,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
         difficultyMenu.addPopupWidget(normalLabel);
         difficultyMenu.addPopupWidget(okButton);
         addPopupMenu(difficultyMenu);
-        //addWidgetToWorld(difficultyMenu);
         difficultyMenu.startIncomingAnimators();
     }
+
     public void setPlayerBuildersLabelChangeText(int change) {
         if (change > 0) {
              playerBuildersLabelChange.setText("+" + change);

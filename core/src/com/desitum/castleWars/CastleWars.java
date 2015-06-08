@@ -50,10 +50,8 @@ public class CastleWars extends Game {
     // GUI
         //Castle Texture
         //Wall Texture
-        //Change Button Images? (You said you didn't like them earlier, so are we changing those?)
         //MenuScreen Additions (Animations, Store Button, Leaderboard Button in Corner, etc)?
         //Maybe something at the top showing the left side is you, right side is the computer or player2?
-        //Add dificulty setting gui piece on game start
     //Computer AI
         //Just Test it a Lot, and I'll fine tune it till its actually semi-hard to beat
     //Dev Console

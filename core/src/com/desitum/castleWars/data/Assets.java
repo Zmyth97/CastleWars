@@ -17,22 +17,31 @@ public class Assets {
     public static Texture trashCanSelected;
 
     //Button Textures
-    public static Texture playButtonUp;
-    public static Texture playButtonDown;
-    public static Texture settingsButtonUp;
-    public static Texture settingsButtonDown;
-    public static Texture cancelButtonUp;
-    public static Texture cancelButtonDown;
-    public static Texture okButtonUp;
-    public static Texture okButtonDown;
-    public static Texture exitButtonUp;
-    public static Texture exitButtonDown;
+    public static Texture playButton;
+    public static Texture settingsButton;
+    public static Texture leaderboardButton;
+    public static Texture cancelButton;
+    public static Texture okButton;
+    public static Texture buildDeckButton;
+    public static Texture shareButton;
+    public static Texture soundButtonOn;
+    public static Texture soundButtonOff;
+
+    //Round Button Textures
+    public static Texture playButtonRound;
+    public static Texture cancelButtonRound;
+    public static Texture leaderboardButtonRound;
+    public static Texture okButtonRound;
+    public static Texture settingsButtonRound;
+    public static Texture shareButtonRound;
 
     //Menu Textures
     public static Texture textFieldBackground;
     public static Texture menuBackground;
     public static Texture toggleButtonOff;
     public static Texture toggleButtonOn;
+    public static Texture upArrow;
+    public static Texture downArrow;
     public static Texture popupMenuBackground;
 
     //Game Textures
@@ -149,22 +158,33 @@ public class Assets {
 
     public static void loadMenuTextures() {
         invisible = Drawing.getHollowRectangle(10, 10, 1, new Color(0, 0, 0, 0));
-        playButtonUp = new Texture("menu/play_button_up.png");
-        playButtonDown = new Texture("menu/play_button_down.png");
-        settingsButtonUp = new Texture("menu/settings_button_up.png");
-        settingsButtonDown = new Texture("menu/settings_button_down.png");
-        cancelButtonUp = new Texture("menu/cancel_button_up.png");
-        cancelButtonDown = new Texture("menu/cancel_button_down.png");
-        okButtonUp = new Texture("menu/ok_button_up.png");
-        okButtonDown = new Texture("menu/ok_button_down.png");
-        exitButtonUp = new Texture("menu/exit_button_up.png");
-        exitButtonDown = new Texture("menu/exit_button_down.png");
+
+        //Button Textures
+        playButton = new Texture("menu/play_button.png");
+        settingsButton = new Texture("menu/settings_button.png");
+        leaderboardButton = new Texture("menu/leaderboard_button.png");
+        cancelButton = new Texture("menu/cancel_button.png");
+        okButton = new Texture("menu/ok_button.png");
+        buildDeckButton = new Texture("menu/build_deck_button.png");
+        shareButton = new Texture("menu/share_button.png");
+        soundButtonOn = new Texture("menu/sound_button_on.png");
+        soundButtonOff = new Texture("menu/sound_button_off.png");
+
+        //Round Button Textures
+        playButtonRound = new Texture("menu/play_button_round.png");
+        cancelButtonRound = new Texture("menu/cancel_button_round.png");
+        leaderboardButtonRound = new Texture("menu/leaderboard_button_round.png");
+        okButtonRound = new Texture("menu/ok_button_round.png");
+        settingsButtonRound = new Texture("menu/settings_button_round.png");
+        shareButtonRound = new Texture("menu/share_button_round.png");
 
         textFieldBackground = Drawing.getTextureRoundedRectangle(50, 50, 5, new Color(0.5f, 0.2f, 0.1f, 0.8f));
         menuBackground = new Texture("menu/menu_bg.png");
 
         toggleButtonOff = new Texture("menu/toggleButtonOff.png");
         toggleButtonOn = new Texture("menu/toggleButtonOn.png");
+        upArrow = new Texture("menu/up_arrow_button.png");
+        downArrow = new Texture("menu/down_arrow_button.png");
         popupMenuBackground = new Texture("menu/popupMenuBackground.png");
 
         textFieldFont = new BitmapFont(Gdx.files.internal("font/cartoon.fnt"), Gdx.files.internal("font/cartoon.png"), false);
