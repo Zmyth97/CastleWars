@@ -1,7 +1,6 @@
 package com.desitum.castleWars.libraries.menu;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.CollisionDetection;
@@ -74,8 +73,8 @@ public class PopupMenu extends PopupWidget {
         for (PopupWidget widget : widgets) { // Go through each PopupWidget in the menu's widgets
 
             boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
-            if (widget.getClass().equals(PopupButton.class)) { // if Widget is a PopupButton
-                PopupButton button = (PopupButton) widget;
+            if (widget instanceof PopupButton) { // if Widget is a PopupButton
+                PopupButton button = button = (PopupButton) widget;
                 if (clickInArea && clickDown) {
                     button.onClickDown();
                 } else if (clickInArea) {
@@ -83,7 +82,16 @@ public class PopupMenu extends PopupWidget {
                 } else {
                     button.onClickUp(false);
                 }
-            } else if (widget.getClass().equals(PopupSlider.class)) { // if widget is a Slider
+            } else if (widget instanceof PopupButtonMaterial) {
+                PopupButtonMaterial button = button = (PopupButtonMaterial) widget;
+                if (clickInArea && clickDown) {
+                    button.onClickDown(touchPos);
+                } else if (clickInArea) {
+                    button.onClickUp(true);
+                } else {
+                    button.onClickUp(false);
+                }
+            } else if (widget instanceof PopupSlider) { // if widget is a Slider
                 PopupSlider slider = (PopupSlider) widget;
                 if (clickInArea && clickDown) {
                     slider.onClickDown(touchPos);
@@ -92,7 +100,7 @@ public class PopupMenu extends PopupWidget {
                 } else {
                     slider.onClickUp(); // handles if not in area
                 }
-            } else if (widget.getClass().equals(PopupScrollArea.class)) { // if widget is a PopupScrollArea
+            } else if (widget instanceof PopupScrollArea) { // if widget is a PopupScrollArea
                 PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
                 popupScrollArea.updateTouchInput(touchPos, clickDown);
             } else if (widget instanceof PopupImage) {

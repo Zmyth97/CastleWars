@@ -262,7 +262,12 @@ public class GameWorld extends KodyWorld implements GameInterface {
             if (!isDiscarding()) {
                 cardActions.doCardAction(card.getCardID());
                 player1.getHand().removeCardFromHand(card);
-                player1.getHand().addCardToHand(drawNewCard(card.getX(), card.getY(), 0));
+                for (int i = 0; i <= player1.getHand().getCardsInHand().size(); i++) {
+                    float cardX = MenuScreen.SCREEN_WIDTH / 2 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
+
+                    if (i == player1.getHand().getCardsInHand().size())
+                        player1.getHand().addCardToHand(drawNewCard(cardX, card.getY(), 0));
+                }
                 deck.addCard(card);
             }
             disableCard(card);
