@@ -40,7 +40,7 @@ public class FlipEffect implements Animator {
 
     private OnAnimationFinishedListener finishedListener;
 
-    public FlipEffect(Sprite sprite, float duration, int flipDirection) {
+    public FlipEffect(final Sprite sprite, final Texture toTexture, float duration, int flipDirection) {
         if (!contains(directions, flipDirection)) {
             throw new EnumConstantNotPresentException(Directions.class, "flipDirection");
         }
@@ -52,18 +52,32 @@ public class FlipEffect implements Animator {
         this.ran = false;
 
         if (sprite != null) {
-            animators.add(new ScaleAnimator(sprite, duration / 2, 0, 1, 0, Interpolation.ACCELERATE_INTERPOLATOR, flipDirection == HORIZONTAl, flipDirection == VERTICAL));
+            ScaleAnimator firstScale = new ScaleAnimator(sprite, duration / 2, 0, 1, 0, Interpolation.ACCELERATE_INTERPOLATOR, flipDirection == HORIZONTAl, flipDirection == VERTICAL);
+            firstScale.setOnFinishedListener(new OnAnimationFinishedListener() {
+                @Override
+                public void onAnimationFinished(Animator anim) {
+                    sprite.setTexture(toTexture);
+                }
+            });
+            animators.add(firstScale);
             animators.add(new ScaleAnimator(sprite, duration / 2, duration / 2, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, flipDirection == HORIZONTAl, flipDirection == VERTICAL));
         }
     }
 
-    public FlipEffect(Texture texture, Rectangle rectangle, float duration, int flipDirection) {
-        this(null, duration, flipDirection);
+    public FlipEffect(Texture fromTexture, final Texture toTexture, Rectangle rectangle, float duration, int flipDirection) {
+        this(null, toTexture, duration, flipDirection);
 
         this.texture = texture;
         this.rectangle = rectangle;
 
-        animators.add(new ScaleAnimator(duration / 2, 1, 0, Interpolation.ACCELERATE_INTERPOLATOR));
+        ScaleAnimator firstScale = new ScaleAnimator(duration / 2, 1, 0, Interpolation.ACCELERATE_INTERPOLATOR);
+        firstScale.setOnFinishedListener(new OnAnimationFinishedListener() {
+            @Override
+            public void onAnimationFinished(Animator anim) {
+                texture = toTexture;
+            }
+        });
+        animators.add(firstScale);
         animators.add(new ScaleAnimator(duration / 2, duration / 2, 1, 0, Interpolation.DECELERATE_INTERPOLATOR));
     }
 
