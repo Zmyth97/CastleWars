@@ -70,27 +70,27 @@ public class JapanesePack {
     //endregion
 
     //region Japanese CardAmounts
-    public static int STOCKADE_AMOUNT = 2;
+    public static int STOCKADE_AMOUNT = 3;
     public static int FORTRESS_AMOUNT = 2;
     public static int MONASTERY_AMOUNT = 2;
-    public static int RAMPART_AMOUNT = 2;
-    public static int CITADEL_AMOUNT = 2;
+    public static int RAMPART_AMOUNT = 1;
+    public static int CITADEL_AMOUNT = 1;
 
-    public static int ASHIGARU_AMOUNT = 2;
-    public static int SHURIKEN_AMOUNT = 2;
+    public static int ASHIGARU_AMOUNT = 3;
+    public static int SHURIKEN_AMOUNT = 3;
     public static int KATANA_AMOUNT = 2;
-    public static int SAMURAI_AMOUNT = 2;
+    public static int SAMURAI_AMOUNT = 1;
     public static int DOJO_AMOUNT = 2;
 
     public static int SHRINE_AMOUNT = 2;
     public static int QUARRY_AMOUNT = 2;
     public static int TEMPLE_AMOUNT = 2;
     public static int RICE_PADDY_AMOUNT = 2;
-    public static int SEPPUKU_AMOUNT = 2;
+    public static int SEPPUKU_AMOUNT = 1;
 
-    public static int NINJA_AMOUNT = 2;
-    public static int DRAGON_AMOUNT = 2;
-    public static int SHOGUN_AMOUNT = 2;
+    public static int NINJA_AMOUNT = 1;
+    public static int DRAGON_AMOUNT = 1;
+    public static int SHOGUN_AMOUNT = 1;
     //endregion
 
     public JapanesePack(GameInterface gi) {

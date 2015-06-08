@@ -276,13 +276,21 @@ public class Deck {
         }
     }
 
-    public Card drawCard() {
-        System.out.println("Deck size: " + cardList.size());
+    public Card drawCard(boolean isComputer) {
         Card lastCard = cardList.remove(cardList.size() - 1);
         Collections.shuffle(cardList);
         cardList.add(lastCard);
         Card cardDrawn = cardList.get(0);
         cardList.remove(0);
+
+        if(isComputer && cardDrawn.getCardID() > 399){
+            while(cardDrawn.getCardID() > 399) {
+                cardList.add(cardDrawn);
+                Collections.shuffle(cardList);
+                cardDrawn = cardList.get(0);
+                cardList.remove(0);
+            }
+        }
         return cardDrawn;
     }
 

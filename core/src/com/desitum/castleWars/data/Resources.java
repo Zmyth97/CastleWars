@@ -31,9 +31,9 @@ public class Resources {
         playerBuilders = 2;
         playerSoldiers = 2;
         playerWizards = 2;
-        playerStones = 200;
-        playerWeapons = 200;
-        playerGems = 200;
+        playerStones = 16;
+        playerWeapons = 16;
+        playerGems = 16;
 
         computerBuilders = 2;
         computerSoldiers = 2;

@@ -148,8 +148,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
         //Fill Both Players Hands At Start
         for (int i = 0; i < Settings.CARDS_DEALT; i++) {
             float cardX = MenuScreen.SCREEN_WIDTH/2 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING))/2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
-            player1.getHand().addCardToHand(drawNewCard(cardX, CARDS_Y, i * 0.2f));
-            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f));
+            player1.getHand().addCardToHand(drawNewCard(cardX, CARDS_Y, i * 0.2f, false));
+            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f, true));
         }
     }
 
@@ -226,7 +226,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                     //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
                     cardActions.doCardAction(card.getCardID());
                     player2.getHand().removeCardFromHand(c);
-                    player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
+                    player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0, true));
                     deck.addCard(c);
                     disableCard(c);
                     usedCard = true;
@@ -245,7 +245,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 cardActions.doCardAction(chosenCard.getCardID());
             }
             player2.getHand().removeCardFromHand(chosenCard);
-            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, - Card.CARD_HEIGHT, 0));
+            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, - Card.CARD_HEIGHT, 0, true));
             deck.addCard(chosenCard);
             disableCard(chosenCard);
             c = chosenCard;
@@ -265,7 +265,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 for (int i = 0; i <= iRange; i++) {
                     float cardX = MenuScreen.SCREEN_WIDTH / 2 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
                     if (i == player1.getHand().getCardsInHand().size()) {
-                        player1.getHand().addCardToHand(drawNewCard(cardX, card.getY(), 0));
+                        player1.getHand().addCardToHand(drawNewCard(cardX, card.getY(), 0, false));
                     } else {
                         Card card1 = player1.getHand().getCardsInHand().get(i);
                         card1.clearAllAnimators();
@@ -287,21 +287,15 @@ public class GameWorld extends KodyWorld implements GameInterface {
         card.disable();
     }
 
-    private Card drawNewCard(float x, float y, float delay) {
-        Card card = deck.drawCard();
-        if(this.playerTurn == PLAYER2 && card.getCardID() > 399){
-            deck.addCard(card);
-            System.out.println("Getting new Card: " + card.getCardID());
-            drawNewCard(x, y, delay); //Note To Kody: Not sure if this is where you'd want this, almost put it in deck but the interface isn't passed
-                                      //to it and not sure if you would rather it here or in deck and add the interface to it. Up to you sir!
-        }
-        card.clearAllAnimators();
-        card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_X, x, 1f, delay, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
-        card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_Y, y, 1f, delay, Interpolation.DECELERATE_INTERPOLATOR, false, true));
-        card.addOutgoingAnimator(new MovementAnimator(card, x, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
-        card.addOutgoingAnimator(new MovementAnimator(card, y, DISCARD_PILE_Y, 1f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
-        card.startIncomingAnimators();
-        card.setFlipEffect(new FlipEffect(card, Assets.cardBack, card.getTexture(), 1.0f, FlipEffect.HORIZONTAl));
+    private Card drawNewCard(float x, float y, float delay, boolean isComputer) { //Had to change to boolean for initial drawCards
+        Card card = deck.drawCard(isComputer);
+            card.clearAllAnimators();
+            card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_X, x, 1f, delay, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
+            card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_Y, y, 1f, delay, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+            card.addOutgoingAnimator(new MovementAnimator(card, x, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
+            card.addOutgoingAnimator(new MovementAnimator(card, y, DISCARD_PILE_Y, 1f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+            card.startIncomingAnimators();
+            card.setFlipEffect(new FlipEffect(card, Assets.cardBack, card.getTexture(), 1.0f, FlipEffect.HORIZONTAl));
         return card;
     }
 
