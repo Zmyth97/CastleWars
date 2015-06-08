@@ -8,12 +8,11 @@ import com.desitum.castleWars.data.CardActions;
 import com.desitum.castleWars.data.ComputerAI;
 import com.desitum.castleWars.data.Resources;
 import com.desitum.castleWars.data.Settings;
-import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
-import com.desitum.castleWars.libraries.animation.OnAnimationFinishedListener;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
+import com.desitum.castleWars.libraries.menu.PopupButton;
 import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupTextLabel;
@@ -21,6 +20,7 @@ import com.desitum.castleWars.libraries.menu.PopupToggleButton;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
+import com.desitum.castleWars.objects.Cloud;
 import com.desitum.castleWars.objects.Deck;
 import com.desitum.castleWars.objects.Player;
 import com.desitum.castleWars.packs.FlamePack;
@@ -51,8 +51,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static final float CHANGE_TEXT_HEIGHT = 6;
     private static final float MENU_TEXT_WIDTH = 15;
     private static final float MENU_TEXT_HEIGHT = 6;
-    private static final int EASY_DIFFICULTY = 0;
-    private static final int HARD_DIFFICULTY = 1;
+    public static final int EASY_DIFFICULTY = 0;
+    public static final int NORMAL_DIFFICULTY = 1;
     private static Color buildColor = new Color(.122f, 0f, .616f, 1);
     private static Color attackColor = new Color(.855f, 0f, .102f, 1);
     private static Color magicColor = new Color(.035f, .722f, 0, 1);
@@ -101,6 +101,15 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private FlamePack flamePack;
     private JapanesePack japanesePack;
     private float computerDelay;
+    private ArrayList<Cloud> cloudList;
+
+
+    private PopupMenu difficultyMenu;
+    private PopupToggleButton easyButton;
+    private PopupToggleButton normalButton;
+    private PopupTextLabel easyLabel;
+    private PopupTextLabel normalLabel;
+    private PopupButton okButton;
 
     public GameWorld(Viewport cam) {
         super();
@@ -126,11 +135,13 @@ public class GameWorld extends KodyWorld implements GameInterface {
         flamePack = new FlamePack(this);
         japanesePack = new JapanesePack(this);
         myResources = new Resources(this);
+        cloudList = new ArrayList<Cloud>();
 
-        difficulty = 0;
         ai = new ComputerAI(this);
 
         setupSideMenus();
+
+        buildDifficultyGUI();
 
         //Fill Both Players Hands At Start
         for (int i = 0; i < Settings.CARDS_DEALT; i++) {
@@ -158,6 +169,13 @@ public class GameWorld extends KodyWorld implements GameInterface {
         player1.update(delta);
         player2.update(delta);
 
+        int randomCloudChance = (int)(Math.random() * 500);
+        if(randomCloudChance == 1){
+            makeCloud();
+        }
+        for(Cloud cloud: cloudList){
+            cloud.update(delta);
+        }
 
         playerBuildersLabel.setText(":" + myResources.getPlayerBuilders());
         playerSoldiersLabel.setText(":" + myResources.getPlayerSoldiers());
@@ -181,7 +199,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private void switchTurns(int playerTurn) {
         this.playerTurn = playerTurn;
-        System.out.println("Turn: " + playerTurn);
         discardToggle.turnOff();
 
         if (playerTurn == PLAYER) {
@@ -197,7 +214,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private void computerTurn() {
         Card c = null;
-        System.out.println("Computer Turn Started");
         if(difficulty == EASY_DIFFICULTY){
             boolean usedCard = false;
             for (Card card : player2.getHand().getCardsInHand()) {
@@ -205,7 +221,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
                     c = card;
                     c.startOutgoingAnimators();
                     //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
-                    System.out.println("Do Computer Card Action");
                     cardActions.doCardAction(card.getCardID());
                     player2.getHand().removeCardFromHand(c);
                     player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0));
@@ -219,7 +234,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 c = player2.getHand().getCardsInHand().get(0);
                 disableCard(c);
             }
-        } else if(difficulty == HARD_DIFFICULTY) {
+        } else if(difficulty == NORMAL_DIFFICULTY) {
             Card chosenCard = ai.processAI();
             chosenCard.startOutgoingAnimators();
             //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
@@ -241,7 +256,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
             card.startOutgoingAnimators();
             //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
             if (!isDiscarding()) {
-                System.out.println("Do Player Card Action");
                 cardActions.doCardAction(card.getCardID());
                 player1.getHand().removeCardFromHand(card);
                 player1.getHand().addCardToHand(drawNewCard(card.getX(), card.getY(), 0));
@@ -270,6 +284,25 @@ public class GameWorld extends KodyWorld implements GameInterface {
         return card;
     }
 
+    private void makeCloud(){
+        int randomY = (int)(Math.random() * 28) + 60;
+        int randomSize = (int)(Math.random() * 10) + 20;
+        float randomSpeed = (float)(Math.random() * 3) + 2;
+        int randomTexture = (int)(Math.random() * 2);
+
+        if(randomTexture == 1){
+             cloudList.add(new Cloud(this, Assets.cloud1, randomY, randomSize, randomSpeed));
+        } else if (randomTexture == 2){
+            cloudList.add(new Cloud(this, Assets.cloud2, randomY, randomSize, randomSpeed));
+        } else {
+            cloudList.add(new Cloud(this, Assets.cloud3, randomY, randomSize, randomSpeed));
+        }
+
+    }
+
+    public ArrayList<Cloud> getCloudList(){
+        return cloudList;
+    }
     @Override
     public Resources getResources() {
         return myResources;
@@ -526,6 +559,64 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.addWidgetToWorld(discardToggle);
     }
 
+    private void buildDifficultyGUI(){
+        float menuWidth = (GameScreen.SCREEN_WIDTH * .75f);
+        float menuHeight = (GameScreen.SCREEN_HEIGHT * .75f);
+        difficultyMenu = new PopupMenu(Assets.popupMenuBackground,(GameScreen.SCREEN_WIDTH/2) - (GameScreen.SCREEN_WIDTH * .75f)/2, -200, menuWidth, menuHeight);
+        MovementAnimator yAnimator = new MovementAnimator(difficultyMenu, -200, (GameScreen.SCREEN_HEIGHT/2) - (GameScreen.SCREEN_HEIGHT * .75f)/3, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        difficultyMenu.addIncomingAnimator(yAnimator);
+        MovementAnimator yAnimator2 = new MovementAnimator(difficultyMenu, (GameScreen.SCREEN_HEIGHT/2) - (GameScreen.SCREEN_HEIGHT * .75f)/3, -200, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
+        difficultyMenu.addOutgoingAnimator(yAnimator2);
+
+
+        easyButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth/6, (menuHeight/3), menuWidth/6, (menuHeight/6), false);
+        easyButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                easyButton.turnOn();
+                if(normalButton.isOn()){
+                    normalButton.turnOff();
+                }
+                System.out.println("Turn Easy On");
+            }
+        });
+        normalButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth/4 * 2.5f, (menuHeight/3), menuWidth/6, (menuHeight/6), false);
+        normalButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                    normalButton.turnOn();
+                    if(easyButton.isOn()){
+                        easyButton.turnOff();
+                    }
+                    System.out.println("Turn Normal On");
+                }
+
+        });
+
+        easyLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/7, (menuHeight/3) *2, menuWidth/4, (menuHeight/8), "Easy");
+        normalLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/4 * 2.3f, (menuHeight/3)*2, menuWidth/3f, (menuHeight/8), "Normal");
+        okButton = new PopupButton(Assets.okButtonUp, Assets.okButtonDown, menuWidth/2  - (menuWidth/4)/1.75f, menuHeight/4 - menuHeight/6, menuWidth/4, menuHeight/6);
+        okButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                if (easyButton.isOn()) {
+                    difficulty = EASY_DIFFICULTY;
+                } else {
+                    difficulty = NORMAL_DIFFICULTY;
+                }
+                difficultyMenu.startOutgoingAnimators();
+                removeWidgetFromWorld(difficultyMenu);
+            }
+        });
+        difficultyMenu.addPopupWidget(easyButton);
+        difficultyMenu.addPopupWidget(normalButton);
+        difficultyMenu.addPopupWidget(easyLabel);
+        difficultyMenu.addPopupWidget(normalLabel);
+        difficultyMenu.addPopupWidget(okButton);
+        addPopupMenu(difficultyMenu);
+        //addWidgetToWorld(difficultyMenu);
+        difficultyMenu.startIncomingAnimators();
+    }
     public void setPlayerBuildersLabelChangeText(int change) {
         if (change > 0) {
              playerBuildersLabelChange.setText("+" + change);
@@ -688,5 +779,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     public boolean isDiscarding() {
         return discardToggle.isOn();
+    }
+
+    public void setDifficulty(int difficulty){
+        this.difficulty = difficulty;
     }
 }

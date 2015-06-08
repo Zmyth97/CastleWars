@@ -115,28 +115,20 @@ public class ParticleEmitter {
 
                 if (lineInfo.equals(MIN_PARTICLES)) {
                     this.minParticles = Integer.parseInt(lineChange);
-                    System.out.println(lineInfo + ":" + lineChange);
                 } else if (lineInfo.equals(MAX_PARTICLES)) {
                     this.maxParticles = Integer.parseInt(lineChange);
-                    System.out.println(lineInfo + ":" + lineChange);
                 } else if (lineInfo.equals(EMIT_CIRCLE)) {
                     this.emitCircle = Boolean.parseBoolean(lineChange);
-                    System.out.println(lineInfo + ":" + lineChange);
                 } else if (lineInfo.equals(EMIT_RADIUS)) {
                     this.emitRadius = Float.parseFloat(lineChange);
-                    System.out.println(lineInfo + ":" + lineChange);
                 } else if (lineInfo.equals(EMIT_WIDTH)) {
                     this.width = Float.parseFloat(lineChange);
-                    System.out.println(lineInfo + ":" + lineChange);
                 } else if (lineInfo.equals(EMIT_HEIGHT)) {
                     this.height = Float.parseFloat(lineChange);
-                    System.out.println(lineInfo + ":" + lineChange);
                 } else if (lineInfo.equals(IS_SQUARE)) {
                     this.isSquare = Boolean.parseBoolean(lineChange);
-                    System.out.println(lineInfo + ":" + lineChange);
                 } else if (lineInfo.equals(MIN_PARTICLE_WIDTH)) {
                     this.particleMinWidth = Float.parseFloat(lineChange);
-                    System.out.println(lineInfo + ":" + lineChange);
                 } else if (lineInfo.equals(MAX_PARTICLE_WIDTH)) {
                     this.particleMaxWidth = Float.parseFloat(lineChange);
                 } else if (lineInfo.equals(MIN_PARTICLE_HEIGHT)) {
@@ -149,10 +141,8 @@ public class ParticleEmitter {
                     this.particleMaxAngle = Float.parseFloat(lineChange);
                 } else if (lineInfo.equals(MIN_PARTICLE_DISTANCE)) {
                     this.particleMinDistance = Float.parseFloat(lineChange);
-                    System.out.println(lineInfo + ":" + lineChange);
                 } else if (lineInfo.equals(MAX_PARTICLE_DISTANCE)) {
                     this.particleMaxDistance = Float.parseFloat(lineChange);
-                    System.out.println(lineInfo + ":" + lineChange);
                 } else if (lineInfo.equals(MIN_PARTICLE_DURATION)) {
                     this.particleMinDuration = Float.parseFloat(lineChange);
                 } else if (lineInfo.equals(MAX_PARTICLE_DURATION)) {

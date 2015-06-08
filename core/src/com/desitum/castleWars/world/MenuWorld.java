@@ -78,19 +78,19 @@ public class MenuWorld extends KodyWorld {
 
     private void createButtons() {
         //Create the buttons!
-        playButton = new PopupButton(Assets.playButtonUp, Assets.playButtonDown, ((MenuScreen.SCREEN_WIDTH/2)* .5f) - 15f, 50, 30, 20);
+        playButton = new PopupButton(Assets.playButtonUp, Assets.playButtonDown, ((MenuScreen.SCREEN_WIDTH/2)* .5f) - 15f, 40, 30, 20);
         playButton.addIncomingAnimator(new MovementAnimator(playButton, -20, playButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         playButton.startIncomingAnimators();
 
-        settingsButton = new PopupButton(Assets.settingsButtonUp, Assets.settingsButtonDown, ((MenuScreen.SCREEN_WIDTH/4) * 3)-15f, 50, 30, 20);
+        settingsButton = new PopupButton(Assets.settingsButtonUp, Assets.settingsButtonDown, ((MenuScreen.SCREEN_WIDTH/4) * 3)-15f, 40, 30, 20);
         settingsButton.addIncomingAnimator(new MovementAnimator(settingsButton, -20, settingsButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         settingsButton.startIncomingAnimators();
 
-        multiButton = new PopupButton(Assets.okButtonUp, Assets.okButtonDown, ((MenuScreen.SCREEN_WIDTH/4) * 3) - 15f, 20, 30, 20);
+        multiButton = new PopupButton(Assets.okButtonUp, Assets.okButtonDown, ((MenuScreen.SCREEN_WIDTH/4) * 3) - 15f, 10, 30, 20);
         multiButton.addIncomingAnimator(new MovementAnimator(multiButton, -20, multiButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         multiButton.startIncomingAnimators();
 
-        deckButton = new PopupButton(Assets.cancelButtonUp, Assets.cancelButtonDown, ((MenuScreen.SCREEN_WIDTH/2) * .5f) - 15f, 20, 30, 20);
+        deckButton = new PopupButton(Assets.cancelButtonUp, Assets.cancelButtonDown, ((MenuScreen.SCREEN_WIDTH/2) * .5f) - 15f, 10, 30, 20);
         deckButton.addIncomingAnimator(new MovementAnimator(deckButton, -20, deckButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         deckButton.startIncomingAnimators();
 

@@ -44,24 +44,15 @@ public class CastleWars extends Game {
 
     //TODO: CheckList!!!//
 
-    //GLITCHES:
-    //Cards in Hand randomly Glitch up then back
-    //Card Actions you click on does it for computer
-    //Card Actions do another cards action
-    //Card Actions do wrong amount
     //CardActions
         //Fix Cards Moving Around to Show a Computer Hand Too? (Like original Castle Wars, maybe change the background color a bit between the two or something? idk)
         //Make sure the Draw Pile shows the Backs of Cards
-        //Make Card not Fade once its sent to the Discard Pile (Looks weird ish?)
-        //Change Text to Show only the Card Changes, not the card cost or resource add ons (reduce confusion)
-    //GUI
+    // GUI
         //Castle Texture
-        //Wall Texture & Animations, Particle Effects
-        //Finish Card Images
+        //Wall Texture
         //Change Button Images? (You said you didn't like them earlier, so are we changing those?)
         //MenuScreen Additions (Animations, Store Button, Leaderboard Button in Corner, etc)?
         //Maybe something at the top showing the left side is you, right side is the computer or player2?
-        //Animation in background? Parralax Mapping, Clouds Moving, etc?
         //Add dificulty setting gui piece on game start
     //Computer AI
         //Just Test it a Lot, and I'll fine tune it till its actually semi-hard to beat
@@ -79,9 +70,8 @@ public class CastleWars extends Game {
         //Are we going to search for sounds, or just make some ourselves at my house XD
         //Add them to game!
     //Build your Deck
-        //Not too hard since you added the amounts to settings, but still need to form the screen/gui for it
-    //Textures/Cards for The Skin/Card Packs
-        //This once all the above is done
+        //Fix it so it works haha
+
 
 
 }

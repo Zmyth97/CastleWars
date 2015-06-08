@@ -2,6 +2,7 @@ package com.desitum.castleWars.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,6 +10,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
+import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.libraries.animation.MovementAnimator;
+import com.desitum.castleWars.libraries.interpolation.Interpolation;
+import com.desitum.castleWars.libraries.menu.OnClickListener;
+import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.menu.PopupMenu;
+import com.desitum.castleWars.libraries.menu.PopupTextLabel;
+import com.desitum.castleWars.libraries.menu.PopupToggleButton;
+import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.world.GameRenderer;
 import com.desitum.castleWars.world.GameWorld;
 
@@ -30,11 +40,6 @@ public class GameScreen implements Screen {
     private GameWorld gameWorld;
     private GameRenderer gameRenderer;
 
-    public static final int GAME_BEFORE = 3;
-    public static final int GAME_RUNNING = 4;
-    public static final int GAME_PAUSED = 5;
-    public static final int GAME_OVER = 6;
-    public static final int GAME_OVER_WITH_TRANSITION = 7;
 
     public GameScreen(GooglePlayServicesInterface googlePlayServicesInterface, CastleWars cw) {
         batch = new SpriteBatch();
@@ -49,7 +54,6 @@ public class GameScreen implements Screen {
 
         castleWars = cw;
         gpgs = googlePlayServicesInterface;
-
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.objects.Card;
+import com.desitum.castleWars.objects.Cloud;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.screens.MenuScreen;
 
@@ -51,6 +52,11 @@ public class GameRenderer {
 
     private void drawWorld() {
         gameBatch.draw(Assets.gameSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
+
+        for(Cloud cloud: world.getCloudList()){
+                cloud.draw(gameBatch);
+        }
+
         world.getPlayer1().getCastle().draw(gameBatch);
         world.getPlayer2().getCastle().draw(gameBatch);
         gameBatch.draw(Assets.gameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT / 4 + 8));

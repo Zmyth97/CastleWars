@@ -31,6 +31,9 @@ public class Assets {
     //Menu Textures
     public static Texture textFieldBackground;
     public static Texture menuBackground;
+    public static Texture toggleButtonOff;
+    public static Texture toggleButtonOn;
+    public static Texture popupMenuBackground;
 
     //Game Textures
     public static Texture playerCastle;
@@ -39,6 +42,9 @@ public class Assets {
     public static Texture computerWall;
     public static Texture gameGround;
     public static Texture gameSky;
+    public static Texture cloud1;
+    public static Texture cloud2;
+    public static Texture cloud3;
     public static Texture menuArea;
     public static Texture cardBack;
     public static Texture cardBlank;
@@ -157,6 +163,10 @@ public class Assets {
         textFieldBackground = Drawing.getTextureRoundedRectangle(50, 50, 5, new Color(0.5f, 0.2f, 0.1f, 0.8f));
         menuBackground = new Texture("menu/menu_bg.png");
 
+        toggleButtonOff = new Texture("menu/toggleButtonOff.png");
+        toggleButtonOn = new Texture("menu/toggleButtonOn.png");
+        popupMenuBackground = new Texture("menu/popupMenuBackground.png");
+
         textFieldFont = new BitmapFont(Gdx.files.internal("font/cartoon.fnt"), Gdx.files.internal("font/cartoon.png"), false);
         textFieldFont.setScale(0.15f);
         textFieldFont.setColor(Color.WHITE);
@@ -169,6 +179,9 @@ public class Assets {
         computerWall = new Texture("game/wall2.png");
         gameGround = new Texture("game/ground.png");
         gameSky = new Texture("game/sky.png");
+        cloud1 = new Texture("game/cloud1.png");
+        cloud2 = new Texture("game/cloud2.png");
+        cloud3 = new Texture("game/cloud3.png");
         menuArea = new Texture("game/area.png");
         cardBack = new Texture("game/card_back.png");
         cardBlank = new Texture("game/card_blank.png");
