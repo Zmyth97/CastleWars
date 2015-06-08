@@ -29,6 +29,7 @@ import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.screens.MenuScreen;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
@@ -44,6 +45,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public static final float DISCARD_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
     public static final float CARD_SPACING = 0.5f;
     public static final float CARDS_Y = 5;
+    public static final int EASY_DIFFICULTY = 0;
+    public static final int NORMAL_DIFFICULTY = 1;
     private static final float FADE_IN_DURATION = 1f;
     private static final float FADE_DELAY = 04f;
     private static final float FADE_OUT_DURATION = 0.3f;
@@ -51,8 +54,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static final float CHANGE_TEXT_HEIGHT = 6;
     private static final float MENU_TEXT_WIDTH = 15;
     private static final float MENU_TEXT_HEIGHT = 6;
-    public static final int EASY_DIFFICULTY = 0;
-    public static final int NORMAL_DIFFICULTY = 1;
     private static Color buildColor = new Color(.122f, 0f, .616f, 1);
     private static Color attackColor = new Color(.855f, 0f, .102f, 1);
     private static Color magicColor = new Color(.035f, .722f, 0, 1);
@@ -173,8 +174,11 @@ public class GameWorld extends KodyWorld implements GameInterface {
         if(randomCloudChance == 1){
             makeCloud();
         }
-        for(Cloud cloud: cloudList){
-            cloud.update(delta);
+        Iterator<Cloud> iter = cloudList.iterator();
+        while (iter.hasNext()) {
+            Cloud c = iter.next();
+            c.update(delta);
+            if (c.needsRemoval()) iter.remove();
         }
 
         playerBuildersLabel.setText(":" + myResources.getPlayerBuilders());
