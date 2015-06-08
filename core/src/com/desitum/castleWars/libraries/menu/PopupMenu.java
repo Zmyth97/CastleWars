@@ -74,7 +74,7 @@ public class PopupMenu extends PopupWidget {
 
             boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
             if (widget instanceof PopupButton) { // if Widget is a PopupButton
-                PopupButton button = button = (PopupButton) widget;
+                PopupButton button = (PopupButton) widget;
                 if (clickInArea && clickDown) {
                     button.onClickDown();
                 } else if (clickInArea) {
