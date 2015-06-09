@@ -203,5 +203,9 @@ public class PopupTextLabel extends PopupWidget {
     public ColorEffects getColorEffect1() {
         return colorEffects.get(0);
     }
+
+    public void setFontColor(Color color){
+        currentColor = color;
+    }
 }
 

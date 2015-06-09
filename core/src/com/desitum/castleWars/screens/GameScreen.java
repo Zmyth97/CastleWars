@@ -65,6 +65,9 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         update(delta);
         draw();
+        if(gameWorld.gameOver){
+            castleWars.setScreen(new MenuScreen(gpgs, castleWars)); //Do we need to make a new screen for it? Was the first one disposed?
+        }
     }
 
     public void update(float delta){

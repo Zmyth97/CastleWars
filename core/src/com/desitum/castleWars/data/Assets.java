@@ -24,8 +24,10 @@ public class Assets {
     public static Texture okButton;
     public static Texture buildDeckButton;
     public static Texture shareButton;
+    public static Texture multiButton;
     public static Texture soundButtonOn;
     public static Texture soundButtonOff;
+    public static Texture storeButton;
 
     //Round Button Textures
     public static Texture playButtonRound;
@@ -34,6 +36,7 @@ public class Assets {
     public static Texture okButtonRound;
     public static Texture settingsButtonRound;
     public static Texture shareButtonRound;
+    public static Texture storeButtonRound;
 
     //Menu Textures
     public static Texture textFieldBackground;
@@ -165,10 +168,12 @@ public class Assets {
         leaderboardButton = new Texture("menu/leaderboard_button.png");
         cancelButton = new Texture("menu/cancel_button.png");
         okButton = new Texture("menu/ok_button.png");
+        multiButton = new Texture("menu/multi_button.png");
         buildDeckButton = new Texture("menu/build_deck_button.png");
         shareButton = new Texture("menu/share_button.png");
         soundButtonOn = new Texture("menu/sound_button_on.png");
         soundButtonOff = new Texture("menu/sound_button_off.png");
+        storeButton = new Texture("menu/shopping_button.png");
 
         //Round Button Textures
         playButtonRound = new Texture("menu/play_button_round.png");
@@ -177,6 +182,7 @@ public class Assets {
         okButtonRound = new Texture("menu/ok_button_round.png");
         settingsButtonRound = new Texture("menu/settings_button_round.png");
         shareButtonRound = new Texture("menu/share_button_round.png");
+        storeButtonRound = new Texture("menu/shopping_button_round.png");
 
         textFieldBackground = Drawing.getTextureRoundedRectangle(50, 50, 5, new Color(0.5f, 0.2f, 0.1f, 0.8f));
         menuBackground = new Texture("menu/menu_bg.png");

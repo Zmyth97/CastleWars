@@ -81,6 +81,10 @@ public class MenuScreen implements Screen, MenuInterface {
         //For when we add leaderboards
     }
     @Override
+    public void store() {
+        //For when we add the store for in app purchases
+    }
+    @Override
     public void buildDeck() {
         castleWars.setScreen(new BuildScreen(castleWars));
     }

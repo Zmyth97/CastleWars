@@ -27,6 +27,7 @@ public class MenuWorld extends KodyWorld {
     private PopupButtonMaterial multiButton;
     private PopupButtonMaterial deckButton;
     private PopupButtonMaterial settingsButton;
+    private PopupButtonMaterial storeButton;
 
     public MenuWorld(Viewport cam, MenuInterface mi) {
         super();
@@ -89,7 +90,7 @@ public class MenuWorld extends KodyWorld {
         leaderboardButton.addIncomingAnimator(new MovementAnimator(leaderboardButton, -20, leaderboardButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         leaderboardButton.startIncomingAnimators();
 
-        multiButton = new PopupButtonMaterial(Assets.okButton,((MenuScreen.SCREEN_WIDTH/4) * 3) - 15f, 10, BUTTON_HEIGHT, 30, 20);
+        multiButton = new PopupButtonMaterial(Assets.multiButton,((MenuScreen.SCREEN_WIDTH/4) * 3) - 15f, 10, BUTTON_HEIGHT, 30, 20);
         multiButton.addIncomingAnimator(new MovementAnimator(multiButton, -20, multiButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         multiButton.startIncomingAnimators();
 
@@ -101,12 +102,17 @@ public class MenuWorld extends KodyWorld {
         settingsButton.addIncomingAnimator(new MovementAnimator(settingsButton, -20, settingsButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         settingsButton.startIncomingAnimators();
 
+        storeButton = new PopupButtonMaterial(Assets.storeButtonRound, 2, MenuScreen.SCREEN_HEIGHT - 22f, BUTTON_HEIGHT, 20, 20);
+        storeButton.addIncomingAnimator(new MovementAnimator(storeButton, -20, storeButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
+        storeButton.startIncomingAnimators();
+
         //Add the buttons to the ArrayList
         this.addWidget(playButton);
         this.addWidget(leaderboardButton);
         this.addWidget(multiButton);
         this.addWidget(deckButton);
         this.addWidget(settingsButton);
+        this.addWidget(storeButton);
     }
 
     public void update(float delta) {
@@ -146,6 +152,13 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 menuInterface.buildDeck();
+            }
+        });
+
+        storeButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                menuInterface.store();
             }
         });
     }

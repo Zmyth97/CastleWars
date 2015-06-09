@@ -99,6 +99,9 @@ public class Resources {
             playerBuilders = 1;
         } else {
             playerBuilders += amount;
+            if(playerBuilders < 0){
+                playerBuilders = 0;
+            }
         }
         if (difference != 0) gi.setPlayerBuildersLabelChangeText(difference);
         return difference;
@@ -111,6 +114,9 @@ public class Resources {
             playerSoldiers = 1;
         } else {
             playerSoldiers += amount;
+            if(playerSoldiers < 0){
+                playerSoldiers = 0;
+            }
         }
         if (difference != 0)  gi.setPlayerSoldiersLabelChangeText(difference);
         return difference;
@@ -123,6 +129,9 @@ public class Resources {
             playerWizards = 1;
         } else {
             playerWizards += amount;
+            if(playerWizards < 0){
+                playerWizards = 0;
+            }
         }
         if (difference != 0)  gi.setPlayerWizardsLabelChangeText(difference);
         return difference;
@@ -171,6 +180,9 @@ public class Resources {
             computerBuilders = 1;
         } else {
             computerBuilders += amount;
+            if(computerBuilders < 0){
+                computerBuilders = 0;
+            }
         }
         if (difference != 0)  gi.setComputerBuildersLabelChangeText(difference);
         return difference;
@@ -183,6 +195,9 @@ public class Resources {
             computerSoldiers = 1;
         } else {
             computerSoldiers += amount;
+            if(computerSoldiers < 0){
+                computerSoldiers = 0;
+            }
         }
         if (difference != 0)  gi.setComputerSoldiersLabelChangeText(difference);
         return difference;
@@ -195,6 +210,9 @@ public class Resources {
             computerWizards = 1;
         } else {
             computerWizards += amount;
+            if(computerWizards < 0){
+                computerWizards = 0;
+            }
         }
         if (difference != 0)  gi.setComputerWizardsLabelChangeText(difference);
         return difference;

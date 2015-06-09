@@ -63,6 +63,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private Player player1;
     private Player player2;
     private ComputerAI ai;
+    public boolean aiDiscarding;
     private PopupTextLabel playerBuildersLabel;
     private PopupTextLabel playerSoldiersLabel;
     private PopupTextLabel playerWizardsLabel;
@@ -105,6 +106,15 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private float computerDelay;
     private ArrayList<Cloud> cloudList;
 
+    private PopupTextLabel playerLabel;
+    private PopupTextLabel computerLabel;
+    private ColorEffects turnEffect;
+    private ColorEffects notTurnEffect; //Lol. Love the name right?
+
+    private PopupTextLabel winLabel;
+    private PopupTextLabel loseLabel;
+    private float endTimer;
+    public boolean gameOver;
 
     private PopupMenu difficultyMenu;
     private PopupToggleButton easyButton;
@@ -140,6 +150,19 @@ public class GameWorld extends KodyWorld implements GameInterface {
         cloudList = new ArrayList<Cloud>();
 
         ai = new ComputerAI(this);
+        aiDiscarding = false;
+
+        endTimer = 0;
+        gameOver = false;
+
+        turnEffect = new ColorEffects(Color.BLACK, Color.RED, 0.5f);
+        notTurnEffect = new ColorEffects(Color.RED, Color.BLACK, 0.5f);
+        playerLabel = new PopupTextLabel(Assets.invisible, Color.WHITE, Assets.textFieldFont, 0, (GameScreen.SCREEN_HEIGHT / 4 + 1), 20, 5, "Player");
+        computerLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH - 25, (GameScreen.SCREEN_HEIGHT / 4 + 1), 25, 5, "Computer");
+        addWidgetToWorld(playerLabel);
+        addWidgetToWorld(computerLabel);
+        playerLabel.setFontColor(Color.BLACK);
+        computerLabel.setFontColor(Color.BLACK);
 
         setupSideMenus();
 
@@ -182,6 +205,12 @@ public class GameWorld extends KodyWorld implements GameInterface {
             if (c.needsRemoval()) iter.remove();
         }
 
+        if(endTimer > 0){
+            endTimer -= delta;
+            if(endTimer < 0){
+                gameOver = true;
+            }
+        }
         playerBuildersLabel.setText(":" + myResources.getPlayerBuilders());
         playerSoldiersLabel.setText(":" + myResources.getPlayerSoldiers());
         playerWizardsLabel.setText(":" + myResources.getPlayerWizards());
@@ -189,7 +218,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerWeaponLabel.setText(":" + myResources.getPlayerWeapons());
         playerGemLabel.setText(":" + myResources.getPlayerGems());
         playerCastleLabel.setText(":" + (int)  player1.getCastle().getHealth());
-        playerWallLabel.setText(":" + (int)  player1.getCastle().getWall().getHealth());
+        playerWallLabel.setText(":" + (int) player1.getCastle().getWall().getHealth());
         computerBuildersLabel.setText(":" + myResources.getComputerBuilders());
         computerSoldiersLabel.setText(":" + myResources.getComputerSoldiers());
         computerWizardsLabel.setText(":" + myResources.getComputerWizards());
@@ -203,16 +232,26 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private void switchTurns(int playerTurn) {
         this.playerTurn = playerTurn;
         discardToggle.turnOff();
+        aiDiscarding = false;
 
         if (playerTurn == PLAYER) {
             myResources.addPlayerStones(2 * myResources.getPlayerBuilders());
             myResources.addPlayerGems(2 * myResources.getPlayerWizards());
             myResources.addPlayerWeapons(2 * myResources.getPlayerSoldiers());
+            playerLabel.addFontColorChanger(turnEffect);
+            playerLabel.startTextColorEffects();
+            computerLabel.addFontColorChanger(notTurnEffect);
+            computerLabel.startTextColorEffects();
         } else {
             myResources.addComputerStones(2 * myResources.getComputerBuilders());
             myResources.addComputerGems(2 * myResources.getComputerWizards());
             myResources.addComputerWeapons(2 * myResources.getComputerSoldiers());
+            computerLabel.addFontColorChanger(turnEffect);
+            computerLabel.startTextColorEffects();
+            playerLabel.addFontColorChanger(notTurnEffect);
+            playerLabel.startTextColorEffects();
         }
+
     }
 
     private void computerTurn() {
@@ -243,6 +282,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
             //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
             if(!ai.isDiscarding()) {
                 cardActions.doCardAction(chosenCard.getCardID());
+            } else {
+                aiDiscarding = true;
             }
             player2.getHand().removeCardFromHand(chosenCard);
             player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, - Card.CARD_HEIGHT, 0, true));
@@ -314,7 +355,22 @@ public class GameWorld extends KodyWorld implements GameInterface {
         }
 
     }
-
+    @Override
+    public void win(){
+        winLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2, GameScreen.SCREEN_HEIGHT/4 * 3, 50, 5, "You Won!");
+        addWidgetToWorld(winLabel);
+        winLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
+        winLabel.startTextColorEffects();
+        endTimer = 5f;
+    }
+    @Override
+    public void lose(){
+        loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2, GameScreen.SCREEN_HEIGHT/4 * 3, 50, 5, "You Lost!");
+        addWidgetToWorld(loseLabel);
+        loseLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
+        loseLabel.startTextColorEffects();
+        endTimer = 5f;
+    }
     public ArrayList<Cloud> getCloudList(){
         return cloudList;
     }
@@ -526,7 +582,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         float computerLabelX = computerAttackMenu.getX() - CHANGE_TEXT_WIDTH - 2;
 
-        computerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerBuildAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
+        computerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerBuildAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
         computerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerBuildAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);

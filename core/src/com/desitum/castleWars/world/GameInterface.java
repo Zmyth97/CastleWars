@@ -15,6 +15,8 @@ public interface GameInterface {
     public int getPlayerTurn();
     public Player getPlayer1();
     public Player getPlayer2();
+    public void win();
+    public void lose();
     public void addCardToWorld(Card card);
     public void removeCardFromWorld(Card card);
     public void removeWidgetFromWorld(PopupWidget widget);

@@ -176,11 +176,11 @@ public class CardActions {
             }
         }else if(cardID == SABOTAGE){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
-                gi.getPlayer1().getCastle().repair(8);
+                gi.getPlayer1().getCastle().getWall().repair(10);
                 gi.getPlayer2().getCastle().doDamage(4);
                 gi.getResources().subtractPlayerStones(SABOTAGE_COST); //Cost
             } else {
-                gi.getPlayer2().getCastle().repair(8);
+                gi.getPlayer2().getCastle().getWall().repair(10);
                 gi.getPlayer1().getCastle().doDamage(4);
                 gi.getResources().subtractComputerStones(SABOTAGE_COST); //Cost
             }

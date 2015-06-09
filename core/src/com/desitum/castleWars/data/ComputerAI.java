@@ -46,11 +46,15 @@ public class ComputerAI {
             System.out.println("Card ID: " + card);
             if (card == 0) {
                 card = possibleCards.get(0);
+                if(card == CardActions.JERICHO){
+                    discarding = true;
+                }
             }
             chosenCard = chooseCard(card);
             System.out.println("Chosen Card: " + chosenCard.getCardID());
         } else {
             chosenCard = findBestToDiscard();
+            System.out.println("Had to Discard");
             discarding = true;
         }
 
@@ -63,28 +67,28 @@ public class ComputerAI {
         boolean moveToNext = true;
         if (gi.getPlayer1().getCastle().getWall().getHealth() + gi.getPlayer1().getCastle().getHealth() <= MAX_ATTACK || gi.getPlayer1().getCastle().getHealth() <= 20) { //20 for Trojan Horse Card
             chosenCard = checkForAttackWin();
-            System.out.println("See if AI can attack to win");
+            System.out.println("See if AI Can Attack to Win");
             if (chosenCard > 0) {
                 moveToNext = false;
             }
         }
         if ((100 - gi.getPlayer2().getCastle().getHealth()) <= MAX_BUILD && moveToNext) {
             chosenCard = checkForBuildWin();
-            System.out.println("See if AI can build to win");
+            System.out.println("See if AI Can Build to Win");
             if (chosenCard > 0) {
                 moveToNext = false;
             }
         }
         if (gi.getPlayer2().getCastle().getWall().getHealth() + gi.getPlayer2().getCastle().getHealth() <= MAX_ATTACK || gi.getPlayer2().getCastle().getHealth() <= 20 && moveToNext) {//20 for Trojan Horse Card
             chosenCard = checkForAttackDefeat();
-            System.out.println("Try to avoid attack defeat by Player1");
+            System.out.println("Try to Avoid Attack Defeat by Player1");
             if (chosenCard > 0) {
                 moveToNext = false;
             }
         }
         if ((100 - gi.getPlayer1().getCastle().getHealth()) <= MAX_BUILD && moveToNext) {
             chosenCard = checkForBuildDefeat();
-            System.out.println("Try to avoid build win by Player1");
+            System.out.println("Try to Avoid Build Win by Player1");
             if (chosenCard > 0) {
                 moveToNext = false;
             }

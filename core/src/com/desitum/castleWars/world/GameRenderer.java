@@ -45,6 +45,10 @@ public class GameRenderer {
             }
         }
 
+        if(world.aiDiscarding){
+            gameBatch.draw(Assets.discard, world.DISCARD_PILE_X, world.DISCARD_PILE_Y, Card.CARD_WIDTH, Card.CARD_HEIGHT);
+        }
+
         for (PopupMenu menu : this.world.getMenus()) {
             menu.draw(gameBatch);
         }

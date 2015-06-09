@@ -10,4 +10,5 @@ public interface MenuInterface {
     public void multiplayer();
     public void buildDeck();
     public void leaderboard();
+    public void store();
 }

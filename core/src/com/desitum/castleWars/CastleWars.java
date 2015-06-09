@@ -42,16 +42,16 @@ public class CastleWars extends Game {
         getScreen().dispose();
     }
 
-    //TODO: CheckList!!!//
-
+    //TODO: CheckList!!!
+    //Glitches
+        //Draw Pile Sometimes Shows The Next Card
+        //The Turn Labels Sometimes Don't Switch
+        //Cards Stop Working Randomly?
+        //Change Labels Get Frozen?
+        //When you discard it jumps to draw pile then moves to discard pile (sometimes)
+        //Whatever you Discard you'll get right back?
     //CardActions
-        //Fix Cards Moving Around to Show a Computer Hand Too? (Like original Castle Wars, maybe change the background color a bit between the two or something? idk)
-        //Make sure the Draw Pile shows the Backs of Cards
-    // GUI
-        //Castle Texture
-        //Wall Texture
-        //MenuScreen Additions (Animations, Store Button, Leaderboard Button in Corner, etc)?
-        //Maybe something at the top showing the left side is you, right side is the computer or player2?
+        //Computer Hand?
     //Computer AI
         //Just Test it a Lot, and I'll fine tune it till its actually semi-hard to beat
     //Dev Console

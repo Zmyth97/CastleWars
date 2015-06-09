@@ -81,6 +81,11 @@ public class Castle extends Sprite {
         }
         if(health <= 0){
             health = 0;
+            if(this.equals(gi.getPlayer1().getCastle())){
+                gi.lose();
+            } else {
+                gi.win();
+            }
         }
     }
 
@@ -93,6 +98,11 @@ public class Castle extends Sprite {
         }
         if (health >= 100) {
             health = 100;
+            if(this.equals(gi.getPlayer1().getCastle())){
+                gi.win();
+            } else {
+                gi.lose();
+            }
         }
         animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);
         particles.turnOn();
