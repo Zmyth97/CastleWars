@@ -43,13 +43,6 @@ public class CastleWars extends Game {
     }
 
     //TODO: CheckList!!!
-    //Glitches
-        //Draw Pile Sometimes Shows The Next Card
-        //The Turn Labels Sometimes Don't Switch
-        //Cards Stop Working Randomly?
-        //Change Labels Get Frozen?
-        //When you discard it jumps to draw pile then moves to discard pile (sometimes)
-        //Whatever you Discard you'll get right back?
     //CardActions
         //Computer Hand?
     //Computer AI

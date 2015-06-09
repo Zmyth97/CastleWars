@@ -64,7 +64,7 @@ public class GameRenderer {
 
     private void drawCards() {
         gameBatch.draw(Assets.cardBack, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y, Card.CARD_WIDTH, Card.CARD_HEIGHT);
-        for (int x = world.getDeck().getCardList().size() - 4; x < world.getDeck().getCardList().size(); x++) {
+        for (int x = world.getDeck().getCardList().size() - 3; x < world.getDeck().getCardList().size(); x++) {
             Card card = world.getDeck().getCardList().get(x);
             if(card.getX() != GameWorld.DRAW_PILE_X) {
                 card.draw(gameBatch);

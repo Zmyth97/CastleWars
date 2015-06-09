@@ -164,8 +164,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerLabel.setFontColor(Color.BLACK);
         computerLabel.setFontColor(Color.BLACK);
 
-        aiDiscardLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, DISCARD_PILE_X, DISCARD_PILE_Y - 5, 20, 5, "Discarded");
+        aiDiscardLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, DISCARD_PILE_X - 2, DISCARD_PILE_Y - 5, 20, 3, "Discarded");
         aiDiscardLabel.setFontColor(new Color(0, 0, 0, 0));
+        addWidgetToWorld(aiDiscardLabel);
 
         setupSideMenus();
 
@@ -241,18 +242,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
             myResources.addPlayerStones(2 * myResources.getPlayerBuilders());
             myResources.addPlayerGems(2 * myResources.getPlayerWizards());
             myResources.addPlayerWeapons(2 * myResources.getPlayerSoldiers());
-            playerLabel.addFontColorChanger(turnEffect);
-            playerLabel.startTextColorEffects();
-            computerLabel.addFontColorChanger(notTurnEffect);
-            computerLabel.startTextColorEffects();
+            playerLabel.setFontColor(Color.RED);
+            computerLabel.setFontColor(Color.BLACK);
         } else {
             myResources.addComputerStones(2 * myResources.getComputerBuilders());
             myResources.addComputerGems(2 * myResources.getComputerWizards());
             myResources.addComputerWeapons(2 * myResources.getComputerSoldiers());
-            computerLabel.addFontColorChanger(turnEffect);
-            computerLabel.startTextColorEffects();
-            playerLabel.addFontColorChanger(notTurnEffect);
-            playerLabel.startTextColorEffects();
+            computerLabel.setFontColor(Color.RED);
+            playerLabel.setFontColor(Color.BLACK);
         }
 
     }
@@ -268,9 +265,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
                     cardActions.doCardAction(card.getCardID());
                     player2.getHand().removeCardFromHand(c);
                     player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0, true));
-                    deck.addCard(c);
                     disableCard(c);
                     usedCard = true;
+                    deck.addCard(c);
                     break;
                 }
             }
@@ -280,18 +277,18 @@ public class GameWorld extends KodyWorld implements GameInterface {
             }
         } else if(difficulty == NORMAL_DIFFICULTY) {
             Card chosenCard = ai.processAI();
-            chosenCard.startOutgoingAnimators();
             if(!ai.isDiscarding()) {
                 cardActions.doCardAction(chosenCard.getCardID());
             } else {
-                aiDiscardLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, .5f, 0));
-                aiDiscardLabel.addFontColorChanger(new ColorEffects(Color.BLACK, new Color(0, 0, 0, 0), .5f, .5f));
+                aiDiscardLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f, 0));
+                aiDiscardLabel.addFontColorChanger(new ColorEffects(Color.BLACK, new Color(0, 0, 0, 0), 1f, 1f));
+                aiDiscardLabel.startTextColorEffects();
             }
+            chosenCard.startOutgoingAnimators();
             player2.getHand().removeCardFromHand(chosenCard);
-            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, - Card.CARD_HEIGHT, 0, true));
+            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0, true));
             deck.addCard(chosenCard);
             disableCard(chosenCard);
-            c = chosenCard;
         }
         switchTurns(PLAYER);
     }
@@ -304,7 +301,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 cardActions.doCardAction(card.getCardID());
             }
             player1.getHand().removeCardFromHand(card);
-            deck.addCard(card);
             int iRange = player1.getHand().getCardsInHand().size();
             for (int i = 0; i <= iRange; i++) {
                 float cardX = MenuScreen.SCREEN_WIDTH / 2 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
@@ -320,6 +316,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                     card1.startIncomingAnimators();
                 }
             }
+            deck.addCard(card);
             disableCard(card);
             switchTurns(PLAYER2);
         }

@@ -278,17 +278,19 @@ public class Deck {
 
     public Card drawCard(boolean isComputer) {
         Card lastCard = cardList.remove(cardList.size() - 1);
+        Card secondToLastCard = cardList.remove(cardList.size() - 1);
         Collections.shuffle(cardList);
+        cardList.add(secondToLastCard);
         cardList.add(lastCard);
         Card cardDrawn = cardList.get(0);
         cardList.remove(0);
 
         if(isComputer && cardDrawn.getCardID() > 399){
             while(cardDrawn.getCardID() > 399) {
-                cardList.add(cardDrawn);
-                Collections.shuffle(cardList);
-                cardDrawn = cardList.get(0);
-                cardList.remove(0);
+                cardList.add(0, cardDrawn);
+                int randomCard = (int)(Math.random() * (cardList.size() - 5)); //I did it this way instead of the first way because shuffling it messed up the last card in the pile and etc. (Bugs)
+                cardDrawn = cardList.get(randomCard);
+                cardList.remove(randomCard);
             }
         }
         return cardDrawn;
