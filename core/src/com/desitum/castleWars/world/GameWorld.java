@@ -265,7 +265,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 if (card.isAvailable()) {
                     c = card;
                     c.startOutgoingAnimators();
-                    //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
                     cardActions.doCardAction(card.getCardID());
                     player2.getHand().removeCardFromHand(c);
                     player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0, true));
@@ -282,7 +281,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
         } else if(difficulty == NORMAL_DIFFICULTY) {
             Card chosenCard = ai.processAI();
             chosenCard.startOutgoingAnimators();
-            //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
             if(!ai.isDiscarding()) {
                 cardActions.doCardAction(chosenCard.getCardID());
             } else {
@@ -302,26 +300,25 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public void onClickCard(Card card) {
         if ((card.isAvailable() || isDiscarding()) && playerTurn == PLAYER) {
             card.startOutgoingAnimators();
-            //If CARD HAS FINISHED MOVING AND IS IN THE DISCARD PILE, THEN DO BELOW
             if (!isDiscarding()) {
                 cardActions.doCardAction(card.getCardID());
-                player1.getHand().removeCardFromHand(card);
-                int iRange = player1.getHand().getCardsInHand().size();
-                for (int i = 0; i <= iRange; i++) {
-                    float cardX = MenuScreen.SCREEN_WIDTH / 2 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
-                    if (i == player1.getHand().getCardsInHand().size()) {
-                        player1.getHand().addCardToHand(drawNewCard(cardX, card.getY(), 0, false));
-                    } else {
-                        Card card1 = player1.getHand().getCardsInHand().get(i);
-                        card1.clearAllAnimators();
-                        card1.addIncomingAnimator(new MovementAnimator(card, card1.getX(), cardX, 1f, i * 0.1f, Interpolation.ACCELERATE_DECELERATE_INTERPOLATOR, true, false));
-                        card1.addIncomingAnimator(new MovementAnimator(card, card1.getY(), CARDS_Y, 1f, i * 0.1f, Interpolation.DECELERATE_INTERPOLATOR, false, true));
-                        card1.addOutgoingAnimator(new MovementAnimator(card, cardX, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
-                        card1.addOutgoingAnimator(new MovementAnimator(card, card1.getY(), DISCARD_PILE_Y, 1f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
-                        card1.startIncomingAnimators();
-                    }
+            }
+            player1.getHand().removeCardFromHand(card);
+            deck.addCard(card);
+            int iRange = player1.getHand().getCardsInHand().size();
+            for (int i = 0; i <= iRange; i++) {
+                float cardX = MenuScreen.SCREEN_WIDTH / 2 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
+                if (i == player1.getHand().getCardsInHand().size()) {
+                    player1.getHand().addCardToHand(drawNewCard(cardX, card.getY(), 0, false));
+                } else {
+                    Card card1 = player1.getHand().getCardsInHand().get(i);
+                    card1.clearAllAnimators();
+                    card1.addIncomingAnimator(new MovementAnimator(card, card1.getX(), cardX, 1f, i * 0.1f, Interpolation.ACCELERATE_DECELERATE_INTERPOLATOR, true, false));
+                    card1.addIncomingAnimator(new MovementAnimator(card, card1.getY(), CARDS_Y, 1f, i * 0.1f, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+                    card1.addOutgoingAnimator(new MovementAnimator(card, cardX, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
+                    card1.addOutgoingAnimator(new MovementAnimator(card, card1.getY(), DISCARD_PILE_Y, 1f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+                    card1.startIncomingAnimators();
                 }
-                deck.addCard(card);
             }
             disableCard(card);
             switchTurns(PLAYER2);
