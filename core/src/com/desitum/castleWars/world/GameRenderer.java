@@ -44,11 +44,6 @@ public class GameRenderer {
                 }
             }
         }
-
-        if(world.aiDiscarding){
-            gameBatch.draw(Assets.discard, world.DISCARD_PILE_X, world.DISCARD_PILE_Y, Card.CARD_WIDTH, Card.CARD_HEIGHT);
-        }
-
         for (PopupMenu menu : this.world.getMenus()) {
             menu.draw(gameBatch);
         }
@@ -69,9 +64,11 @@ public class GameRenderer {
 
     private void drawCards() {
         gameBatch.draw(Assets.cardBack, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y, Card.CARD_WIDTH, Card.CARD_HEIGHT);
-        for (int x = world.getDeck().getCardList().size() - 2; x < world.getDeck().getCardList().size(); x++) {
+        for (int x = world.getDeck().getCardList().size() - 4; x < world.getDeck().getCardList().size(); x++) {
             Card card = world.getDeck().getCardList().get(x);
-            card.draw(gameBatch);
+            if(card.getX() != GameWorld.DRAW_PILE_X) {
+                card.draw(gameBatch);
+            }
         }
         for (Card card : world.getPlayer2().getHand().getCardsInHand()) {
             card.draw(gameBatch);

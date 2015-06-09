@@ -63,7 +63,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private Player player1;
     private Player player2;
     private ComputerAI ai;
-    public boolean aiDiscarding;
     private PopupTextLabel playerBuildersLabel;
     private PopupTextLabel playerSoldiersLabel;
     private PopupTextLabel playerWizardsLabel;
@@ -111,6 +110,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private ColorEffects turnEffect;
     private ColorEffects notTurnEffect; //Lol. Love the name right?
 
+    private PopupTextLabel aiDiscardLabel; //Looked Weird When the AI Moved a Card and it Did Nothing
+
     private PopupTextLabel winLabel;
     private PopupTextLabel loseLabel;
     private float endTimer;
@@ -150,7 +151,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
         cloudList = new ArrayList<Cloud>();
 
         ai = new ComputerAI(this);
-        aiDiscarding = false;
 
         endTimer = 0;
         gameOver = false;
@@ -164,6 +164,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerLabel.setFontColor(Color.BLACK);
         computerLabel.setFontColor(Color.BLACK);
 
+        aiDiscardLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, DISCARD_PILE_X, DISCARD_PILE_Y - 5, 20, 5, "Discarded");
+        aiDiscardLabel.setFontColor(new Color(0, 0, 0, 0));
+
         setupSideMenus();
 
         buildDifficultyGUI();
@@ -174,6 +177,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             player1.getHand().addCardToHand(drawNewCard(cardX, CARDS_Y, i * 0.2f, false));
             player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f, true));
         }
+
     }
 
     public void update(float delta) {
@@ -232,7 +236,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private void switchTurns(int playerTurn) {
         this.playerTurn = playerTurn;
         discardToggle.turnOff();
-        aiDiscarding = false;
 
         if (playerTurn == PLAYER) {
             myResources.addPlayerStones(2 * myResources.getPlayerBuilders());
@@ -283,7 +286,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
             if(!ai.isDiscarding()) {
                 cardActions.doCardAction(chosenCard.getCardID());
             } else {
-                aiDiscarding = true;
+                aiDiscardLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, .5f, 0));
+                aiDiscardLabel.addFontColorChanger(new ColorEffects(Color.BLACK, new Color(0, 0, 0, 0), .5f, .5f));
             }
             player2.getHand().removeCardFromHand(chosenCard);
             player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, - Card.CARD_HEIGHT, 0, true));
@@ -357,7 +361,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
     @Override
     public void win(){
-        winLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2, GameScreen.SCREEN_HEIGHT/4 * 3, 50, 5, "You Won!");
+        winLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2 - 25, GameScreen.SCREEN_HEIGHT/4 * 2.5f, 50, 10, "You Won!");
         addWidgetToWorld(winLabel);
         winLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
         winLabel.startTextColorEffects();
@@ -365,7 +369,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
     @Override
     public void lose(){
-        loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2, GameScreen.SCREEN_HEIGHT/4 * 3, 50, 5, "You Lost!");
+        loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2 - 25, GameScreen.SCREEN_HEIGHT/4 * 2.5f, 55, 10, "You Lost!");
         addWidgetToWorld(loseLabel);
         loseLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
         loseLabel.startTextColorEffects();

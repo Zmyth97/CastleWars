@@ -99,8 +99,8 @@ public class Resources {
             playerBuilders = 1;
         } else {
             playerBuilders += amount;
-            if(playerBuilders < 0){
-                playerBuilders = 0;
+            if(playerBuilders <= 0){
+                playerBuilders = 1;
             }
         }
         if (difference != 0) gi.setPlayerBuildersLabelChangeText(difference);
@@ -114,8 +114,8 @@ public class Resources {
             playerSoldiers = 1;
         } else {
             playerSoldiers += amount;
-            if(playerSoldiers < 0){
-                playerSoldiers = 0;
+            if(playerSoldiers <= 0){
+                playerSoldiers = 1;
             }
         }
         if (difference != 0)  gi.setPlayerSoldiersLabelChangeText(difference);
@@ -129,8 +129,8 @@ public class Resources {
             playerWizards = 1;
         } else {
             playerWizards += amount;
-            if(playerWizards < 0){
-                playerWizards = 0;
+            if(playerWizards <= 0){
+                playerWizards = 1;
             }
         }
         if (difference != 0)  gi.setPlayerWizardsLabelChangeText(difference);
@@ -180,8 +180,8 @@ public class Resources {
             computerBuilders = 1;
         } else {
             computerBuilders += amount;
-            if(computerBuilders < 0){
-                computerBuilders = 0;
+            if(computerBuilders <= 0){
+                computerBuilders = 1;
             }
         }
         if (difference != 0)  gi.setComputerBuildersLabelChangeText(difference);
@@ -195,8 +195,8 @@ public class Resources {
             computerSoldiers = 1;
         } else {
             computerSoldiers += amount;
-            if(computerSoldiers < 0){
-                computerSoldiers = 0;
+            if(computerSoldiers <= 0){
+                computerSoldiers = 1;
             }
         }
         if (difference != 0)  gi.setComputerSoldiersLabelChangeText(difference);
@@ -210,8 +210,8 @@ public class Resources {
             computerWizards = 1;
         } else {
             computerWizards += amount;
-            if(computerWizards < 0){
-                computerWizards = 0;
+            if(computerWizards <= 0){
+                computerWizards = 1;
             }
         }
         if (difference != 0)  gi.setComputerWizardsLabelChangeText(difference);
