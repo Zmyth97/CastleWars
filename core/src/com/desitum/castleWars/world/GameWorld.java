@@ -643,6 +643,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             @Override
             public void onClick(PopupWidget widget) {
                 easyButton.turnOn();
+                Assets.buttonSound.play(Settings.VOLUME);
                 if(normalButton.isOn()){
                     normalButton.turnOff();
                 }}
@@ -651,8 +652,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
         normalButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
-                    normalButton.turnOn();
-                    if(easyButton.isOn()){
+                normalButton.turnOn();
+                Assets.buttonSound.play(Settings.VOLUME);
+                if(easyButton.isOn()){
                         easyButton.turnOff();
                     }             }
 
@@ -669,6 +671,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 } {
                     difficulty = NORMAL_DIFFICULTY;
                 }
+                Assets.buttonSound.play(Settings.VOLUME);
                 difficultyMenu.startOutgoingAnimators();
                 removeWidgetFromWorld(difficultyMenu);
             }

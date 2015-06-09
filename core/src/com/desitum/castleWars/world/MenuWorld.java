@@ -50,6 +50,7 @@ public class MenuWorld extends KodyWorld {
         cancelButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME); //Please don't kill me, this is a nice place for it!
                 popupMenu.startOutgoingAnimators();
             }
         });
@@ -59,6 +60,7 @@ public class MenuWorld extends KodyWorld {
         volumeSlider.setSliderListener(new PopupSliderListener() {
             @Override
             public void onChange(float pos) {
+                Settings.VOLUME = pos;
             }
         });
         popupMenu.addPopupWidget(volumeSlider);
@@ -68,6 +70,7 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Settings.setVolume(volumeSlider.getPosition());
+                Assets.buttonSound.play(Settings.VOLUME); //Please don't kill me, this is a nice place for it!
                 popupMenu.startOutgoingAnimators();
             }
         });
@@ -130,6 +133,7 @@ public class MenuWorld extends KodyWorld {
         leaderboardButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
                 menuInterface.leaderboard();
             }
         });
@@ -137,6 +141,7 @@ public class MenuWorld extends KodyWorld {
         settingsButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
                 menuInterface.settings();
             }
         });
@@ -144,6 +149,7 @@ public class MenuWorld extends KodyWorld {
        multiButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
                 menuInterface.multiplayer();
             }
         });
@@ -151,6 +157,7 @@ public class MenuWorld extends KodyWorld {
         deckButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
                 menuInterface.buildDeck();
             }
         });
@@ -158,6 +165,7 @@ public class MenuWorld extends KodyWorld {
         storeButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
                 menuInterface.store();
             }
         });

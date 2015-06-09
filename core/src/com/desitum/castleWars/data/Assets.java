@@ -1,6 +1,8 @@
 package com.desitum.castleWars.data;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -61,6 +63,7 @@ public class Assets {
     public static Texture cardBack;
     public static Texture cardBlank;
 
+    //Basic Build Cards
     public static Texture buildCardReinforce;
     public static Texture buildCardFortify;
     public static Texture buildCardCastle;
@@ -72,6 +75,7 @@ public class Assets {
     public static Texture buildCardSabotage;
     public static Texture buildCardStronghold;
 
+    //Basic Gem Cards
     public static Texture gemCardCreateStones;
     public static Texture gemCardCreateWeapons;
     public static Texture gemCardCreateGems;
@@ -83,6 +87,7 @@ public class Assets {
     public static Texture gemCardLightningStrike;
     public static Texture gemCardBlast;
 
+    //Basic Attack Cards
     public static Texture attackCardRecruiter;
     public static Texture attackCardSpearman;
     public static Texture attackCardRam;
@@ -94,12 +99,14 @@ public class Assets {
     public static Texture attackCardThief;
     public static Texture attackCardRaid;
 
+    //Basic Gold Cards
     public static Texture goldCardJericho;
     public static Texture goldCardTrojanHorse;
     public static Texture goldCardBlackPlague;
     public static Texture goldCardMerlin;
     public static Texture goldCardDuplicate;
 
+    //Resource Images
     public static Texture hammer;
     public static Texture stone;
     public static Texture spear;
@@ -131,6 +138,7 @@ public class Assets {
     public static Texture flameGoldCardMeteors;
     public static Texture flameGoldCardInferno;
     //endregion
+    //region Japanese Cards
     public static Texture japaneseBuildCardStockade;
     public static Texture japaneseBuildCardFortress;
     public static Texture japaneseBuildCardMonastery;
@@ -152,12 +160,15 @@ public class Assets {
     public static Texture japaneseGoldCardNinja;
     public static Texture japaneseGoldCardDragon;
     public static Texture japaneseGoldCardShogun;
-    //region Japanese Cards
-
     //endregion
 
     //Misc Textures
     public static BitmapFont textFieldFont;
+
+    //Music & Sounds
+    public static Music menuMusic;
+    public static Sound buttonSound;
+
 
     public static void loadMenuTextures() {
         invisible = Drawing.getHollowRectangle(10, 10, 1, new Color(0, 0, 0, 0));
@@ -330,7 +341,10 @@ public class Assets {
     }
 
     public static void loadSounds() {
-
+        buttonSound = Gdx.audio.newSound(Gdx.files.internal("sound/Click.mp3"));
+        menuMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/menu_loop1.wav"));
+        //menuMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/menu_loop2.mp3"));
+        menuMusic.setLooping(true);
     }
 
     public static void dispose() {

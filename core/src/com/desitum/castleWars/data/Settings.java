@@ -8,7 +8,7 @@ import com.badlogic.gdx.Preferences;
  */
 public class Settings {
     public static boolean volumeOn = true;
-    public static float volume = 1;
+    public static float VOLUME = 1;
     public static int highscore;
 
     public static int CARDS_DEALT = 6;
@@ -59,28 +59,27 @@ public class Settings {
     public static void getSound() {
         Preferences prefs = Gdx.app.getPreferences("settings");
         prefs.putBoolean("soundOn", volumeOn);
-        //prefs.flush();
+        prefs.flush();
         if(Settings.volumeOn == true)
         {
-            //Assets.menuMusic.setVolume(1);
-            volume = 1;
+            VOLUME = 1;
+            Assets.menuMusic.setVolume(VOLUME);
         }
         else
         {
-            //Assets.menuMusic.setVolume(0);
-            volume = 0;
+            VOLUME = 0;
+            Assets.menuMusic.setVolume(VOLUME);
         }
     }
 
     public static void load(){
         Preferences prefs = Gdx.app.getPreferences("settings");
         volumeOn = prefs.getBoolean("soundOn", true);
-        highscore = prefs.getInteger("highscore", 0);
         getSound();
     }
 
     public static void setVolume(float volume){
-        //TODO need to actually do something
+        VOLUME = volume;
     }
 
     public static void saveScore(int score) {

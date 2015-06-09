@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.world.MenuInterface;
 import com.desitum.castleWars.world.MenuRenderer;
@@ -46,10 +47,14 @@ public class MenuScreen implements Screen, MenuInterface {
 
         menuWorld = new MenuWorld(viewport, this);
         menuRenderer = new MenuRenderer(menuWorld, spriteBatch);
+
+        Assets.menuMusic.play();
+
     }
 
     private void update(float delta) {
         menuWorld.update(delta);
+        Assets.menuMusic.setVolume(Settings.VOLUME);
     }
 
     private void draw() {
