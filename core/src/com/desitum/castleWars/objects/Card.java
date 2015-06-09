@@ -14,8 +14,8 @@ import com.desitum.castleWars.libraries.menu.PopupButton;
  */
 public class Card extends PopupButton {
 
-    public static final float CARD_WIDTH = 14;
-    public static final float CARD_HEIGHT = 21;
+    public static final float CARD_WIDTH = 16;
+    public static final float CARD_HEIGHT = 24;
     public static final int BUILD = 1;
     public static final int ATTACK = 2;
     public static final int MAGIC = 3;
@@ -36,7 +36,7 @@ public class Card extends PopupButton {
         this.cardType = cardType;
         this.cardCost = cardCost;
         this.cardID = cardID;
-        this.setPosition(x, y);
+        this.setPosition(x , y);
     }
 
     public void update(float delta) {

@@ -45,7 +45,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public static final float DISCARD_PILE_X = MenuScreen.SCREEN_WIDTH / 2 + 1.25f;
     public static final float DISCARD_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
     public static final float CARD_SPACING = 0.5f;
-    public static final float CARDS_Y = 5;
+    public static final float CARDS_Y = 2;
     public static final int EASY_DIFFICULTY = 0;
     public static final int NORMAL_DIFFICULTY = 1;
     private static final float FADE_IN_DURATION = 1f;
@@ -189,7 +189,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         super.update(delta);
 
-        if (playerTurn == PLAYER2) {
+        if (playerTurn == PLAYER2 && endTimer <= 0) {
             computerDelay -= delta;
             if (computerDelay < 0) {
                 computerDelay = Settings.COMPUTER_DELAY;

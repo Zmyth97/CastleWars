@@ -354,10 +354,54 @@ public class ComputerAI {
 
     private Card findBestToDiscard() {
         Card toDiscard = null;
-        //Add Logic for which is best to discard here
+        boolean attackWin = false;
+        boolean buildWin = false;
+        boolean attackDeafeat = false;
+        boolean buildDefeat = false;
 
-        //Placeholder
-        toDiscard = gi.getPlayer2().getHand().getCardsInHand().get(0);
+        System.out.println("Needs to Discard");
+        System.out.println("See if AI is Close to Attack Winning");
+        if (gi.getPlayer1().getCastle().getWall().getHealth() + gi.getPlayer1().getCastle().getHealth() <= MAX_ATTACK || gi.getPlayer1().getCastle().getHealth() <= 20) { //20 for Trojan Horse Card
+            attackWin = true;
+        }
+        System.out.println("See if AI is Close to  a Build Winning");
+        if ((100 - gi.getPlayer2().getCastle().getHealth()) <= MAX_BUILD) {
+            buildWin = true;
+        }
+        System.out.println("See if AI is Close to Attack Defeat");
+        if (gi.getPlayer2().getCastle().getWall().getHealth() + gi.getPlayer2().getCastle().getHealth() <= MAX_ATTACK || gi.getPlayer2().getCastle().getHealth() <= 20) {//20 for Trojan Horse Card
+            attackDeafeat = true;
+        }
+        System.out.println("See if AI is Close to Build Defeat");
+        if ((100 - gi.getPlayer1().getCastle().getHealth()) <= MAX_BUILD) {
+            buildDefeat = true;
+        }
+
+        System.out.println("Choose Best Basic Cards to Discard Based on Above Queries");
+        if(attackDeafeat || buildWin){
+            for(Card card: gi.getPlayer2().getHand().getCardsInHand()){
+                if(card.getCardType() == Card.ATTACK){
+                    toDiscard = card;
+                }
+            }
+        } else if(attackWin || buildDefeat){
+            for(Card card: gi.getPlayer2().getHand().getCardsInHand()){
+                if(card.getCardType() == Card.BUILD){
+                    toDiscard = card;
+                }
+            }
+        } else {
+            for(Card card: gi.getPlayer2().getHand().getCardsInHand()){
+                if(card.getCardType() == Card.MAGIC){
+                    toDiscard = card;
+                }
+            }
+        }
+
+        if(toDiscard == null) {
+            System.out.println("Discard Logic Found No Good Card to Discard, Chose First Card Instead");
+            toDiscard = gi.getPlayer2().getHand().getCardsInHand().get(0);
+        }
 
         return toDiscard;
     }

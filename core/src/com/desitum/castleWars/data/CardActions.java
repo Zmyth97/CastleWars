@@ -244,25 +244,41 @@ public class CardActions {
                 gi.getPlayer1().getCastle().doDamage(20);
                 gi.getResources().subtractComputerWeapons(TREBUCHET_COST); //Cost
             }
-        } else if(cardID == ASSASSIN){
+        } else if(cardID == ASSASSIN){ //This Method seems a little redundant, but it does this to try and kill a random person that is greater than 1 (so that it will actually subtract one since the minimum is 1)
             int randomInt = (int)(Math.random() * 2);
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().subtractPlayerWeapons(ASSASSIN_COST); //Cost
-                if(randomInt == 0){
+                if(randomInt == 0 && gi.getResources().getComputerBuilders() > 1){
                     gi.getResources().adjustComputerBuilders(-1);
-                } else if (randomInt == 1){
+                } else if (randomInt == 1  && gi.getResources().getComputerSoldiers() > 1){
                     gi.getResources().adjustComputerSoldiers(-1);
-                } else {
+                } else if(randomInt == 2 && gi.getResources().getComputerWizards() > 1){
                     gi.getResources().adjustComputerWizards(-1);
+                } else if(gi.getResources().getComputerBuilders() > 1){
+                    gi.getResources().adjustComputerBuilders(-1);
+                } else if(gi.getResources().getComputerSoldiers() > 1){
+                    gi.getResources().adjustComputerSoldiers(-1);
+                } else if(gi.getResources().getComputerWizards() > 1){
+                    gi.getResources().adjustComputerWizards(-1);
+                } else {
+                    gi.getResources().adjustComputerBuilders(-1);
                 }
             } else {
                 gi.getResources().subtractComputerWeapons(ASSASSIN_COST); //Cost
-                if(randomInt == 0){
+                if(randomInt == 0 && gi.getResources().getPlayerBuilders() > 1){
                     gi.getResources().adjustPlayerBuilders(-1);
-                } else if (randomInt == 1){
+                } else if (randomInt == 1  && gi.getResources().getPlayerSoldiers() > 1){
                     gi.getResources().adjustPlayerSoldiers(-1);
-                } else {
+                } else if(randomInt == 2 && gi.getResources().getPlayerWizards() > 1){
                     gi.getResources().adjustPlayerWizards(-1);
+                } else if(gi.getResources().getPlayerBuilders() > 1){
+                    gi.getResources().adjustPlayerBuilders(-1);
+                } else if(gi.getResources().getPlayerSoldiers() > 1){
+                    gi.getResources().adjustPlayerSoldiers(-1);
+                } else if(gi.getResources().getPlayerWizards() > 1){
+                    gi.getResources().adjustPlayerWizards(-1);
+                } else {
+                    gi.getResources().adjustPlayerBuilders(-1);
                 }
             }
         }else if(cardID == BURGLAR){

@@ -334,6 +334,31 @@ public class Assets {
     }
 
     public static void dispose() {
-        //TODO Add Disposals
+        invisible.dispose();
+
+        playButton.dispose();
+        settingsButton.dispose();
+        leaderboardButton.dispose();
+        cancelButton.dispose();
+        okButton.dispose();
+        multiButton.dispose();
+        buildDeckButton.dispose();
+        shareButton.dispose();
+        soundButtonOn.dispose();
+        soundButtonOff.dispose();
+        storeButton.dispose();
+
+        playButtonRound.dispose();
+        cancelButtonRound.dispose();
+        leaderboardButtonRound.dispose();
+        okButtonRound.dispose();
+        settingsButtonRound.dispose();
+        shareButtonRound.dispose();
+        storeButtonRound.dispose();
+
+        textFieldBackground.dispose();
+        menuBackground.dispose();
+
+        //STOPPED HERE BECAUSE I REALIZED IT MIGHT NOT BE NEEDED. TALK TO MEH!
     }
 }
