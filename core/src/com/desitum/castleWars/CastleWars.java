@@ -2,48 +2,41 @@ package com.desitum.castleWars;
 
 
 import com.badlogic.gdx.Game;
-
 import com.badlogic.gdx.Screen;
 
 
 public class CastleWars extends Game {
-    GooglePlayServicesInterface googlePlay;
-
     public static final int RAIDER = 0; //1 Win
     public static final int PILLAGER = 1; //5 Wins
     public static final int TEMPLAR = 2; //10 Wins
     public static final int CRUSADER = 3; //50 Wins
     public static final int DESTROYER = 4; //100 Wins
-
     public static final int BEGINNER_RAIDER = 4; //1 Multi Win
     public static final int NOVICE_RAIDER= 4; //3 Multi Wins
     public static final int ADVANCED_RAIDER = 4; //5 Multi Wins
     public static final int EXPERT_RAIDER = 4; //10 Multi Wins
     public static final int MASTER_RAIDER = 4; //25 Multi Wins
-
     public static final int DO_IT_YOURSELF = 4; //Build First Deck
     public static final int SILENT_BUT_DEADLY = 4; //First Time Muting the Game (lol)
     public static final int WORLD_CONQUEST = 4; //First Multiplayer Game
     public static final int PILLAGED = 4; //Be Beaten by the AI on Normal
     public static final int FLAMING_NINJA = 4; //Buy Both Fire and Japanese Card Packs
-
     public static final int FEUDAL_JAPAN = 4; //Buy the Japanese Card Pack
     public static final int DEATH_BY_FIRE = 4; //First Time Using The Dragon
     public static final int NIGHT_KILLER = 4; //Use the Ninja Card 20 Times
     public static final int RICE_FARMER = 4; //Use Rice Paddy 20 Times
     public static final int JAPANESE_MASTER = 4; //Use a Japanese Card to Win a Game (Build or Attack)
-
     public static final int BURN_IT_ALL = 4; //Buy the Fire Card Pack
     public static final int THE_SKY_IS_FALLING = 4; //First Time Using Meteors
     public static final int REBORN = 4; //Use the Phoenix Card 20 Times
     public static final int LET_IT_FLOW = 4; //Use Lava Flow 20 Times (hehehehe)
     public static final int ELEMENTALIST = 4; //Use a Fire Card to Win a Game (Build or Attack)
-
     public static final int BUILDER = 4; //First Build Win
     public static final int ATTACKER = 4; //First Attack Win
     public static final int WATCHING_CLOUDS = 4; //A total of 1,000 Clouds Float By While Playing
     public static final int TO_THE_POINT = 4; //Win a game using only 15 Cards (too hard?)
     public static final int CARD_MASTER = 4; //Use a total of 10,000 Cards (too much?)
+    GooglePlayServicesInterface googlePlay;
 
 
 
@@ -51,6 +44,24 @@ public class CastleWars extends Game {
 
     public CastleWars(GooglePlayServicesInterface googlePlay) {
         this.googlePlay = googlePlay;
+    }
+
+    public void submitWin() {
+
+    }
+
+    public void submitBuildWin() {
+        submitWin();
+        //Needs a way to submit build alone
+    }
+
+    public void submitCloud() {
+
+    }
+
+    public void submitAttackWin() {
+        submitWin();
+        //Needs way to submit attack alone
     }
 
     @Override
