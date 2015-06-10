@@ -50,11 +50,16 @@ public class Assets {
     public static Texture popupMenuBackground;
 
     //Game Textures
+    public static Texture playerFlameCastle;
     public static Texture playerCastle;
     public static Texture playerWall;
+    public static Texture computerFlameCastle;
     public static Texture computerCastle;
     public static Texture computerWall;
+    public static Texture flameGround;
     public static Texture gameGround;
+    public static Texture flameSky;
+    public static Texture japaneseSky;
     public static Texture gameSky;
     public static Texture cloud1;
     public static Texture cloud2;
@@ -211,11 +216,16 @@ public class Assets {
 
     public static void loadGameTextures() {
         playerCastle = new Texture("game/player_castle.png");
+        playerFlameCastle = new Texture("game/player_flame_castle.png");
         playerWall = new Texture("game/player_wall.png");
         computerCastle = new Texture("game/computer_castle.png");
+        computerFlameCastle = new Texture("game/computer_flame_castle.png");
         computerWall = new Texture("game/computer_wall.png");
         gameGround = new Texture("game/ground.png");
+        flameGround = new Texture("game/flame_ground.png");
         gameSky = new Texture("game/sky.png");
+        japaneseSky = new Texture("game/japanese_sky.png");
+        flameSky = new Texture("game/flame_sky.png");
         cloud1 = new Texture("game/cloud1.png");
         cloud2 = new Texture("game/cloud2.png");
         cloud3 = new Texture("game/cloud3.png");
