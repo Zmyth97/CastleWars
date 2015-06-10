@@ -47,6 +47,7 @@ public class PopupScrollArea extends PopupWidget {
         this.spacing = spacing;
         this.activeWidth = activeWidth;
         this.activeHeight = activeHeight;
+        this.setPosition(x , y);
     }
 
     public void updateScrollInput(float amount) {

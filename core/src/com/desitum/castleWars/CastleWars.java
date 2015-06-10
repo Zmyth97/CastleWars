@@ -9,7 +9,6 @@ import com.badlogic.gdx.Screen;
 public class CastleWars extends Game {
     GooglePlayServicesInterface googlePlay;
 
-
     public static final int RAIDER = 0; //1 Win
     public static final int PILLAGER = 1; //5 Wins
     public static final int TEMPLAR = 2; //10 Wins
@@ -17,16 +16,16 @@ public class CastleWars extends Game {
     public static final int DESTROYER = 4; //100 Wins
 
     public static final int BEGINNER_RAIDER = 4; //1 Multi Win
-    public static final int NOVICE_RAIDER= 4; //5 Multi Wins
-    public static final int ADVANCED_RAIDER = 4; //10 Multi Wins
-    public static final int EXPERT_RAIDER = 4; //50 Multi Wins
-    public static final int MASTER_RAIDER = 4; //100 Multi Wins
+    public static final int NOVICE_RAIDER= 4; //3 Multi Wins
+    public static final int ADVANCED_RAIDER = 4; //5 Multi Wins
+    public static final int EXPERT_RAIDER = 4; //10 Multi Wins
+    public static final int MASTER_RAIDER = 4; //25 Multi Wins
 
     public static final int DO_IT_YOURSELF = 4; //Build First Deck
     public static final int SILENT_BUT_DEADLY = 4; //First Time Muting the Game (lol)
     public static final int WORLD_CONQUEST = 4; //First Multiplayer Game
     public static final int PILLAGED = 4; //Be Beaten by the AI on Normal
-    public static final int DO_NOT_DISTURB = 4; //Get rid of adds (included in buying a card pack or separate)
+    public static final int FLAMING_NINJA = 4; //Buy Both Fire and Japanese Card Packs
 
     public static final int FEUDAL_JAPAN = 4; //Buy the Japanese Card Pack
     public static final int DEATH_BY_FIRE = 4; //First Time Using The Dragon
