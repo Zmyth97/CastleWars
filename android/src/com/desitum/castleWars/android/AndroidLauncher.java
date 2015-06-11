@@ -168,8 +168,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_let_it_flow), 1);
             } else if (achievement == CastleWars.ELEMENTALIST) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_elementalist));
-            } else if (achievement == CastleWars.BEEN_THERE_DONE_THAT) {
-                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_been_there_done_that));
             } else {
                 //Nothing!
             }

@@ -44,7 +44,6 @@ public class CastleWars extends Game {
     public static final int DIDNT_SEE_THAT_COMING = 28; //Win a game using the Trojan Horse Card #
     public static final int CASTLE_MASTER = 29; //Play a Total of 200 Games #
 
-    public static final int BEEN_THERE_DONE_THAT = 30; //Have Every Other Achievement
     public static final int AN_ERA_BEGINS = 31; //First Game #
 
 
