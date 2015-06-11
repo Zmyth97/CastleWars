@@ -4,12 +4,37 @@ Google Play game services IDs.
 Save this file as res/values/games-ids.xml in your project.
 -->
 <resources>
-    <string name="app_id">12345</string>
-    <string name="achievement_one">asdf</string>
-    <string name="achievement_two">asdf</string>
-    <string name="achievement_three">asdf</string>
-    <string name="achievement_four">asdf</string>
-    <string name="achievement_five">asdf</string>
-
-    <string name="leaderboard_highscore">asdf</string>
+    <string name="app_id">906614532106</string>
+    <string name="achievement_an_era_begins">CgkIitC_s7EaEAIQEA</string>
+    <string name="achievement_raider">CgkIitC_s7EaEAIQAQ</string>
+    <string name="achievement_pillager">CgkIitC_s7EaEAIQAg</string>
+    <string name="achievement_templar">CgkIitC_s7EaEAIQAw</string>
+    <string name="achievement_crusader">CgkIitC_s7EaEAIQBA</string>
+    <string name="achievement_destroyer">CgkIitC_s7EaEAIQBQ</string>
+    <string name="achievement_beginner_raider">CgkIitC_s7EaEAIQBg</string>
+    <string name="achievement_novice_raider">CgkIitC_s7EaEAIQBw</string>
+    <string name="achievement_advanced_raider">CgkIitC_s7EaEAIQCA</string>
+    <string name="achievement_expert_raider">CgkIitC_s7EaEAIQCQ</string>
+    <string name="achievement_master_raider">CgkIitC_s7EaEAIQCg</string>
+    <string name="achievement_do_it_yourself">CgkIitC_s7EaEAIQCw</string>
+    <string name="achievement_silent_but_deadly">CgkIitC_s7EaEAIQDA</string>
+    <string name="achievement_world_conquest">CgkIitC_s7EaEAIQDQ</string>
+    <string name="achievement_pillaged">CgkIitC_s7EaEAIQDg</string>
+    <string name="achievement_flaming_ninja">CgkIitC_s7EaEAIQDw</string>
+    <string name="achievement_builder">CgkIitC_s7EaEAIQEQ</string>
+    <string name="achievement_attacker">CgkIitC_s7EaEAIQEg</string>
+    <string name="achievement_cloud_watcher">CgkIitC_s7EaEAIQEw</string>
+    <string name="achievement_didnt_see_that_coming">CgkIitC_s7EaEAIQFA</string>
+    <string name="achievement_castle_master">CgkIitC_s7EaEAIQFQ</string>
+    <string name="achievement_feudal_japan">CgkIitC_s7EaEAIQFg</string>
+    <string name="achievement_death_by_fire">CgkIitC_s7EaEAIQFw</string>
+    <string name="achievement_night_killer">CgkIitC_s7EaEAIQGA</string>
+    <string name="achievement_honorable_sacrifice">CgkIitC_s7EaEAIQGQ</string>
+    <string name="achievement_japanese_master">CgkIitC_s7EaEAIQGg</string>
+    <string name="achievement_burn_it_all">CgkIitC_s7EaEAIQGw</string>
+    <string name="achievement_death_from_above">CgkIitC_s7EaEAIQHA</string>
+    <string name="achievement_reborn">CgkIitC_s7EaEAIQHQ</string>
+    <string name="achievement_let_it_flow">CgkIitC_s7EaEAIQHg</string>
+    <string name="achievement_elementalist">CgkIitC_s7EaEAIQHw</string>
+    <string name="achievement_been_there_done_that">CgkIitC_s7EaEAIQIA</string>
 </resources>

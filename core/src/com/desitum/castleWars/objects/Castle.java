@@ -3,6 +3,7 @@ package com.desitum.castleWars.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
@@ -84,6 +85,7 @@ public class Castle extends Sprite {
             if(this.equals(gi.getPlayer1().getCastle())){
                 gi.lose();
             } else {
+                gi.unlockAchievement(CastleWars.ATTACKER);
                 gi.win();
             }
         }
@@ -99,6 +101,7 @@ public class Castle extends Sprite {
         if (health >= 100) {
             health = 100;
             if(this.equals(gi.getPlayer1().getCastle())){
+                gi.unlockAchievement(CastleWars.BUILDER);
                 gi.win();
             } else {
                 gi.lose();

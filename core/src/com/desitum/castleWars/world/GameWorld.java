@@ -3,6 +3,8 @@ package com.desitum.castleWars.world;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.desitum.castleWars.CastleWars;
+import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.CardActions;
 import com.desitum.castleWars.data.ComputerAI;
@@ -38,6 +40,11 @@ import java.util.Iterator;
  */
 public class GameWorld extends KodyWorld implements GameInterface {
 
+
+    ////////////////////////////////////////////////
+    //PLACEHOLDER TILL WE CAN DISTINGUISH BETWEEN NETWORK AND SINGLE GAMES
+    private boolean networkGame;
+    ////////////////////////////////////////////////
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
     public static final float DRAW_PILE_X = MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH - 1.25f;
@@ -59,10 +66,12 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static Color attackColor = new Color(.855f, 0f, .102f, 1);
     private static Color magicColor = new Color(.035f, .722f, 0, 1);
     private static Color castleColor = new Color(0.278f, 0.278f, 0.322f, 1);
+    private GooglePlayServicesInterface gpgs;
     private int playerTurn;
     private Player player1;
     private Player player2;
     private ComputerAI ai;
+    private Card lastCardUsed;
     private PopupTextLabel playerBuildersLabel;
     private PopupTextLabel playerSoldiersLabel;
     private PopupTextLabel playerWizardsLabel;
@@ -124,10 +133,11 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupTextLabel normalLabel;
     private PopupButtonMaterial okButton;
 
-    public GameWorld(Viewport cam) {
+    public GameWorld(GooglePlayServicesInterface gpgs, Viewport cam) {
         super();
         super.setCam(cam);
 
+        this.gpgs = gpgs;
         player1 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 - 50));
         player2 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 + 25));
 
@@ -179,6 +189,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f, true));
         }
 
+        gpgs.unlockAchievement(CastleWars.AN_ERA_BEGINS);
     }
 
     public void update(float delta) {
@@ -207,7 +218,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
         while (iter.hasNext()) {
             Cloud c = iter.next();
             c.update(delta);
-            if (c.needsRemoval()) iter.remove();
+            if (c.needsRemoval()){
+                gpgs.unlockAchievement(CastleWars.CLOUD_WATCHER);
+                iter.remove();
+            }
         }
 
         if(endTimer > 0){
@@ -299,6 +313,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             card.startOutgoingAnimators();
             if (!isDiscarding()) {
                 cardActions.doCardAction(card.getCardID());
+                lastCardUsed = card;
             }
             player1.getHand().removeCardFromHand(card);
             int iRange = player1.getHand().getCardsInHand().size();
@@ -355,6 +370,28 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
     @Override
     public void win(){
+        gpgs.unlockAchievement(CastleWars.CASTLE_MASTER);
+        if(lastCardUsed.getCardID() > 400 && lastCardUsed.getCardID() < 500){
+            gpgs.unlockAchievement(CastleWars.ELEMENTALIST);
+        } else if(lastCardUsed.getCardID() > 500 && lastCardUsed.getCardID() < 600){
+            gpgs.unlockAchievement(CastleWars.JAPANESE_MASTER);
+        }
+        if(lastCardUsed.getCardID() == CardActions.TROJAN_HORSE){
+            gpgs.unlockAchievement(CastleWars.DIDNT_SEE_THAT_COMING);
+        }
+        if(networkGame){
+            gpgs.unlockAchievement(CastleWars.BEGINNER_RAIDER);
+            gpgs.unlockAchievement(CastleWars.NOVICE_RAIDER);
+            gpgs.unlockAchievement(CastleWars.ADVANCED_RAIDER);
+            gpgs.unlockAchievement(CastleWars.EXPERT_RAIDER);
+            gpgs.unlockAchievement(CastleWars.MASTER_RAIDER);
+        } else {
+            gpgs.unlockAchievement(CastleWars.RAIDER);
+            gpgs.unlockAchievement(CastleWars.PILLAGER);
+            gpgs.unlockAchievement(CastleWars.TEMPLAR);
+            gpgs.unlockAchievement(CastleWars.CRUSADER);
+            gpgs.unlockAchievement(CastleWars.DESTROYER);
+        }
         winLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2 - 25, GameScreen.SCREEN_HEIGHT/4 * 2.5f, 50, 10, "You Won!");
         addWidgetToWorld(winLabel);
         winLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
@@ -363,6 +400,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
     @Override
     public void lose(){
+        gpgs.unlockAchievement(CastleWars.CASTLE_MASTER);
+        if(!networkGame){
+            gpgs.unlockAchievement(CastleWars.PILLAGED);
+        }
         loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2 - 25, GameScreen.SCREEN_HEIGHT/4 * 2.5f, 55, 10, "You Lost!");
         addWidgetToWorld(loseLabel);
         loseLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
@@ -371,6 +412,11 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
     public ArrayList<Cloud> getCloudList(){
         return cloudList;
+    }
+
+    @Override
+    public void unlockAchievement(int achievement){
+        gpgs.unlockAchievement(achievement);
     }
     @Override
     public Resources getResources() {
@@ -662,7 +708,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         easyLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/7, (menuHeight/3) *2, menuWidth/4, (menuHeight/8), "Easy");
         normalLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/4 * 2.3f, (menuHeight/3)*2, menuWidth/3f, (menuHeight/8), "Normal");
-        okButton = new PopupButtonMaterial(Assets.okButton, menuWidth / 2 - (menuWidth / 4) / 1.75f, menuHeight / 4 - menuHeight / 6, 2, menuWidth / 4, menuHeight / 6);
+
+        okButton = new PopupButtonMaterial(Assets.okButton, menuWidth / 2 - (menuWidth / 4) / 1.75f, menuHeight / 4 - menuHeight / 6, MenuWorld.BUTTON_HEIGHT, menuWidth / 4, menuHeight / 6);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {

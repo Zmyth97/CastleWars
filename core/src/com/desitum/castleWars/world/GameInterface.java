@@ -11,6 +11,7 @@ import com.desitum.castleWars.objects.Player;
  */
 public interface GameInterface {
     public void onClickCard(Card card);
+    public void unlockAchievement(int achievement);
     public Resources getResources();
     public int getPlayerTurn();
     public Player getPlayer1();

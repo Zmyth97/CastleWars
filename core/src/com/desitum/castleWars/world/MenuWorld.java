@@ -19,7 +19,7 @@ import com.desitum.castleWars.screens.MenuScreen;
  */
 public class MenuWorld extends KodyWorld {
 
-    private static final int BUTTON_HEIGHT = 2;
+    public static final float BUTTON_HEIGHT = 0.5f;
     private MenuInterface menuInterface;
     private PopupMenu popupMenu;
     private PopupButtonMaterial playButton;

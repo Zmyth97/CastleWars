@@ -21,17 +21,11 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.achievement.Achievement;
 
 public class AndroidLauncher extends AndroidApplication implements GooglePlayServicesInterface,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
-
-    public static final int ACHIEVEMENT_ONE = 0;
-    public static final int ACHIEVEMENT_TWO = 1;
-    public static final int ACHIEVEMENT_THREE = 2;
-    public static final int ACHIEVEMENT_FOUR = 3;
-    public static final int ACHIEVEMENT_FIVE = 4;
-
 
     private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
 
@@ -58,10 +52,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     private boolean mIsInResolution;
 
     private static final String AD_UNIT_ID = "adunit1234";
-    protected AdView adView;
     protected View gameView;
-
-    private AdView admobView;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -87,34 +78,10 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
 
         View gameView = createGameView(config);
         layout.addView(gameView);
-        admobView = createAdView();
-        layout.addView(admobView);
 
         setContentView(layout);
-        startAdvertising(admobView);
     }
-    private final int SHOW_ADS = 1;
-    private final int HIDE_ADS = 0;
 
-    protected Handler handler = new Handler()
-    {
-        @Override
-        public void handleMessage(Message msg) {
-            switch(msg.what) {
-                case SHOW_ADS:
-                {
-                    adView.setVisibility(View.VISIBLE); //change to visible
-                    break;
-                }
-                case HIDE_ADS:
-                {
-                    adView.setVisibility(View.GONE);//change to not visible
-                    // you should also disable the ad fetching here!
-                    break;
-                }
-            }
-        }
-    };
 
     @Override
     public void getLeaderBoard() {
@@ -139,16 +106,70 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     @Override
     public void unlockAchievement(int achievement) {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-            if (achievement == ACHIEVEMENT_ONE) {
-                Games.Achievements.unlock(mGoogleApiClient, "12345");
-            } else if (achievement == ACHIEVEMENT_TWO) {
-                Games.Achievements.unlock(mGoogleApiClient, "12345");
-            } else if (achievement == ACHIEVEMENT_THREE) {
-                Games.Achievements.unlock(mGoogleApiClient, "12345");
-            } else if (achievement == ACHIEVEMENT_FOUR) {
-                Games.Achievements.unlock(mGoogleApiClient, "12345");
-            } else if (achievement == ACHIEVEMENT_FIVE) {
-                Games.Achievements.unlock(mGoogleApiClient, "12345");
+            if (achievement == CastleWars.AN_ERA_BEGINS) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_an_era_begins));
+            } else if (achievement == CastleWars.RAIDER) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_raider));
+            } else if (achievement == CastleWars.PILLAGER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_pillager), 1);
+            } else if (achievement == CastleWars.TEMPLAR) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_templar), 1);
+            } else if (achievement == CastleWars.CRUSADER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_crusader), 1);
+            }else if (achievement == CastleWars.DESTROYER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_destroyer), 1);
+            } else if (achievement == CastleWars.BEGINNER_RAIDER) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_beginner_raider));
+            } else if (achievement == CastleWars.NOVICE_RAIDER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_novice_raider), 1);
+            } else if (achievement == CastleWars.ADVANCED_RAIDER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_advanced_raider), 1);
+            }else if (achievement == CastleWars.EXPERT_RAIDER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_expert_raider), 1);
+            } else if (achievement == CastleWars.MASTER_RAIDER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_master_raider), 1);
+            } else if (achievement == CastleWars.DO_IT_YOURSELF) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_do_it_yourself));
+            } else if (achievement == CastleWars.SILENT_BUT_DEADLY) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_silent_but_deadly));
+            }else if (achievement == CastleWars.WORLD_CONQUEST) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_world_conquest));
+            } else if (achievement == CastleWars.PILLAGED) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_pillaged));
+            } else if (achievement == CastleWars.FLAMING_NINJA) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_flaming_ninja));
+            } else if (achievement == CastleWars.BUILDER) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_builder));
+            }else if (achievement == CastleWars.ATTACKER) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_attacker));
+            } else if (achievement == CastleWars.CLOUD_WATCHER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_cloud_watcher), 1);
+            } else if (achievement == CastleWars.DIDNT_SEE_THAT_COMING) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_didnt_see_that_coming));
+            } else if (achievement == CastleWars.CASTLE_MASTER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_castle_master), 1);
+            }else if (achievement == CastleWars.FEUDAL_JAPAN) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_feudal_japan));
+            } else if (achievement == CastleWars.DEATH_BY_FIRE) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_death_by_fire));
+            } else if (achievement == CastleWars.NIGHT_KILLER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_night_killer), 1);
+            } else if (achievement == CastleWars.HONORABLE_SACRIFICE) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_honorable_sacrifice), 1);
+            }else if (achievement == CastleWars.JAPANESE_MASTER) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_japanese_master));
+            } else if (achievement == CastleWars.BURN_IT_ALL) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_burn_it_all));
+            } else if (achievement == CastleWars.DEATH_FROM_ABOVE) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_death_from_above));
+            } else if (achievement == CastleWars.REBORN) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_reborn), 1);
+            }else if (achievement == CastleWars.LET_IT_FLOW) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_let_it_flow), 1);
+            } else if (achievement == CastleWars.ELEMENTALIST) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_elementalist));
+            } else if (achievement == CastleWars.BEEN_THERE_DONE_THAT) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_been_there_done_that));
             } else {
                 //Nothing!
             }
@@ -165,15 +186,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
 
     }
 
-    @Override
-    public void showAd() {
-        handler.sendEmptyMessage(SHOW_ADS);
-    }
-
-    @Override
-    public void hideAd() {
-        handler.sendEmptyMessage(HIDE_ADS);
-    }
 
     @Override
     public void shareRegularScore(int score) {
@@ -185,17 +197,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     }
 
 
-    private AdView createAdView() {
-        adView = new AdView(this);
-        adView.setAdSize(AdSize.SMART_BANNER);
-        adView.setAdUnitId(AD_UNIT_ID);
-        adView.setId(12345); // this is an arbitrary id, allows for relative positioning in createGameView()
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-        params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-        adView.setLayoutParams(params);
-        return adView;
-    }
 
     private View createGameView(AndroidApplicationConfiguration cfg) {
         gameView = initializeForView(new CastleWars(this), cfg);
@@ -206,10 +207,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         return gameView;
     }
 
-    private void startAdvertising(AdView adView) {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
-    }
 
     /**
      * Called when the Activity is made visible.

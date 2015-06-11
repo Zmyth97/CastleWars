@@ -79,6 +79,19 @@ public class PopupButtonMaterial extends PopupWidget {
         beenDown = false;
     }
 
+    @Override
+    public void update(float delta){
+
+        touchScale.update(delta);
+        touchColor.update(delta);
+        if (touchScale.isRunning()) {
+            shadowMap = new Pixmap((int) getWidth() * 10, (int) getHeight() * 10, Pixmap.Format.RGBA8888);
+            shadowMap.setColor(touchColor.getCurrentColor());
+            shadowMap.fillCircle((int) touchPos.x * 10, (int) (shadowMap.getHeight() - touchPos.y * 10), (int) (touchScale.getAmount() * getHeight() * 0.75f * 10));
+            touchShadow = new Texture(shadowMap);
+        }
+    }
+
     public void setButtonListener(OnClickListener buttonListener) {
         this.buttonListener = buttonListener;
     }

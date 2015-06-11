@@ -68,6 +68,7 @@ public class Settings {
         else
         {
             VOLUME = 0;
+
             Assets.menuMusic.setVolume(VOLUME);
         }
     }

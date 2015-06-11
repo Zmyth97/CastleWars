@@ -1,5 +1,6 @@
 package com.desitum.castleWars.data;
 
+import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.packs.FlamePack;
 import com.desitum.castleWars.packs.JapanesePack;
 import com.desitum.castleWars.world.GameInterface;
@@ -561,6 +562,7 @@ public class CardActions {
         } else if(cardID == FlamePack.LAVA_FLOW){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustPlayerStones(24);
+                gi.unlockAchievement(CastleWars.LET_IT_FLOW); //Achievement
                 gi.getResources().subtractPlayerGems(FlamePack.LAVA_FLOW_COST); //Cost
             } else {
                 gi.getResources().adjustComputerStones(24);
@@ -597,6 +599,7 @@ public class CardActions {
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustComputerSoldiers(-1);
                 gi.getResources().adjustPlayerSoldiers(2);
+                gi.unlockAchievement(CastleWars.REBORN); //Achievement
                 gi.getResources().subtractPlayerWeapons(FlamePack.PHEONIX_COST); //Cost
             } else {
                 gi.getResources().adjustPlayerSoldiers(-1);
@@ -606,6 +609,7 @@ public class CardActions {
         }else if(cardID == FlamePack.METEORS){
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(40);
+                gi.unlockAchievement(CastleWars.DEATH_FROM_ABOVE); //Achievement
                 gi.getResources().subtractPlayerGems(FlamePack.METEORS_COST); //Cost
             } else {
                 gi.getPlayer1().getCastle().doDamage(40);
@@ -749,6 +753,7 @@ public class CardActions {
                 gi.getResources().adjustPlayerSoldiers(-1);
                 gi.getResources().adjustPlayerWizards(2);
                 gi.getResources().subtractPlayerGems(JapanesePack.SEPPUKU_COST); //Cost
+                gi.unlockAchievement(CastleWars.HONORABLE_SACRIFICE); //Achievement
             } else {
                 gi.getResources().adjustComputerSoldiers(-1);
                 gi.getResources().adjustComputerWizards(2);
@@ -761,6 +766,7 @@ public class CardActions {
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getResources().adjustComputerWizards(-3);
                 gi.getResources().subtractPlayerWeapons(JapanesePack.NINJA_COST); //Cost
+                gi.unlockAchievement(CastleWars.NIGHT_KILLER); //Achievement
             } else {
                 gi.getResources().adjustPlayerWizards(-3);
                 gi.getResources().subtractComputerWeapons(JapanesePack.NINJA_COST); //Cost
@@ -769,6 +775,7 @@ public class CardActions {
             if(gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer2().getCastle().doDamage(40);
                 gi.getResources().subtractPlayerGems(JapanesePack.DRAGON_COST); //Cost
+                gi.unlockAchievement(CastleWars.DEATH_BY_FIRE); //Achievement
             } else {
                 gi.getPlayer1().getCastle().doDamage(40);
                 gi.getResources().subtractComputerGems(JapanesePack.DRAGON_COST); //Cost

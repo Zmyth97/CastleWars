@@ -49,7 +49,7 @@ public class GameScreen implements Screen {
         //the aspect provided (worldWidth/worldHeight) will be kept
         viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
 
-        gameWorld = new GameWorld(viewport);
+        gameWorld = new GameWorld(gpgs, viewport);
         gameRenderer = new GameRenderer(gameWorld, batch);
 
         castleWars = cw;
