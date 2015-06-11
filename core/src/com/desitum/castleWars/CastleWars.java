@@ -2,7 +2,6 @@ package com.desitum.castleWars;
 
 
 import com.badlogic.gdx.Game;
-
 import com.badlogic.gdx.Screen;
 
 
@@ -46,7 +45,7 @@ public class CastleWars extends Game {
     public static final int CASTLE_MASTER = 29; //Play a Total of 200 Games #
 
     public static final int BEEN_THERE_DONE_THAT = 30; //Have Every Other Achievement
-    public static final int AN_ERA_BEGINS = 31; //First Game
+    public static final int AN_ERA_BEGINS = 31; //First Game #
 
 
 
@@ -54,6 +53,24 @@ public class CastleWars extends Game {
 
     public CastleWars(GooglePlayServicesInterface googlePlay) {
         this.googlePlay = googlePlay;
+    }
+
+    public void submitWin() {
+
+    }
+
+    public void submitBuildWin() {
+        submitWin();
+        //Needs a way to submit build alone
+    }
+
+    public void submitCloud() {
+
+    }
+
+    public void submitAttackWin() {
+        submitWin();
+        //Needs way to submit attack alone
     }
 
     @Override
@@ -92,7 +109,7 @@ public class CastleWars extends Game {
     //Dev Console
         //All of it!
     //Achievements
-        //Add Counters/Booleans For Achievements if Google Doesn't Handle It
+    //Finish Adding Achievemends that aren't down (They don't have a # next to them)
     //Multiplayer
         //Start it :P
     //In App Purchases
