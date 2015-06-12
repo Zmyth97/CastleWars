@@ -1,5 +1,6 @@
 package com.desitum.castleWars.android;
 
+
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
@@ -15,56 +16,40 @@ import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 
 public class AndroidLauncher extends AndroidApplication implements GooglePlayServicesInterface,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener{
+
+    private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
+
+    private static final String TAG = "GooglePlayServicesActivity";
+
+    private static final String KEY_IN_RESOLUTION = "is_in_resolution";
+
+    private ConnectionResult mConnectionResult;
 
     /**
      * Request code for auto Google Play Services error resolution.
      */
     protected static final int REQUEST_CODE_RESOLUTION = 1;
-    private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
-    private static final String TAG = "GooglePlayServicesActivity";
-    private static final String KEY_IN_RESOLUTION = "is_in_resolution";
-    private static final String AD_UNIT_ID = "adunit1234";
-    private final int SHOW_ADS = 1;
-    private final int HIDE_ADS = 0;
-    protected Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SHOW_ADS: {
-                    adView.setVisibility(View.VISIBLE); //change to visible
-                    break;
-                }
-                case HIDE_ADS: {
-                    adView.setVisibility(View.GONE);//change to not visible
-                    // you should also disable the ad fetching here!
-                    break;
-                }
-            }
-        }
-    };
-    protected AdView adView;
-    protected View gameView;
-    private ConnectionResult mConnectionResult;
+
     /**
      * Google API client.
      */
     private GoogleApiClient mGoogleApiClient;
+
     /**
      * Determines if the client is in a resolution state, and
      * waiting for resolution intent to return.
      */
     private boolean mIsInResolution;
-    private AdView admobView;
+
+    private static final String AD_UNIT_ID = "adunit1234";
+    protected View gameView;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -90,19 +75,16 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
 
         View gameView = createGameView(config);
         layout.addView(gameView);
-        admobView = createAdView();
-        layout.addView(admobView);
 
         setContentView(layout);
-        startAdvertising(admobView);
     }
+
 
     @Override
     public void getLeaderBoard() {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, "12345"), 100);
-        }
-        else{
+        } else {
             //Nothing!
         }
     }
@@ -198,15 +180,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
 
     }
 
-    @Override
-    public void showAd() {
-        handler.sendEmptyMessage(SHOW_ADS);
-    }
-
-    @Override
-    public void hideAd() {
-        handler.sendEmptyMessage(HIDE_ADS);
-    }
 
     @Override
     public void shareRegularScore(int score) {
@@ -218,17 +191,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     }
 
 
-    private AdView createAdView() {
-        adView = new AdView(this);
-        adView.setAdSize(AdSize.SMART_BANNER);
-        adView.setAdUnitId(AD_UNIT_ID);
-        //adView.setId(12345); // this is an arbitrary id, allows for relative positioning in createGameView()
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-        params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-        adView.setLayoutParams(params);
-        return adView;
-    }
 
     private View createGameView(AndroidApplicationConfiguration cfg) {
         gameView = initializeForView(new CastleWars(this), cfg);
@@ -239,10 +201,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         return gameView;
     }
 
-    private void startAdvertising(AdView adView) {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
-    }
 
     /**
      * Called when the Activity is made visible.

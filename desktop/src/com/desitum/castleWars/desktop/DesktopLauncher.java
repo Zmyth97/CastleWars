@@ -39,13 +39,6 @@ public class DesktopLauncher {
 
             }
 
-            @Override
-            public void showAd() {
-            }
-
-            @Override
-            public void hideAd() {
-            }
         }), config);
 	}
 }

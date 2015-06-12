@@ -11,8 +11,4 @@ public interface GooglePlayServicesInterface {
     public void login();
     public void logout();
     public void shareRegularScore(int score);
-
-    public void showAd();
-
-    public void hideAd();
 }
