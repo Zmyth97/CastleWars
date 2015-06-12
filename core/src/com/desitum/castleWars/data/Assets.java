@@ -21,6 +21,7 @@ public class Assets {
     //Button Textures
     public static Texture playButton;
     public static Texture settingsButton;
+    public static Texture settings;
     public static Texture leaderboardButton;
     public static Texture cancelButton;
     public static Texture okButton;
@@ -181,6 +182,7 @@ public class Assets {
         //Button Textures
         playButton = new Texture("menu/play_button.png");
         settingsButton = new Texture("menu/settings_button.png");
+        settings = new Texture("menu/settings.png");
         leaderboardButton = new Texture("menu/leaderboard_button.png");
         cancelButton = new Texture("menu/cancel_button.png");
         okButton = new Texture("menu/ok_button.png");

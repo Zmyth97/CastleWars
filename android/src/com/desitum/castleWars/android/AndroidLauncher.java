@@ -1,5 +1,6 @@
 package com.desitum.castleWars.android;
 
+
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
@@ -13,15 +14,11 @@ import android.widget.RelativeLayout;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.CastleWars;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
+import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
-import com.google.android.gms.games.achievement.Achievement;
 
 public class AndroidLauncher extends AndroidApplication implements GooglePlayServicesInterface,
         GoogleApiClient.ConnectionCallbacks,

@@ -108,7 +108,7 @@ public class CastleWars extends Game {
     //Dev Console
         //All of it!
     //Achievements
-    //Finish Adding Achievemends that aren't down (They don't have a # next to them)
+    //Finish Adding Achievements that aren't done (They don't have a # next to them)
     //Multiplayer
         //Start it :P
     //In App Purchases

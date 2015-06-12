@@ -36,7 +36,7 @@ public class PopupSlider extends PopupWidget {
 
         this.setOriginCenter();
 
-        sliderX = x + width/2;
+        sliderX = x + width/2 - sliderWidth;
     }
 
     public void onClickDown(Vector3 pos) {

@@ -712,8 +712,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         cardScrollArea.addWidget(duplicateMenu);
         //endregion
         //region Add Japanese Menus To Card Scoll Area
-        boolean hasBoughtJapanesePack = true;
-        if(hasBoughtJapanesePack){
+        if(GameWorld.BOUGHT_JAPANESE_PACK){
             cardScrollArea.addWidget(stockadeMenu);
             cardScrollArea.addWidget(fortressMenu);
             cardScrollArea.addWidget(monasteryMenu);
@@ -738,8 +737,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         }
         //endregion
         //region Add Flame Menus To Card Scroll Area
-        boolean hasBoughtFlamePack = true;
-        if(hasBoughtFlamePack){
+        if(GameWorld.BOUGHT_FlAME_PACK){
             cardScrollArea.addWidget(wallOfFireMenu);
             cardScrollArea.addWidget(campfireMenu);
             cardScrollArea.addWidget(forgeMenu);

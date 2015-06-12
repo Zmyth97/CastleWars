@@ -20,16 +20,6 @@ public class DesktopLauncher {
             }
 
             @Override
-            public void showAd() {
-
-            }
-
-            @Override
-            public void hideAd() {
-
-            }
-
-            @Override
             public void unlockAchievement(int achievement) {
 
             }

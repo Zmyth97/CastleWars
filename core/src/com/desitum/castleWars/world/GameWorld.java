@@ -47,6 +47,11 @@ public class GameWorld extends KodyWorld implements GameInterface {
     ////////////////////////////////////////////////
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
+    ////////////////////////////////////////////////
+    //PLACEHOLDER TILL WE CAN DISTINGUISH BETWEEN IF THEY HAVE BOUGHT THEM OR NOT
+    public static boolean BOUGHT_FlAME_PACK = true;
+    public static boolean BOUGHT_JAPANESE_PACK = true;
+    ////////////////////////////////////////////////
     public static final float DRAW_PILE_X = MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH - 1.25f;
     public static final float DRAW_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
     public static final float DISCARD_PILE_X = MenuScreen.SCREEN_WIDTH / 2 + 1.25f;
@@ -105,6 +110,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupTextLabel computerCastleLabelChange;
     private PopupTextLabel computerWallLabelChange;
     private PopupToggleButton discardToggle;
+    private PopupButtonMaterial settingsButton;
     private int difficulty;
     private Deck deck;
     private Resources myResources;
@@ -116,8 +122,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private PopupTextLabel playerLabel;
     private PopupTextLabel computerLabel;
-    private ColorEffects turnEffect;
-    private ColorEffects notTurnEffect; //Lol. Love the name right?
 
     private PopupTextLabel aiDiscardLabel; //Looked Weird When the AI Moved a Card and it Did Nothing
 
@@ -138,6 +142,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         super.setCam(cam);
 
         this.gpgs = gpgs;
+
         player1 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 - 50));
         player2 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 + 25));
 
@@ -165,8 +170,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
         endTimer = 0;
         gameOver = false;
 
-        turnEffect = new ColorEffects(Color.BLACK, Color.RED, 0.5f);
-        notTurnEffect = new ColorEffects(Color.RED, Color.BLACK, 0.5f);
         playerLabel = new PopupTextLabel(Assets.invisible, Color.WHITE, Assets.textFieldFont, 0, (GameScreen.SCREEN_HEIGHT / 4 + 1), 20, 5, "Player");
         computerLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH - 25, (GameScreen.SCREEN_HEIGHT / 4 + 1), 25, 5, "Computer");
         addWidgetToWorld(playerLabel);
@@ -669,9 +672,11 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.addWidget(computerCastleLabelChange);
         this.addWidget(computerWallLabelChange);
 
-        this.discardToggle = new PopupToggleButton(Assets.trashCanSelected, Assets.trashCan, 5, 5, 10, 15, false);
-
+        this.discardToggle = new PopupToggleButton(Assets.trashCanSelected, Assets.trashCan, 5, 12, 8, 12, false);
         this.addWidgetToWorld(discardToggle);
+
+        this.settingsButton = new PopupButtonMaterial(Assets.settings, 5, 2, MenuWorld.BUTTON_HEIGHT, 8, 8);
+        this.addWidgetToWorld(settingsButton);
     }
 
     private void buildDifficultyGUI(){

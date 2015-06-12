@@ -1,5 +1,7 @@
 package com.desitum.castleWars.world;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
@@ -10,6 +12,8 @@ import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupSlider;
 import com.desitum.castleWars.libraries.menu.PopupSliderListener;
+import com.desitum.castleWars.libraries.menu.PopupTextLabel;
+import com.desitum.castleWars.libraries.menu.PopupToggleButton;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.screens.MenuScreen;
@@ -29,6 +33,10 @@ public class MenuWorld extends KodyWorld {
     private PopupButtonMaterial settingsButton;
     private PopupButtonMaterial storeButton;
 
+    private PopupToggleButton originalAssetsToggle;
+    private PopupToggleButton flameAssetsToggle;
+    private PopupToggleButton japaneseAssetsToggle;
+
     public MenuWorld(Viewport cam, MenuInterface mi) {
         super();
         super.setCam(cam);
@@ -46,7 +54,7 @@ public class MenuWorld extends KodyWorld {
         popupMenu.addOutgoingAnimator(yAnimator2);
 
 
-        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButton, 5, 5, BUTTON_HEIGHT, 57.5f, 15);
+        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButton, 5, 5, BUTTON_HEIGHT, 30, 10);
         cancelButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -65,7 +73,7 @@ public class MenuWorld extends KodyWorld {
         });
         popupMenu.addPopupWidget(volumeSlider);
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 67.5f, 5, BUTTON_HEIGHT, 57.5f, 15);
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 30, 5, BUTTON_HEIGHT, 30, 10);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -75,6 +83,53 @@ public class MenuWorld extends KodyWorld {
             }
         });
         popupMenu.addPopupWidget(okButton);
+
+        PopupTextLabel originalAssetsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 12, 50, 25, 3, "Original Textures", BitmapFont.HAlignment.CENTER);
+        popupMenu.addPopupWidget(originalAssetsLabel);
+        originalAssetsToggle = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, 15, 25, 20, 20, true);
+        originalAssetsToggle.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                originalAssetsToggle.turnOn();
+                flameAssetsToggle.turnOff();
+                japaneseAssetsToggle.turnOff();
+                GameRenderer.ASSETS_TO_USE = 1;
+            }
+        });
+        popupMenu.addPopupWidget(originalAssetsToggle);
+
+        if(GameWorld.BOUGHT_FlAME_PACK) {
+            PopupTextLabel flameAssetsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 52, 50, 25, 3, "Flame Textures", BitmapFont.HAlignment.CENTER);
+            popupMenu.addPopupWidget(flameAssetsLabel);
+            flameAssetsToggle = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, 55, 25, 20, 20, false);
+            flameAssetsToggle.setButtonListener(new OnClickListener() {
+                @Override
+                public void onClick(PopupWidget widget) {
+                    flameAssetsToggle.turnOn();
+                    originalAssetsToggle.turnOff();
+                    japaneseAssetsToggle.turnOff();
+                    GameRenderer.ASSETS_TO_USE = 2;
+                }
+            });
+            popupMenu.addPopupWidget(flameAssetsToggle);
+        }
+
+        if(GameWorld.BOUGHT_JAPANESE_PACK) {
+            PopupTextLabel japaneseAssetsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 92, 50, 25, 3, "Japanese Textures", BitmapFont.HAlignment.CENTER);
+            popupMenu.addPopupWidget(japaneseAssetsLabel);
+            japaneseAssetsToggle = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, 95, 25, 20, 20, false);
+            japaneseAssetsToggle.setButtonListener(new OnClickListener() {
+                @Override
+                public void onClick(PopupWidget widget) {
+                    japaneseAssetsToggle.turnOn();
+                    originalAssetsToggle.turnOff();
+                    flameAssetsToggle.turnOff();
+                    GameRenderer.ASSETS_TO_USE = 3;
+                }
+            });
+            popupMenu.addPopupWidget(japaneseAssetsToggle);
+        }
+
         this.addPopupMenu(popupMenu);
         //endregion
     }

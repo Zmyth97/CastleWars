@@ -25,10 +25,10 @@ public class Deck {
 
         cardList = new ArrayList<Card>();
         fillDeck();
-        if (boughtFlamePack) {
+        if (GameWorld.BOUGHT_FlAME_PACK) {
             addFlameCards();
         }
-        if (boughtJapanesePack) {
+        if (GameWorld.BOUGHT_JAPANESE_PACK) {
             addJapaneseCards();
         }
     }

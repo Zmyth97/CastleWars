@@ -19,6 +19,8 @@ public class GameRenderer {
     private OrthographicCamera gameCam;
     private GameWorld world;
 
+    public static int ASSETS_TO_USE = 1;
+
     public GameRenderer(GameWorld world, SpriteBatch batch) {
         this.world = world;
         this.gameBatch = batch;
@@ -51,7 +53,13 @@ public class GameRenderer {
     }
 
     private void drawWorld() {
-        gameBatch.draw(Assets.gameSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
+        if(ASSETS_TO_USE == 1) {
+            gameBatch.draw(Assets.gameSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
+        } else if(ASSETS_TO_USE == 2){
+            gameBatch.draw(Assets.flameSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
+        } else if(ASSETS_TO_USE == 3) {
+            gameBatch.draw(Assets.japaneseSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
+        }
 
         for(Cloud cloud: world.getCloudList()){
                 cloud.draw(gameBatch);
@@ -59,7 +67,11 @@ public class GameRenderer {
 
         world.getPlayer1().getCastle().draw(gameBatch);
         world.getPlayer2().getCastle().draw(gameBatch);
-        gameBatch.draw(Assets.gameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT / 4 + 8));
+        if(ASSETS_TO_USE == 1 || ASSETS_TO_USE == 3) {
+            gameBatch.draw(Assets.gameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT / 4 + 8));
+        } else if(ASSETS_TO_USE == 2){
+            gameBatch.draw(Assets.flameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT / 4 + 8));
+        }
     }
 
     private void drawCards() {
