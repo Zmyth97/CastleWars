@@ -101,8 +101,6 @@ public class CastleWars extends Game {
         //Fix the "Ok" Button
         //Fix the Button Ratios
         //Make sure everything works (like achievments) if you aren't signed in, that it doesn't cause a crash or anything haha
-    //GUI
-        //Finish Setting Menus
     //Build your Deck
         //Fix it so it works haha
     //Dev Console

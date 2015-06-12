@@ -14,6 +14,10 @@ public class Settings {
     public static int CARDS_DEALT = 6;
     public static float COMPUTER_DELAY = 3f;
 
+    public static boolean WANTS_FLAME_CARDS = true;
+    public static boolean WANTS_JAPANESE_CARDS = true;
+    public static int ASSETS_TO_USE = 1;
+
     //region CardAmounts
     public static int REINFORCE_AMOUNT = 3;
     public static int FORTIFY_AMOUNT = 3;
@@ -75,6 +79,9 @@ public class Settings {
 
     public static void load(){
         Preferences prefs = Gdx.app.getPreferences("settings");
+        ASSETS_TO_USE = prefs.getInteger("assetsType", 1);
+        WANTS_FLAME_CARDS = prefs.getBoolean("wantsFlame", true);
+        WANTS_JAPANESE_CARDS = prefs.getBoolean("wantsJapanese", true);
         volumeOn = prefs.getBoolean("soundOn", true);
         getSound();
     }
@@ -92,4 +99,18 @@ public class Settings {
         prefs.putInteger("highscore", score);
         prefs.flush();
     }
+
+    public static void savePackSettings(int assetsType, boolean wantsFlame, boolean wantsJapanese) {
+
+        ASSETS_TO_USE = assetsType;
+        WANTS_FLAME_CARDS = wantsFlame;
+        WANTS_JAPANESE_CARDS = wantsJapanese;
+        Preferences prefs = Gdx.app.getPreferences("settings");
+        prefs.putInteger("assetsType", assetsType);
+        prefs.putBoolean("wantsFlame", wantsFlame);
+        prefs.putBoolean("wantsJapanese", wantsJapanese);
+        prefs.flush();
+    }
+
+
 }

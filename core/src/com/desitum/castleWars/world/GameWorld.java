@@ -53,8 +53,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
     //PLACEHOLDER TILL WE CAN DISTINGUISH BETWEEN IF THEY HAVE BOUGHT THEM OR NOT
     public static boolean BOUGHT_FlAME_PACK = true;
     public static boolean BOUGHT_JAPANESE_PACK = true;
-    public static boolean WANTS_FLAME_CARDS = true;
-    public static boolean WANTS_JAPANESE_CARDS = true;
     ////////////////////////////////////////////////
     public static final float DRAW_PILE_X = MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH - 1.25f;
     public static final float DRAW_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;

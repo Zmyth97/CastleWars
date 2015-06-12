@@ -2,6 +2,7 @@ package com.desitum.castleWars.objects;
 
 import com.badlogic.gdx.Game;
 import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.world.GameInterface;
 import com.desitum.castleWars.world.GameRenderer;
@@ -15,19 +16,19 @@ public class Player {
 
     public Player(GameInterface gameInterface, float castleX){
         if(GameScreen.SCREEN_WIDTH/2 > castleX) {
-            if(GameRenderer.ASSETS_TO_USE ==1) {
+            if(Settings.ASSETS_TO_USE ==1) {
                 castle = new Castle(Assets.playerCastle, gameInterface, castleX);
-            } else if(GameRenderer.ASSETS_TO_USE == 2) {
+            } else if(Settings.ASSETS_TO_USE == 2) {
                 castle = new Castle(Assets.playerFlameCastle, gameInterface, castleX);
-            } else if(GameRenderer.ASSETS_TO_USE == 3){
+            } else if(Settings.ASSETS_TO_USE == 3){
                 castle = new Castle(Assets.playerJapaneseCastle, gameInterface, castleX);
             }
         } else {
-            if(GameRenderer.ASSETS_TO_USE ==1) {
+            if(Settings.ASSETS_TO_USE ==1) {
                 castle = new Castle(Assets.computerCastle, gameInterface, castleX);
-            } else if(GameRenderer.ASSETS_TO_USE == 2) {
+            } else if(Settings.ASSETS_TO_USE == 2) {
                 castle = new Castle(Assets.computerFlameCastle, gameInterface, castleX);
-            }else if(GameRenderer.ASSETS_TO_USE == 3){
+            }else if(Settings.ASSETS_TO_USE == 3){
                 castle = new Castle(Assets.computerJapaneseCastle, gameInterface, castleX);
             }
         }

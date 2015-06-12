@@ -3,6 +3,7 @@ package com.desitum.castleWars.world;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.objects.Card;
@@ -18,8 +19,6 @@ public class GameRenderer {
     private SpriteBatch gameBatch;
     private OrthographicCamera gameCam;
     private GameWorld world;
-
-    public static int ASSETS_TO_USE = 1;
 
     public GameRenderer(GameWorld world, SpriteBatch batch) {
         this.world = world;
@@ -53,11 +52,11 @@ public class GameRenderer {
     }
 
     private void drawWorld() {
-        if(ASSETS_TO_USE == 1) {
+        if(Settings.ASSETS_TO_USE == 1) {
             gameBatch.draw(Assets.gameSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
-        } else if(ASSETS_TO_USE == 2){
+        } else if(Settings.ASSETS_TO_USE == 2){
             gameBatch.draw(Assets.flameSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
-        } else if(ASSETS_TO_USE == 3) {
+        } else if(Settings.ASSETS_TO_USE == 3) {
             gameBatch.draw(Assets.japaneseSky, 0, 0, GameScreen.SCREEN_WIDTH, GameScreen.SCREEN_HEIGHT);
         }
 
@@ -67,9 +66,9 @@ public class GameRenderer {
 
         world.getPlayer1().getCastle().draw(gameBatch);
         world.getPlayer2().getCastle().draw(gameBatch);
-        if(ASSETS_TO_USE == 1 || ASSETS_TO_USE == 3) {
+        if(Settings.ASSETS_TO_USE == 1 || Settings.ASSETS_TO_USE == 3) {
             gameBatch.draw(Assets.gameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT / 4 + 8));
-        } else if(ASSETS_TO_USE == 2){
+        } else if(Settings.ASSETS_TO_USE == 2){
             gameBatch.draw(Assets.flameGround, 0, 0, GameScreen.SCREEN_WIDTH, (GameScreen.SCREEN_HEIGHT / 4 + 8));
         }
     }

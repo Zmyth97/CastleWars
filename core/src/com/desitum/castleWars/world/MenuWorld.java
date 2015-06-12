@@ -40,6 +40,12 @@ public class MenuWorld extends KodyWorld {
     private PopupToggleButton flameCardsToggle;
     private PopupToggleButton japaneseCardsToggle;
 
+    //USED FOR SETTINGS IN THIS THINGY
+    private boolean wantsFlame = Settings.WANTS_FLAME_CARDS;
+    private boolean wantsJapanese = Settings.WANTS_JAPANESE_CARDS;
+    private int assetsType = Settings.ASSETS_TO_USE;
+
+
     public MenuWorld(Viewport cam, MenuInterface mi) {
         super();
         super.setCam(cam);
@@ -50,6 +56,7 @@ public class MenuWorld extends KodyWorld {
         setupOnClickListeners();
 
         //region Settings Popup Menu
+
         popupMenu = new PopupMenu(Assets.popupMenuBackground, 10, -130, 130, 80);
         MovementAnimator yAnimator = new MovementAnimator(popupMenu, -130, 10, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         popupMenu.addIncomingAnimator(yAnimator);
@@ -68,20 +75,9 @@ public class MenuWorld extends KodyWorld {
         });
         popupMenu.addPopupWidget(volumeSlider);
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 50, 7, BUTTON_HEIGHT, 30, 10);
-        okButton.setButtonListener(new OnClickListener() {
-            @Override
-            public void onClick(PopupWidget widget) {
-                Settings.setVolume(volumeSlider.getPosition());
-                Assets.buttonSound.play(Settings.VOLUME);
-                popupMenu.startOutgoingAnimators();
-            }
-        });
-        popupMenu.addPopupWidget(okButton);
-
         PopupTextLabel originalAssetsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 12, 55, 25, 3, "Original Textures", BitmapFont.HAlignment.CENTER);
         popupMenu.addPopupWidget(originalAssetsLabel);
-        originalAssetsToggle = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, 16, 34, 16, 16, true);
+        originalAssetsToggle = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, 16, 34, 16, 16, false);
         originalAssetsToggle.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -89,7 +85,7 @@ public class MenuWorld extends KodyWorld {
                 originalAssetsToggle.turnOn();
                 flameAssetsToggle.turnOff();
                 japaneseAssetsToggle.turnOff();
-                GameRenderer.ASSETS_TO_USE = 1;
+                assetsType = 1;
             }
         });
         popupMenu.addPopupWidget(originalAssetsToggle);
@@ -105,22 +101,23 @@ public class MenuWorld extends KodyWorld {
                     flameAssetsToggle.turnOn();
                     originalAssetsToggle.turnOff();
                     japaneseAssetsToggle.turnOff();
-                    GameRenderer.ASSETS_TO_USE = 2;
+                    assetsType = 2;
                 }
             });
             popupMenu.addPopupWidget(flameAssetsToggle);
 
             PopupTextLabel flameCardsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 12, 27, 25, 3, "Flame Cards In Game", BitmapFont.HAlignment.CENTER);
             popupMenu.addPopupWidget(flameCardsLabel);
+            if(wantsFlame) flameCardsToggle.turnOn(); //Appearance For Load Settings
             flameCardsToggle = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, 16, 7, 16, 16, false);
             flameCardsToggle.setButtonListener(new OnClickListener() {
                 @Override
                 public void onClick(PopupWidget widget) {
                     Assets.buttonSound.play(Settings.VOLUME);
-                    if(flameCardsToggle.isOn()){
-                        GameWorld.WANTS_FLAME_CARDS = true;
+                    if (flameCardsToggle.isOn()) {
+                        wantsFlame = true;
                     } else {
-                        GameWorld.WANTS_FLAME_CARDS = false;
+                        wantsFlame = false;
                     }
                 }
             });
@@ -130,6 +127,7 @@ public class MenuWorld extends KodyWorld {
         if(GameWorld.BOUGHT_JAPANESE_PACK) {
             PopupTextLabel japaneseAssetsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 96, 55, 25, 3, "Japanese Textures", BitmapFont.HAlignment.CENTER);
             popupMenu.addPopupWidget(japaneseAssetsLabel);
+
             japaneseAssetsToggle = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, 101, 34, 16, 16, false);
             japaneseAssetsToggle.setButtonListener(new OnClickListener() {
                 @Override
@@ -138,7 +136,7 @@ public class MenuWorld extends KodyWorld {
                     japaneseAssetsToggle.turnOn();
                     originalAssetsToggle.turnOff();
                     flameAssetsToggle.turnOff();
-                    GameRenderer.ASSETS_TO_USE = 3;
+                    assetsType = 3;
                 }
             });
             popupMenu.addPopupWidget(japaneseAssetsToggle);
@@ -146,20 +144,41 @@ public class MenuWorld extends KodyWorld {
             PopupTextLabel japaneseCardsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 95, 27, 26, 3, "Japanese Cards In Game", BitmapFont.HAlignment.CENTER);
             popupMenu.addPopupWidget(japaneseCardsLabel);
             japaneseCardsToggle = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, 101, 7, 16, 16, false);
+            if(wantsJapanese) japaneseCardsToggle.turnOn(); //Appearance For Load Settings
             japaneseCardsToggle.setButtonListener(new OnClickListener() {
                 @Override
                 public void onClick(PopupWidget widget) {
                     Assets.buttonSound.play(Settings.VOLUME);
                     if (japaneseCardsToggle.isOn()) {
-                        GameWorld.WANTS_JAPANESE_CARDS = true;
+                        wantsJapanese = true;
                     }
                     if (japaneseCardsToggle.isOn() == false) {
-                        GameWorld.WANTS_JAPANESE_CARDS = false;
+                        wantsJapanese = false;
                     }
                 }
             });
             popupMenu.addPopupWidget(japaneseCardsToggle);
         }
+
+        if(assetsType == 1){ //These are for appearances on load based off loaded settings
+            originalAssetsToggle.turnOn();
+        } else if(assetsType == 2){
+            flameAssetsToggle.turnOn();
+        } else {
+            japaneseAssetsToggle.turnOn();
+        }
+
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 50, 7, BUTTON_HEIGHT, 30, 10);
+        okButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Settings.setVolume(volumeSlider.getPosition());
+                Settings.savePackSettings(assetsType, wantsFlame, wantsJapanese);
+                Assets.buttonSound.play(Settings.VOLUME);
+                popupMenu.startOutgoingAnimators();
+            }
+        });
+        popupMenu.addPopupWidget(okButton);
 
         this.addPopupMenu(popupMenu);
         //endregion
