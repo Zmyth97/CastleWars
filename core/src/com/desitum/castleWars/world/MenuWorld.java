@@ -56,6 +56,8 @@ public class MenuWorld extends KodyWorld {
         MovementAnimator yAnimator2 = new MovementAnimator(popupMenu, 10, -130, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
         popupMenu.addOutgoingAnimator(yAnimator2);
 
+        PopupTextLabel settingsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 40, 65, 50, 10, "Settings", BitmapFont.HAlignment.CENTER);
+        popupMenu.addPopupWidget(settingsLabel);
 
         final PopupSlider volumeSlider = new PopupSlider(Assets.toggleButtonOff, Assets.toggleButtonOff, 5, 60, 120, 5, 3, 10);
         volumeSlider.setSliderListener(new PopupSliderListener() {
@@ -88,7 +90,6 @@ public class MenuWorld extends KodyWorld {
                 flameAssetsToggle.turnOff();
                 japaneseAssetsToggle.turnOff();
                 GameRenderer.ASSETS_TO_USE = 1;
-                System.out.println("Original: " + GameRenderer.ASSETS_TO_USE);
             }
         });
         popupMenu.addPopupWidget(originalAssetsToggle);
@@ -105,7 +106,6 @@ public class MenuWorld extends KodyWorld {
                     originalAssetsToggle.turnOff();
                     japaneseAssetsToggle.turnOff();
                     GameRenderer.ASSETS_TO_USE = 2;
-                    System.out.println("Flame: " + GameRenderer.ASSETS_TO_USE);
                 }
             });
             popupMenu.addPopupWidget(flameAssetsToggle);
@@ -139,7 +139,6 @@ public class MenuWorld extends KodyWorld {
                     originalAssetsToggle.turnOff();
                     flameAssetsToggle.turnOff();
                     GameRenderer.ASSETS_TO_USE = 3;
-                    System.out.println("Japanese: " + GameRenderer.ASSETS_TO_USE);
                 }
             });
             popupMenu.addPopupWidget(japaneseAssetsToggle);

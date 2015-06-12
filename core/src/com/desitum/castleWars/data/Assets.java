@@ -52,8 +52,10 @@ public class Assets {
 
     //Game Textures
     public static Texture playerFlameCastle;
+    public static Texture playerJapaneseCastle;
     public static Texture playerCastle;
     public static Texture playerWall;
+    public static Texture computerJapaneseCastle;
     public static Texture computerFlameCastle;
     public static Texture computerCastle;
     public static Texture computerWall;
@@ -219,9 +221,11 @@ public class Assets {
     public static void loadGameTextures() {
         playerCastle = new Texture("game/player_castle.png");
         playerFlameCastle = new Texture("game/player_flame_castle.png");
+        playerJapaneseCastle = new Texture("game/player_japanese_castle.png");
         playerWall = new Texture("game/player_wall.png");
         computerCastle = new Texture("game/computer_castle.png");
         computerFlameCastle = new Texture("game/computer_flame_castle.png");
+        computerJapaneseCastle = new Texture("game/computer_japanese_castle.png");
         computerWall = new Texture("game/computer_wall.png");
         gameGround = new Texture("game/ground.png");
         flameGround = new Texture("game/flame_ground.png");
