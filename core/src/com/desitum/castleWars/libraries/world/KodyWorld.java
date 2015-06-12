@@ -64,64 +64,75 @@ public class KodyWorld {
     }
 
     public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
-        try {
-            for (PopupWidget widget : widgets) {
-                boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
-                if (widget instanceof PopupButton) {
-                    PopupButton button = (PopupButton) widget;
-                    if (clickInArea && clickDown) {
-                        button.onClickDown();
-                    } else if (clickInArea) {
-                        button.onClickUp(true);
-                    } else {
-                        button.onClickUp(false);
-                    }
-                } else if (widget instanceof PopupSlider) {
-                    PopupSlider slider = (PopupSlider) widget;
-                    if (clickInArea && clickDown) {
-                        slider.onClickDown(touchPos);
-                    } else if (clickInArea) {
-                        slider.onClickUp();
-                    } else {
-                        slider.onClickUp(); // handles if not in area
-                    }
-                } else if (widget instanceof PopupButtonMaterial) {
-                    PopupButtonMaterial button = (PopupButtonMaterial) widget;
-                    if (clickInArea && clickDown) {
-                        button.onClickDown(touchPos);
-                    } else if (clickInArea) {
-                        button.onClickUp(true);
-                    } else {
-                        button.onClickUp(false); // handles if not in area
-                    }
-                } else if (widget instanceof PopupScrollArea) {
-                    PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
-                    popupScrollArea.updateTouchInput(touchPos, clickDown);
-                } else if (widget instanceof PopupImage) {
-                    PopupImage image = (PopupImage) widget;
-                    if (clickInArea && clickDown) {
-                        image.onClickDown();
-                    } else if (clickInArea) {
-                        image.onClickUp(true);
-                    } else {
-                        image.onClickUp(false);
-                    }
-                } else if (widget instanceof PopupToggleButton) {
-                    PopupToggleButton button = (PopupToggleButton) widget;
-                    if (clickInArea && clickDown) {
-                        button.onClickDown();
-                    } else if (clickInArea) {
-                        button.onClickUp(true);
-                    } else {
-                        button.onClickUp(false);
-                    }
-                } else if (widget instanceof PopupSpinner) {
-                    PopupSpinner spinner = (PopupSpinner) widget;
-                    spinner.updateTouchInput(touchPos, clickDown);
-                }
+        boolean clickedOnWidget = false;
+        for (int i = menus.size() - 1; i >= 0; i--) {
+            PopupMenu menu = menus.get(i);
+            boolean clickInArea = (CollisionDetection.pointInRectangle(menu.getBoundingRectangle(), touchPos) && !clickedOnWidget);
+            if (clickInArea) {
+                menu.updateTouchInput(touchPos, clickDown);
+                clickedOnWidget = true;
             }
-        } catch (ConcurrentModificationException e) {
-            e.printStackTrace();
+        }
+        if (!clickedOnWidget) {
+            try {
+                for (PopupWidget widget : widgets) {
+                    boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
+                    if (widget instanceof PopupButton) {
+                        PopupButton button = (PopupButton) widget;
+                        if (clickInArea && clickDown) {
+                            button.onClickDown();
+                        } else if (clickInArea) {
+                            button.onClickUp(true);
+                        } else {
+                            button.onClickUp(false);
+                        }
+                    } else if (widget instanceof PopupSlider) {
+                        PopupSlider slider = (PopupSlider) widget;
+                        if (clickInArea && clickDown) {
+                            slider.onClickDown(touchPos);
+                        } else if (clickInArea) {
+                            slider.onClickUp();
+                        } else {
+                            slider.onClickUp(); // handles if not in area
+                        }
+                    } else if (widget instanceof PopupButtonMaterial) {
+                        PopupButtonMaterial button = (PopupButtonMaterial) widget;
+                        if (clickInArea && clickDown) {
+                            button.onClickDown(touchPos);
+                        } else if (clickInArea) {
+                            button.onClickUp(true);
+                        } else {
+                            button.onClickUp(false); // handles if not in area
+                        }
+                    } else if (widget instanceof PopupScrollArea) {
+                        PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
+                        popupScrollArea.updateTouchInput(touchPos, clickDown);
+                    } else if (widget instanceof PopupImage) {
+                        PopupImage image = (PopupImage) widget;
+                        if (clickInArea && clickDown) {
+                            image.onClickDown();
+                        } else if (clickInArea) {
+                            image.onClickUp(true);
+                        } else {
+                            image.onClickUp(false);
+                        }
+                    } else if (widget instanceof PopupToggleButton) {
+                        PopupToggleButton button = (PopupToggleButton) widget;
+                        if (clickInArea && clickDown) {
+                            button.onClickDown();
+                        } else if (clickInArea) {
+                            button.onClickUp(true);
+                        } else {
+                            button.onClickUp(false);
+                        }
+                    } else if (widget instanceof PopupSpinner) {
+                        PopupSpinner spinner = (PopupSpinner) widget;
+                        spinner.updateTouchInput(touchPos, clickDown);
+                    }
+                }
+            } catch (ConcurrentModificationException e) {
+                e.printStackTrace();
+            }
         }
 
         for (PopupWidget widget: widgetsToRem) {
@@ -133,10 +144,6 @@ public class KodyWorld {
             widgets.add(widget);
         }
         widgetsToAdd.clear();
-
-        for (PopupMenu menu: menus) {
-            menu.updateTouchInput(touchPos, clickDown);
-        }
     }
 
     public void addWidget(PopupWidget widget){

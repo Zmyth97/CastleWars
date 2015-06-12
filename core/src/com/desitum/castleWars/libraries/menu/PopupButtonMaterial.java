@@ -81,6 +81,7 @@ public class PopupButtonMaterial extends PopupWidget {
 
     @Override
     public void update(float delta){
+        super.update(delta);
 
         touchScale.update(delta);
         touchColor.update(delta);

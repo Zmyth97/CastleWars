@@ -38,6 +38,14 @@ public class DesktopLauncher {
             public void shareRegularScore(int score) {
 
             }
+
+            @Override
+            public void showAd() {
+            }
+
+            @Override
+            public void hideAd() {
+            }
         }), config);
 	}
 }

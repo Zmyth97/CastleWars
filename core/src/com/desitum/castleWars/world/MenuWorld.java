@@ -108,8 +108,8 @@ public class MenuWorld extends KodyWorld {
 
             PopupTextLabel flameCardsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 12, 27, 25, 3, "Flame Cards In Game", BitmapFont.HAlignment.CENTER);
             popupMenu.addPopupWidget(flameCardsLabel);
-            if(wantsFlame) flameCardsToggle.turnOn(); //Appearance For Load Settings
             flameCardsToggle = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, 16, 7, 16, 16, false);
+            if (wantsFlame) flameCardsToggle.turnOn(); //Appearance For Load Settings
             flameCardsToggle.setButtonListener(new OnClickListener() {
                 @Override
                 public void onClick(PopupWidget widget) {
