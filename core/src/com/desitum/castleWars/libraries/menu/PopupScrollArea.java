@@ -89,7 +89,6 @@ public class PopupScrollArea extends PopupWidget {
     @Override
     public void update(float delta) {
         super.update(delta);
-
         for (PopupWidget widget : widgets) {
             widget.update(delta);
         }

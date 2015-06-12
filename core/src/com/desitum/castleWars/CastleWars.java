@@ -60,7 +60,7 @@ public class CastleWars extends Game {
 
     public void submitBuildWin() {
         submitWin();
-        //Needs a way to submit build alone
+        //Needs a way to submit build alone //Why? ~Zack
     }
 
     public void submitCloud() {
@@ -69,7 +69,7 @@ public class CastleWars extends Game {
 
     public void submitAttackWin() {
         submitWin();
-        //Needs way to submit attack alone
+        //Needs way to submit attack alone //Why? ~Zack
     }
 
     @Override
