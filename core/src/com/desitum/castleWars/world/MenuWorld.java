@@ -78,7 +78,7 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Settings.setVolume(volumeSlider.getPosition());
-                Assets.buttonSound.play(Settings.VOLUME); //Please don't kill me, this is a nice place for it!
+                Assets.buttonSound.play(Settings.VOLUME);
                 popupMenu.startOutgoingAnimators();
             }
         });
@@ -90,6 +90,7 @@ public class MenuWorld extends KodyWorld {
         originalAssetsToggle.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
                 originalAssetsToggle.turnOn();
                 flameAssetsToggle.turnOff();
                 japaneseAssetsToggle.turnOff();
@@ -105,6 +106,7 @@ public class MenuWorld extends KodyWorld {
             flameAssetsToggle.setButtonListener(new OnClickListener() {
                 @Override
                 public void onClick(PopupWidget widget) {
+                    Assets.buttonSound.play(Settings.VOLUME);
                     flameAssetsToggle.turnOn();
                     originalAssetsToggle.turnOff();
                     japaneseAssetsToggle.turnOff();
@@ -121,6 +123,7 @@ public class MenuWorld extends KodyWorld {
             japaneseAssetsToggle.setButtonListener(new OnClickListener() {
                 @Override
                 public void onClick(PopupWidget widget) {
+                    Assets.buttonSound.play(Settings.VOLUME); //Please don't kill me, this is a nice place for it!
                     japaneseAssetsToggle.turnOn();
                     originalAssetsToggle.turnOff();
                     flameAssetsToggle.turnOff();

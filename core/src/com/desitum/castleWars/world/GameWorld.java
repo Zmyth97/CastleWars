@@ -18,6 +18,8 @@ import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
 import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
+import com.desitum.castleWars.libraries.menu.PopupSlider;
+import com.desitum.castleWars.libraries.menu.PopupSliderListener;
 import com.desitum.castleWars.libraries.menu.PopupTextLabel;
 import com.desitum.castleWars.libraries.menu.PopupToggleButton;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
@@ -77,6 +79,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private Player player2;
     private ComputerAI ai;
     private Card lastCardUsed;
+    private PopupMenu settingsMenu;
     private PopupTextLabel playerBuildersLabel;
     private PopupTextLabel playerSoldiersLabel;
     private PopupTextLabel playerWizardsLabel;
@@ -182,7 +185,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         addWidgetToWorld(aiDiscardLabel);
 
         setupSideMenus();
-
+        setupSettingsMenu();
         buildDifficultyGUI();
 
         //Fill Both Players Hands At Start
@@ -239,7 +242,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerStoneLabel.setText(":" + myResources.getPlayerStones());
         playerWeaponLabel.setText(":" + myResources.getPlayerWeapons());
         playerGemLabel.setText(":" + myResources.getPlayerGems());
-        playerCastleLabel.setText(":" + (int)  player1.getCastle().getHealth());
+        playerCastleLabel.setText(":" + (int) player1.getCastle().getHealth());
         playerWallLabel.setText(":" + (int) player1.getCastle().getWall().getHealth());
         computerBuildersLabel.setText(":" + myResources.getComputerBuilders());
         computerSoldiersLabel.setText(":" + myResources.getComputerSoldiers());
@@ -248,7 +251,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerWeaponLabel.setText(":" + myResources.getComputerWeapons());
         computerGemLabel.setText(":" + myResources.getComputerGems());
         computerCastleLabel.setText(":" + (int) player2.getCastle().getHealth());
-        computerWallLabel.setText(":" + (int)  player2.getCastle().getWall().getHealth());
+        computerWallLabel.setText(":" + (int) player2.getCastle().getWall().getHealth());
     }
 
     private void switchTurns(int playerTurn) {
@@ -676,7 +679,54 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.addWidgetToWorld(discardToggle);
 
         this.settingsButton = new PopupButtonMaterial(Assets.settings, 5, 2, MenuWorld.BUTTON_HEIGHT, 8, 8);
+        settingsButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                settingsMenu.startIncomingAnimators();
+            }
+        });
         this.addWidgetToWorld(settingsButton);
+    }
+
+    private void setupSettingsMenu(){
+        settingsMenu = new PopupMenu(Assets.popupMenuBackground, 10, -130, 130, 80);
+        MovementAnimator yAnimator = new MovementAnimator(settingsMenu, -130, 10, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        settingsMenu.addIncomingAnimator(yAnimator);
+        MovementAnimator yAnimator2 = new MovementAnimator(settingsMenu, 10, -130, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
+        settingsMenu.addOutgoingAnimator(yAnimator2);
+
+
+        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButton, 5, 5, MenuWorld.BUTTON_HEIGHT, 30, 10);
+        cancelButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                settingsMenu.startOutgoingAnimators();
+            }
+        });
+        settingsMenu.addPopupWidget(cancelButton);
+
+        final PopupSlider volumeSlider = new PopupSlider(Assets.toggleButtonOff, Assets.toggleButtonOff, 5, 60, 120, 5, 3, 10);
+        volumeSlider.setSliderListener(new PopupSliderListener() {
+            @Override
+            public void onChange(float pos) {
+                Settings.VOLUME = pos;
+            }
+        });
+        settingsMenu.addPopupWidget(volumeSlider);
+
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 30, 5, MenuWorld.BUTTON_HEIGHT, 30, 10);
+        okButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Settings.setVolume(volumeSlider.getPosition());
+                Assets.buttonSound.play(Settings.VOLUME);
+                settingsMenu.startOutgoingAnimators();
+            }
+        });
+        settingsMenu.addPopupWidget(okButton);
+
+        this.addPopupMenu(settingsMenu);
     }
 
     private void buildDifficultyGUI(){
