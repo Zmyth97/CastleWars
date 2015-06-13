@@ -40,6 +40,7 @@ public class MenuWorld extends KodyWorld {
     private PopupToggleButton flameCardsToggle;
     private PopupToggleButton japaneseCardsToggle;
 
+    private int settingsToggle;
     //USED FOR SETTINGS IN THIS THINGY
     private boolean wantsFlame = Settings.WANTS_FLAME_CARDS;
     private boolean wantsJapanese = Settings.WANTS_JAPANESE_CARDS;
@@ -83,8 +84,8 @@ public class MenuWorld extends KodyWorld {
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
                 originalAssetsToggle.turnOn();
-                flameAssetsToggle.turnOff();
-                japaneseAssetsToggle.turnOff();
+                if(flameAssetsToggle != null)flameAssetsToggle.turnOff();
+                if(japaneseAssetsToggle != null)japaneseAssetsToggle.turnOff();
                 assetsType = 1;
             }
         });
@@ -100,7 +101,7 @@ public class MenuWorld extends KodyWorld {
                     Assets.buttonSound.play(Settings.VOLUME);
                     flameAssetsToggle.turnOn();
                     originalAssetsToggle.turnOff();
-                    japaneseAssetsToggle.turnOff();
+                    if(japaneseAssetsToggle != null)japaneseAssetsToggle.turnOff();
                     assetsType = 2;
                 }
             });
@@ -135,7 +136,7 @@ public class MenuWorld extends KodyWorld {
                     Assets.buttonSound.play(Settings.VOLUME);
                     japaneseAssetsToggle.turnOn();
                     originalAssetsToggle.turnOff();
-                    flameAssetsToggle.turnOff();
+                    if(flameAssetsToggle != null)flameAssetsToggle.turnOff();
                     assetsType = 3;
                 }
             });
@@ -162,19 +163,35 @@ public class MenuWorld extends KodyWorld {
 
         if(assetsType == 1){ //These are for appearances on load based off loaded settings
             originalAssetsToggle.turnOn();
-        } else if(assetsType == 2){
+        } else if(assetsType == 2 && GameWorld.BOUGHT_FlAME_PACK){
             flameAssetsToggle.turnOn();
-        } else {
+        } else if(GameWorld.BOUGHT_JAPANESE_PACK){
             japaneseAssetsToggle.turnOn();
         }
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 50, 7, BUTTON_HEIGHT, 30, 10);
+        //Quality Checkers (Should Never be needed since if you have bought them you should always have them, but causes crash if done wrong, so just in case)
+        if(assetsType == 2 && !GameWorld.BOUGHT_FlAME_PACK){
+            originalAssetsToggle.turnOn();
+            assetsType = 1;
+        } else if(assetsType == 3 && !GameWorld.BOUGHT_JAPANESE_PACK){
+            originalAssetsToggle.turnOn();
+            assetsType = 1;
+        }
+        if(wantsFlame && !GameWorld.BOUGHT_FlAME_PACK){
+            wantsFlame = false;
+        }
+        if(wantsJapanese && !GameWorld.BOUGHT_JAPANESE_PACK){
+            wantsJapanese = false;
+        }
+
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 45, 7, BUTTON_HEIGHT, 40, 15);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
                 Settings.setVolume(volumeSlider.getPosition());
                 Settings.savePackSettings(assetsType, wantsFlame, wantsJapanese);
                 Assets.buttonSound.play(Settings.VOLUME);
+                settingsToggle--;
                 popupMenu.startOutgoingAnimators();
             }
         });
@@ -190,19 +207,19 @@ public class MenuWorld extends KodyWorld {
 
     private void createButtons() {
         //Create the buttons!
-        playButton = new PopupButtonMaterial(Assets.playButton, ((MenuScreen.SCREEN_WIDTH/2)* .5f) - 15f, 38, BUTTON_HEIGHT, 30, 20);
+        playButton = new PopupButtonMaterial(Assets.playButton, ((MenuScreen.SCREEN_WIDTH/2)* .35f) - 15f, 38, BUTTON_HEIGHT, 60, 20);
         playButton.addIncomingAnimator(new MovementAnimator(playButton, -20, playButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         playButton.startIncomingAnimators();
 
-        leaderboardButton = new PopupButtonMaterial(Assets.leaderboardButton,((MenuScreen.SCREEN_WIDTH/4) * 3)-15f, 38, BUTTON_HEIGHT, 30, 20);
+        leaderboardButton = new PopupButtonMaterial(Assets.leaderboardButton,((MenuScreen.SCREEN_WIDTH/4) * 2.5f)-15f, 38, BUTTON_HEIGHT, 60, 20);
         leaderboardButton.addIncomingAnimator(new MovementAnimator(leaderboardButton, -20, leaderboardButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         leaderboardButton.startIncomingAnimators();
 
-        multiButton = new PopupButtonMaterial(Assets.multiButton,((MenuScreen.SCREEN_WIDTH/4) * 3) - 15f, 10, BUTTON_HEIGHT, 30, 20);
+        multiButton = new PopupButtonMaterial(Assets.multiButton,((MenuScreen.SCREEN_WIDTH/4) * 2.5f) - 15f, 10, BUTTON_HEIGHT, 60, 20);
         multiButton.addIncomingAnimator(new MovementAnimator(multiButton, -20, multiButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         multiButton.startIncomingAnimators();
 
-        deckButton = new PopupButtonMaterial(Assets.buildDeckButton, ((MenuScreen.SCREEN_WIDTH/2) * .5f) - 15f, 10, BUTTON_HEIGHT, 30, 20);
+        deckButton = new PopupButtonMaterial(Assets.buildDeckButton, ((MenuScreen.SCREEN_WIDTH/2) * .35f) - 15f, 10, BUTTON_HEIGHT, 60, 20);
         deckButton.addIncomingAnimator(new MovementAnimator(deckButton, -20, deckButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         deckButton.startIncomingAnimators();
 
@@ -247,7 +264,13 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                menuInterface.settings();
+                if(settingsToggle == 0) {
+                    settingsToggle++;
+                    menuInterface.settings();
+                } else {
+                    settingsToggle--;
+                    popupMenu.startOutgoingAnimators();
+                }
             }
         });
 

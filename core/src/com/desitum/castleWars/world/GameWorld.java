@@ -79,6 +79,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private Player player2;
     private ComputerAI ai;
     private Card lastCardUsed;
+    private int settingsToggle;
     private PopupMenu settingsMenu;
     private PopupTextLabel playerBuildersLabel;
     private PopupTextLabel playerSoldiersLabel;
@@ -113,13 +114,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupTextLabel computerCastleLabelChange;
     private PopupTextLabel computerWallLabelChange;
     private PopupToggleButton discardToggle;
-    private PopupButtonMaterial settingsButton;
     private int difficulty;
     private Deck deck;
     private Resources myResources;
     private CardActions cardActions;
-    private FlamePack flamePack;
-    private JapanesePack japanesePack;
     private float computerDelay;
     private ArrayList<Cloud> cloudList;
 
@@ -128,17 +126,12 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private PopupTextLabel aiDiscardLabel; //Looked Weird When the AI Moved a Card and it Did Nothing
 
-    private PopupTextLabel winLabel;
-    private PopupTextLabel loseLabel;
     private float endTimer;
     public boolean gameOver;
 
     private PopupMenu difficultyMenu;
     private PopupToggleButton easyButton;
     private PopupToggleButton normalButton;
-    private PopupTextLabel easyLabel;
-    private PopupTextLabel normalLabel;
-    private PopupButtonMaterial okButton;
 
     public GameWorld(GooglePlayServicesInterface gpgs, Viewport cam) {
         super();
@@ -163,8 +156,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
             });
         }
         cardActions = new CardActions(this);
-        flamePack = new FlamePack(this);
-        japanesePack = new JapanesePack(this);
+        FlamePack flamePack = new FlamePack(this);
+        JapanesePack japanesePack = new JapanesePack(this);
         myResources = new Resources(this);
         cloudList = new ArrayList<Cloud>();
 
@@ -275,7 +268,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     private void computerTurn() {
-        Card c = null;
+        Card c;
         if(difficulty == EASY_DIFFICULTY){
             boolean usedCard = false;
             for (Card card : player2.getHand().getCardsInHand()) {
@@ -398,7 +391,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             gpgs.unlockAchievement(CastleWars.CRUSADER);
             gpgs.unlockAchievement(CastleWars.DESTROYER);
         }
-        winLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2 - 25, GameScreen.SCREEN_HEIGHT/4 * 2.5f, 50, 10, "You Won!");
+        PopupTextLabel winLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2 - 25, GameScreen.SCREEN_HEIGHT/4 * 2.5f, 50, 10, "You Won!");
         addWidgetToWorld(winLabel);
         winLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
         winLabel.startTextColorEffects();
@@ -410,7 +403,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         if(!networkGame){
             gpgs.unlockAchievement(CastleWars.PILLAGED);
         }
-        loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2 - 25, GameScreen.SCREEN_HEIGHT/4 * 2.5f, 55, 10, "You Lost!");
+        PopupTextLabel loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2 - 25, GameScreen.SCREEN_HEIGHT/4 * 2.5f, 55, 10, "You Lost!");
         addWidgetToWorld(loseLabel);
         loseLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
         loseLabel.startTextColorEffects();
@@ -519,8 +512,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerCastleMenu.setColor(castleColor);
         MovementAnimator playerCastleAnimator = new MovementAnimator(playerCastleMenu, 0, 33, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         playerCastleMenu.addIncomingAnimator(playerCastleAnimator);
-        playerCastleMenu.addPopupWidget(new PopupImage(Assets.wand, Assets.invisible, 1, 9, 6, 6, false));
-        playerCastleMenu.addPopupWidget(new PopupImage(Assets.gem, Assets.invisible, 1, 1, 6, 6, false));
+        playerCastleMenu.addPopupWidget(new PopupImage(Assets.castle, Assets.invisible, 2, 9, 5, 5, false));
+        playerCastleMenu.addPopupWidget(new PopupImage(Assets.wall, Assets.invisible, 3, 1, 3, 5, false));
         playerCastleLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerCastleLabel.setText(":" + (int)player1.getCastle().getHealth());
         playerWallLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
@@ -583,8 +576,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerCastleMenu.setColor(castleColor);
         MovementAnimator computerCastleAnimator = new MovementAnimator(computerCastleMenu, 130, 33, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         computerCastleMenu.addIncomingAnimator(computerCastleAnimator);
-        computerCastleMenu.addPopupWidget(new PopupImage(Assets.wand, Assets.invisible, 1, 9, 6, 6, false));
-        computerCastleMenu.addPopupWidget(new PopupImage(Assets.gem, Assets.invisible, 1, 1, 6, 6, false));
+        computerCastleMenu.addPopupWidget(new PopupImage(Assets.castle, Assets.invisible, 2, 9, 5, 5, false));
+        computerCastleMenu.addPopupWidget(new PopupImage(Assets.wall, Assets.invisible, 3, 1, 3, 5, false));
         computerCastleLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         computerCastleLabel.setText(":" + (int) player2.getCastle().getHealth());
         computerWallLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
@@ -678,11 +671,17 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.discardToggle = new PopupToggleButton(Assets.trashCanSelected, Assets.trashCan, 5, 12, 8, 12, false);
         this.addWidgetToWorld(discardToggle);
 
-        this.settingsButton = new PopupButtonMaterial(Assets.settings, 5, 2, MenuWorld.BUTTON_HEIGHT, 8, 8);
+        PopupButtonMaterial settingsButton = new PopupButtonMaterial(Assets.settings, 5, 2, MenuWorld.BUTTON_HEIGHT, 8, 8);
         settingsButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
-                settingsMenu.startIncomingAnimators();
+                if(settingsToggle == 0) {
+                    settingsToggle++;
+                    settingsMenu.startIncomingAnimators();
+                } else {
+                    settingsToggle--;
+                    settingsMenu.startOutgoingAnimators();
+                }
             }
         });
         this.addWidgetToWorld(settingsButton);
@@ -695,16 +694,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
         MovementAnimator yAnimator2 = new MovementAnimator(settingsMenu, 10, -130, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
         settingsMenu.addOutgoingAnimator(yAnimator2);
 
-
-        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButton, 5, 5, MenuWorld.BUTTON_HEIGHT, 30, 10);
-        cancelButton.setButtonListener(new OnClickListener() {
-            @Override
-            public void onClick(PopupWidget widget) {
-                Assets.buttonSound.play(Settings.VOLUME);
-                settingsMenu.startOutgoingAnimators();
-            }
-        });
-        settingsMenu.addPopupWidget(cancelButton);
+        PopupTextLabel settingsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 40, 65, 50, 10, "Settings", BitmapFont.HAlignment.CENTER);
+        settingsMenu.addPopupWidget(settingsLabel);
 
         final PopupSlider volumeSlider = new PopupSlider(Assets.toggleButtonOff, Assets.toggleButtonOff, 5, 60, 120, 5, 3, 10);
         volumeSlider.setSliderListener(new PopupSliderListener() {
@@ -715,16 +706,40 @@ public class GameWorld extends KodyWorld implements GameInterface {
         });
         settingsMenu.addPopupWidget(volumeSlider);
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 30, 5, MenuWorld.BUTTON_HEIGHT, 30, 10);
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 17.5f, 15, MenuWorld.BUTTON_HEIGHT, 30, 10);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
                 Settings.setVolume(volumeSlider.getPosition());
                 Assets.buttonSound.play(Settings.VOLUME);
+                settingsToggle--;
                 settingsMenu.startOutgoingAnimators();
             }
         });
         settingsMenu.addPopupWidget(okButton);
+
+
+        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButton, 82.5f, 15, MenuWorld.BUTTON_HEIGHT, 30, 10);
+        cancelButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                settingsMenu.startOutgoingAnimators();
+            }
+        });
+        settingsMenu.addPopupWidget(cancelButton);
+
+
+
+        PopupButtonMaterial exitButton = new PopupButtonMaterial(Assets.exitButton, 50, 35, MenuWorld.BUTTON_HEIGHT, 30, 10);
+        exitButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                gameOver = true;
+            }
+        });
+        settingsMenu.addPopupWidget(exitButton);
 
         this.addPopupMenu(settingsMenu);
     }
@@ -761,10 +776,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         });
 
-        easyLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/7, (menuHeight/3) *2, menuWidth/4, (menuHeight/8), "Easy");
-        normalLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/4 * 2.3f, (menuHeight/3)*2, menuWidth/3f, (menuHeight/8), "Normal");
+        PopupTextLabel easyLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/7, (menuHeight/3) *2, menuWidth/4, (menuHeight/8), "Easy");
+        PopupTextLabel normalLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/4 * 2.3f, (menuHeight/3)*2, menuWidth/3f, (menuHeight/8), "Normal");
 
-        okButton = new PopupButtonMaterial(Assets.okButton, menuWidth / 2 - (menuWidth / 4) / 1.75f, menuHeight / 4 - menuHeight / 6, MenuWorld.BUTTON_HEIGHT, menuWidth / 4, menuHeight / 6);
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, menuWidth / 2 - (menuWidth / 4) / 1.75f, menuHeight / 4 - menuHeight / 6, MenuWorld.BUTTON_HEIGHT, menuWidth / 4, menuHeight / 6);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {

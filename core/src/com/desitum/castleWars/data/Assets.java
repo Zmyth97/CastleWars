@@ -20,6 +20,7 @@ public class Assets {
 
     //Button Textures
     public static Texture playButton;
+    public static Texture exitButton;
     public static Texture settingsButton;
     public static Texture settings;
     public static Texture leaderboardButton;
@@ -122,6 +123,8 @@ public class Assets {
     public static Texture wand;
     public static Texture gem;
     public static Texture helmet;
+    public static Texture castle;
+    public static Texture wall;
 
     //region Flame Cards
     public static Texture flameBuildCardWallOfFire;
@@ -183,6 +186,7 @@ public class Assets {
 
         //Button Textures
         playButton = new Texture("menu/play_button.png");
+        exitButton = new Texture("menu/exit_button.png");
         settingsButton = new Texture("menu/settings_button.png");
         settings = new Texture("menu/settings.png");
         leaderboardButton = new Texture("menu/leaderboard_button.png");
@@ -246,6 +250,8 @@ public class Assets {
         wand = new Texture("game/wand.png");
         gem = new Texture("game/gem.png");
         helmet = new Texture("game/helmet.png");
+        castle = new Texture("game/castle.png");
+        wall = new Texture("game/wall.png");
 
         discard = new Texture("game/cards/discard.png");
         trashCan = new Texture("game/trash_unselected.png");

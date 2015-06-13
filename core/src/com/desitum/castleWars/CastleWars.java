@@ -96,11 +96,7 @@ public class CastleWars extends Game {
     //Misc
         //Disposals
         //Memory Leak Stuff
-        //Added Back Shadows, but Now They Don't Appear.....
-        //Layers to Touch Input, Opposite of Drawing and all that
-        //Fix the "Ok" Button
-        //Fix the Button Ratios
-        //Make sure everything works (like achievments) if you aren't signed in, that it doesn't cause a crash or anything haha
+        //Make sure everything works (like achievements) if you aren't signed in, that it doesn't cause a crash or anything haha
     //Build your Deck
         //Fix it so it works haha
     //Dev Console
