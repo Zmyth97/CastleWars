@@ -1,8 +1,5 @@
 package com.desitum.castleWars.data;
 
-import com.badlogic.gdx.graphics.Color;
-import com.desitum.castleWars.libraries.animation.ColorEffects;
-import com.desitum.castleWars.libraries.menu.PopupTextLabel;
 import com.desitum.castleWars.world.GameInterface;
 
 /**

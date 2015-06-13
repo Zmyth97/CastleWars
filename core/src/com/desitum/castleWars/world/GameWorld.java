@@ -28,8 +28,6 @@ import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Cloud;
 import com.desitum.castleWars.objects.Deck;
 import com.desitum.castleWars.objects.Player;
-import com.desitum.castleWars.packs.FlamePack;
-import com.desitum.castleWars.packs.JapanesePack;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.screens.MenuScreen;
 
@@ -156,8 +154,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
             });
         }
         cardActions = new CardActions(this);
-        FlamePack flamePack = new FlamePack(this);
-        JapanesePack japanesePack = new JapanesePack(this);
         myResources = new Resources(this);
         cloudList = new ArrayList<Cloud>();
 
@@ -697,7 +693,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
         PopupTextLabel settingsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 40, 65, 50, 10, "Settings", BitmapFont.HAlignment.CENTER);
         settingsMenu.addPopupWidget(settingsLabel);
 
-        final PopupSlider volumeSlider = new PopupSlider(Assets.toggleButtonOff, Assets.toggleButtonOff, 5, 60, 120, 5, 3, 10);
+        PopupTextLabel volumeLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 55, 55, 30, 5, "Volume", BitmapFont.HAlignment.CENTER);
+        settingsMenu.addPopupWidget(volumeLabel);
+        final PopupSlider volumeSlider = new PopupSlider(Assets.toggleButtonOff, Assets.toggleButtonOff, 5, 45, 120, 5, 3, 10);
         volumeSlider.setSliderListener(new PopupSliderListener() {
             @Override
             public void onChange(float pos) {
@@ -706,7 +704,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         });
         settingsMenu.addPopupWidget(volumeSlider);
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 17.5f, 15, MenuWorld.BUTTON_HEIGHT, 30, 10);
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 17.5f, 5, MenuWorld.BUTTON_HEIGHT, 30, 10);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -719,7 +717,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         settingsMenu.addPopupWidget(okButton);
 
 
-        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButton, 82.5f, 15, MenuWorld.BUTTON_HEIGHT, 30, 10);
+        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButton, 82.5f, 5, MenuWorld.BUTTON_HEIGHT, 30, 10);
         cancelButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -730,8 +728,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
         settingsMenu.addPopupWidget(cancelButton);
 
 
+        PopupTextLabel exitLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 52, 30, 30, 5, "Exit Game", BitmapFont.HAlignment.CENTER);
+        settingsMenu.addPopupWidget(exitLabel);
 
-        PopupButtonMaterial exitButton = new PopupButtonMaterial(Assets.exitButton, 50, 35, MenuWorld.BUTTON_HEIGHT, 30, 10);
+        PopupButtonMaterial exitButton = new PopupButtonMaterial(Assets.exitButton, 50, 20, MenuWorld.BUTTON_HEIGHT, 30, 10);
         exitButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -966,7 +966,4 @@ public class GameWorld extends KodyWorld implements GameInterface {
         return discardToggle.isOn();
     }
 
-    public void setDifficulty(int difficulty){
-        this.difficulty = difficulty;
-    }
 }

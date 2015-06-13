@@ -96,6 +96,7 @@ public class CastleWars extends Game {
     //Misc
         //Disposals
         //Memory Leak Stuff
+        //Fix Particle Effects on Android
         //Make sure everything works (like achievements) if you aren't signed in, that it doesn't cause a crash or anything haha
     //Build your Deck
         //Fix it so it works haha

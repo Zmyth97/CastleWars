@@ -21,7 +21,6 @@ public class Assets {
     //Button Textures
     public static Texture playButton;
     public static Texture exitButton;
-    public static Texture settingsButton;
     public static Texture settings;
     public static Texture leaderboardButton;
     public static Texture cancelButton;
@@ -29,21 +28,12 @@ public class Assets {
     public static Texture buildDeckButton;
     public static Texture shareButton;
     public static Texture multiButton;
-    public static Texture soundButtonOn;
-    public static Texture soundButtonOff;
-    public static Texture storeButton;
 
     //Round Button Textures
-    public static Texture playButtonRound;
-    public static Texture cancelButtonRound;
-    public static Texture leaderboardButtonRound;
-    public static Texture okButtonRound;
     public static Texture settingsButtonRound;
-    public static Texture shareButtonRound;
     public static Texture storeButtonRound;
 
     //Menu Textures
-    public static Texture textFieldBackground;
     public static Texture menuBackground;
     public static Texture toggleButtonOff;
     public static Texture toggleButtonOn;
@@ -70,7 +60,6 @@ public class Assets {
     public static Texture cloud3;
     public static Texture menuArea;
     public static Texture cardBack;
-    public static Texture cardBlank;
 
     //Basic Build Cards
     public static Texture buildCardReinforce;
@@ -119,7 +108,6 @@ public class Assets {
     public static Texture hammer;
     public static Texture stone;
     public static Texture spear;
-    public static Texture steak;
     public static Texture wand;
     public static Texture gem;
     public static Texture helmet;
@@ -185,9 +173,10 @@ public class Assets {
         invisible = Drawing.getHollowRectangle(10, 10, 1, new Color(0, 0, 0, 0));
 
         //Button Textures
-        playButton = new Texture("menu/play_button.png");
+        if(playButton == null) {
+            playButton = new Texture("menu/play_button.png");
+        }
         exitButton = new Texture("menu/exit_button.png");
-        settingsButton = new Texture("menu/settings_button.png");
         settings = new Texture("menu/settings.png");
         leaderboardButton = new Texture("menu/leaderboard_button.png");
         cancelButton = new Texture("menu/cancel_button.png");
@@ -195,20 +184,11 @@ public class Assets {
         multiButton = new Texture("menu/multi_button.png");
         buildDeckButton = new Texture("menu/build_deck_button.png");
         shareButton = new Texture("menu/share_button.png");
-        soundButtonOn = new Texture("menu/sound_button_on.png");
-        soundButtonOff = new Texture("menu/sound_button_off.png");
-        storeButton = new Texture("menu/shopping_button.png");
 
         //Round Button Textures
-        playButtonRound = new Texture("menu/play_button_round.png");
-        cancelButtonRound = new Texture("menu/cancel_button_round.png");
-        leaderboardButtonRound = new Texture("menu/leaderboard_button_round.png");
-        okButtonRound = new Texture("menu/ok_button_round.png");
         settingsButtonRound = new Texture("menu/settings_button_round.png");
-        shareButtonRound = new Texture("menu/share_button_round.png");
         storeButtonRound = new Texture("menu/shopping_button_round.png");
 
-        textFieldBackground = Drawing.getTextureRoundedRectangle(50, 50, 5, new Color(0.5f, 0.2f, 0.1f, 0.8f));
         menuBackground = new Texture("menu/menu_bg.png");
 
         toggleButtonOff = new Texture("menu/toggleButtonOff.png");
@@ -241,12 +221,10 @@ public class Assets {
         cloud3 = new Texture("game/cloud3.png");
         menuArea = new Texture("game/area.png");
         cardBack = new Texture("game/card_back.png");
-        cardBlank = new Texture("game/card_blank.png");
 
         hammer = new Texture("game/hammer.png");
         stone = new Texture("game/stone.png");
         spear = new Texture("game/spear.png");
-        steak = new Texture("game/steak.png");
         wand = new Texture("game/wand.png");
         gem = new Texture("game/gem.png");
         helmet = new Texture("game/helmet.png");
@@ -370,31 +348,6 @@ public class Assets {
     }
 
     public static void dispose() {
-        invisible.dispose();
-
-        playButton.dispose();
-        settingsButton.dispose();
-        leaderboardButton.dispose();
-        cancelButton.dispose();
-        okButton.dispose();
-        multiButton.dispose();
-        buildDeckButton.dispose();
-        shareButton.dispose();
-        soundButtonOn.dispose();
-        soundButtonOff.dispose();
-        storeButton.dispose();
-
-        playButtonRound.dispose();
-        cancelButtonRound.dispose();
-        leaderboardButtonRound.dispose();
-        okButtonRound.dispose();
-        settingsButtonRound.dispose();
-        shareButtonRound.dispose();
-        storeButtonRound.dispose();
-
-        textFieldBackground.dispose();
-        menuBackground.dispose();
-
         //STOPPED HERE BECAUSE I REALIZED IT MIGHT NOT BE NEEDED. TALK TO MEH!
     }
 }

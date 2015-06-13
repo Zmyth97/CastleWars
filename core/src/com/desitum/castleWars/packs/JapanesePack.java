@@ -1,13 +1,10 @@
 package com.desitum.castleWars.packs;
 
-import com.desitum.castleWars.world.GameInterface;
-import com.desitum.castleWars.world.GameWorld;
 
 /**
  * Created by Zmyth97 on 5/26/2015.
  */
 public class JapanesePack {
-    private GameInterface gi;
 
     //region Build Cards
     public static final int STOCKADE = 501; //+8 Wall
@@ -92,8 +89,4 @@ public class JapanesePack {
     public static int DRAGON_AMOUNT = 1;
     public static int SHOGUN_AMOUNT = 1;
     //endregion
-
-    public JapanesePack(GameInterface gi) {
-        this.gi = gi;
-    }
 }

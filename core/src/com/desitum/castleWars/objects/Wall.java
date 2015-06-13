@@ -21,7 +21,7 @@ public class Wall extends Sprite {
 
     private static float DISTANCE_FROM_CASTLE = 7;
 
-    private float health; //Health = height in this game haha
+    private float health; //Health = height in this game
     private float ZERO = GameScreen.SCREEN_HEIGHT / 4 + 8;
     private float ratio;
 
@@ -80,10 +80,10 @@ public class Wall extends Sprite {
         } else {
             gi.setComputerWallLabelChangeText(-(int)damage + (int) -health);
         }
-        if(health <= 0 && justWalls == false){
+        if(health <= 0 && !justWalls){
             castle.doDamage(-health);
             health = 0;
-        } else if(health <= 0 && justWalls == true){
+        } else if(health <= 0 && justWalls){
             health = 0;
         }
     }

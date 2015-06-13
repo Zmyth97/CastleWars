@@ -85,12 +85,4 @@ public class GameRenderer {
             card.draw(gameBatch);
         }
     }
-
-    public OrthographicCamera getCam() {
-        return gameCam;
-    }
-
-    public void resetCam() {
-        gameCam.position.set(GameScreen.SCREEN_WIDTH / 2, GameScreen.SCREEN_HEIGHT / 2, 0);
-    }
 }

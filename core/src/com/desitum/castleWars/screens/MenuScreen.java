@@ -11,7 +11,6 @@ import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
-import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.world.MenuInterface;
 import com.desitum.castleWars.world.MenuRenderer;
 import com.desitum.castleWars.world.MenuWorld;
@@ -33,7 +32,7 @@ public class MenuScreen implements Screen, MenuInterface {
     private MenuWorld menuWorld;
     private MenuRenderer menuRenderer;
 
-    private GooglePlayServicesInterface gpgs; //Will be used for scoreboard popup later
+    private GooglePlayServicesInterface gpgs;
     private CastleWars castleWars;
 
     public MenuScreen(GooglePlayServicesInterface gps, CastleWars castleWars) {
@@ -126,6 +125,6 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void dispose() {
-
+        System.out.println("I (MenuScreen) disposed!");
     }
 }

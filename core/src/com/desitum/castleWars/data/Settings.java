@@ -64,7 +64,7 @@ public class Settings {
         Preferences prefs = Gdx.app.getPreferences("settings");
         prefs.putBoolean("soundOn", volumeOn);
         prefs.flush();
-        if(Settings.volumeOn == true)
+        if(Settings.volumeOn)
         {
             VOLUME = 1;
             Assets.menuMusic.setVolume(VOLUME);
@@ -88,16 +88,6 @@ public class Settings {
 
     public static void setVolume(float volume){
         VOLUME = volume;
-    }
-
-    public static void saveScore(int score) {
-        if (highscore > score){
-            return;
-        }
-        highscore = score;
-        Preferences prefs = Gdx.app.getPreferences("settings");
-        prefs.putInteger("highscore", score);
-        prefs.flush();
     }
 
     public static void savePackSettings(int assetsType, boolean wantsFlame, boolean wantsJapanese) {

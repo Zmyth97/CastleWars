@@ -2,7 +2,6 @@ package com.desitum.castleWars.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,15 +9,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
-import com.desitum.castleWars.data.Assets;
-import com.desitum.castleWars.libraries.animation.MovementAnimator;
-import com.desitum.castleWars.libraries.interpolation.Interpolation;
-import com.desitum.castleWars.libraries.menu.OnClickListener;
-import com.desitum.castleWars.libraries.menu.PopupButton;
-import com.desitum.castleWars.libraries.menu.PopupMenu;
-import com.desitum.castleWars.libraries.menu.PopupTextLabel;
-import com.desitum.castleWars.libraries.menu.PopupToggleButton;
-import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.world.GameRenderer;
 import com.desitum.castleWars.world.GameWorld;
 
@@ -45,8 +35,7 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         cam = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
         cam.position.set(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0);
-        //the viewport object will handle camera's attributes
-        //the aspect provided (worldWidth/worldHeight) will be kept
+
         viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
 
         this.gpgs = googlePlayServicesInterface;
@@ -107,6 +96,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        System.out.println("I (GameScreen) disposed!");
     }
 }

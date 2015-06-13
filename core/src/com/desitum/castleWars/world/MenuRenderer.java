@@ -34,13 +34,4 @@ public class MenuRenderer {
             menu.draw(menuBatch);
         }
     }
-
-
-    public void resetCam() {
-        menuCamera.position.set(MenuScreen.SCREEN_WIDTH / 2, MenuScreen.SCREEN_HEIGHT / 2, 0);
-    }
-
-    public OrthographicCamera getCam() {
-        return menuCamera;
-    }
 }

@@ -16,12 +16,8 @@ import java.util.Collections;
 public class Deck {
 
     private ArrayList<Card> cardList;
-    private boolean boughtFlamePack; //Place Holder Till Real Code
-    private boolean boughtJapanesePack; //Place Holder Till Real Code
 
     public Deck() {
-        boughtFlamePack = true; //Place Holder Till Real Code
-        boughtJapanesePack = true; //Place Holder Till Real Code
 
         cardList = new ArrayList<Card>();
         fillDeck();

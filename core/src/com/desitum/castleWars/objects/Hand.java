@@ -8,7 +8,6 @@ import java.util.ArrayList;
  * Created by Zmyth97 on 5/20/2015.
  */
 public class Hand {
-    private Player player;
     private ArrayList<Card> cardList;
     private GameInterface gi;
 

@@ -1,11 +1,9 @@
 package com.desitum.castleWars.objects;
 
-import com.badlogic.gdx.Game;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.world.GameInterface;
-import com.desitum.castleWars.world.GameRenderer;
 
 /**
  * Created by Zmyth97 on 5/20/2015.
@@ -40,23 +38,10 @@ public class Player {
         return castle;
     }
 
-    public boolean containsCard(Card card) {
-        boolean contains = false;
-        for (Card c: hand.getCardsInHand()) {
-            if (c.equals(card)) {
-                contains = true;
-            }
-        }
-        return contains;
-    }
-
     public Hand getHand() {
         return hand;
     }
 
-    public void setHand(Hand hand) {
-        this.hand = hand;
-    }
 
     public void update(float delta) {
         hand.update(delta);

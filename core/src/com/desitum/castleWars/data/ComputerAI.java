@@ -10,7 +10,6 @@ import java.util.Collections;
  * Created by Zmyth97 on 5/24/2015.
  */
 public class ComputerAI {
-    //These static variables are info from our cards to help determine cards to use (Easier to change later this way)
     private static final int MAX_ATTACK = 32;
     private static final int MAX_BUILD = 20;
 
@@ -104,10 +103,6 @@ public class ComputerAI {
         int chosenCard = 0;
         float target = gi.getPlayer1().getCastle().getHealth() + gi.getPlayer1().getCastle().getWall().getHealth();
 
-        if (gi.getPlayer1().getCastle().getHealth() <= 20 && possibleCards.contains(CardActions.TROJAN_HORSE)) {
-            return chosenCard = CardActions.TROJAN_HORSE;
-        }
-
         for (int card : possibleCards) {
             if (card == CardActions.SPEARMAN && target <= 2) {
                 chosenCard = CardActions.SPEARMAN;
@@ -127,6 +122,11 @@ public class ComputerAI {
                 chosenCard = CardActions.MERLIN;
             }
         }
+
+        if (gi.getPlayer1().getCastle().getHealth() <= 20 && possibleCards.contains(CardActions.TROJAN_HORSE)) {
+            chosenCard = CardActions.TROJAN_HORSE;
+        }
+
         return chosenCard;
     }
 
@@ -209,7 +209,7 @@ public class ComputerAI {
     private int processPossibleCards() {
         int chosenCard = 0;
         System.out.println("See if AI can recruit people");
-        checkForPeople();
+        chosenCard = checkForPeople();
 
         if (chosenCard == 0) {
             System.out.println("Improve Economy Chosen");

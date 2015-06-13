@@ -1,13 +1,9 @@
 package com.desitum.castleWars.packs;
 
-import com.desitum.castleWars.world.GameInterface;
-import com.desitum.castleWars.world.GameWorld;
-
 /**
  * Created by Zmyth97 on 5/25/2015.
  */
 public class FlamePack {
-    private GameInterface gi;
 
     //region Build Cards
     public static final int WALL_OF_FIRE = 401; //+8 Wall
@@ -92,8 +88,4 @@ public class FlamePack {
     public static int METEORS_AMOUNT = 1;
     public static int INFERNO_AMOUNT = 1;
     //endregion
-
-    public FlamePack(GameInterface gi){
-        this.gi = gi;
-    }
 }
