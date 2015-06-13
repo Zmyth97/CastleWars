@@ -144,7 +144,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         computerDelay = Settings.COMPUTER_DELAY;
 
         deck = new Deck();
-        for (Card card: deck.getCardList()) {
+        for (Card card : deck.getCardList()) {
             card.setButtonListener(new OnClickListener() {
                 @Override
                 public void onClick(PopupWidget widget) {
@@ -179,9 +179,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         //Fill Both Players Hands At Start
         for (int i = 0; i < Settings.CARDS_DEALT; i++) {
-            float cardX = MenuScreen.SCREEN_WIDTH/2 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING))/2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
+            float cardX = MenuScreen.SCREEN_WIDTH / 2 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
             player1.getHand().addCardToHand(drawNewCard(cardX, CARDS_Y, i * 0.2f, false));
-            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH/2 - Card.CARD_WIDTH/2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f, true));
+            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f, true));
         }
 
         gpgs.unlockAchievement(CastleWars.AN_ERA_BEGINS);
@@ -189,7 +189,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     public void update(float delta) {
 
-        for (Card c: deck.getCardList()) {
+        for (Card c : deck.getCardList()) {
             c.update(delta);
         }
 
@@ -205,23 +205,23 @@ public class GameWorld extends KodyWorld implements GameInterface {
         player1.update(delta);
         player2.update(delta);
 
-        int randomCloudChance = (int)(Math.random() * 500);
-        if(randomCloudChance == 1){
+        int randomCloudChance = (int) (Math.random() * 500);
+        if (randomCloudChance == 1) {
             makeCloud();
         }
         Iterator<Cloud> iter = cloudList.iterator();
         while (iter.hasNext()) {
             Cloud c = iter.next();
             c.update(delta);
-            if (c.needsRemoval()){
+            if (c.needsRemoval()) {
                 gpgs.unlockAchievement(CastleWars.CLOUD_WATCHER);
                 iter.remove();
             }
         }
 
-        if(endTimer > 0){
+        if (endTimer > 0) {
             endTimer -= delta;
-            if(endTimer < 0){
+            if (endTimer < 0) {
                 gameOver = true;
             }
         }
@@ -265,7 +265,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private void computerTurn() {
         Card c;
-        if(difficulty == EASY_DIFFICULTY){
+        if (difficulty == EASY_DIFFICULTY) {
             boolean usedCard = false;
             for (Card card : player2.getHand().getCardsInHand()) {
                 if (card.isAvailable()) {
@@ -284,9 +284,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 c = player2.getHand().getCardsInHand().get(0);
                 disableCard(c);
             }
-        } else if(difficulty == NORMAL_DIFFICULTY) {
+        } else if (difficulty == NORMAL_DIFFICULTY) {
             Card chosenCard = ai.processAI();
-            if(!ai.isDiscarding()) {
+            if (!ai.isDiscarding()) {
                 cardActions.doCardAction(chosenCard.getCardID());
             } else {
                 aiDiscardLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f, 0));
@@ -338,43 +338,44 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private Card drawNewCard(float x, float y, float delay, boolean isComputer) { //Had to change to boolean for initial drawCards
         Card card = deck.drawCard(isComputer);
-            card.clearAllAnimators();
-            card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_X, x, 1f, delay, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
-            card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_Y, y, 1f, delay, Interpolation.DECELERATE_INTERPOLATOR, false, true));
-            card.addOutgoingAnimator(new MovementAnimator(card, x, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
-            card.addOutgoingAnimator(new MovementAnimator(card, y, DISCARD_PILE_Y, 1f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
-            card.startIncomingAnimators();
-            card.setFlipEffect(new FlipEffect(card, Assets.cardBack, card.getTexture(), 1.0f, FlipEffect.HORIZONTAl));
+        card.clearAllAnimators();
+        card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_X, x, 1f, delay, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
+        card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_Y, y, 1f, delay, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+        card.addOutgoingAnimator(new MovementAnimator(card, x, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
+        card.addOutgoingAnimator(new MovementAnimator(card, y, DISCARD_PILE_Y, 1f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+        card.startIncomingAnimators();
+        card.setFlipEffect(new FlipEffect(card, Assets.cardBack, card.getTexture(), 1.0f, FlipEffect.HORIZONTAl));
         return card;
     }
 
-    private void makeCloud(){
-        int randomY = (int)(Math.random() * 28) + 60;
-        int randomSize = (int)(Math.random() * 10) + 20;
+    private void makeCloud() {
+        int randomY = (int) (Math.random() * 28) + 60;
+        int randomSize = (int) (Math.random() * 10) + 20;
         float randomSpeed = ((int) (Math.random() * 3.0f)) * 2.0f;
-        int randomTexture = (int)(Math.random() * 2);
+        int randomTexture = (int) (Math.random() * 2);
 
-        if(randomTexture == 1){
-             cloudList.add(new Cloud(this, Assets.cloud1, randomY, randomSize, randomSpeed));
-        } else if (randomTexture == 2){
+        if (randomTexture == 1) {
+            cloudList.add(new Cloud(this, Assets.cloud1, randomY, randomSize, randomSpeed));
+        } else if (randomTexture == 2) {
             cloudList.add(new Cloud(this, Assets.cloud2, randomY, randomSize, randomSpeed));
         } else {
             cloudList.add(new Cloud(this, Assets.cloud3, randomY, randomSize, randomSpeed));
         }
 
     }
+
     @Override
-    public void win(){
+    public void win() {
         gpgs.unlockAchievement(CastleWars.CASTLE_MASTER);
-        if(lastCardUsed.getCardID() > 400 && lastCardUsed.getCardID() < 500){
+        if (lastCardUsed.getCardID() > 400 && lastCardUsed.getCardID() < 500) {
             gpgs.unlockAchievement(CastleWars.ELEMENTALIST);
-        } else if(lastCardUsed.getCardID() > 500 && lastCardUsed.getCardID() < 600){
+        } else if (lastCardUsed.getCardID() > 500 && lastCardUsed.getCardID() < 600) {
             gpgs.unlockAchievement(CastleWars.JAPANESE_MASTER);
         }
-        if(lastCardUsed.getCardID() == CardActions.TROJAN_HORSE){
+        if (lastCardUsed.getCardID() == CardActions.TROJAN_HORSE) {
             gpgs.unlockAchievement(CastleWars.DIDNT_SEE_THAT_COMING);
         }
-        if(networkGame){
+        if (networkGame) {
             gpgs.unlockAchievement(CastleWars.BEGINNER_RAIDER);
             gpgs.unlockAchievement(CastleWars.NOVICE_RAIDER);
             gpgs.unlockAchievement(CastleWars.ADVANCED_RAIDER);
@@ -387,32 +388,35 @@ public class GameWorld extends KodyWorld implements GameInterface {
             gpgs.unlockAchievement(CastleWars.CRUSADER);
             gpgs.unlockAchievement(CastleWars.DESTROYER);
         }
-        PopupTextLabel winLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2 - 25, GameScreen.SCREEN_HEIGHT/4 * 2.5f, 50, 10, "You Won!");
+        PopupTextLabel winLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH / 2 - 25, GameScreen.SCREEN_HEIGHT / 4 * 2.5f, 50, 10, "You Won!");
         addWidgetToWorld(winLabel);
         winLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
         winLabel.startTextColorEffects();
         endTimer = 5f;
     }
+
     @Override
-    public void lose(){
+    public void lose() {
         gpgs.unlockAchievement(CastleWars.CASTLE_MASTER);
-        if(!networkGame){
+        if (!networkGame) {
             gpgs.unlockAchievement(CastleWars.PILLAGED);
         }
-        PopupTextLabel loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH/2 - 25, GameScreen.SCREEN_HEIGHT/4 * 2.5f, 55, 10, "You Lost!");
+        PopupTextLabel loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH / 2 - 25, GameScreen.SCREEN_HEIGHT / 4 * 2.5f, 55, 10, "You Lost!");
         addWidgetToWorld(loseLabel);
         loseLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
         loseLabel.startTextColorEffects();
         endTimer = 5f;
     }
-    public ArrayList<Cloud> getCloudList(){
+
+    public ArrayList<Cloud> getCloudList() {
         return cloudList;
     }
 
     @Override
-    public void unlockAchievement(int achievement){
+    public void unlockAchievement(int achievement) {
         gpgs.unlockAchievement(achievement);
     }
+
     @Override
     public Resources getResources() {
         return myResources;
@@ -511,7 +515,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         playerCastleMenu.addPopupWidget(new PopupImage(Assets.castle, Assets.invisible, 2, 9, 5, 5, false));
         playerCastleMenu.addPopupWidget(new PopupImage(Assets.wall, Assets.invisible, 3, 1, 3, 5, false));
         playerCastleLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
-        playerCastleLabel.setText(":" + (int)player1.getCastle().getHealth());
+        playerCastleLabel.setText(":" + (int) player1.getCastle().getHealth());
         playerWallLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerWallLabel.setText(":" + (int) player1.getCastle().getWall().getHealth());
         playerCastleMenu.addPopupWidget(playerCastleLabel);
@@ -671,7 +675,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         settingsButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
-                if(settingsToggle == 0) {
+                if (settingsToggle == 0) {
                     settingsToggle++;
                     settingsMenu.startIncomingAnimators();
                 } else {
@@ -683,7 +687,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.addWidgetToWorld(settingsButton);
     }
 
-    private void setupSettingsMenu(){
+    private void setupSettingsMenu() {
         settingsMenu = new PopupMenu(Assets.popupMenuBackground, 10, -130, 130, 80);
         MovementAnimator yAnimator = new MovementAnimator(settingsMenu, -130, 10, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         settingsMenu.addIncomingAnimator(yAnimator);
@@ -744,40 +748,42 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.addPopupMenu(settingsMenu);
     }
 
-    private void buildDifficultyGUI(){
+    private void buildDifficultyGUI() {
         float menuWidth = (GameScreen.SCREEN_WIDTH * .75f);
         float menuHeight = (GameScreen.SCREEN_HEIGHT * .75f);
-        difficultyMenu = new PopupMenu(Assets.popupMenuBackground,(GameScreen.SCREEN_WIDTH/2) - (GameScreen.SCREEN_WIDTH * .75f)/2, -200, menuWidth, menuHeight);
-        MovementAnimator yAnimator = new MovementAnimator(difficultyMenu, -200, (GameScreen.SCREEN_HEIGHT/2) - (GameScreen.SCREEN_HEIGHT * .75f)/3, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        difficultyMenu = new PopupMenu(Assets.popupMenuBackground, (GameScreen.SCREEN_WIDTH / 2) - (GameScreen.SCREEN_WIDTH * .75f) / 2, -200, menuWidth, menuHeight);
+        MovementAnimator yAnimator = new MovementAnimator(difficultyMenu, -200, (GameScreen.SCREEN_HEIGHT / 2) - (GameScreen.SCREEN_HEIGHT * .75f) / 3, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         difficultyMenu.addIncomingAnimator(yAnimator);
-        MovementAnimator yAnimator2 = new MovementAnimator(difficultyMenu, (GameScreen.SCREEN_HEIGHT/2) - (GameScreen.SCREEN_HEIGHT * .75f)/3, -200, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
+        MovementAnimator yAnimator2 = new MovementAnimator(difficultyMenu, (GameScreen.SCREEN_HEIGHT / 2) - (GameScreen.SCREEN_HEIGHT * .75f) / 3, -200, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
         difficultyMenu.addOutgoingAnimator(yAnimator2);
 
 
-        easyButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth/6, (menuHeight/3), menuWidth/6, (menuWidth/6), false);
+        easyButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth / 6, (menuHeight / 3), menuWidth / 6, (menuWidth / 6), false);
         easyButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
                 easyButton.turnOn();
                 Assets.buttonSound.play(Settings.VOLUME);
-                if(normalButton.isOn()){
+                if (normalButton.isOn()) {
                     normalButton.turnOff();
-                }}
+                }
+            }
         });
-        normalButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth/4 * 2.5f, (menuHeight/3), menuWidth/6, (menuWidth/6), false);
+        normalButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth / 4 * 2.5f, (menuHeight / 3), menuWidth / 6, (menuWidth / 6), false);
         normalButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
                 normalButton.turnOn();
                 Assets.buttonSound.play(Settings.VOLUME);
-                if(easyButton.isOn()){
-                        easyButton.turnOff();
-                    }             }
+                if (easyButton.isOn()) {
+                    easyButton.turnOff();
+                }
+            }
 
         });
 
-        PopupTextLabel easyLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/7, (menuHeight/3) *2, menuWidth/4, (menuHeight/8), "Easy");
-        PopupTextLabel normalLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth/4 * 2.3f, (menuHeight/3)*2, menuWidth/3f, (menuHeight/8), "Normal");
+        PopupTextLabel easyLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth / 7, (menuHeight / 3) * 2, menuWidth / 4, (menuHeight / 8), "Easy");
+        PopupTextLabel normalLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth / 4 * 2.3f, (menuHeight / 3) * 2, menuWidth / 3f, (menuHeight / 8), "Normal");
 
         PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, menuWidth / 2 - (menuWidth / 4) / 1.75f, menuHeight / 4 - menuHeight / 6, MenuWorld.BUTTON_HEIGHT, menuWidth / 4, menuHeight / 6);
         okButton.setButtonListener(new OnClickListener() {
@@ -785,7 +791,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
             public void onClick(PopupWidget widget) {
                 if (easyButton.isOn()) {
                     difficulty = EASY_DIFFICULTY;
-                } {
+                }
+                {
                     difficulty = NORMAL_DIFFICULTY;
                 }
                 Assets.buttonSound.play(Settings.VOLUME);
@@ -804,7 +811,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     public void setPlayerBuildersLabelChangeText(int change) {
         if (change > 0) {
-             playerBuildersLabelChange.setText("+" + change);
+            playerBuildersLabelChange.setText("+" + change);
             playerBuildersLabelChange.startTextColorEffects();
         } else if (change < 0) {
             playerBuildersLabelChange.setText("" + change);
@@ -965,5 +972,5 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public boolean isDiscarding() {
         return discardToggle.isOn();
     }
-
 }
+

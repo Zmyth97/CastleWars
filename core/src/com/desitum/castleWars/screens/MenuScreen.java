@@ -125,6 +125,7 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void dispose() {
-        System.out.println("I (MenuScreen) disposed!");
+
+
     }
 }
