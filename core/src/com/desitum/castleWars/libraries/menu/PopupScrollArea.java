@@ -175,6 +175,54 @@ public class PopupScrollArea extends PopupMenu {
         }
     }
 
+    public void addWidget(PopupWidget toAdd) {
+        toAdd.setSize(widgetWidth, widgetHeight);
+
+        if (scrollDirection == HORIZONTAL) {
+            toAdd.setX(getX() + getWidth() / 2 + (widgets.size() / columns) * (widgetWidth + spacing));
+            toAdd.setY(getY() + (widgets.size() % columns) * (widgetHeight + spacing));
+        } else if (scrollDirection == VERTICAL) {
+            toAdd.setY(getY() + getHeight() / 2 + (widgets.size() / columns) * (widgetWidth + spacing));
+            toAdd.setX(getX() + (widgets.size() % columns) * (widgetHeight + spacing));
+        }
+
+        if (scrollDirection == HORIZONTAL || scrollDirection == VERTICAL) {
+            for (Animator anim : getIncomingAnimatorsToAdd()) {
+                Animator dupAnim = anim.duplicate();
+                if (dupAnim.getClass().equals(MovementAnimator.class)) {
+                    MovementAnimator dupMov = (MovementAnimator) dupAnim;
+                    if (dupMov.isControllingX() && scrollDirection == VERTICAL) {
+                        dupMov.setStartPos(toAdd.getX() - dupMov.getDistance());
+                        dupMov.setEndPos(toAdd.getX());
+                    }
+                    if (dupMov.isControllingY() && scrollDirection == HORIZONTAL) {
+                        dupMov.setStartPos(dupMov.getStartPos());
+                        dupMov.setEndPos(dupMov.getEndPos());
+                    }
+                    toAdd.addIncomingAnimator(dupMov);
+                }
+            }
+            for (Animator anim : getOutgoingAnimatorsToAdd()) {
+                Animator dupAnim = anim.duplicate();
+                if (dupAnim.getClass().equals(MovementAnimator.class)) {
+                    MovementAnimator dupMov = (MovementAnimator) dupAnim;
+                    if (dupMov.isControllingX()) {
+                        dupMov.setStartPos(toAdd.getX() - dupMov.getDistance());
+                        dupMov.setEndPos(toAdd.getX());
+                    }
+                    if (dupMov.isControllingY()) {
+                        dupMov.setStartPos(toAdd.getY() - dupMov.getDistance());
+                        dupMov.setEndPos(toAdd.getY());
+                    }
+                    toAdd.addOutgoingAnimator(dupMov);
+                }
+            }
+
+            widgets.add(toAdd);
+            updateWidgets();
+        }
+    }
+
     public void setWidgets(ArrayList<PopupWidget> widgetsToSet) {
         this.widgets = new ArrayList<PopupWidget>();
         for (PopupWidget widget : widgetsToSet) {

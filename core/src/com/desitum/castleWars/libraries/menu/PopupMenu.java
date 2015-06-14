@@ -19,6 +19,7 @@ import java.util.Iterator;
 public class PopupMenu extends PopupWidget {
 
     private ArrayList<PopupWidget> widgets;
+
     private ArrayList<Animator> incomingAnimatorsToAdd;
     private ArrayList<Animator> outgoingAnimatorsToAdd;
 
@@ -331,6 +332,14 @@ public class PopupMenu extends PopupWidget {
     public void addFadeInAnimator(float duration, float delay) {
         super.addFadeInAnimator(duration, delay);
         fadeIn = true;
+    }
+
+    protected ArrayList<Animator> getIncomingAnimatorsToAdd() {
+        return incomingAnimatorsToAdd;
+    }
+
+    protected ArrayList<Animator> getOutgoingAnimatorsToAdd() {
+        return outgoingAnimatorsToAdd;
     }
 }
 
