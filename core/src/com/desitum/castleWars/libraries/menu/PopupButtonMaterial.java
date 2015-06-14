@@ -98,9 +98,11 @@ public class PopupButtonMaterial extends PopupWidget {
     }
 
     public void draw(SpriteBatch batch) {
-        batch.draw(shadow, getX() + z * 0.2f, getY() - z * 0.5f, getWidth(), getHeight());
-        super.draw(batch);
         Color c = batch.getColor();
+        batch.setColor(getColor());
+        batch.draw(shadow, getX() + z * 0.2f, getY() - z * 0.5f, getWidth(), getHeight());
+        batch.setColor(c);
+        super.draw(batch);
         batch.setColor(getColor());
         batch.draw(touchShadow, getX(), getY(), getWidth(), getHeight());
         batch.setColor(c);
