@@ -9,7 +9,9 @@ import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
+import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
+import com.desitum.castleWars.libraries.menu.PopupScrollArea;
 import com.desitum.castleWars.libraries.menu.PopupSlider;
 import com.desitum.castleWars.libraries.menu.PopupSliderListener;
 import com.desitum.castleWars.libraries.menu.PopupTextLabel;
@@ -17,6 +19,8 @@ import com.desitum.castleWars.libraries.menu.PopupToggleButton;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.screens.MenuScreen;
+
+import java.awt.Menu;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
@@ -41,6 +45,14 @@ public class MenuWorld extends KodyWorld {
     private PopupToggleButton japaneseCardsToggle;
 
     private int settingsToggle;
+
+    private PopupMenu storeMenu;
+
+    private PopupImage flameAd;
+    private PopupImage japanAd;
+    private PopupImage slotAd;
+
+    private int currentItem = 1; //Current Item Showing in Store Menu
     //USED FOR SETTINGS IN THIS THINGY
     private boolean wantsFlame = Settings.WANTS_FLAME_CARDS;
     private boolean wantsJapanese = Settings.WANTS_JAPANESE_CARDS;
@@ -55,6 +67,7 @@ public class MenuWorld extends KodyWorld {
 
         createButtons();
         setupOnClickListeners();
+        createStore();
 
         //region Settings Popup Menu
 
@@ -205,6 +218,11 @@ public class MenuWorld extends KodyWorld {
         popupMenu.startIncomingAnimators();
     }
 
+    public void getStoreMove(){
+        storeMenu.animateFadeIn(1, 0.1f);
+        storeMenu.startIncomingAnimators();
+    }
+
     private void createButtons() {
         //Create the buttons!
         playButton = new PopupButtonMaterial(Assets.playButton, ((MenuScreen.SCREEN_WIDTH/2)* .35f) - 15f, 38, BUTTON_HEIGHT, 60, 20);
@@ -297,5 +315,81 @@ public class MenuWorld extends KodyWorld {
                 menuInterface.store();
             }
         });
+    }
+
+    private void createStore(){
+        storeMenu = new PopupMenu(Assets.blur, 0, 0, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
+
+        final float AD_WIDTH = 45;
+        float AD_HEIGHT = 60;
+        float AD_X = MenuScreen.SCREEN_WIDTH/2 - AD_WIDTH/2;
+        float AD_Y = MenuScreen.SCREEN_HEIGHT/2 - 15;
+
+        final PopupScrollArea storeScroll = new PopupScrollArea(Assets.invisible, 0, AD_Y, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, MenuScreen.SCREEN_WIDTH, AD_HEIGHT,  PopupScrollArea.HORIZONTAL, 3, 1, MenuScreen.SCREEN_WIDTH, AD_WIDTH);
+
+        flameAd = new PopupImage(Assets.flameAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 1
+        japanAd = new PopupImage(Assets.japaneseAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 2
+        slotAd = new PopupImage(Assets.extraSlotAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 3
+
+        storeScroll.addWidget(flameAd);
+        storeScroll.addWidget(japanAd);
+        storeScroll.addWidget(slotAd);
+        storeMenu.addPopupWidget(storeScroll);
+
+        PopupButtonMaterial buyButton = new PopupButtonMaterial(Assets.buyButton, MenuScreen.SCREEN_WIDTH/2 - 20, MenuScreen.SCREEN_HEIGHT/6, BUTTON_HEIGHT, 40, 15);
+        buyButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                //BUY STUFF HERE FOR IN APP PURCHASES
+            }
+        });
+        storeMenu.addPopupWidget(buyButton);
+
+        PopupButtonMaterial leftButton = new PopupButtonMaterial(Assets.leftArrow, 2, MenuScreen.SCREEN_HEIGHT/2 - 10, BUTTON_HEIGHT, 20, 20);
+        leftButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                if(currentItem == 1) {
+                    storeScroll.goToWidget(2);
+                    currentItem = 2;
+                } else if(currentItem == 2){
+                    storeScroll.goToWidget(3);
+                    currentItem = 3;
+                }
+            }
+        });
+        storeMenu.addPopupWidget(leftButton);
+
+        PopupButtonMaterial rightButton = new PopupButtonMaterial(Assets.rightArrow, MenuScreen.SCREEN_WIDTH - 22, MenuScreen.SCREEN_HEIGHT/2 - 10, BUTTON_HEIGHT, 20, 20);
+        rightButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                if(currentItem == 3) {
+                    storeScroll.goToWidget(2);
+                    currentItem = 2;
+                } else if(currentItem == 2){
+                    storeScroll.goToWidget(1);
+                    currentItem = 1;
+                }
+            }
+        });
+        storeMenu.addPopupWidget(rightButton);
+
+
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButtonRound, 2, 2, BUTTON_HEIGHT, 20, 20);
+        okButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                storeMenu.startOutgoingAnimators();
+                storeMenu.animateFadeOut(1, 0);
+            }
+        });
+        storeMenu.addPopupWidget(okButton);
+
+        this.addPopupMenu(storeMenu);
     }
 }

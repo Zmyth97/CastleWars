@@ -68,6 +68,7 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void playGame() {
+        Assets.menuMusic.stop();
         castleWars.setScreen(new GameScreen(gpgs, castleWars));
     }
 
@@ -86,7 +87,7 @@ public class MenuScreen implements Screen, MenuInterface {
     }
     @Override
     public void store() {
-        //For when we add the store for in app purchases
+        menuWorld.getStoreMove();
     }
     @Override
     public void buildDeck() {
@@ -110,12 +111,13 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void pause() {
-
+        Assets.menuMusic.stop();
     }
 
     @Override
     public void resume() {
-
+        Assets.menuMusic.play();
+        Assets.menuMusic.setVolume(Settings.VOLUME);
     }
 
     @Override

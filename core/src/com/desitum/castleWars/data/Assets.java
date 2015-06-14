@@ -14,9 +14,15 @@ import com.desitum.castleWars.libraries.Drawing;
 public class Assets {
 
     public static Texture invisible;
+    public static Texture blur;
     public static Texture discard;
     public static Texture trashCan;
     public static Texture trashCanSelected;
+
+    //Store
+    public static Texture flameAd;
+    public static Texture japaneseAd;
+    public static Texture extraSlotAd;
 
     //Button Textures
     public static Texture playButton;
@@ -28,9 +34,11 @@ public class Assets {
     public static Texture buildDeckButton;
     public static Texture shareButton;
     public static Texture multiButton;
+    public static Texture buyButton;
 
     //Round Button Textures
     public static Texture settingsButtonRound;
+    public static Texture okButtonRound;
     public static Texture storeButtonRound;
 
     //Menu Textures
@@ -39,6 +47,8 @@ public class Assets {
     public static Texture toggleButtonOn;
     public static Texture upArrow;
     public static Texture downArrow;
+    public static Texture leftArrow;
+    public static Texture rightArrow;
     public static Texture popupMenuBackground;
 
     //Game Textures
@@ -171,11 +181,15 @@ public class Assets {
 
     public static void loadMenuTextures() {
         invisible = Drawing.getHollowRectangle(10, 10, 1, new Color(0, 0, 0, 0));
+        blur = new Texture("menu/blur.png");
+
+        //Store
+        flameAd = new Texture("menu/flame_ad.png");
+        japaneseAd = new Texture("menu/japan_ad.png");
+        extraSlotAd = new Texture("menu/extra_slot_ad.png");
 
         //Button Textures
-        if(playButton == null) {
-            playButton = new Texture("menu/play_button.png");
-        }
+        playButton = new Texture("menu/play_button.png");
         exitButton = new Texture("menu/exit_button.png");
         settings = new Texture("menu/settings.png");
         leaderboardButton = new Texture("menu/leaderboard_button.png");
@@ -184,9 +198,11 @@ public class Assets {
         multiButton = new Texture("menu/multi_button.png");
         buildDeckButton = new Texture("menu/build_deck_button.png");
         shareButton = new Texture("menu/share_button.png");
+        buyButton = new Texture("menu/buy_button.png");
 
         //Round Button Textures
         settingsButtonRound = new Texture("menu/settings_button_round.png");
+        okButtonRound = new Texture("menu/ok_button_round.png");
         storeButtonRound = new Texture("menu/shopping_button_round.png");
 
         menuBackground = new Texture("menu/menu_bg.png");
@@ -195,6 +211,8 @@ public class Assets {
         toggleButtonOn = new Texture("menu/toggleButtonOn.png");
         upArrow = new Texture("menu/up_arrow_button.png");
         downArrow = new Texture("menu/down_arrow_button.png");
+        leftArrow = new Texture("menu/left_arrow_button.png");
+        rightArrow = new Texture("menu/right_arrow_button.png");
         popupMenuBackground = new Texture("menu/popupMenuBackground.png");
 
         textFieldFont = new BitmapFont(Gdx.files.internal("font/cartoon.fnt"), Gdx.files.internal("font/cartoon.png"), false);
