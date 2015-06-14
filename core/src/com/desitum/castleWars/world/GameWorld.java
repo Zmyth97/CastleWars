@@ -42,15 +42,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
 
     ////////////////////////////////////////////////
-    //PLACEHOLDER TILL WE CAN DISTINGUISH BETWEEN NETWORK AND SINGLE GAMES
-    private boolean networkGame;
-    ////////////////////////////////////////////////
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
-    ////////////////////////////////////////////////
-    //PLACEHOLDER TILL WE CAN DISTINGUISH BETWEEN IF THEY HAVE BOUGHT THEM OR NOT
-    public static boolean BOUGHT_FlAME_PACK = true;
-    public static boolean BOUGHT_JAPANESE_PACK = true;
     ////////////////////////////////////////////////
     public static final float DRAW_PILE_X = MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH - 1.25f;
     public static final float DRAW_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
@@ -67,10 +60,18 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static final float CHANGE_TEXT_HEIGHT = 6;
     private static final float MENU_TEXT_WIDTH = 15;
     private static final float MENU_TEXT_HEIGHT = 6;
+    ////////////////////////////////////////////////
+    //PLACEHOLDER TILL WE CAN DISTINGUISH BETWEEN IF THEY HAVE BOUGHT THEM OR NOT
+    public static boolean BOUGHT_FlAME_PACK = true;
+    public static boolean BOUGHT_JAPANESE_PACK = true;
     private static Color buildColor = new Color(.122f, 0f, .616f, 1);
     private static Color attackColor = new Color(.855f, 0f, .102f, 1);
     private static Color magicColor = new Color(.035f, .722f, 0, 1);
     private static Color castleColor = new Color(0.278f, 0.278f, 0.322f, 1);
+    public boolean gameOver;
+    ////////////////////////////////////////////////
+    //PLACEHOLDER TILL WE CAN DISTINGUISH BETWEEN NETWORK AND SINGLE GAMES
+    private boolean networkGame;
     private GooglePlayServicesInterface gpgs;
     private int playerTurn;
     private Player player1;
@@ -118,15 +119,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private CardActions cardActions;
     private float computerDelay;
     private ArrayList<Cloud> cloudList;
-
     private PopupTextLabel playerLabel;
     private PopupTextLabel computerLabel;
-
     private PopupTextLabel aiDiscardLabel; //Looked Weird When the AI Moved a Card and it Did Nothing
-
     private float endTimer;
-    public boolean gameOver;
-
     private PopupMenu difficultyMenu;
     private PopupToggleButton easyButton;
     private PopupToggleButton normalButton;
@@ -270,7 +266,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             for (Card card : player2.getHand().getCardsInHand()) {
                 if (card.isAvailable()) {
                     c = card;
-                    c.startOutgoingAnimators();
+                    c.moveOut();
                     cardActions.doCardAction(card.getCardID());
                     player2.getHand().removeCardFromHand(c);
                     player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0, true));
@@ -293,7 +289,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 aiDiscardLabel.addFontColorChanger(new ColorEffects(Color.BLACK, new Color(0, 0, 0, 0), 1f, 1f));
                 aiDiscardLabel.startTextColorEffects();
             }
-            chosenCard.startOutgoingAnimators();
+            chosenCard.moveOut();
             player2.getHand().removeCardFromHand(chosenCard);
             player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0, true));
             deck.addCard(chosenCard);
@@ -305,7 +301,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     @Override
     public void onClickCard(Card card) {
         if ((card.isAvailable() || isDiscarding()) && playerTurn == PLAYER) {
-            card.startOutgoingAnimators();
+            card.moveOut();
             if (!isDiscarding()) {
                 cardActions.doCardAction(card.getCardID());
                 lastCardUsed = card;
@@ -323,7 +319,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                     card1.addIncomingAnimator(new MovementAnimator(card, card1.getY(), CARDS_Y, 1f, i * 0.1f, Interpolation.DECELERATE_INTERPOLATOR, false, true));
                     card1.addOutgoingAnimator(new MovementAnimator(card, cardX, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
                     card1.addOutgoingAnimator(new MovementAnimator(card, card1.getY(), DISCARD_PILE_Y, 1f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
-                    card1.startIncomingAnimators();
+                    card1.moveIn();
                 }
             }
             deck.addCard(card);
@@ -343,7 +339,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         card.addIncomingAnimator(new MovementAnimator(card, DRAW_PILE_Y, y, 1f, delay, Interpolation.DECELERATE_INTERPOLATOR, false, true));
         card.addOutgoingAnimator(new MovementAnimator(card, x, DISCARD_PILE_X, 1f, 0, Interpolation.ACCELERATE_INTERPOLATOR, true, false));
         card.addOutgoingAnimator(new MovementAnimator(card, y, DISCARD_PILE_Y, 1f, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
-        card.startIncomingAnimators();
+        card.moveIn();
         card.setFlipEffect(new FlipEffect(card, Assets.cardBack, card.getTexture(), 1.0f, FlipEffect.HORIZONTAl));
         return card;
     }
@@ -587,14 +583,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.addPopupMenu(computerCastleMenu);
         //endregion
 
-        playerBuildMenu.startIncomingAnimators();
-        playerAttackMenu.startIncomingAnimators();
-        playerMagicMenu.startIncomingAnimators();
-        playerCastleMenu.startIncomingAnimators();
-        computerBuildMenu.startIncomingAnimators();
-        computerAttackMenu.startIncomingAnimators();
-        computerMagicMenu.startIncomingAnimators();
-        computerCastleMenu.startIncomingAnimators();
+        playerBuildMenu.moveIn();
+        playerAttackMenu.moveIn();
+        playerMagicMenu.moveIn();
+        playerCastleMenu.moveIn();
+        computerBuildMenu.moveIn();
+        computerAttackMenu.moveIn();
+        computerMagicMenu.moveIn();
+        computerCastleMenu.moveIn();
 
         float playerLabelX = 22;
 
@@ -677,10 +673,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
             public void onClick(PopupWidget widget) {
                 if (settingsToggle == 0) {
                     settingsToggle++;
-                    settingsMenu.startIncomingAnimators();
+                    settingsMenu.moveIn();
                 } else {
                     settingsToggle--;
-                    settingsMenu.startOutgoingAnimators();
+                    settingsMenu.moveOut();
                 }
             }
         });
@@ -715,7 +711,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 Settings.setVolume(volumeSlider.getPosition());
                 Assets.buttonSound.play(Settings.VOLUME);
                 settingsToggle--;
-                settingsMenu.startOutgoingAnimators();
+                settingsMenu.moveOut();
             }
         });
         settingsMenu.addPopupWidget(okButton);
@@ -726,7 +722,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                settingsMenu.startOutgoingAnimators();
+                settingsMenu.moveOut();
             }
         });
         settingsMenu.addPopupWidget(cancelButton);
@@ -796,7 +792,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                     difficulty = NORMAL_DIFFICULTY;
                 }
                 Assets.buttonSound.play(Settings.VOLUME);
-                difficultyMenu.startOutgoingAnimators();
+                difficultyMenu.moveOut();
                 removeWidgetFromWorld(difficultyMenu);
             }
         });
@@ -806,7 +802,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         difficultyMenu.addPopupWidget(normalLabel);
         difficultyMenu.addPopupWidget(okButton);
         addPopupMenu(difficultyMenu);
-        difficultyMenu.startIncomingAnimators();
+        difficultyMenu.moveIn();
     }
 
     public void setPlayerBuildersLabelChangeText(int change) {

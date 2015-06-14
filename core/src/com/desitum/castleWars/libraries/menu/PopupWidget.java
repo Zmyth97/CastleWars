@@ -56,7 +56,7 @@ public abstract class PopupWidget extends Sprite {
         this.goingOutAnimators.add(anim);
     }
 
-    public void startIncomingAnimators() {
+    public void moveIn() {
         for (Animator anim : comingInAnimators) {
             anim.start(false);
         }
@@ -64,7 +64,7 @@ public abstract class PopupWidget extends Sprite {
         this.enabled = true;
     }
 
-    public void startOutgoingAnimators() {
+    public void moveOut() {
         for (Animator anim : goingOutAnimators) {
             anim.start(false);
         }
@@ -97,13 +97,14 @@ public abstract class PopupWidget extends Sprite {
         this.clearOutgoingAnimators();
     }
 
-    public void animateFadeIn(float duration, float delay) {
+    public void addFadeInAnimator(float duration, float delay) {
         ColorEffects fadeIn = new ColorEffects(new Color(this.getColor().r, this.getColor().g, this.getColor().b, 0), this.getColor(), duration, delay);
         fadeIn.setSprite(this, false, false);
         addIncomingAnimator(fadeIn);
+        setColor(new Color(1, 1, 1, 0));
     }
 
-    public void animateFadeOut(float duration, float delay) {
+    public void addFadeOutAnimator(float duration, float delay) {
         ColorEffects fadeOut = new ColorEffects(this.getColor(), new Color(this.getColor().r, this.getColor().g, this.getColor().b, 0), duration, delay);
         fadeOut.setSprite(this, false, false);
         addIncomingAnimator(fadeOut);

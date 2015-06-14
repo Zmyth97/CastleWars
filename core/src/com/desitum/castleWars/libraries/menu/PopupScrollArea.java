@@ -13,12 +13,10 @@ import java.util.ArrayList;
 /**
  * Created by dvan6234 on 4/23/2015.
  */
-public class PopupScrollArea extends PopupWidget {
+public class PopupScrollArea extends PopupMenu {
 
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
-    ArrayList<Animator> comingInAnimatorsToAdd;
-    ArrayList<Animator> goingOutAnimatorsToAdd;
     ArrayList<PopupWidget> widgets;
     private float scrollAmount;
     private int scrollDirection;
@@ -34,9 +32,6 @@ public class PopupScrollArea extends PopupWidget {
 
     public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, int rows, float spacing, float widgetSize) {
         super(background, width, height, x, y);
-
-        comingInAnimatorsToAdd = new ArrayList<Animator>();
-        goingOutAnimatorsToAdd = new ArrayList<Animator>();
 
         widgets = new ArrayList<PopupWidget>();
 
@@ -54,9 +49,6 @@ public class PopupScrollArea extends PopupWidget {
 
     public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, int rows, float spacing, float widgetWidth, float widgetHeight) {
         super(background, width, height, x, y);
-
-        comingInAnimatorsToAdd = new ArrayList<Animator>();
-        goingOutAnimatorsToAdd = new ArrayList<Animator>();
 
         widgets = new ArrayList<PopupWidget>();
 
@@ -127,28 +119,26 @@ public class PopupScrollArea extends PopupWidget {
     @Override
     public void addIncomingAnimator(Animator anim) {
         super.addIncomingAnimator(anim);
-        this.comingInAnimatorsToAdd.add(anim);
     }
 
     @Override
     public void addOutgoingAnimator(Animator anim) {
         super.addOutgoingAnimator(anim);
-        this.goingOutAnimatorsToAdd.add(anim);
     }
 
     @Override
-    public void startIncomingAnimators() {
-        super.startIncomingAnimators();
+    public void moveIn() {
+        super.moveIn();
         for (PopupWidget widget : widgets) {
-            widget.startIncomingAnimators();
+            widget.moveIn();
         }
     }
 
     @Override
-    public void startOutgoingAnimators() {
-        super.startOutgoingAnimators();
+    public void moveOut() {
+        super.moveOut();
         for (PopupWidget widget : widgets) {
-            widget.startOutgoingAnimators();
+            widget.moveOut();
         }
     }
 
@@ -184,58 +174,10 @@ public class PopupScrollArea extends PopupWidget {
         }
     }
 
-    public void addWidget(PopupWidget toAdd) {
-        toAdd.setSize(widgetWidth, widgetHeight);
-
-        if (scrollDirection == HORIZONTAL) {
-            toAdd.setX(getX() + getWidth() / 2 + (widgets.size() / columns) * (widgetWidth + spacing));
-            toAdd.setY(getY() + (widgets.size() % columns) * (widgetHeight + spacing));
-        } else if (scrollDirection == VERTICAL) {
-            toAdd.setY(getY() + getHeight() / 2 + (widgets.size() / columns) * (widgetWidth + spacing));
-            toAdd.setX(getX() + (widgets.size() % columns) * (widgetHeight + spacing));
-        }
-
-        if (scrollDirection == HORIZONTAL || scrollDirection == VERTICAL) {
-            for (Animator anim : comingInAnimatorsToAdd) {
-                Animator dupAnim = anim.duplicate();
-                if (dupAnim.getClass().equals(MovementAnimator.class)) {
-                    MovementAnimator dupMov = (MovementAnimator) dupAnim;
-                    if (dupMov.isControllingX()) {
-                        dupMov.setStartPos(toAdd.getX() - dupMov.getDistance());
-                        dupMov.setEndPos(toAdd.getX());
-                    }
-                    if (dupMov.isControllingY()) {
-                        dupMov.setStartPos(dupMov.getStartPos());
-                        dupMov.setEndPos(dupMov.getEndPos());
-                    }
-                    toAdd.addIncomingAnimator(dupMov);
-                }
-            }
-            for (Animator anim : goingOutAnimatorsToAdd) {
-                Animator dupAnim = anim.duplicate();
-                if (dupAnim.getClass().equals(MovementAnimator.class)) {
-                    MovementAnimator dupMov = (MovementAnimator) dupAnim;
-                    if (dupMov.isControllingX()) {
-                        dupMov.setStartPos(toAdd.getX() - dupMov.getDistance());
-                        dupMov.setEndPos(toAdd.getX());
-                    }
-                    if (dupMov.isControllingY()) {
-                        dupMov.setStartPos(toAdd.getY() - dupMov.getDistance());
-                        dupMov.setEndPos(toAdd.getY());
-                    }
-                    toAdd.addOutgoingAnimator(dupMov);
-                }
-            }
-
-            widgets.add(toAdd);
-            updateWidgets();
-        }
-    }
-
     public void setWidgets(ArrayList<PopupWidget> widgetsToSet) {
         this.widgets = new ArrayList<PopupWidget>();
         for (PopupWidget widget : widgetsToSet) {
-            addWidget(widget);
+            this.addPopupWidget(widget);
         }
         updateWidgets();
     }

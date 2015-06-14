@@ -244,10 +244,10 @@ public class PopupSpinner extends PopupWidget {
      * start animators added to incomingAnimators
      */
     @Override
-    public void startIncomingAnimators() {
-        super.startIncomingAnimators();
+    public void moveIn() {
+        super.moveIn();
         for (PopupWidget widget : widgets) {
-            widget.startIncomingAnimators();
+            widget.moveIn();
         }
     }
 
@@ -255,10 +255,10 @@ public class PopupSpinner extends PopupWidget {
      * start animators added to outgoingAnimators
      */
     @Override
-    public void startOutgoingAnimators() {
-        super.startOutgoingAnimators();
+    public void moveOut() {
+        super.moveOut();
         for (PopupWidget widget : widgets) {
-            widget.startOutgoingAnimators();
+            widget.moveOut();
         }
     }
 }

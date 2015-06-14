@@ -20,8 +20,6 @@ import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.screens.MenuScreen;
 
-import java.awt.Menu;
-
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
@@ -205,7 +203,7 @@ public class MenuWorld extends KodyWorld {
                 Settings.savePackSettings(assetsType, wantsFlame, wantsJapanese);
                 Assets.buttonSound.play(Settings.VOLUME);
                 settingsToggle--;
-                popupMenu.startOutgoingAnimators();
+                popupMenu.moveOut();
             }
         });
         popupMenu.addPopupWidget(okButton);
@@ -215,39 +213,39 @@ public class MenuWorld extends KodyWorld {
     }
 
     public void getMenuMove(){
-        popupMenu.startIncomingAnimators();
+        popupMenu.moveIn();
     }
 
     public void getStoreMove(){
-        storeMenu.animateFadeIn(1, 0.1f);
-        storeMenu.startIncomingAnimators();
+        storeMenu.addFadeInAnimator(1, 0.1f);
+        storeMenu.moveIn();
     }
 
     private void createButtons() {
         //Create the buttons!
         playButton = new PopupButtonMaterial(Assets.playButton, ((MenuScreen.SCREEN_WIDTH/2)* .35f) - 15f, 38, BUTTON_HEIGHT, 60, 20);
         playButton.addIncomingAnimator(new MovementAnimator(playButton, -20, playButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
-        playButton.startIncomingAnimators();
+        playButton.moveIn();
 
         leaderboardButton = new PopupButtonMaterial(Assets.leaderboardButton,((MenuScreen.SCREEN_WIDTH/4) * 2.5f)-15f, 38, BUTTON_HEIGHT, 60, 20);
         leaderboardButton.addIncomingAnimator(new MovementAnimator(leaderboardButton, -20, leaderboardButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
-        leaderboardButton.startIncomingAnimators();
+        leaderboardButton.moveIn();
 
         multiButton = new PopupButtonMaterial(Assets.multiButton,((MenuScreen.SCREEN_WIDTH/4) * 2.5f) - 15f, 10, BUTTON_HEIGHT, 60, 20);
         multiButton.addIncomingAnimator(new MovementAnimator(multiButton, -20, multiButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
-        multiButton.startIncomingAnimators();
+        multiButton.moveIn();
 
         deckButton = new PopupButtonMaterial(Assets.buildDeckButton, ((MenuScreen.SCREEN_WIDTH/2) * .35f) - 15f, 10, BUTTON_HEIGHT, 60, 20);
         deckButton.addIncomingAnimator(new MovementAnimator(deckButton, -20, deckButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
-        deckButton.startIncomingAnimators();
+        deckButton.moveIn();
 
         settingsButton = new PopupButtonMaterial(Assets.settingsButtonRound, ((MenuScreen.SCREEN_WIDTH)) - 22f, MenuScreen.SCREEN_HEIGHT - 22f, BUTTON_HEIGHT, 20, 20);
         settingsButton.addIncomingAnimator(new MovementAnimator(settingsButton, -20, settingsButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
-        settingsButton.startIncomingAnimators();
+        settingsButton.moveIn();
 
         storeButton = new PopupButtonMaterial(Assets.storeButtonRound, 2, MenuScreen.SCREEN_HEIGHT - 22f, BUTTON_HEIGHT, 20, 20);
         storeButton.addIncomingAnimator(new MovementAnimator(storeButton, -20, storeButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
-        storeButton.startIncomingAnimators();
+        storeButton.moveIn();
 
         //Add the buttons to the ArrayList
         this.addWidget(playButton);
@@ -287,7 +285,7 @@ public class MenuWorld extends KodyWorld {
                     menuInterface.settings();
                 } else {
                     settingsToggle--;
-                    popupMenu.startOutgoingAnimators();
+                    popupMenu.moveOut();
                 }
             }
         });
@@ -384,8 +382,8 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                storeMenu.startOutgoingAnimators();
-                storeMenu.animateFadeOut(1, 0);
+                storeMenu.moveOut();
+                storeMenu.addFadeOutAnimator(1, 0);
             }
         });
         storeMenu.addPopupWidget(okButton);
