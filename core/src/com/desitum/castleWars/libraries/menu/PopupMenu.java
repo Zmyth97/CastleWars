@@ -5,9 +5,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.animation.Animator;
+import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
+import com.desitum.castleWars.libraries.animation.ScaleAnimator;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by kody on 4/18/15.
@@ -208,6 +211,9 @@ public class PopupMenu extends PopupWidget {
                     dupMov.setEndPos(toAdd.getY() + dupMov.getEndPos());
                 }
                 toAdd.addIncomingAnimator(dupMov);
+            } else if (dupAnim instanceof ColorEffects) {
+                dupAnim.setSprite(toAdd, false, false);
+                toAdd.addIncomingAnimator(dupAnim);
             }
         }
         for (Animator anim : outgoingAnimatorsToAdd) {
@@ -223,6 +229,9 @@ public class PopupMenu extends PopupWidget {
                     dupMov.setEndPos(toAdd.getY() + dupMov.getEndPos());
                 }
                 toAdd.addOutgoingAnimator(dupMov);
+            } else if (dupAnim instanceof ColorEffects) {
+                dupAnim.setSprite(toAdd, false, false);
+                toAdd.addOutgoingAnimator(dupAnim);
             }
         }
 
@@ -250,6 +259,63 @@ public class PopupMenu extends PopupWidget {
         super.startOutgoingAnimators();
         for (PopupWidget widget : widgets) {
             widget.startOutgoingAnimators();
+        }
+    }
+
+    @Override
+    public void clearColorEffects() {
+        super.clearColorEffects();
+        Iterator<Animator> iter = incomingAnimatorsToAdd.iterator();
+        while (iter.hasNext()) {
+            Animator anim = iter.next();
+            if (anim instanceof ColorEffects) {
+                iter.remove();
+            }
+        }
+        iter = outgoingAnimatorsToAdd.iterator();
+        while (iter.hasNext()) {
+            Animator anim = iter.next();
+            if (anim instanceof ColorEffects) {
+                iter.remove();
+            }
+        }
+    }
+
+    @Override
+    public void clearMovementAnimators() {
+        super.clearColorEffects();
+        Iterator<Animator> iter = incomingAnimatorsToAdd.iterator();
+        while (iter.hasNext()) {
+            Animator anim = iter.next();
+            if (anim instanceof MovementAnimator) {
+                iter.remove();
+            }
+        }
+        iter = outgoingAnimatorsToAdd.iterator();
+        while (iter.hasNext()) {
+            Animator anim = iter.next();
+            if (anim instanceof MovementAnimator) {
+                iter.remove();
+            }
+        }
+    }
+
+    @Override
+    public void clearScaleAnimators() {
+        super.clearColorEffects();
+        Iterator<Animator> iter = incomingAnimatorsToAdd.iterator();
+        while (iter.hasNext()) {
+            Animator anim = iter.next();
+            if (anim instanceof ScaleAnimator) {
+                iter.remove();
+            }
+        }
+        iter = outgoingAnimatorsToAdd.iterator();
+        while (iter.hasNext()) {
+            Animator anim = iter.next();
+            if (anim instanceof ScaleAnimator) {
+                iter.remove();
+            }
         }
     }
 }
