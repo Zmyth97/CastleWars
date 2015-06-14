@@ -166,6 +166,7 @@ public class PopupScrollArea extends PopupMenu {
             } else {
                 widget.setY(getY() + getWidth() / 2 + (widgetNum / columns) * (widgetHeight + spacing) + scrollAmount);
                 float widgetDistanceFromCenter = (getY() + getHeight() / 2 - widget.getY()) / activeWidth / 2;
+                widgetDistanceFromCenter *= 4;
                 if (widgetDistanceFromCenter < 0) widgetDistanceFromCenter *= -1;
                 if (widgetDistanceFromCenter > 1) widgetDistanceFromCenter = 1;
                 widget.setAlpha(1 - widgetDistanceFromCenter);
