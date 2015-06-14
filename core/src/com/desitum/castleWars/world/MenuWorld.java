@@ -329,9 +329,9 @@ public class MenuWorld extends KodyWorld {
         japanAd = new PopupImage(Assets.japaneseAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 2
         slotAd = new PopupImage(Assets.extraSlotAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 3
 
-        storeScroll.addWidget(flameAd);
-        storeScroll.addWidget(japanAd);
-        storeScroll.addWidget(slotAd);
+        storeScroll.addPopupWidget(flameAd);
+        storeScroll.addPopupWidget(japanAd);
+        storeScroll.addPopupWidget(slotAd);
         storeMenu.addPopupWidget(storeScroll);
 
         PopupButtonMaterial buyButton = new PopupButtonMaterial(Assets.buyButton, MenuScreen.SCREEN_WIDTH/2 - 20, MenuScreen.SCREEN_HEIGHT/6, BUTTON_HEIGHT, 40, 15);
