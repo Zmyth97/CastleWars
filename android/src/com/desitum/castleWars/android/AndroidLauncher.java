@@ -16,6 +16,7 @@ import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
+import com.desitum.castleWars.world.GameWorld;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -30,6 +31,11 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
 
     private static final String KEY_IN_RESOLUTION = "is_in_resolution";
 
+    private static final String FIRE_PACK_SKU = "flame_card_pack_id";
+    private static final String JAPANESE_PACK_SKU = "japanese_card_pack_id";
+    private static final String EXTRA_SLOT_1_SKU = "extra_slot_1_id";
+    private static final String EXTRA_SLOT_2_SKU = "extra_slot_2_id";
+
     private ConnectionResult mConnectionResult;
 
     /**
@@ -41,14 +47,16 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
      * Google API client.
      */
     private GoogleApiClient mGoogleApiClient;
-
     /**
      * Determines if the client is in a resolution state, and
      * waiting for resolution intent to return.
      */
     private boolean mIsInResolution;
 
-    private static final String AD_UNIT_ID = "adunit1234";
+    IabHelper mHelper;
+
+
+
     protected View gameView;
 
     @Override
@@ -71,6 +79,20 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         RelativeLayout layout = new RelativeLayout(this);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         layout.setLayoutParams(params);
+
+        mHelper = new IabHelper(this, getString(R.string.base64EncodedPublicKey1) + getString(R.string.base64EncodedPublicKey2) + getString(R.string.base64EncodedPublicKey3)); //Split into three for security. Or so is says online
+
+        mHelper.startSetup(new
+                                   IabHelper.OnIabSetupFinishedListener() {
+                                       public void onIabSetupFinished(IabResult result) {
+                                           if (!result.isSuccess()) {
+                                               Log.d(TAG, "In-app Billing setup failed: " +
+                                                       result);
+                                           } else {
+                                               Log.d(TAG, "In-app Billing is set up OK");
+                                           }
+                                       }
+                                   });
 
 
         View gameView = createGameView(config);
@@ -170,6 +192,64 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         }
     }
 
+    @Override
+    public void makePurchase(String sku){
+        IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener
+                = new IabHelper.OnIabPurchaseFinishedListener() {
+            public void onIabPurchaseFinished(IabResult result, Purchase purchase)
+            {
+                if (result.isFailure()) {
+                    Log.d(TAG, "Error purchasing: " + result);
+                    return;
+                }
+                else if (purchase.getSku().equals(FIRE_PACK_SKU)) {
+                    GameWorld.BOUGHT_FlAME_PACK = true;
+                }
+                else if (purchase.getSku().equals(JAPANESE_PACK_SKU)) {
+                    GameWorld.BOUGHT_JAPANESE_PACK = true;
+                }
+                else if (purchase.getSku().equals(EXTRA_SLOT_1_SKU)) {
+                    GameWorld.EXTRA_CARD_SLOT_1 = true;
+                }
+                else if (purchase.getSku().equals(EXTRA_SLOT_2_SKU)) {
+                    GameWorld.EXTRA_CARD_SLOT_2 = true;
+                }
+            }
+        };
+        int value = 0;
+        if(sku.contains("flame")){
+            value = 10001;
+        } else if(sku.contains("japan")){
+            value = 10002;
+        } else if(sku.contains("slot_1")){
+            value = 10003;
+        } else if(sku.contains("slot_2")){
+            value = 10004;
+        }
+        mHelper.launchPurchaseFlow(this, sku, value,
+                mPurchaseFinishedListener, "");
+    }
+
+    @Override
+    public void checkForPurchasesMade(){
+        IabHelper.QueryInventoryFinishedListener mGotInventoryListener
+                = new IabHelper.QueryInventoryFinishedListener() {
+            public void onQueryInventoryFinished(IabResult result,
+                                                 Inventory inventory) {
+
+                if (result.isFailure()) {
+                    //Blerg?
+                }
+                else {
+                    GameWorld.BOUGHT_FlAME_PACK = inventory.hasPurchase(FIRE_PACK_SKU);
+                    GameWorld.BOUGHT_JAPANESE_PACK = inventory.hasPurchase(JAPANESE_PACK_SKU);
+                    GameWorld.EXTRA_CARD_SLOT_1 = inventory.hasPurchase(EXTRA_SLOT_1_SKU);
+                    GameWorld.EXTRA_CARD_SLOT_2 = inventory.hasPurchase(EXTRA_SLOT_2_SKU);
+                }
+            }
+        };
+        mHelper.queryInventoryAsync(mGotInventoryListener);
+    }
     @Override
     public void login() {
 
@@ -296,6 +376,13 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         }
         // Save the result and resolve the connection failure upon a user click.
         mConnectionResult = result;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mHelper != null) mHelper.dispose();
+        mHelper = null;
     }
 }
 

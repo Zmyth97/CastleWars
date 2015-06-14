@@ -89,6 +89,11 @@ public class MenuScreen implements Screen, MenuInterface {
     public void store() {
         menuWorld.getStoreMove();
     }
+
+    @Override
+    public void buyItem(String sku){
+        gpgs.makePurchase(sku);
+    }
     @Override
     public void buildDeck() {
         castleWars.setScreen(new BuildScreen(castleWars));

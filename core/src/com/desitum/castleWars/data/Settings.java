@@ -60,21 +60,11 @@ public class Settings {
     //endregion
 
 
-    public static void getSound() {
+    public static void setSound() {
         Preferences prefs = Gdx.app.getPreferences("settings");
-        prefs.putBoolean("soundOn", volumeOn);
+        prefs.putFloat("sound", VOLUME);
         prefs.flush();
-        if(Settings.volumeOn)
-        {
-            VOLUME = 1;
-            Assets.menuMusic.setVolume(VOLUME);
-        }
-        else
-        {
-            VOLUME = 0;
-
-            Assets.menuMusic.setVolume(VOLUME);
-        }
+        Assets.menuMusic.setVolume(VOLUME);
     }
 
     public static void load(){
@@ -82,8 +72,7 @@ public class Settings {
         ASSETS_TO_USE = prefs.getInteger("assetsType", 1);
         WANTS_FLAME_CARDS = prefs.getBoolean("wantsFlame", true);
         WANTS_JAPANESE_CARDS = prefs.getBoolean("wantsJapanese", true);
-        volumeOn = prefs.getBoolean("soundOn", true);
-        getSound();
+        VOLUME = prefs.getFloat("sound", 0.5f);
     }
 
     public static void setVolume(float volume){
@@ -91,7 +80,6 @@ public class Settings {
     }
 
     public static void savePackSettings(int assetsType, boolean wantsFlame, boolean wantsJapanese) {
-
         ASSETS_TO_USE = assetsType;
         WANTS_FLAME_CARDS = wantsFlame;
         WANTS_JAPANESE_CARDS = wantsJapanese;

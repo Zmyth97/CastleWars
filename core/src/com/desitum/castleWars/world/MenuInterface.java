@@ -11,4 +11,5 @@ public interface MenuInterface {
     public void buildDeck();
     public void leaderboard();
     public void store();
+    public void buyItem(String sku);
 }

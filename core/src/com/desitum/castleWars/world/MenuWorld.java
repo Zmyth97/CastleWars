@@ -3,6 +3,7 @@ package com.desitum.castleWars.world;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
@@ -20,13 +21,22 @@ import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.screens.MenuScreen;
 
+import java.util.Set;
+
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
 public class MenuWorld extends KodyWorld {
 
     public static final float BUTTON_HEIGHT = 0.5f;
+
+    private static final String FIRE_SKU = "flame_card_pack_id";
+    private static final String JAPANESE_SKU = "japanese_card_pack_id";
+    private static final String EXTRA_CARD_SLOT_1_ID = "extra_slot_1_id";
+    private static final String EXTRA_CARD_SLOT_2_ID = "extra_slot_2_id";
+
     private MenuInterface menuInterface;
+    private GooglePlayServicesInterface gpgs;
     private PopupMenu popupMenu;
     private PopupButtonMaterial playButton;
     private PopupButtonMaterial leaderboardButton;
@@ -78,12 +88,12 @@ public class MenuWorld extends KodyWorld {
         PopupTextLabel settingsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 40, 65, 50, 10, "Settings", BitmapFont.HAlignment.CENTER);
         popupMenu.addPopupWidget(settingsLabel);
 
-        final PopupSlider volumeSlider = new PopupSlider(Assets.toggleButtonOff, Assets.toggleButtonOff, 5, 60, 120, 5, 3, 10);
+        final PopupSlider volumeSlider = new PopupSlider(Assets.toggleButtonOff, Assets.toggleButtonOff, Settings.VOLUME, 5, 60, 120, 5, 3, 10);
         volumeSlider.setSliderListener(new PopupSliderListener() {
             @Override
             public void onChange(float pos) {
                 Settings.VOLUME = pos;
-                Settings.setVolume(pos);
+                Settings.setSound();
             }
         });
         popupMenu.addPopupWidget(volumeSlider);
@@ -341,7 +351,14 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                //BUY STUFF HERE FOR IN-APP PURCHASES
+                if(currentItem == 1){
+                    menuInterface.buyItem(FIRE_SKU);
+                } else if(currentItem == 2){
+                    menuInterface.buyItem(JAPANESE_SKU);
+                } else if(currentItem == 3){
+                    //Need to Add Second Card Slot Thingy
+                    menuInterface.buyItem(EXTRA_CARD_SLOT_1_ID);
+                }
             }
         });
         storeMenu.addPopupWidget(buyButton);
