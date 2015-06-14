@@ -675,90 +675,90 @@ public class BuildScreen extends KodyWorld implements Screen {
         shogunMenu.addPopupWidget(shogunImage);
         //endregion
         //region Add Basic Menus To Card Scroll Area
-        cardScrollArea.addWidget(barrierMenu);
-        cardScrollArea.addWidget(wallMenu);
-        cardScrollArea.addWidget(greatWallMenu);
-        cardScrollArea.addWidget(reinforceMenu);
-        cardScrollArea.addWidget(fortifyMenu);
-        cardScrollArea.addWidget(castlesMenu);
-        cardScrollArea.addWidget(architectMenu);
-        cardScrollArea.addWidget(reserveMenu);
-        cardScrollArea.addWidget(sabotageMenu);
-        cardScrollArea.addWidget(strongholdMenu);
-        cardScrollArea.addWidget(recruiterMenu);
-        cardScrollArea.addWidget(spearmanMenu);
-        cardScrollArea.addWidget(ramMenu);
-        cardScrollArea.addWidget(catapultMenu);
-        cardScrollArea.addWidget(legionMenu);
-        cardScrollArea.addWidget(trebuchetMenu);
-        cardScrollArea.addWidget(assassinMenu);
-        cardScrollArea.addWidget(burglarMenu);
-        cardScrollArea.addWidget(thiefMenu);
-        cardScrollArea.addWidget(raidMenu);
-        cardScrollArea.addWidget(createStonesMenu);
-        cardScrollArea.addWidget(createWeaponsMenu);
-        cardScrollArea.addWidget(createGemsMenu);
-        cardScrollArea.addWidget(destroyStonesMenu);
-        cardScrollArea.addWidget(destroyWeaponsMenu);
-        cardScrollArea.addWidget(destroyGemsMenu);
-        cardScrollArea.addWidget(mageMenu);
-        cardScrollArea.addWidget(hatTrickMenu);
-        cardScrollArea.addWidget(lightningMenu);
-        cardScrollArea.addWidget(blastMenu);
-        cardScrollArea.addWidget(jerichoMenu);
-        cardScrollArea.addWidget(trojanHorseMenu);
-        cardScrollArea.addWidget(blackPlagueMenu);
-        cardScrollArea.addWidget(merlinMenu);
-        cardScrollArea.addWidget(duplicateMenu);
+        cardScrollArea.addPopupWidget(barrierMenu);
+        cardScrollArea.addPopupWidget(wallMenu);
+        cardScrollArea.addPopupWidget(greatWallMenu);
+        cardScrollArea.addPopupWidget(reinforceMenu);
+        cardScrollArea.addPopupWidget(fortifyMenu);
+        cardScrollArea.addPopupWidget(castlesMenu);
+        cardScrollArea.addPopupWidget(architectMenu);
+        cardScrollArea.addPopupWidget(reserveMenu);
+        cardScrollArea.addPopupWidget(sabotageMenu);
+        cardScrollArea.addPopupWidget(strongholdMenu);
+        cardScrollArea.addPopupWidget(recruiterMenu);
+        cardScrollArea.addPopupWidget(spearmanMenu);
+        cardScrollArea.addPopupWidget(ramMenu);
+        cardScrollArea.addPopupWidget(catapultMenu);
+        cardScrollArea.addPopupWidget(legionMenu);
+        cardScrollArea.addPopupWidget(trebuchetMenu);
+        cardScrollArea.addPopupWidget(assassinMenu);
+        cardScrollArea.addPopupWidget(burglarMenu);
+        cardScrollArea.addPopupWidget(thiefMenu);
+        cardScrollArea.addPopupWidget(raidMenu);
+        cardScrollArea.addPopupWidget(createStonesMenu);
+        cardScrollArea.addPopupWidget(createWeaponsMenu);
+        cardScrollArea.addPopupWidget(createGemsMenu);
+        cardScrollArea.addPopupWidget(destroyStonesMenu);
+        cardScrollArea.addPopupWidget(destroyWeaponsMenu);
+        cardScrollArea.addPopupWidget(destroyGemsMenu);
+        cardScrollArea.addPopupWidget(mageMenu);
+        cardScrollArea.addPopupWidget(hatTrickMenu);
+        cardScrollArea.addPopupWidget(lightningMenu);
+        cardScrollArea.addPopupWidget(blastMenu);
+        cardScrollArea.addPopupWidget(jerichoMenu);
+        cardScrollArea.addPopupWidget(trojanHorseMenu);
+        cardScrollArea.addPopupWidget(blackPlagueMenu);
+        cardScrollArea.addPopupWidget(merlinMenu);
+        cardScrollArea.addPopupWidget(duplicateMenu);
         //endregion
         //region Add Japanese Menus To Card Scoll Area
         if(GameWorld.BOUGHT_JAPANESE_PACK){
-            cardScrollArea.addWidget(stockadeMenu);
-            cardScrollArea.addWidget(fortressMenu);
-            cardScrollArea.addWidget(monasteryMenu);
-            cardScrollArea.addWidget(rampartMenu);
-            cardScrollArea.addWidget(citadelMenu);
+            cardScrollArea.addPopupWidget(stockadeMenu);
+            cardScrollArea.addPopupWidget(fortressMenu);
+            cardScrollArea.addPopupWidget(monasteryMenu);
+            cardScrollArea.addPopupWidget(rampartMenu);
+            cardScrollArea.addPopupWidget(citadelMenu);
 
-            cardScrollArea.addWidget(ashigaruMenu);
-            cardScrollArea.addWidget(shurikenMenu);
-            cardScrollArea.addWidget(katanaMenu);
-            cardScrollArea.addWidget(samuraiMenu);
-            cardScrollArea.addWidget(dojoMenu);
+            cardScrollArea.addPopupWidget(ashigaruMenu);
+            cardScrollArea.addPopupWidget(shurikenMenu);
+            cardScrollArea.addPopupWidget(katanaMenu);
+            cardScrollArea.addPopupWidget(samuraiMenu);
+            cardScrollArea.addPopupWidget(dojoMenu);
 
-            cardScrollArea.addWidget(shrineMenu);
-            cardScrollArea.addWidget(quarryMenu);
-            cardScrollArea.addWidget(templeMenu);
-            cardScrollArea.addWidget(ricePaddyMenu);
-            cardScrollArea.addWidget(seppukuMenu);
+            cardScrollArea.addPopupWidget(shrineMenu);
+            cardScrollArea.addPopupWidget(quarryMenu);
+            cardScrollArea.addPopupWidget(templeMenu);
+            cardScrollArea.addPopupWidget(ricePaddyMenu);
+            cardScrollArea.addPopupWidget(seppukuMenu);
 
-            cardScrollArea.addWidget(ninjaMenu);
-            cardScrollArea.addWidget(dragonMenu);
-            cardScrollArea.addWidget(shogunMenu);
+            cardScrollArea.addPopupWidget(ninjaMenu);
+            cardScrollArea.addPopupWidget(dragonMenu);
+            cardScrollArea.addPopupWidget(shogunMenu);
         }
         //endregion
         //region Add Flame Menus To Card Scroll Area
         if(GameWorld.BOUGHT_FlAME_PACK){
-            cardScrollArea.addWidget(wallOfFireMenu);
-            cardScrollArea.addWidget(campfireMenu);
-            cardScrollArea.addWidget(forgeMenu);
-            cardScrollArea.addWidget(boilingOilMenu);
-            cardScrollArea.addWidget(bonfireMenu);
+            cardScrollArea.addPopupWidget(wallOfFireMenu);
+            cardScrollArea.addPopupWidget(campfireMenu);
+            cardScrollArea.addPopupWidget(forgeMenu);
+            cardScrollArea.addPopupWidget(boilingOilMenu);
+            cardScrollArea.addPopupWidget(bonfireMenu);
 
-            cardScrollArea.addWidget(fireMenu);
-            cardScrollArea.addWidget(fireArrowsMenu);
-            cardScrollArea.addWidget(flamingAxeMenu);
-            cardScrollArea.addWidget(flamingShotMenu);
-            cardScrollArea.addWidget(flameLegionMenu);
+            cardScrollArea.addPopupWidget(fireMenu);
+            cardScrollArea.addPopupWidget(fireArrowsMenu);
+            cardScrollArea.addPopupWidget(flamingAxeMenu);
+            cardScrollArea.addPopupWidget(flamingShotMenu);
+            cardScrollArea.addPopupWidget(flameLegionMenu);
 
-            cardScrollArea.addWidget(fireShamanMenu);
-            cardScrollArea.addWidget(lavaFlowMenu);
-            cardScrollArea.addWidget(coalMenu);
-            cardScrollArea.addWidget(blacksmithMenu);
-            cardScrollArea.addWidget(fireballMenu);
+            cardScrollArea.addPopupWidget(fireShamanMenu);
+            cardScrollArea.addPopupWidget(lavaFlowMenu);
+            cardScrollArea.addPopupWidget(coalMenu);
+            cardScrollArea.addPopupWidget(blacksmithMenu);
+            cardScrollArea.addPopupWidget(fireballMenu);
 
-            cardScrollArea.addWidget(phoenixMenu);
-            cardScrollArea.addWidget(meteorsMenu);
-            cardScrollArea.addWidget(infernoMenu);
+            cardScrollArea.addPopupWidget(phoenixMenu);
+            cardScrollArea.addPopupWidget(meteorsMenu);
+            cardScrollArea.addPopupWidget(infernoMenu);
         }
         //endregion
         super.addWidget(cardScrollArea);

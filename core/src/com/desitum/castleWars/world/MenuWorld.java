@@ -83,6 +83,7 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onChange(float pos) {
                 Settings.VOLUME = pos;
+                Settings.setVolume(pos);
             }
         });
         popupMenu.addPopupWidget(volumeSlider);
@@ -217,7 +218,6 @@ public class MenuWorld extends KodyWorld {
     }
 
     public void getStoreMove(){
-        storeMenu.addFadeInAnimator(1, 0.1f);
         storeMenu.moveIn();
     }
 
@@ -317,6 +317,8 @@ public class MenuWorld extends KodyWorld {
 
     private void createStore(){
         storeMenu = new PopupMenu(Assets.blur, 0, 0, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
+        storeMenu.addFadeInAnimator(1, 0);
+        storeMenu.addFadeOutAnimator(1, 0);
 
         final float AD_WIDTH = 45;
         float AD_HEIGHT = 60;
@@ -339,7 +341,7 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                //BUY STUFF HERE FOR IN APP PURCHASES
+                //BUY STUFF HERE FOR IN-APP PURCHASES
             }
         });
         storeMenu.addPopupWidget(buyButton);
@@ -383,7 +385,6 @@ public class MenuWorld extends KodyWorld {
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
                 storeMenu.moveOut();
-                storeMenu.addFadeOutAnimator(1, 0);
             }
         });
         storeMenu.addPopupWidget(okButton);

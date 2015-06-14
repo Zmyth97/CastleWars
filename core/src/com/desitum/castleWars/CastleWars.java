@@ -54,24 +54,6 @@ public class CastleWars extends Game {
         this.googlePlay = googlePlay;
     }
 
-    public void submitWin() {
-
-    }
-
-    public void submitBuildWin() {
-        submitWin();
-        //Needs a way to submit build alone //Why? ~Zack
-    }
-
-    public void submitCloud() {
-
-    }
-
-    public void submitAttackWin() {
-        submitWin();
-        //Needs way to submit attack alone //Why? ~Zack
-    }
-
     @Override
     public void create () {
         Screen splashScreen = new com.desitum.castleWars.screens.SplashScreen(googlePlay, this);
@@ -108,8 +90,6 @@ public class CastleWars extends Game {
         //Start it :P
     //In App Purchases
         //Add Card Packs
-        //Add Code to Change Assets/Cards if They Have Bought Them
-        //Add Options to Settings Menu To Change The Above Stuff
 
 
 
