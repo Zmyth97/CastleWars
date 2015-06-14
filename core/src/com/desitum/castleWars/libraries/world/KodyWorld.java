@@ -67,6 +67,7 @@ public class KodyWorld {
         boolean clickedOnWidget = false;
         for (int i = menus.size() - 1; i >= 0; i--) {
             PopupMenu menu = menus.get(i);
+            if (!menu.isEnabled()) continue;
             boolean clickInArea = (CollisionDetection.pointInRectangle(menu.getBoundingRectangle(), touchPos) && !clickedOnWidget);
             if (clickInArea) {
                 menu.updateTouchInput(touchPos, clickDown);
@@ -76,6 +77,7 @@ public class KodyWorld {
         if (!clickedOnWidget) {
             try {
                 for (PopupWidget widget : widgets) {
+                    if (!widget.isEnabled()) continue;
                     boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
                     if (widget instanceof PopupButton) {
                         PopupButton button = (PopupButton) widget;

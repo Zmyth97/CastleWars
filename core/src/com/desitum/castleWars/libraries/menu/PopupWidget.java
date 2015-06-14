@@ -21,12 +21,16 @@ public abstract class PopupWidget extends Sprite {
     private ArrayList<Animator> comingInAnimators;
     private ArrayList<Animator> goingOutAnimators;
 
+    private boolean enabled;
+
     public PopupWidget(Texture texture, float width, float height, float x, float y) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
         setSize(width, height);
         setX(x);
         setY(y);
+
+        this.enabled = false;
 
         this.comingInAnimators = new ArrayList<Animator>();
         this.goingOutAnimators = new ArrayList<Animator>();
@@ -56,12 +60,16 @@ public abstract class PopupWidget extends Sprite {
         for (Animator anim : comingInAnimators) {
             anim.start(false);
         }
+
+        this.enabled = true;
     }
 
     public void startOutgoingAnimators() {
         for (Animator anim : goingOutAnimators) {
             anim.start(false);
         }
+
+        this.enabled = false;
     }
 
     public void setOriginCenter() {
@@ -150,5 +158,9 @@ public abstract class PopupWidget extends Sprite {
                 iter.remove();
             }
         }
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 }

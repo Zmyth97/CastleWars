@@ -24,7 +24,8 @@ public class PopupScrollArea extends PopupWidget {
     private int scrollDirection;
     private int columns;
     private int rows;
-    private float widgetSize;
+    private float widgetWidth;
+    private float widgetHeight;
     private float spacing;
     private float activeWidth;
     private float activeHeight;
@@ -43,11 +44,32 @@ public class PopupScrollArea extends PopupWidget {
         this.scrollDirection = scrollDirection;
         this.columns = columns;
         if (scrollDirection == VERTICAL) this.columns = rows;
-        this.widgetSize = widgetSize;
+        this.widgetWidth = widgetSize;
+        this.widgetHeight = widgetSize;
         this.spacing = spacing;
         this.activeWidth = activeWidth;
         this.activeHeight = activeHeight;
         this.setPosition(x , y);
+    }
+
+    public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, int rows, float spacing, float widgetWidth, float widgetHeight) {
+        super(background, width, height, x, y);
+
+        comingInAnimatorsToAdd = new ArrayList<Animator>();
+        goingOutAnimatorsToAdd = new ArrayList<Animator>();
+
+        widgets = new ArrayList<PopupWidget>();
+
+        scrollAmount = 0;
+        this.scrollDirection = scrollDirection;
+        this.columns = columns;
+        if (scrollDirection == VERTICAL) this.columns = rows;
+        this.widgetWidth = widgetWidth;
+        this.widgetHeight = widgetHeight;
+        this.spacing = spacing;
+        this.activeWidth = activeWidth;
+        this.activeHeight = activeHeight;
+        this.setPosition(x, y);
     }
 
     public void updateScrollInput(float amount) {
@@ -55,8 +77,8 @@ public class PopupScrollArea extends PopupWidget {
 
         if (scrollAmount > 0) {
             scrollAmount = 0;
-        } else if (scrollAmount < -(widgets.size() - 1) * (widgetSize + spacing)) {
-            scrollAmount = -(widgets.size() - 1) * (widgetSize + spacing);
+        } else if (scrollDirection == HORIZONTAL && scrollAmount < -(widgets.size() - 1) * (widgetWidth + spacing)) {
+            scrollAmount = -(widgets.size() - 1) * (widgetWidth + spacing);
         }
         updateWidgets();
     }
@@ -144,7 +166,7 @@ public class PopupScrollArea extends PopupWidget {
             PopupWidget widget = widgets.get(widgetNum);
 
             if (scrollDirection == HORIZONTAL) {
-                widget.setX(getX() + getWidth() / 2 + (widgetNum / columns) * (widgetSize + spacing) + scrollAmount);
+                widget.setX(getX() + getWidth() / 2 + (widgetNum / columns) * (widgetWidth + spacing) + scrollAmount);
                 float widgetDistanceFromCenter = (getX() + getWidth() / 2 - widget.getX() - widget.getWidth() / 2) / activeWidth / 2;
                 widgetDistanceFromCenter *= 4;
                 if (widgetDistanceFromCenter < 0) widgetDistanceFromCenter *= -1;
@@ -152,7 +174,7 @@ public class PopupScrollArea extends PopupWidget {
                 widget.setAlpha(1 - widgetDistanceFromCenter);
                 widget.setScale(1 - widgetDistanceFromCenter, 1);
             } else {
-                widget.setY(getY() + getWidth() / 2 + (widgetNum / columns) * (widgetSize + spacing) + scrollAmount);
+                widget.setY(getY() + getWidth() / 2 + (widgetNum / columns) * (widgetHeight + spacing) + scrollAmount);
                 float widgetDistanceFromCenter = (getY() + getHeight() / 2 - widget.getY()) / activeWidth / 2;
                 if (widgetDistanceFromCenter < 0) widgetDistanceFromCenter *= -1;
                 if (widgetDistanceFromCenter > 1) widgetDistanceFromCenter = 1;
@@ -163,14 +185,14 @@ public class PopupScrollArea extends PopupWidget {
     }
 
     public void addWidget(PopupWidget toAdd) {
-        toAdd.setSize(widgetSize, widgetSize);
+        toAdd.setSize(widgetWidth, widgetHeight);
 
         if (scrollDirection == HORIZONTAL) {
-            toAdd.setX(getX() + getWidth() / 2 + (widgets.size() / columns) * (widgetSize + spacing));
-            toAdd.setY(getY() + (widgets.size() % columns) * (widgetSize + spacing));
+            toAdd.setX(getX() + getWidth() / 2 + (widgets.size() / columns) * (widgetWidth + spacing));
+            toAdd.setY(getY() + (widgets.size() % columns) * (widgetHeight + spacing));
         } else if (scrollDirection == VERTICAL) {
-            toAdd.setY(getY() + getHeight() / 2 + (widgets.size() / columns) * (widgetSize + spacing));
-            toAdd.setX(getX() + (widgets.size() % columns) * (widgetSize + spacing));
+            toAdd.setY(getY() + getHeight() / 2 + (widgets.size() / columns) * (widgetWidth + spacing));
+            toAdd.setX(getX() + (widgets.size() % columns) * (widgetHeight + spacing));
         }
 
         if (scrollDirection == HORIZONTAL || scrollDirection == VERTICAL) {
@@ -219,7 +241,9 @@ public class PopupScrollArea extends PopupWidget {
     }
 
     public void goToWidget(int widgetNum) {
-        scrollAmount = -(widgetNum / columns) * (widgetSize + spacing);
+        if (scrollDirection == HORIZONTAL) {
+            scrollAmount = -(widgetNum / columns) * (widgetWidth + spacing);
+        }
         updateWidgets();
     }
 
@@ -229,7 +253,10 @@ public class PopupScrollArea extends PopupWidget {
     }
 
     public float getPositionToCenter(int widgetNum) {
-        return -(widgetNum / columns) * (widgetSize + spacing) - widgetSize / 2;
+        if (scrollDirection == HORIZONTAL) {
+            return -(widgetNum / columns) * (widgetWidth + spacing) - widgetWidth / 2;
+        }
+        return 0;
     }
 
     public void selectWidget(int position, boolean deselectRest) {
