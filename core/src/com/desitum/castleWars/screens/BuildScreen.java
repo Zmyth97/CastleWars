@@ -243,7 +243,7 @@ public class BuildScreen extends KodyWorld implements Screen {
 
         castleWars = cw;
 
-        cardScrollArea = new PopupScrollArea(Assets.invisible, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, PopupScrollArea.VERTICAL, 8, 5, GameWorld.CARD_SPACING, Card.CARD_HEIGHT);
+        cardScrollArea = new PopupScrollArea(Assets.invisible, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, PopupScrollArea.VERTICAL, 5, GameWorld.CARD_SPACING, Card.CARD_HEIGHT);
 
         //region BasicMenus
         PopupMenu barrierMenu = new PopupMenu(Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);

@@ -52,6 +52,8 @@ public class PopupMenu extends PopupWidget {
 
         setPosition(x, y);
         this.setSize(width, height);
+
+        disable();
     }
 
     /**
@@ -340,6 +342,30 @@ public class PopupMenu extends PopupWidget {
 
     protected ArrayList<Animator> getOutgoingAnimatorsToAdd() {
         return outgoingAnimatorsToAdd;
+    }
+
+    public boolean isFadeIn() {
+        return fadeIn;
+    }
+
+    @Override
+    public void setX(float x) {
+        if (widgets != null) {
+            for (PopupWidget widget : widgets) {
+                widget.setX(widget.getX() - getX() + x);
+            }
+        }
+        super.setX(x);
+    }
+
+    @Override
+    public void setY(float y) {
+        if (widgets != null) {
+            for (PopupWidget widget : widgets) {
+                widget.setY(widget.getY() - getY() + y);
+            }
+        }
+        super.setY(y);
     }
 }
 

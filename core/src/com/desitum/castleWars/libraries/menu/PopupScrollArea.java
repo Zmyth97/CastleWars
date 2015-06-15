@@ -21,7 +21,6 @@ public class PopupScrollArea extends PopupMenu {
     private float scrollAmount;
     private int scrollDirection;
     private int columns;
-    private int rows;
     private float widgetWidth;
     private float widgetHeight;
     private float spacing;
@@ -30,7 +29,7 @@ public class PopupScrollArea extends PopupMenu {
 
     private MovementAnimator slideAnimator;
 
-    public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, int rows, float spacing, float widgetSize) {
+    public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, float spacing, float widgetSize) {
         super(background, width, height, x, y);
 
         widgets = new ArrayList<PopupWidget>();
@@ -38,7 +37,7 @@ public class PopupScrollArea extends PopupMenu {
         scrollAmount = 0;
         this.scrollDirection = scrollDirection;
         this.columns = columns;
-        if (scrollDirection == VERTICAL) this.columns = rows;
+        if (scrollDirection == VERTICAL) this.columns = columns;
         this.widgetWidth = widgetSize;
         this.widgetHeight = widgetSize;
         this.spacing = spacing;
@@ -164,8 +163,8 @@ public class PopupScrollArea extends PopupMenu {
                 widget.setAlpha(1 - widgetDistanceFromCenter);
                 widget.setScale(1 - widgetDistanceFromCenter, 1);
             } else {
-                widget.setY(getY() + getWidth() / 2 + (widgetNum / columns) * (widgetHeight + spacing) + scrollAmount);
-                float widgetDistanceFromCenter = (getY() + getHeight() / 2 - widget.getY()) / activeWidth / 2;
+                widget.setY(getY() + getHeight() / 2 + (widgetNum / columns) * (widgetHeight + spacing) + scrollAmount);
+                float widgetDistanceFromCenter = (getY() + getHeight() / 2 - widget.getY()) / activeHeight / 2;
                 widgetDistanceFromCenter *= 4;
                 if (widgetDistanceFromCenter < 0) widgetDistanceFromCenter *= -1;
                 if (widgetDistanceFromCenter > 1) widgetDistanceFromCenter = 1;
@@ -175,7 +174,8 @@ public class PopupScrollArea extends PopupMenu {
         }
     }
 
-    public void addWidget(PopupWidget toAdd) {
+    @Override
+    public void addPopupWidget(PopupWidget toAdd) {
         toAdd.setSize(widgetWidth, widgetHeight);
 
         if (scrollDirection == HORIZONTAL) {
@@ -183,7 +183,9 @@ public class PopupScrollArea extends PopupMenu {
             toAdd.setY(getY() + (widgets.size() % columns) * (widgetHeight + spacing));
         } else if (scrollDirection == VERTICAL) {
             toAdd.setY(getY() + getHeight() / 2 + (widgets.size() / columns) * (widgetWidth + spacing));
+            System.out.println(toAdd.getY());
             toAdd.setX(getX() + (widgets.size() % columns) * (widgetHeight + spacing));
+            System.out.println(toAdd.getX());
         }
 
         if (scrollDirection == HORIZONTAL || scrollDirection == VERTICAL) {
@@ -217,10 +219,12 @@ public class PopupScrollArea extends PopupMenu {
                     toAdd.addOutgoingAnimator(dupMov);
                 }
             }
-
-            widgets.add(toAdd);
-            updateWidgets();
         }
+        if (isFadeIn()) {
+            toAdd.setColor(1, 1, 1, 0);
+        }
+        widgets.add(toAdd);
+        updateWidgets();
     }
 
     public void setWidgets(ArrayList<PopupWidget> widgetsToSet) {

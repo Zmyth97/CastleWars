@@ -1,5 +1,6 @@
 package com.desitum.castleWars.libraries.menu;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -63,8 +64,12 @@ public class PopupImage extends PopupWidget {
     @Override
     public void draw(SpriteBatch batch) {
         super.draw(batch);
-        if (this.beenDown)
+        if (this.beenDown) {
+            Color c = batch.getColor();
+            batch.setColor(getColor());
             batch.draw(downTexture, this.getX() + getWidth() / 2 - (getWidth() / 2) * getScaleX(), this.getY(), this.getWidth() * getScaleX(), this.getHeight());
+            batch.setColor(c);
+        }
     }
 
     public void setActive() {

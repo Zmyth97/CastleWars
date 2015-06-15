@@ -30,7 +30,7 @@ public abstract class PopupWidget extends Sprite {
         setX(x);
         setY(y);
 
-        this.enabled = false;
+        this.enabled = true;
 
         this.comingInAnimators = new ArrayList<Animator>();
         this.goingOutAnimators = new ArrayList<Animator>();
@@ -159,6 +159,18 @@ public abstract class PopupWidget extends Sprite {
                 iter.remove();
             }
         }
+    }
+
+    public void enable() {
+        enabled = true;
+    }
+
+    public void disable() {
+        enabled = false;
+    }
+
+    public void toggleEnabled() {
+        enabled = !enabled;
     }
 
     public boolean isEnabled() {
