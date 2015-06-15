@@ -39,7 +39,7 @@ public class Drawing {
         return returnTexture;
     }
 
-    public static Texture getHollowRectangle(int width, int height, int lineWidth, Color color){
+    public static Texture getHollowRectangle(int width, int height, int lineWidth, Color color) {
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
         pixmap.setColor(color);
 
@@ -50,10 +50,10 @@ public class Drawing {
         pixmap.fillRectangle(width - lineWidth, 0, lineWidth, height);
 
         //top rectangle
-        pixmap.fillRectangle(lineWidth, height - lineWidth, width - lineWidth*2, lineWidth);
+        pixmap.fillRectangle(lineWidth, height - lineWidth, width - lineWidth * 2, lineWidth);
 
         //bottom rectangle
-        pixmap.fillRectangle(lineWidth, 0, width - lineWidth*2, lineWidth);
+        pixmap.fillRectangle(lineWidth, 0, width - lineWidth * 2, lineWidth);
         Texture returnTexture = new Texture(pixmap.getWidth(), pixmap.getHeight(), Pixmap.Format.RGBA8888);
         returnTexture.draw(pixmap, 0, 0);
         return returnTexture;

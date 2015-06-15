@@ -334,7 +334,7 @@ public class Assets {
         flameGoldCardInferno = new Texture("game/flame_pack/inferno.png");
     }
 
-    private static void loadJapaneseCards(){
+    private static void loadJapaneseCards() {
         japaneseBuildCardStockade = new Texture("game/japanese_pack/stockade.png");
         japaneseBuildCardFortress = new Texture("game/japanese_pack/fortress.png");
         japaneseBuildCardMonastery = new Texture("game/japanese_pack/monastery.png");

@@ -30,13 +30,13 @@ public class Card extends PopupButton {
     private ColorEffects colorChanger; //Fade from a lighter shade to more vibrant when you actually have enough resources
     private MovementAnimator movementAnimator;
 
-    public Card(Texture cardImage, int cardType,   int cardID, int cardCost, float x, float y){
+    public Card(Texture cardImage, int cardType, int cardID, int cardCost, float x, float y) {
         super(cardImage, cardImage, x, y, CARD_WIDTH, CARD_HEIGHT);
         available = true;
         this.cardType = cardType;
         this.cardCost = cardCost;
         this.cardID = cardID;
-        this.setPosition(x , y);
+        this.setPosition(x, y);
     }
 
     public void update(float delta) {
@@ -45,7 +45,7 @@ public class Card extends PopupButton {
         if (colorChanger != null) colorChanger.update(delta);
     }
 
-    public void fadeColor(){
+    public void fadeColor() {
         if (colorChanger != null && colorChanger.isRunning()) return;
         if (ColorEffects.colorsMatch(this.getColor(), fadedColor, 0.01f)) return;
         colorChanger = new ColorEffects(regularColor, fadedColor, 0.2f);
@@ -53,7 +53,7 @@ public class Card extends PopupButton {
         colorChanger.start(false);
     }
 
-    public void restoreColor(){
+    public void restoreColor() {
         if (colorChanger != null && colorChanger.isRunning()) return;
         if (ColorEffects.colorsMatch(this.getColor(), regularColor, 0.01f)) return;
         colorChanger = new ColorEffects(fadedColor, regularColor, 0.2f);
@@ -69,7 +69,7 @@ public class Card extends PopupButton {
         return cardType;
     }
 
-    public int getCardID(){
+    public int getCardID() {
         return cardID;
     }
 

@@ -19,7 +19,7 @@ public class Cloud extends Sprite {
 
     private GameWorld gw;
 
-    public Cloud(GameWorld gw, Texture cloudTexture, float yAmount, float size, float speed){
+    public Cloud(GameWorld gw, Texture cloudTexture, float yAmount, float size, float speed) {
         super(cloudTexture, 0, 0, cloudTexture.getWidth(), cloudTexture.getHeight());
         this.gw = gw;
         this.yAmount = yAmount;
@@ -32,7 +32,7 @@ public class Cloud extends Sprite {
         this.setPosition(0 - (cloudTexture.getWidth() / size), yAmount);
     }
 
-    public void update(float delta){
+    public void update(float delta) {
         if (this.getX() > GameScreen.SCREEN_WIDTH) {
             remove = true;
         } else {

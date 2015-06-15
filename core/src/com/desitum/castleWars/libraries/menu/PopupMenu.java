@@ -135,8 +135,8 @@ public class PopupMenu extends PopupWidget {
      * Updates information from the scroll wheel
      * all handled in KodyWorld
      *
-     * @param amount     gives either 0, 1, or -1
-     * @param mousePos   pos of the cursor
+     * @param amount   gives either 0, 1, or -1
+     * @param mousePos pos of the cursor
      */
     @Override
     public void updateScroll(int amount, Vector3 mousePos) {

@@ -18,7 +18,7 @@ public class Particle extends Sprite {
 
     private ParticleEmitter particleEmitter;
 
-    public Particle(Texture texture, ParticleEmitter pe, ParticleSettings ps){
+    public Particle(Texture texture, ParticleEmitter pe, ParticleSettings ps) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
         this.setSize(ps.getHeight(), ps.getWidth());
@@ -28,7 +28,7 @@ public class Particle extends Sprite {
 
         this.animators = ps.getAnimators();
 
-        for (Animator animator: animators) {
+        for (Animator animator : animators) {
             animator.setSprite(this, animator.updateX(), animator.updateY());
         }
 
@@ -40,8 +40,8 @@ public class Particle extends Sprite {
     }
 
 
-    public void update(float delta){
-        for (Animator anim: animators){
+    public void update(float delta) {
+        for (Animator anim : animators) {
             anim.update(delta);
         }
 
@@ -52,12 +52,12 @@ public class Particle extends Sprite {
         }
     }
 
-    public float getLifetime(){
+    public float getLifetime() {
         return lifetime;
     }
 
-    public void startAllAnimators(){
-        for (Animator anim: animators){
+    public void startAllAnimators() {
+        for (Animator anim : animators) {
             anim.start(false);
         }
     }

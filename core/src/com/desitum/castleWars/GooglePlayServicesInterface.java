@@ -6,11 +6,18 @@ package com.desitum.castleWars;
 public interface GooglePlayServicesInterface {
 
     public void getLeaderBoard();
+
     public void submitScore(int score);
+
     public void unlockAchievement(int achievement);
+
     public void makePurchase(String sku);
+
     public void checkForPurchasesMade();
+
     public void login();
+
     public void logout();
+
     public void shareRegularScore(int score);
 }

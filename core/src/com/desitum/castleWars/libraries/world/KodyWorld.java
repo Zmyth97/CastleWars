@@ -32,7 +32,7 @@ public class KodyWorld implements InputProcessor {
     private ArrayList<PopupWidget> widgetsToAdd;
     private ArrayList<PopupWidget> widgetsToRem;
 
-    public KodyWorld () {
+    public KodyWorld() {
         widgets = new ArrayList<PopupWidget>();
         widgetsToAdd = new ArrayList<PopupWidget>();
         widgetsToRem = new ArrayList<PopupWidget>();
@@ -41,11 +41,11 @@ public class KodyWorld implements InputProcessor {
     }
 
     public void update(float delta) {
-        for (PopupWidget widget: widgets) {
+        for (PopupWidget widget : widgets) {
             widget.update(delta);
         }
 
-        for (PopupMenu menu: menus) {
+        for (PopupMenu menu : menus) {
             menu.update(delta);
         }
 
@@ -138,18 +138,18 @@ public class KodyWorld implements InputProcessor {
             }
         }
 
-        for (PopupWidget widget: widgetsToRem) {
+        for (PopupWidget widget : widgetsToRem) {
             widgets.remove(widget);
         }
         widgetsToRem.clear();
 
-        for (PopupWidget widget: widgetsToAdd) {
+        for (PopupWidget widget : widgetsToAdd) {
             widgets.add(widget);
         }
         widgetsToAdd.clear();
     }
 
-    public void addWidget(PopupWidget widget){
+    public void addWidget(PopupWidget widget) {
         widgetsToAdd.add(widget);
     }
 

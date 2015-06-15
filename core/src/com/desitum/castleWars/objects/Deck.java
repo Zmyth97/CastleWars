@@ -281,11 +281,11 @@ public class Deck {
         Card cardDrawn = cardList.get(0);
         cardList.remove(0);
 
-        if(isComputer && cardDrawn.getCardID() > 399){
+        if (isComputer && cardDrawn.getCardID() > 399) {
             System.out.println("Comp Drawing");
-            while(cardDrawn.getCardID() > 399) {
+            while (cardDrawn.getCardID() > 399) {
                 cardList.add(0, cardDrawn);
-                int randomCard = (int)(Math.random() * (cardList.size() - 5)); //I did it this way instead of the first way because shuffling it messed up the last card in the pile and etc. (Bugs)
+                int randomCard = (int) (Math.random() * (cardList.size() - 5)); //I did it this way instead of the first way because shuffling it messed up the last card in the pile and etc. (Bugs)
                 cardDrawn = cardList.get(randomCard);
                 cardList.remove(randomCard);
             }

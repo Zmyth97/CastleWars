@@ -72,7 +72,7 @@ public class Settings {
         Assets.menuMusic.setVolume(VOLUME);
     }
 
-    public static void load(){
+    public static void load() {
         Preferences prefs = Gdx.app.getPreferences("settings");
         ASSETS_TO_USE = prefs.getInteger("assetsType", 1);
         WANTS_FLAME_CARDS = prefs.getBoolean("wantsFlame", true);
@@ -80,7 +80,7 @@ public class Settings {
         VOLUME = prefs.getFloat("sound", 0.5f);
     }
 
-    public static void setVolume(float volume){
+    public static void setVolume(float volume) {
         VOLUME = volume;
     }
 

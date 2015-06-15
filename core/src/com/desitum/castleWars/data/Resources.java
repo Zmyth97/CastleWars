@@ -22,7 +22,7 @@ public class Resources {
     private int computerWeapons;
     private int computerGems;
 
-    public Resources(GameInterface gameInterface){
+    public Resources(GameInterface gameInterface) {
         this.gi = gameInterface;
 
         playerBuilders = 2;
@@ -96,7 +96,7 @@ public class Resources {
             playerBuilders = 1;
         } else {
             playerBuilders += amount;
-            if(playerBuilders <= 0){
+            if (playerBuilders <= 0) {
                 playerBuilders = 1;
             }
         }
@@ -111,11 +111,11 @@ public class Resources {
             playerSoldiers = 1;
         } else {
             playerSoldiers += amount;
-            if(playerSoldiers <= 0){
+            if (playerSoldiers <= 0) {
                 playerSoldiers = 1;
             }
         }
-        if (difference != 0)  gi.setPlayerSoldiersLabelChangeText(difference);
+        if (difference != 0) gi.setPlayerSoldiersLabelChangeText(difference);
         return difference;
     }
 
@@ -126,11 +126,11 @@ public class Resources {
             playerWizards = 1;
         } else {
             playerWizards += amount;
-            if(playerWizards <= 0){
+            if (playerWizards <= 0) {
                 playerWizards = 1;
             }
         }
-        if (difference != 0)  gi.setPlayerWizardsLabelChangeText(difference);
+        if (difference != 0) gi.setPlayerWizardsLabelChangeText(difference);
         return difference;
     }
 
@@ -142,7 +142,7 @@ public class Resources {
         } else {
             playerStones += amount;
         }
-        if (difference != 0)  gi.setPlayerStoneLabelChangeText(difference);
+        if (difference != 0) gi.setPlayerStoneLabelChangeText(difference);
         return difference;
     }
 
@@ -154,7 +154,7 @@ public class Resources {
         } else {
             playerWeapons += amount;
         }
-        if (difference != 0)  gi.setPlayerWeaponLabelChangeText(difference);
+        if (difference != 0) gi.setPlayerWeaponLabelChangeText(difference);
         return difference;
     }
 
@@ -166,7 +166,7 @@ public class Resources {
         } else {
             playerGems += amount;
         }
-        if (difference != 0)  gi.setPlayerGemLabelChangeText(difference);
+        if (difference != 0) gi.setPlayerGemLabelChangeText(difference);
         return difference;
     }
 
@@ -177,11 +177,11 @@ public class Resources {
             computerBuilders = 1;
         } else {
             computerBuilders += amount;
-            if(computerBuilders <= 0){
+            if (computerBuilders <= 0) {
                 computerBuilders = 1;
             }
         }
-        if (difference != 0)  gi.setComputerBuildersLabelChangeText(difference);
+        if (difference != 0) gi.setComputerBuildersLabelChangeText(difference);
         return difference;
     }
 
@@ -192,11 +192,11 @@ public class Resources {
             computerSoldiers = 1;
         } else {
             computerSoldiers += amount;
-            if(computerSoldiers <= 0){
+            if (computerSoldiers <= 0) {
                 computerSoldiers = 1;
             }
         }
-        if (difference != 0)  gi.setComputerSoldiersLabelChangeText(difference);
+        if (difference != 0) gi.setComputerSoldiersLabelChangeText(difference);
         return difference;
     }
 
@@ -207,11 +207,11 @@ public class Resources {
             computerWizards = 1;
         } else {
             computerWizards += amount;
-            if(computerWizards <= 0){
+            if (computerWizards <= 0) {
                 computerWizards = 1;
             }
         }
-        if (difference != 0)  gi.setComputerWizardsLabelChangeText(difference);
+        if (difference != 0) gi.setComputerWizardsLabelChangeText(difference);
         return difference;
     }
 
@@ -223,7 +223,7 @@ public class Resources {
         } else {
             computerStones += amount;
         }
-        if (difference != 0)  gi.setComputerStoneLabelChangeText(difference);
+        if (difference != 0) gi.setComputerStoneLabelChangeText(difference);
         return difference;
     }
 
@@ -235,7 +235,7 @@ public class Resources {
         } else {
             computerWeapons += amount;
         }
-        if (difference != 0)  gi.setComputerWeaponLabelChangeText(difference);
+        if (difference != 0) gi.setComputerWeaponLabelChangeText(difference);
         return difference;
     }
 
@@ -247,55 +247,55 @@ public class Resources {
         } else {
             computerGems += amount;
         }
-        if (difference != 0)  gi.setComputerGemLabelChangeText(difference);
+        if (difference != 0) gi.setComputerGemLabelChangeText(difference);
         return difference;
     }
 
-    public void addPlayerWeapons(int amount){
+    public void addPlayerWeapons(int amount) {
         playerWeapons += amount;
     }
 
-    public void addPlayerStones(int amount){
+    public void addPlayerStones(int amount) {
         playerStones += amount;
     }
 
-    public void addPlayerGems(int amount){
+    public void addPlayerGems(int amount) {
         playerGems += amount;
     }
 
-    public void addComputerWeapons(int amount){
+    public void addComputerWeapons(int amount) {
         computerWeapons += amount;
     }
 
-    public void addComputerStones(int amount){
+    public void addComputerStones(int amount) {
         computerStones += amount;
     }
 
-    public void addComputerGems(int amount){
+    public void addComputerGems(int amount) {
         computerGems += amount;
     }
 
-    public void subtractPlayerWeapons(int amount){
+    public void subtractPlayerWeapons(int amount) {
         playerWeapons -= amount;
     }
 
-    public void subtractPlayerStones(int amount){
+    public void subtractPlayerStones(int amount) {
         playerStones -= amount;
     }
 
-    public void subtractPlayerGems(int amount){
+    public void subtractPlayerGems(int amount) {
         playerGems -= amount;
     }
 
-    public void subtractComputerWeapons(int amount){
+    public void subtractComputerWeapons(int amount) {
         computerWeapons -= amount;
     }
 
-    public void subtractComputerStones(int amount){
+    public void subtractComputerStones(int amount) {
         computerStones -= amount;
     }
 
-    public void subtractComputerGems(int amount){
+    public void subtractComputerGems(int amount) {
         computerGems -= amount;
     }
 }

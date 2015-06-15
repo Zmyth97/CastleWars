@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
     public GameScreen(GooglePlayServicesInterface googlePlayServicesInterface, CastleWars cw) {
         batch = new SpriteBatch();
         cam = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
-        cam.position.set(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0);
+        cam.position.set(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0);
 
         viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
 
@@ -55,16 +55,16 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         update(delta);
         draw();
-        if(gameWorld.gameOver){
+        if (gameWorld.gameOver) {
             castleWars.setScreen(new MenuScreen(gpgs, castleWars)); //Do we need to make a new screen for it? Was the first one disposed?
         }
     }
 
-    public void update(float delta){
+    public void update(float delta) {
         gameWorld.update(delta);
     }
 
-    public void draw(){
+    public void draw() {
         Gdx.gl.glClearColor(0, 0, .196f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(cam.combined);

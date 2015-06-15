@@ -28,10 +28,10 @@ public class Castle extends Sprite {
 
     private ParticleEmitter particles;
 
-    public Castle(Texture castleImage, GameInterface gi, float x){
+    public Castle(Texture castleImage, GameInterface gi, float x) {
         super(castleImage, 0, 0, castleImage.getWidth(), castleImage.getHeight());
         health = 40;
-        if(GameScreen.SCREEN_WIDTH/2 > x) {
+        if (GameScreen.SCREEN_WIDTH / 2 > x) {
             wall = new Wall(Assets.playerWall, this, x, gi);
         } else {
             wall = new Wall(Assets.computerWall, this, x, gi);
@@ -60,8 +60,8 @@ public class Castle extends Sprite {
         this.getWall().update(delta);
     }
 
-    public void doDamage(float damage){
-        if(wall.getHealth() <= 0){
+    public void doDamage(float damage) {
+        if (wall.getHealth() <= 0) {
             if (this.equals(gi.getPlayer1().getCastle())) {
                 gi.setPlayerCastleLabelChangeText((int) -damage);
             } else {
@@ -78,11 +78,11 @@ public class Castle extends Sprite {
             });
             animators.start(false);
         } else {
-                this.getWall().doDamage(damage, false);
+            this.getWall().doDamage(damage, false);
         }
-        if(health <= 0){
+        if (health <= 0) {
             health = 0;
-            if(this.equals(gi.getPlayer1().getCastle())){
+            if (this.equals(gi.getPlayer1().getCastle())) {
                 gi.lose();
             } else {
                 gi.unlockAchievement(CastleWars.ATTACKER);
@@ -91,16 +91,16 @@ public class Castle extends Sprite {
         }
     }
 
-    public void repair(float amount){
+    public void repair(float amount) {
         health += amount;
         if (this.equals(gi.getPlayer1().getCastle())) {
-            gi.setPlayerCastleLabelChangeText((int)amount);
+            gi.setPlayerCastleLabelChangeText((int) amount);
         } else {
-            gi.setComputerCastleLabelChangeText((int)amount);
+            gi.setComputerCastleLabelChangeText((int) amount);
         }
         if (health >= 100) {
             health = 100;
-            if(this.equals(gi.getPlayer1().getCastle())){
+            if (this.equals(gi.getPlayer1().getCastle())) {
                 gi.unlockAchievement(CastleWars.BUILDER);
                 gi.win();
             } else {
@@ -125,9 +125,9 @@ public class Castle extends Sprite {
     public void castleDamage(float damage) {
         health -= damage;
         if (this.equals(gi.getPlayer1().getCastle())) {
-            gi.setPlayerCastleLabelChangeText((int)-damage);
+            gi.setPlayerCastleLabelChangeText((int) -damage);
         } else {
-            gi.setComputerCastleLabelChangeText((int)-damage);
+            gi.setComputerCastleLabelChangeText((int) -damage);
         }
         animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);
         particles.turnOn();
@@ -138,7 +138,7 @@ public class Castle extends Sprite {
             }
         });
         animators.start(false);
-        if(health <= 0){
+        if (health <= 0) {
             health = 0;
         }
     }

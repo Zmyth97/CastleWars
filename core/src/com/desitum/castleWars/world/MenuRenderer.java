@@ -30,7 +30,7 @@ public class MenuRenderer {
             menuItem.draw(menuBatch);
         }
 
-        for (PopupMenu menu: this.world.getMenus()) {
+        for (PopupMenu menu : this.world.getMenus()) {
             menu.draw(menuBatch);
         }
     }

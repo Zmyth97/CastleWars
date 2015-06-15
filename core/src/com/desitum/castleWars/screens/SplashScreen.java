@@ -27,10 +27,10 @@ public class SplashScreen implements Screen {
     private boolean hasLoaded = false;
     private float timeElapsed = 0;
 
-    public SplashScreen(com.desitum.castleWars.GooglePlayServicesInterface gps, CastleWars game){
+    public SplashScreen(com.desitum.castleWars.GooglePlayServicesInterface gps, CastleWars game) {
 
         cam = new OrthographicCamera(MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
-        cam.position.set(MenuScreen.SCREEN_WIDTH/2, MenuScreen.SCREEN_HEIGHT/2, 0);
+        cam.position.set(MenuScreen.SCREEN_WIDTH / 2, MenuScreen.SCREEN_HEIGHT / 2, 0);
         batch = new SpriteBatch();
 
         this.gps = gps;
@@ -39,8 +39,8 @@ public class SplashScreen implements Screen {
         Texture desitumTexture = new Texture(Gdx.files.internal("menu/desitum.png"));
         desitum = new Sprite(desitumTexture);
         desitum.setSize(100, 150);
-        desitum.setX(MenuScreen.SCREEN_WIDTH/2 - desitum.getWidth()/2);
-        desitum.setY(MenuScreen.SCREEN_HEIGHT/2 - desitum.getHeight()/2);
+        desitum.setX(MenuScreen.SCREEN_WIDTH / 2 - desitum.getWidth() / 2);
+        desitum.setY(MenuScreen.SCREEN_HEIGHT / 2 - desitum.getHeight() / 2);
     }
 
     @Override
@@ -50,9 +50,9 @@ public class SplashScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if (timeElapsed > 3){
+        if (timeElapsed > 3) {
             game.setScreen(new MenuScreen(gps, game));
-        } else if (beenThrough && !hasLoaded){
+        } else if (beenThrough && !hasLoaded) {
             hasLoaded = true;
             Assets.loadMenuTextures();
             Assets.loadGameTextures();
@@ -61,7 +61,7 @@ public class SplashScreen implements Screen {
             Settings.load();
         }
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glClearColor(0,0,0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
 
         cam.update();
 

@@ -37,7 +37,7 @@ public class MovementAnimator implements Animator {
 
     private OnAnimationFinishedListener finishedListener;
 
-    public MovementAnimator(float startPos, float endPos, float duration, int interpolator){
+    public MovementAnimator(float startPos, float endPos, float duration, int interpolator) {
         this.controllingSprite = null;
         this.startPos = startPos;
         this.endPos = endPos;
@@ -49,7 +49,7 @@ public class MovementAnimator implements Animator {
         setupInterpolator(interpolator);
     }
 
-    public MovementAnimator(Sprite sprite, float startPos, float endPos, float duration, float delay, int interpolator, boolean controlX, boolean controlY){
+    public MovementAnimator(Sprite sprite, float startPos, float endPos, float duration, float delay, int interpolator, boolean controlX, boolean controlY) {
         this.controllingSprite = sprite;
         this.startPos = startPos;
         this.endPos = endPos;
@@ -67,25 +67,25 @@ public class MovementAnimator implements Animator {
         setupInterpolator(interpolator);
     }
 
-    public void setSprite(Sprite control, boolean controlX, boolean controlY){
+    public void setSprite(Sprite control, boolean controlX, boolean controlY) {
         this.controllingSprite = control;
 
         this.controllingX = controlX;
         this.controllingY = controlY;
     }
 
-    public void update(float delta){
-        if (!running){
+    public void update(float delta) {
+        if (!running) {
             return;
         }
 
-        if (currentDelay < animationDelay){
+        if (currentDelay < animationDelay) {
             currentDelay += delta;
             return;
         }
 
-        timeInAnimation += delta/duration;
-        if (timeInAnimation >= 1){
+        timeInAnimation += delta / duration;
+        if (timeInAnimation >= 1) {
             timeInAnimation = 1;
             if (finishedListener != null) finishedListener.onAnimationFinished(this);
             stop();
@@ -93,8 +93,8 @@ public class MovementAnimator implements Animator {
 
         currentPosition = interpolator.getInterpolation(timeInAnimation) * travelDistance + startPos;
 
-        if (this.controllingSprite != null){
-            if (this.controllingX){
+        if (this.controllingSprite != null) {
+            if (this.controllingX) {
                 this.controllingSprite.setX(getCurrentPos());
             }
             if (this.controllingY) {
@@ -103,14 +103,14 @@ public class MovementAnimator implements Animator {
         }
     }
 
-    public float getCurrentPos(){
+    public float getCurrentPos() {
         return currentPosition;
     }
 
-    public void start(boolean isProtected){
+    public void start(boolean isProtected) {
         this.currentDelay = 0;
         this.timeInAnimation = 0;
-        if (isProtected && !ran){
+        if (isProtected && !ran) {
             running = true;
         } else if (!isProtected) {
             running = true;
@@ -118,7 +118,7 @@ public class MovementAnimator implements Animator {
         ran = true;
     }
 
-    public void stop(){
+    public void stop() {
         if (finishedListener != null) {
             finishedListener.onAnimationFinished(this);
         }
@@ -126,37 +126,37 @@ public class MovementAnimator implements Animator {
         running = false;
     }
 
-    public boolean didFinish(){
-        if (ran && !running){
+    public boolean didFinish() {
+        if (ran && !running) {
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean isRunning(){
+    public boolean isRunning() {
         return running;
     }
 
-    private void setupInterpolator(int interpolator){
-        if (interpolator == Interpolation.ACCELERATE_INTERPOLATOR){
+    private void setupInterpolator(int interpolator) {
+        if (interpolator == Interpolation.ACCELERATE_INTERPOLATOR) {
             this.interpolator = AccelerateInterpolator.$();
-        } else if (interpolator == Interpolation.DECELERATE_INTERPOLATOR){
+        } else if (interpolator == Interpolation.DECELERATE_INTERPOLATOR) {
             this.interpolator = DecelerateInterpolator.$();
-        } else if (interpolator == Interpolation.ANTICIPATE_INTERPOLATOR){
+        } else if (interpolator == Interpolation.ANTICIPATE_INTERPOLATOR) {
             this.interpolator = AnticipateInterpolator.$();
-        } else if (interpolator == Interpolation.OVERSHOOT_INTERPOLATOR){
+        } else if (interpolator == Interpolation.OVERSHOOT_INTERPOLATOR) {
             this.interpolator = OvershootInterpolator.$();
-        } else if (interpolator == Interpolation.ACCELERATE_DECELERATE_INTERPOLATOR){
+        } else if (interpolator == Interpolation.ACCELERATE_DECELERATE_INTERPOLATOR) {
             this.interpolator = AccelerateDecelerateInterpolator.$();
-        } else if (interpolator == Interpolation.BOUNCE_INTERPOLATOR){
+        } else if (interpolator == Interpolation.BOUNCE_INTERPOLATOR) {
             this.interpolator = BounceInterpolator.$();
-        } else if (interpolator == Interpolation.LINEAR_INTERPOLATOR){
+        } else if (interpolator == Interpolation.LINEAR_INTERPOLATOR) {
             this.interpolator = LinearInterpolator.$();
         }
     }
 
-    public void reset(){
+    public void reset() {
         ran = false;
         running = false;
         currentPosition = startPos;
@@ -239,7 +239,7 @@ public class MovementAnimator implements Animator {
         this.controllingSprite = controllingSprite;
     }
 
-    public float getDistance(){
+    public float getDistance() {
         return travelDistance;
     }
 

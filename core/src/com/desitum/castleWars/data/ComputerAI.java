@@ -45,7 +45,7 @@ public class ComputerAI {
             System.out.println("Card ID: " + card);
             if (card == 0) {
                 card = possibleCards.get(0);
-                if(card == CardActions.JERICHO){
+                if (card == CardActions.JERICHO) {
                     discarding = true;
                 }
             }
@@ -378,27 +378,27 @@ public class ComputerAI {
         }
 
         System.out.println("Choose Best Basic Cards to Discard Based on Above Queries");
-        if(attackDeafeat || buildWin){
-            for(Card card: gi.getPlayer2().getHand().getCardsInHand()){
-                if(card.getCardType() == Card.ATTACK){
+        if (attackDeafeat || buildWin) {
+            for (Card card : gi.getPlayer2().getHand().getCardsInHand()) {
+                if (card.getCardType() == Card.ATTACK) {
                     toDiscard = card;
                 }
             }
-        } else if(attackWin || buildDefeat){
-            for(Card card: gi.getPlayer2().getHand().getCardsInHand()){
-                if(card.getCardType() == Card.BUILD){
+        } else if (attackWin || buildDefeat) {
+            for (Card card : gi.getPlayer2().getHand().getCardsInHand()) {
+                if (card.getCardType() == Card.BUILD) {
                     toDiscard = card;
                 }
             }
         } else {
-            for(Card card: gi.getPlayer2().getHand().getCardsInHand()){
-                if(card.getCardType() == Card.MAGIC){
+            for (Card card : gi.getPlayer2().getHand().getCardsInHand()) {
+                if (card.getCardType() == Card.MAGIC) {
                     toDiscard = card;
                 }
             }
         }
 
-        if(toDiscard == null) {
+        if (toDiscard == null) {
             System.out.println("Discard Logic Found No Good Card to Discard, Chose First Card Instead");
             toDiscard = gi.getPlayer2().getHand().getCardsInHand().get(0);
         }

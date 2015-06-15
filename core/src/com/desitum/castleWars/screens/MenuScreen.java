@@ -41,7 +41,7 @@ public class MenuScreen implements Screen, MenuInterface {
 
         spriteBatch = new SpriteBatch();
         cam = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
-        cam.position.set(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0);
+        cam.position.set(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0);
         viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
 
         menuWorld = new MenuWorld(viewport, this);
@@ -81,23 +81,27 @@ public class MenuScreen implements Screen, MenuInterface {
     public void multiplayer() {
         //For when we add multiplayer
     }
+
     @Override
     public void leaderboard() {
         //For when we add leaderboards
     }
+
     @Override
     public void store() {
         menuWorld.getStoreMove();
     }
 
     @Override
-    public void buyItem(String sku){
+    public void buyItem(String sku) {
         gpgs.makePurchase(sku);
     }
+
     @Override
     public void buildDeck() {
         castleWars.setScreen(new BuildScreen(castleWars));
     }
+
     @Override
     public void show() {
 

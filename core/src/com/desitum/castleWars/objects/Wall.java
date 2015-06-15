@@ -11,16 +11,12 @@ import com.desitum.castleWars.libraries.particles.ParticleEmitter;
 import com.desitum.castleWars.screens.GameScreen;
 import com.desitum.castleWars.world.GameInterface;
 
-import java.util.ArrayList;
-
 /**
  * Created by Zmyth97 on 5/18/2015.
  */
 public class Wall extends Sprite {
-    GameInterface gi;
-
     private static float DISTANCE_FROM_CASTLE = 7;
-
+    GameInterface gi;
     private float health; //Health = height in this game
     private float ZERO = GameScreen.SCREEN_HEIGHT / 4 + 8;
     private float ratio;
@@ -41,7 +37,7 @@ public class Wall extends Sprite {
 
         health = 10;
 
-        if(GameScreen.SCREEN_WIDTH/2 > x) {
+        if (GameScreen.SCREEN_WIDTH / 2 > x) {
             this.setPosition((x + 25 + DISTANCE_FROM_CASTLE), ZERO - (getHeight()));
         } else {
             this.setPosition((x - this.getWidth() - DISTANCE_FROM_CASTLE), ZERO - (getHeight()));
@@ -76,26 +72,26 @@ public class Wall extends Sprite {
         });
         animators.start(false);
         if (this.equals(gi.getPlayer1().getCastle().getWall())) {
-            gi.setPlayerWallLabelChangeText(-(int)damage + (int) -health);
+            gi.setPlayerWallLabelChangeText(-(int) damage + (int) -health);
         } else {
-            gi.setComputerWallLabelChangeText(-(int)damage + (int) -health);
+            gi.setComputerWallLabelChangeText(-(int) damage + (int) -health);
         }
-        if(health <= 0 && !justWalls){
+        if (health <= 0 && !justWalls) {
             castle.doDamage(-health);
             health = 0;
-        } else if(health <= 0 && justWalls){
+        } else if (health <= 0 && justWalls) {
             health = 0;
         }
     }
 
-    public void repair(float amount){
+    public void repair(float amount) {
         health += amount;
         if (this.equals(gi.getPlayer1().getCastle().getWall())) {
-            gi.setPlayerWallLabelChangeText((int)amount);
+            gi.setPlayerWallLabelChangeText((int) amount);
         } else {
-            gi.setComputerWallLabelChangeText((int)amount);
+            gi.setComputerWallLabelChangeText((int) amount);
         }
-        if(health >= 100){
+        if (health >= 100) {
             health = 100;
         }
         animators = new MovementAnimator(this, this.getY(), ZERO - getHeight() + health * ratio, 1, 0, Interpolation.LINEAR_INTERPOLATOR, false, true);

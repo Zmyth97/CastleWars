@@ -41,7 +41,6 @@ import java.util.Iterator;
 public class GameWorld extends KodyWorld implements GameInterface {
 
 
-    public static boolean NETWORK_GAME;
     ////////////////////////////////////////////////
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
@@ -61,6 +60,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static final float CHANGE_TEXT_HEIGHT = 6;
     private static final float MENU_TEXT_WIDTH = 15;
     private static final float MENU_TEXT_HEIGHT = 6;
+    public static boolean NETWORK_GAME;
     private static Color buildColor = new Color(.122f, 0f, .616f, 1);
     private static Color attackColor = new Color(.855f, 0f, .102f, 1);
     private static Color magicColor = new Color(.035f, .722f, 0, 1);
@@ -128,10 +128,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.gpgs = gpgs;
 
         //gpgs.checkForPurchasesMade();
-        if(Settings.EXTRA_CARD_SLOT_1){
+        if (Settings.EXTRA_CARD_SLOT_1) {
             Settings.CARDS_DEALT += 1;
         }
-        if(Settings.EXTRA_CARD_SLOT_2){
+        if (Settings.EXTRA_CARD_SLOT_2) {
             Settings.CARDS_DEALT += 2;
         }
 

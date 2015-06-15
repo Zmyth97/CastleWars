@@ -43,7 +43,7 @@ public class PopupScrollArea extends PopupMenu {
         this.spacing = spacing;
         this.activeWidth = activeWidth;
         this.activeHeight = activeHeight;
-        this.setPosition(x , y);
+        this.setPosition(x, y);
     }
 
     public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, int rows, float spacing, float widgetWidth, float widgetHeight) {

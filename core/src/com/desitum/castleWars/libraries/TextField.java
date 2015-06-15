@@ -12,7 +12,7 @@ public class TextField {
     private Pixmap pm;
     private Texture tx;
 
-    public TextField(){
+    public TextField() {
         pm = new Pixmap(40, 40, Pixmap.Format.RGBA8888);
         tx = new Texture(pm);
 

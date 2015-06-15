@@ -238,7 +238,7 @@ public class BuildScreen extends KodyWorld implements Screen {
     public BuildScreen(CastleWars cw) {
         batch = new SpriteBatch();
         cam = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
-        cam.position.set(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 0);
+        cam.position.set(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0);
 
         viewport = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, cam);
 
@@ -713,7 +713,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         cardScrollArea.addPopupWidget(duplicateMenu);
         //endregion
         //region Add Japanese Menus To Card Scoll Area
-        if(Settings.BOUGHT_JAPANESE_PACK){
+        if (Settings.BOUGHT_JAPANESE_PACK) {
             cardScrollArea.addPopupWidget(stockadeMenu);
             cardScrollArea.addPopupWidget(fortressMenu);
             cardScrollArea.addPopupWidget(monasteryMenu);
@@ -738,7 +738,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         }
         //endregion
         //region Add Flame Menus To Card Scroll Area
-        if(Settings.BOUGHT_FlAME_PACK){
+        if (Settings.BOUGHT_FlAME_PACK) {
             cardScrollArea.addPopupWidget(wallOfFireMenu);
             cardScrollArea.addPopupWidget(campfireMenu);
             cardScrollArea.addPopupWidget(forgeMenu);
@@ -780,11 +780,11 @@ public class BuildScreen extends KodyWorld implements Screen {
         draw();
     }
 
-    public void update(float delta){
+    public void update(float delta) {
         cardScrollArea.update(delta);
     }
 
-    public void draw(){
+    public void draw() {
         Gdx.gl.glClearColor(0, 0, .196f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(cam.combined);

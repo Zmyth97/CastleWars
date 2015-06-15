@@ -78,7 +78,7 @@ public class BounceInterpolator implements Interpolator {
 
     public float getInterpolation(float t) {
         t -= 1.0f;
-        return -Math.abs(t * t * ((factor + 1) * t + factor))+1;
+        return -Math.abs(t * t * ((factor + 1) * t + factor)) + 1;
     }
 
     @Override

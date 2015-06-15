@@ -6,10 +6,16 @@ package com.desitum.castleWars.world;
 public interface MenuInterface {
 
     public void playGame();
+
     public void settings();
+
     public void multiplayer();
+
     public void buildDeck();
+
     public void leaderboard();
+
     public void store();
+
     public void buyItem(String sku);
 }
