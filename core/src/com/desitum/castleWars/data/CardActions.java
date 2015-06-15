@@ -177,11 +177,11 @@ public class CardActions {
         } else if (cardID == SABOTAGE) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
                 gi.getPlayer1().getCastle().getWall().repair(10);
-                gi.getPlayer2().getCastle().doDamage(4);
+                gi.getPlayer2().getCastle().castleDamage(4);
                 gi.getResources().subtractPlayerStones(SABOTAGE_COST); //Cost
             } else {
                 gi.getPlayer2().getCastle().getWall().repair(10);
-                gi.getPlayer1().getCastle().doDamage(4);
+                gi.getPlayer1().getCastle().castleDamage(4);
                 gi.getResources().subtractComputerStones(SABOTAGE_COST); //Cost
             }
         } else if (cardID == STRONGHOLD) {
@@ -399,10 +399,10 @@ public class CardActions {
             }
         } else if (cardID == LIGHTNING_STRIKE) {
             if (gi.getPlayerTurn() == GameWorld.PLAYER) {
-                gi.getPlayer2().getCastle().doDamage(16);
+                gi.getPlayer2().getCastle().doDamage(20);
                 gi.getResources().subtractPlayerGems(LIGHTNING_STRIKE_COST); //Cost
             } else {
-                gi.getPlayer1().getCastle().doDamage(16);
+                gi.getPlayer1().getCastle().doDamage(20);
                 gi.getResources().subtractComputerGems(LIGHTNING_STRIKE_COST); //Cost
             }
         } else if (cardID == BLAST) {

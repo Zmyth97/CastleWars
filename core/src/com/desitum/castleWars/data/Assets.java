@@ -16,6 +16,7 @@ public class Assets {
     public static Texture invisible;
     public static Texture blur;
     public static Texture discard;
+    public static Texture max;
     public static Texture trashCan;
     public static Texture trashCanSelected;
 
@@ -250,6 +251,7 @@ public class Assets {
         wall = new Texture("game/wall.png");
 
         discard = new Texture("game/cards/discard.png");
+        max = new Texture("game/max.png");
         trashCan = new Texture("game/trash_unselected.png");
         trashCanSelected = new Texture("game/trash_selected.png");
     }
@@ -361,7 +363,6 @@ public class Assets {
     public static void loadSounds() {
         buttonSound = Gdx.audio.newSound(Gdx.files.internal("sound/Click.mp3"));
         menuMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/menu_loop1.wav"));
-        //menuMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/menu_loop2.mp3"));
         menuMusic.setLooping(true);
     }
 

@@ -514,7 +514,7 @@ public class BuildScreen extends KodyWorld implements Screen {
 
         phoenixMenu.addPopupWidget(phoenixSpinner);
         meteorsMenu.addPopupWidget(meteorsSpinner);
-        reinforceMenu.addPopupWidget(infernoSpinner);
+        infernoMenu.addPopupWidget(infernoSpinner);
         //endregion
         //region FlamePack PopupImages
         wallOfFireImage = new PopupImage(Assets.flameBuildCardWallOfFire, Assets.invisible, wallOfFireMenu.getX(), wallOfFireMenu.getY() + SPINNER_HEIGHT, Card.CARD_WIDTH, Card.CARD_HEIGHT, false);

@@ -72,9 +72,17 @@ public class Wall extends Sprite {
         });
         animators.start(false);
         if (this.equals(gi.getPlayer1().getCastle().getWall())) {
-            gi.setPlayerWallLabelChangeText(-(int) damage + (int) -health);
+            if(health < 0){
+                gi.setPlayerWallLabelChangeText(-(int) damage + (int) -health);
+            } else {
+                gi.setPlayerWallLabelChangeText(-(int) damage);
+            }
         } else {
-            gi.setComputerWallLabelChangeText(-(int) damage + (int) -health);
+            if(health < 0){
+                gi.setComputerWallLabelChangeText(-(int) damage + (int) -health);
+            } else {
+                gi.setComputerWallLabelChangeText(-(int) damage);
+            }
         }
         if (health <= 0 && !justWalls) {
             castle.doDamage(-health);
