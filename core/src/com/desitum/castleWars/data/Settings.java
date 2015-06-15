@@ -18,6 +18,11 @@ public class Settings {
     public static boolean WANTS_JAPANESE_CARDS = true;
     public static int ASSETS_TO_USE = 1;
 
+    public static boolean BOUGHT_FlAME_PACK = false;
+    public static boolean BOUGHT_JAPANESE_PACK = false;
+    public static boolean EXTRA_CARD_SLOT_1 = false;
+    public static boolean EXTRA_CARD_SLOT_2 = false;
+
     //region CardAmounts
     public static int REINFORCE_AMOUNT = 3;
     public static int FORTIFY_AMOUNT = 3;

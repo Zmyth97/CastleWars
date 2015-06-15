@@ -41,10 +41,6 @@ import java.util.Iterator;
 public class GameWorld extends KodyWorld implements GameInterface {
 
 
-    public static boolean BOUGHT_FlAME_PACK = false;
-    public static boolean BOUGHT_JAPANESE_PACK = false;
-    public static boolean EXTRA_CARD_SLOT_1 = false;
-    public static boolean EXTRA_CARD_SLOT_2 = false;
     public static boolean NETWORK_GAME;
     ////////////////////////////////////////////////
     public static final int PLAYER = 0;
@@ -131,11 +127,11 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         this.gpgs = gpgs;
 
-        gpgs.checkForPurchasesMade();
-        if(EXTRA_CARD_SLOT_1){
+        //gpgs.checkForPurchasesMade();
+        if(Settings.EXTRA_CARD_SLOT_1){
             Settings.CARDS_DEALT += 1;
         }
-        if(EXTRA_CARD_SLOT_2){
+        if(Settings.EXTRA_CARD_SLOT_2){
             Settings.CARDS_DEALT += 2;
         }
 

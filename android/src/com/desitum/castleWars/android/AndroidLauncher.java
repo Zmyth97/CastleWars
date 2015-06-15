@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
@@ -16,10 +17,12 @@ import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
+import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.world.GameWorld;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.achievement.Achievement;
 
 public class AndroidLauncher extends AndroidApplication implements GooglePlayServicesInterface,
         GoogleApiClient.ConnectionCallbacks,
@@ -203,16 +206,24 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                     return;
                 }
                 else if (purchase.getSku().equals(FIRE_PACK_SKU)) {
-                    GameWorld.BOUGHT_FlAME_PACK = true;
+                    Settings.BOUGHT_FlAME_PACK = true;
+                    unlockAchievement(CastleWars.BURN_IT_ALL);
+                    if(Settings.BOUGHT_JAPANESE_PACK){
+                        unlockAchievement(CastleWars.FLAMING_NINJA);
+                    }
                 }
                 else if (purchase.getSku().equals(JAPANESE_PACK_SKU)) {
-                    GameWorld.BOUGHT_JAPANESE_PACK = true;
+                    Settings.BOUGHT_JAPANESE_PACK = true;
+                    unlockAchievement(CastleWars.FEUDAL_JAPAN);
+                    if(Settings.BOUGHT_FlAME_PACK){
+                        unlockAchievement(CastleWars.FLAMING_NINJA);
+                    }
                 }
                 else if (purchase.getSku().equals(EXTRA_SLOT_1_SKU)) {
-                    GameWorld.EXTRA_CARD_SLOT_1 = true;
+                    Settings.EXTRA_CARD_SLOT_1 = true;
                 }
                 else if (purchase.getSku().equals(EXTRA_SLOT_2_SKU)) {
-                    GameWorld.EXTRA_CARD_SLOT_2 = true;
+                    Settings.EXTRA_CARD_SLOT_2 = true;
                 }
             }
         };
@@ -241,10 +252,10 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                     //Blerg?
                 }
                 else {
-                    GameWorld.BOUGHT_FlAME_PACK = inventory.hasPurchase(FIRE_PACK_SKU);
-                    GameWorld.BOUGHT_JAPANESE_PACK = inventory.hasPurchase(JAPANESE_PACK_SKU);
-                    GameWorld.EXTRA_CARD_SLOT_1 = inventory.hasPurchase(EXTRA_SLOT_1_SKU);
-                    GameWorld.EXTRA_CARD_SLOT_2 = inventory.hasPurchase(EXTRA_SLOT_2_SKU);
+                    Settings.BOUGHT_FlAME_PACK = inventory.hasPurchase(FIRE_PACK_SKU);
+                    Settings.BOUGHT_JAPANESE_PACK = inventory.hasPurchase(JAPANESE_PACK_SKU);
+                    Settings.EXTRA_CARD_SLOT_1 = inventory.hasPurchase(EXTRA_SLOT_1_SKU);
+                    Settings.EXTRA_CARD_SLOT_2 = inventory.hasPurchase(EXTRA_SLOT_2_SKU);
                 }
             }
         };

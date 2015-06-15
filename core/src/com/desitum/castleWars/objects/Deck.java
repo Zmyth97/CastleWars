@@ -21,10 +21,10 @@ public class Deck {
 
         cardList = new ArrayList<Card>();
         fillDeck();
-        if (GameWorld.BOUGHT_FlAME_PACK && Settings.WANTS_FLAME_CARDS) {
+        if (Settings.BOUGHT_FlAME_PACK && Settings.WANTS_FLAME_CARDS) {
             addFlameCards();
         }
-        if (GameWorld.BOUGHT_JAPANESE_PACK && Settings.WANTS_JAPANESE_CARDS) {
+        if (Settings.BOUGHT_JAPANESE_PACK && Settings.WANTS_JAPANESE_CARDS) {
             addJapaneseCards();
         }
     }

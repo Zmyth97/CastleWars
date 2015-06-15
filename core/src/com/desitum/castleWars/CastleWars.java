@@ -24,15 +24,15 @@ public class CastleWars extends Game {
     public static final int SILENT_BUT_DEADLY = 11; //First Time Muting the Game (lol)
     public static final int WORLD_CONQUEST = 12; //First Multiplayer Game
     public static final int PILLAGED = 13; //Be Beaten by the AI on Normal #
-    public static final int FLAMING_NINJA = 14; //Buy Both Fire and Japanese Card Packs
+    public static final int FLAMING_NINJA = 14; //Buy Both Fire and Japanese Card Packs #
 
-    public static final int FEUDAL_JAPAN = 15; //Buy the Japanese Card Pack
+    public static final int FEUDAL_JAPAN = 15; //Buy the Japanese Card Pack #
     public static final int DEATH_BY_FIRE = 16; //First Time Using The Dragon #
     public static final int NIGHT_KILLER = 17; //Use the Ninja Card 20 Times #
     public static final int HONORABLE_SACRIFICE = 18; //Use Seppuku 20 Times #
     public static final int JAPANESE_MASTER = 19; //Use a Japanese Card to Win a Game (Build or Attack) #
 
-    public static final int BURN_IT_ALL = 20; //Buy the Fire Card Pack
+    public static final int BURN_IT_ALL = 20; //Buy the Fire Card Pack #
     public static final int DEATH_FROM_ABOVE = 21; //First Time Using Meteors #
     public static final int REBORN = 22; //Use the Phoenix Card 20 Times #
     public static final int LET_IT_FLOW = 23; //Use Lava Flow 20 Times (hehehehe) #
@@ -75,21 +75,23 @@ public class CastleWars extends Game {
     }
 
     //TODO: CheckList!!!
-    //Misc
         //Disposals
         //Memory Leak Stuff
         //Fix Particle Effects on Android
         //Make sure everything works (like achievements) if you aren't signed in, that it doesn't cause a crash or anything haha
-    //Build your Deck
-        //Fix it so it works haha
-    //Dev Console
-        //All of it!
-    //Achievements
+        //See if In App Purchases Work
+        //Make Sure Adding Card Slots Works
+        //Save Purchases to Settings In Case of No Internet Connection (Hash?)
+        //Fix Popup Scroll Area
+        //Arrange Build Screen Nicely
+        //Add Saving/Loading Decks
+        //Make Promo Graphic, Upload Finished APK (Add a Video?)
         //Finish Adding Achievements that aren't done (They don't have a # next to them)
-    //Multiplayer
-        //Start it :P
-    //In App Purchases
-        //Add Card Packs
+        //Add Networking Code and Implement
+        //Test Networking
+
+        //General Testing! Cards work, buttons, loading and unloading screens, saving stuff, purchases, signed in, signed out, achievements, etc.
+
 
 
 

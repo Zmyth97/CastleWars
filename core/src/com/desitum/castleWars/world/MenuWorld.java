@@ -113,7 +113,7 @@ public class MenuWorld extends KodyWorld {
         });
         popupMenu.addPopupWidget(originalAssetsToggle);
 
-        if(GameWorld.BOUGHT_FlAME_PACK) {
+        if(Settings.BOUGHT_FlAME_PACK) {
             PopupTextLabel flameAssetsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 54, 55, 25, 3, "Flame Textures", BitmapFont.HAlignment.CENTER);
             popupMenu.addPopupWidget(flameAssetsLabel);
             flameAssetsToggle = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, 59, 34, 16, 16, false);
@@ -147,7 +147,7 @@ public class MenuWorld extends KodyWorld {
             popupMenu.addPopupWidget(flameCardsToggle);
         }
 
-        if(GameWorld.BOUGHT_JAPANESE_PACK) {
+        if(Settings.BOUGHT_JAPANESE_PACK) {
             PopupTextLabel japaneseAssetsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 96, 55, 25, 3, "Japanese Textures", BitmapFont.HAlignment.CENTER);
             popupMenu.addPopupWidget(japaneseAssetsLabel);
 
@@ -185,24 +185,24 @@ public class MenuWorld extends KodyWorld {
 
         if(assetsType == 1){ //These are for appearances on load based off loaded settings
             originalAssetsToggle.turnOn();
-        } else if(assetsType == 2 && GameWorld.BOUGHT_FlAME_PACK){
+        } else if(assetsType == 2 && Settings.BOUGHT_FlAME_PACK){
             flameAssetsToggle.turnOn();
-        } else if(GameWorld.BOUGHT_JAPANESE_PACK){
+        } else if(Settings.BOUGHT_JAPANESE_PACK){
             japaneseAssetsToggle.turnOn();
         }
 
         //Quality Checkers (Should Never be needed since if you have bought them you should always have them, but causes crash if done wrong, so just in case)
-        if(assetsType == 2 && !GameWorld.BOUGHT_FlAME_PACK){
+        if(assetsType == 2 && !Settings.BOUGHT_FlAME_PACK){
             originalAssetsToggle.turnOn();
             assetsType = 1;
-        } else if(assetsType == 3 && !GameWorld.BOUGHT_JAPANESE_PACK){
+        } else if(assetsType == 3 && !Settings.BOUGHT_JAPANESE_PACK){
             originalAssetsToggle.turnOn();
             assetsType = 1;
         }
-        if(wantsFlame && !GameWorld.BOUGHT_FlAME_PACK){
+        if(wantsFlame && !Settings.BOUGHT_FlAME_PACK){
             wantsFlame = false;
         }
-        if(wantsJapanese && !GameWorld.BOUGHT_JAPANESE_PACK){
+        if(wantsJapanese && !Settings.BOUGHT_JAPANESE_PACK){
             wantsJapanese = false;
         }
 
