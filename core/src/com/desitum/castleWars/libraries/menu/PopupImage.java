@@ -72,6 +72,11 @@ public class PopupImage extends PopupWidget {
         }
     }
 
+    @Override
+    boolean scrollPosMatters() {
+        return false;
+    }
+
     public void setActive() {
         beenDown = true;
     }

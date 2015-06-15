@@ -192,6 +192,11 @@ public class PopupTextLabel extends PopupWidget {
         }
     }
 
+    @Override
+    boolean scrollPosMatters() {
+        return false;
+    }
+
     public String getText() {
         return this.text;
     }
@@ -204,7 +209,7 @@ public class PopupTextLabel extends PopupWidget {
         return colorEffects.get(0);
     }
 
-    public void setFontColor(Color color){
+    public void setFontColor(Color color) {
         currentColor = color;
     }
 }

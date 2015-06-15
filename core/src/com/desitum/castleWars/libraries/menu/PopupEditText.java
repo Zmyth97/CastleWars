@@ -235,6 +235,11 @@ public class PopupEditText extends PopupWidget {
         }
     }
 
+    @Override
+    boolean scrollPosMatters() {
+        return false;
+    }
+
     public void setText(String text) {
         this.text = text;
     }

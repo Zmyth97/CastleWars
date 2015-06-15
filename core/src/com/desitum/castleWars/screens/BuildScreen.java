@@ -762,6 +762,9 @@ public class BuildScreen extends KodyWorld implements Screen {
             cardScrollArea.addPopupWidget(infernoMenu);
         }
         //endregion
+
+        cardScrollArea.moveIn();
+
         super.addWidget(cardScrollArea);
     }
 

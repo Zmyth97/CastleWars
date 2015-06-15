@@ -59,7 +59,7 @@ public class PopupButtonMaterial extends PopupWidget {
         touchColor = new ColorEffects(Color.GRAY, new Color(0.5f, 0.5f, 0.5f, 0), 1);
     }
 
-    public void onClickDown(Vector3 pos){
+    public void onClickDown(Vector3 pos) {
         this.touchPos.set(pos.x - getX(), pos.y - getY(), 0);
 
         setPosition(getX(), getY() - z * 0.4f);
@@ -70,17 +70,17 @@ public class PopupButtonMaterial extends PopupWidget {
         beenDown = true;
     }
 
-    public void onClickUp(boolean clicked){
+    public void onClickUp(boolean clicked) {
         setPosition(originalX, originalY);
         this.setTexture(upTexture);
-        if (buttonListener != null && clicked && beenDown){
+        if (buttonListener != null && clicked && beenDown) {
             buttonListener.onClick(this);
         }
         beenDown = false;
     }
 
     @Override
-    public void update(float delta){
+    public void update(float delta) {
         super.update(delta);
 
         touchScale.update(delta);
@@ -106,6 +106,11 @@ public class PopupButtonMaterial extends PopupWidget {
         batch.setColor(getColor());
         batch.draw(touchShadow, getX(), getY(), getWidth(), getHeight());
         batch.setColor(c);
+    }
+
+    @Override
+    boolean scrollPosMatters() {
+        return false;
     }
 
     public void setX(float x) {

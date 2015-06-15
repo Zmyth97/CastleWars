@@ -137,23 +137,28 @@ public class PopupMenu extends PopupWidget {
      *
      * @param amount     gives either 0, 1, or -1
      * @param mousePos   pos of the cursor
-     * @param posMatters if your mouse position matters
      */
-    public void udpateScrollInput(int amount, Vector3 mousePos, boolean posMatters) {
+    @Override
+    public void updateScroll(int amount, Vector3 mousePos) {
         for (PopupWidget widget : widgets) {
             if (!widget.getClass().equals(PopupScrollArea.class)) {
                 continue;
             }
-            if (posMatters) {
+            if (widget.scrollPosMatters() && isEnabled()) {
                 if (CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), mousePos)) {
                     PopupScrollArea scrollArea = (PopupScrollArea) widget;
                     scrollArea.updateScrollInput(amount);
                 }
-            } else {
+            } else if (isEnabled()) {
                 PopupScrollArea scrollArea = (PopupScrollArea) widget;
                 scrollArea.updateScrollInput(amount);
             }
         }
+    }
+
+    @Override
+    boolean scrollPosMatters() {
+        return true;
     }
 
     /**

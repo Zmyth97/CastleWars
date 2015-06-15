@@ -70,4 +70,9 @@ public class PopupToggleButton extends PopupWidget {
         on = false;
         this.setTexture(on ? onTexture : offTexture);
     }
+
+    @Override
+    boolean scrollPosMatters() {
+        return false;
+    }
 }

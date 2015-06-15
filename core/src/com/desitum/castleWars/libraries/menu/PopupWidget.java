@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
@@ -176,4 +177,10 @@ public abstract class PopupWidget extends Sprite {
     public boolean isEnabled() {
         return enabled;
     }
+
+    public void updateScroll(int amount, Vector3 mousePos) {
+
+    }
+
+    abstract boolean scrollPosMatters();
 }

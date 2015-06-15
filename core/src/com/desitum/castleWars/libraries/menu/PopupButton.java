@@ -27,24 +27,29 @@ public class PopupButton extends PopupWidget {
         this.setOriginCenter();
     }
 
-	public void onClickDown(){
+    public void onClickDown() {
         this.setTexture(downTexture);
         beenDown = true;
     }
 
-    public void onClickUp(boolean clicked){
+    public void onClickUp(boolean clicked) {
         if (beenDown) this.setTexture(upTexture);
-        if (buttonListener != null && clicked && beenDown){
+        if (buttonListener != null && clicked && beenDown) {
             buttonListener.onClick(this);
         }
         beenDown = false;
     }
 
-    public void resetState(){
+    public void resetState() {
         this.setTexture(downTexture);
     }
 
     public void setButtonListener(OnClickListener buttonListener) {
         this.buttonListener = buttonListener;
+    }
+
+    @Override
+    boolean scrollPosMatters() {
+        return false;
     }
 }

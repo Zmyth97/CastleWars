@@ -1,6 +1,7 @@
 package com.desitum.castleWars.libraries.world;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.libraries.CollisionDetection;
@@ -21,7 +22,7 @@ import java.util.ConcurrentModificationException;
  * Created by kody on 5/21/15.
  * can be used by kody and people in []
  */
-public class KodyWorld {
+public class KodyWorld implements InputProcessor {
 
     private ArrayList<PopupWidget> widgets;
     private ArrayList<PopupMenu> menus;
@@ -166,5 +167,50 @@ public class KodyWorld {
 
     public ArrayList<PopupMenu> getMenus() {
         return menus;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        cam.unproject(touchPoint.set(((float) screenX), ((float) screenY), 0));
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        for (PopupWidget widget : widgets) {
+            widget.updateScroll(amount, touchPoint);
+        }
+
+        return false;
     }
 }

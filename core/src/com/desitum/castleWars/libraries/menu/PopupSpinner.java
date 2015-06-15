@@ -42,6 +42,7 @@ public class PopupSpinner extends PopupMenu {
             @Override
             public void onClick(PopupWidget widget) {
                 value += 1;
+                System.out.println("Clicked: " + value);
             }
         });
         addPopupWidget(clickUp);

@@ -67,4 +67,9 @@ public class PopupSlider extends PopupWidget {
         super.draw(batch);
         batch.draw(sliderTexture, getX() + sliderX - sliderWidth / 2, getY() + getHeight() / 2 - sliderHeight / 2, sliderWidth, sliderHeight);
     }
+
+    @Override
+    boolean scrollPosMatters() {
+        return true;
+    }
 }
