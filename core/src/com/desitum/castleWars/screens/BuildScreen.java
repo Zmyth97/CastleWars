@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.data.Settings;
 import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupScrollArea;
@@ -712,7 +713,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         cardScrollArea.addPopupWidget(duplicateMenu);
         //endregion
         //region Add Japanese Menus To Card Scoll Area
-        if(GameWorld.BOUGHT_JAPANESE_PACK){
+        if(Settings.BOUGHT_JAPANESE_PACK){
             cardScrollArea.addPopupWidget(stockadeMenu);
             cardScrollArea.addPopupWidget(fortressMenu);
             cardScrollArea.addPopupWidget(monasteryMenu);
@@ -737,7 +738,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         }
         //endregion
         //region Add Flame Menus To Card Scroll Area
-        if(GameWorld.BOUGHT_FlAME_PACK){
+        if(Settings.BOUGHT_FlAME_PACK){
             cardScrollArea.addPopupWidget(wallOfFireMenu);
             cardScrollArea.addPopupWidget(campfireMenu);
             cardScrollArea.addPopupWidget(forgeMenu);

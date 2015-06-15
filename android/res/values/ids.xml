@@ -37,4 +37,8 @@ Save this file as res/values/games-ids.xml in your project.
     <string name="achievement_let_it_flow">CgkIitC_s7EaEAIQHg</string>
     <string name="achievement_elementalist">CgkIitC_s7EaEAIQHw</string>
     <string name="achievement_been_there_done_that">CgkIitC_s7EaEAIQIA</string>
+    <string name="base64EncodedPublicKey1">"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvWtFwGSbpNZEuHFz0lqPumUjeYPqi+CJrp2IiEfDTdZepv+Vqvv3dOI09"</string>
+    <string name="base64EncodedPublicKey2">"cEJGeht0WqR5RNLUYJC4saTUrgfRwbplRmMh5MrNfR/3r07++VGj4SorV6wWubqXRD7oiRV6fOOVEl+FSxKL1jV+Ji2lTMl3wZzhL"</string>
+    <string name="base64EncodedPublicKey3">"QmxEYT60voJG1Fo4T6f1mbzI9MWSVi70FugnvJXtucVhNDt0UigB9IFzeiTIPawBooLza8FDWOj0QlnaNaPpSkrOIeNoWbd9sf6gv3efS0CZA+I1N48hKU/aaMTXp/Q4tKmcKZ/uSmAfYJKiPbWSKDTV0DqEtblS4Ux7y/4ArfKHcpUEWpx/WYvwIDAQAB"</string>
+
 </resources>

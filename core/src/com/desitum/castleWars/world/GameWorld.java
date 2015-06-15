@@ -41,6 +41,7 @@ import java.util.Iterator;
 public class GameWorld extends KodyWorld implements GameInterface {
 
 
+    public static boolean NETWORK_GAME;
     ////////////////////////////////////////////////
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
@@ -60,18 +61,11 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static final float CHANGE_TEXT_HEIGHT = 6;
     private static final float MENU_TEXT_WIDTH = 15;
     private static final float MENU_TEXT_HEIGHT = 6;
-    ////////////////////////////////////////////////
-    //PLACEHOLDER TILL WE CAN DISTINGUISH BETWEEN IF THEY HAVE BOUGHT THEM OR NOT
-    public static boolean BOUGHT_FlAME_PACK = true;
-    public static boolean BOUGHT_JAPANESE_PACK = true;
     private static Color buildColor = new Color(.122f, 0f, .616f, 1);
     private static Color attackColor = new Color(.855f, 0f, .102f, 1);
     private static Color magicColor = new Color(.035f, .722f, 0, 1);
     private static Color castleColor = new Color(0.278f, 0.278f, 0.322f, 1);
     public boolean gameOver;
-    ////////////////////////////////////////////////
-    //PLACEHOLDER TILL WE CAN DISTINGUISH BETWEEN NETWORK AND SINGLE GAMES
-    private boolean networkGame;
     private GooglePlayServicesInterface gpgs;
     private int playerTurn;
     private Player player1;
@@ -132,6 +126,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         super.setCam(cam);
 
         this.gpgs = gpgs;
+
+        //gpgs.checkForPurchasesMade();
+        if(Settings.EXTRA_CARD_SLOT_1){
+            Settings.CARDS_DEALT += 1;
+        }
+        if(Settings.EXTRA_CARD_SLOT_2){
+            Settings.CARDS_DEALT += 2;
+        }
 
         player1 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 - 50));
         player2 = new Player(this, (GameScreen.SCREEN_WIDTH / 2 + 25));
@@ -371,7 +373,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         if (lastCardUsed.getCardID() == CardActions.TROJAN_HORSE) {
             gpgs.unlockAchievement(CastleWars.DIDNT_SEE_THAT_COMING);
         }
-        if (networkGame) {
+        if (NETWORK_GAME) {
             gpgs.unlockAchievement(CastleWars.BEGINNER_RAIDER);
             gpgs.unlockAchievement(CastleWars.NOVICE_RAIDER);
             gpgs.unlockAchievement(CastleWars.ADVANCED_RAIDER);
@@ -394,7 +396,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
     @Override
     public void lose() {
         gpgs.unlockAchievement(CastleWars.CASTLE_MASTER);
-        if (!networkGame) {
+        if (!NETWORK_GAME) {
             gpgs.unlockAchievement(CastleWars.PILLAGED);
         }
         PopupTextLabel loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH / 2 - 25, GameScreen.SCREEN_HEIGHT / 4 * 2.5f, 55, 10, "You Lost!");
@@ -695,11 +697,12 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         PopupTextLabel volumeLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 55, 55, 30, 5, "Volume", BitmapFont.HAlignment.CENTER);
         settingsMenu.addPopupWidget(volumeLabel);
-        final PopupSlider volumeSlider = new PopupSlider(Assets.toggleButtonOff, Assets.toggleButtonOff, 5, 45, 120, 5, 3, 10);
+        final PopupSlider volumeSlider = new PopupSlider(Assets.toggleButtonOff, Assets.toggleButtonOff, Settings.VOLUME, 5, 45, 120, 5, 3, 10);
         volumeSlider.setSliderListener(new PopupSliderListener() {
             @Override
             public void onChange(float pos) {
                 Settings.VOLUME = pos;
+                Settings.setSound();
             }
         });
         settingsMenu.addPopupWidget(volumeSlider);

@@ -20,7 +20,7 @@ public class PopupSlider extends PopupWidget {
 
     private boolean beingMoved;
 
-    public PopupSlider(Texture barTexture, Texture sliderTexture, float x, float y, float width, float height, float sliderWidth, float sliderHeight) {
+    public PopupSlider(Texture barTexture, Texture sliderTexture, float sliderX, float x, float y, float width, float height, float sliderWidth, float sliderHeight) {
         super(barTexture, width, height, x, y);
 
         this.beingMoved = false;
@@ -36,7 +36,7 @@ public class PopupSlider extends PopupWidget {
 
         this.setOriginCenter();
 
-        sliderX = x + width/2 - sliderWidth;
+        this.sliderX = sliderX;
     }
 
     public void onClickDown(Vector3 pos) {

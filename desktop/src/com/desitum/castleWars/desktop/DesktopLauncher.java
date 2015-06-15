@@ -25,6 +25,16 @@ public class DesktopLauncher {
             }
 
             @Override
+            public void makePurchase(String sku) {
+
+            }
+
+            @Override
+            public void checkForPurchasesMade() {
+
+            }
+
+            @Override
             public void login() {
 
             }
