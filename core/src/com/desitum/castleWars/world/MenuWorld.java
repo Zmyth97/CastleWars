@@ -333,6 +333,7 @@ public class MenuWorld extends KodyWorld {
     private void createStore() {
         storeMenu = new PopupMenu(Assets.blur, 0, -MenuScreen.SCREEN_HEIGHT, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
         storeMenu.addIncomingAnimator(new MovementAnimator(storeMenu, -MenuScreen.SCREEN_HEIGHT, 0, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
+        storeMenu.addOutgoingAnimator(new MovementAnimator(storeMenu, 0, -MenuScreen.SCREEN_HEIGHT, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
 
         final float AD_WIDTH = 45;
         float AD_HEIGHT = 60;
@@ -354,6 +355,7 @@ public class MenuWorld extends KodyWorld {
         storeScroll.addPopupWidget(flameAd);
         storeScroll.addPopupWidget(japanAd);
         storeScroll.addPopupWidget(slotAd);
+        storeScroll.slideToPosition(storeScroll.getPositionToCenter(0));
 
         storeMenu.addPopupWidget(storeScroll);
 
