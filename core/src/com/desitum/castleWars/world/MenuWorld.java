@@ -303,6 +303,8 @@ public class MenuWorld extends KodyWorld {
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
                 menuInterface.multiplayer();
+                menuInterface.buyItem(FIRE_SKU);
+                System.out.println("Bought Something?");
             }
         });
 

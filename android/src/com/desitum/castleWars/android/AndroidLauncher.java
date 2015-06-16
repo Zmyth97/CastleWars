@@ -1,18 +1,25 @@
 package com.desitum.castleWars.android;
 
 
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.android.vending.billing.IInAppBillingService;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.desitum.castleWars.CastleWars;
@@ -23,6 +30,11 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.achievement.Achievement;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class AndroidLauncher extends AndroidApplication implements GooglePlayServicesInterface,
         GoogleApiClient.ConnectionCallbacks,
@@ -56,9 +68,21 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
      */
     private boolean mIsInResolution;
 
-    IabHelper mHelper;
+    //In App Purchase Code
+    IInAppBillingService mService;
+    ServiceConnection mServiceConn = new ServiceConnection() {
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mService = null;
+        }
 
-
+        @Override
+        public void onServiceConnected(ComponentName name,
+                                       IBinder service) {
+            System.out.println("In App Purchase Service Connected");
+            mService = IInAppBillingService.Stub.asInterface(service);
+        }
+    };
 
     protected View gameView;
 
@@ -83,20 +107,11 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         layout.setLayoutParams(params);
 
-        mHelper = new IabHelper(this, getString(R.string.base64EncodedPublicKey1) + getString(R.string.base64EncodedPublicKey2) + getString(R.string.base64EncodedPublicKey3)); //Split into three for security. Or so is says online
-
-        mHelper.startSetup(new
-                                   IabHelper.OnIabSetupFinishedListener() {
-                                       public void onIabSetupFinished(IabResult result) {
-                                           if (!result.isSuccess()) {
-                                               Log.d(TAG, "In-app Billing setup failed: " +
-                                                       result);
-                                           } else {
-                                               Log.d(TAG, "In-app Billing is set up OK");
-                                           }
-                                       }
-                                   });
-
+        //In App Purchases Code
+        System.out.println("Start Store Services");
+        Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
+        serviceIntent.setPackage("com.android.vending");
+        bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
 
         View gameView = createGameView(config);
         layout.addView(gameView);
@@ -197,36 +212,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
 
     @Override
     public void makePurchase(String sku){
-        IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener
-                = new IabHelper.OnIabPurchaseFinishedListener() {
-            public void onIabPurchaseFinished(IabResult result, Purchase purchase)
-            {
-                if (result.isFailure()) {
-                    Log.d(TAG, "Error purchasing: " + result);
-                    return;
-                }
-                else if (purchase.getSku().equals(FIRE_PACK_SKU)) {
-                    Settings.BOUGHT_FlAME_PACK = true;
-                    unlockAchievement(CastleWars.BURN_IT_ALL);
-                    if(Settings.BOUGHT_JAPANESE_PACK){
-                        unlockAchievement(CastleWars.FLAMING_NINJA);
-                    }
-                }
-                else if (purchase.getSku().equals(JAPANESE_PACK_SKU)) {
-                    Settings.BOUGHT_JAPANESE_PACK = true;
-                    unlockAchievement(CastleWars.FEUDAL_JAPAN);
-                    if(Settings.BOUGHT_FlAME_PACK){
-                        unlockAchievement(CastleWars.FLAMING_NINJA);
-                    }
-                }
-                else if (purchase.getSku().equals(EXTRA_SLOT_1_SKU)) {
-                    Settings.EXTRA_CARD_SLOT_1 = true;
-                }
-                else if (purchase.getSku().equals(EXTRA_SLOT_2_SKU)) {
-                    Settings.EXTRA_CARD_SLOT_2 = true;
-                }
-            }
-        };
+
         int value = 0;
         if(sku.contains("flame")){
             value = 10001;
@@ -237,29 +223,29 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         } else if(sku.contains("slot_2")){
             value = 10004;
         }
-        mHelper.launchPurchaseFlow(this, sku, value,
-                mPurchaseFinishedListener, "");
+
+        try {
+            System.out.println("Trying to Make Purchase!");
+            Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(),
+                    sku, "inapp", "");
+
+            PendingIntent pendingIntent = buyIntentBundle.getParcelable("BUY_INTENT");
+            try {
+                startIntentSenderForResult(pendingIntent.getIntentSender(),
+                        value, new Intent(), Integer.valueOf(0), Integer.valueOf(0),
+                        Integer.valueOf(0));
+            } catch(IntentSender.SendIntentException exception){
+                System.out.println(exception);
+            }
+        } catch(RemoteException exception) {
+            System.out.println(exception);
+        }
+
     }
 
     @Override
     public void checkForPurchasesMade(){
-        IabHelper.QueryInventoryFinishedListener mGotInventoryListener
-                = new IabHelper.QueryInventoryFinishedListener() {
-            public void onQueryInventoryFinished(IabResult result,
-                                                 Inventory inventory) {
 
-                if (result.isFailure()) {
-                    //Blerg?
-                }
-                else {
-                    Settings.BOUGHT_FlAME_PACK = inventory.hasPurchase(FIRE_PACK_SKU);
-                    Settings.BOUGHT_JAPANESE_PACK = inventory.hasPurchase(JAPANESE_PACK_SKU);
-                    Settings.EXTRA_CARD_SLOT_1 = inventory.hasPurchase(EXTRA_SLOT_1_SKU);
-                    Settings.EXTRA_CARD_SLOT_2 = inventory.hasPurchase(EXTRA_SLOT_2_SKU);
-                }
-            }
-        };
-        mHelper.queryInventoryAsync(mGotInventoryListener);
     }
     @Override
     public void login() {
@@ -339,10 +325,84 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
      * Handles Google Play Services resolution callbacks.
      */
     @Override
-    protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
-        if (requestCode == REQUEST_CODE_RESOLVE_ERR && responseCode == RESULT_OK) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_RESOLVE_ERR && resultCode == RESULT_OK) {
             mConnectionResult = null;
             mGoogleApiClient.connect();
+        }
+
+        if (requestCode == 1001) { //Fire Card Pack
+            System.out.println("Finished Purchase, Result Code 1001, Fire Pack");
+            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
+            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
+            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
+
+            if (resultCode == RESULT_OK) {
+                try {
+                    JSONObject jo = new JSONObject(purchaseData);
+                    String sku = jo.getString("productId");
+                    System.out.println("You have bought the " + sku + ". Excellent choice!");
+                    Settings.BOUGHT_FlAME_PACK = true;
+                }
+                catch (JSONException e) {
+                    System.out.println("Failed to parse purchase data.");
+                    e.printStackTrace();
+                }
+            }
+        } else if (requestCode == 1002) { //Japan Card Pack
+            System.out.println("Finished Purchase, Result Code 1002, Japanese Pack");
+            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
+            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
+            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
+
+            if (resultCode == RESULT_OK) {
+                try {
+                    JSONObject jo = new JSONObject(purchaseData);
+                    String sku = jo.getString("productId");
+                    System.out.println("You have bought the " + sku + ". Excellent choice!");
+                    Settings.BOUGHT_JAPANESE_PACK = true;
+                }
+                catch (JSONException e) {
+                    System.out.println("Failed to parse purchase data.");
+                    e.printStackTrace();
+                }
+            }
+        }else if (requestCode == 1003) { //Extra Card Slot 1
+            System.out.println("Finished Purchase, Result Code 1003, Extra Card Slot 1");
+            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
+            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
+            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
+
+            if (resultCode == RESULT_OK) {
+                try {
+                    JSONObject jo = new JSONObject(purchaseData);
+                    String sku = jo.getString("productId");
+                    System.out.println("You have bought the " + sku + ". Excellent choice!");
+                    Settings.EXTRA_CARD_SLOT_1 = true;
+                }
+                catch (JSONException e) {
+                    System.out.println("Failed to parse purchase data.");
+                    e.printStackTrace();
+                }
+            }
+        }else if (requestCode == 1004) { //Extra Card Slot 2
+            System.out.println("Finished Purchase, Result Code 1004, Extra Card Slot 2");
+            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
+            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
+            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
+
+            if (resultCode == RESULT_OK) {
+                try {
+                    JSONObject jo = new JSONObject(purchaseData);
+                    String sku = jo.getString("productId");
+                    System.out.println("You have bought the " + sku + ". Excellent choice!");
+                    Settings.EXTRA_CARD_SLOT_2 = true;
+                }
+                catch (JSONException e) {
+                    System.out.println("Failed to parse purchase data.");
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -392,8 +452,9 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mHelper != null) mHelper.dispose();
-        mHelper = null;
+        if (mService != null) {
+            unbindService(mServiceConn);
+        }
     }
 }
 
