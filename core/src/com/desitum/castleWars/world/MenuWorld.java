@@ -335,8 +335,8 @@ public class MenuWorld extends KodyWorld {
         storeMenu.addIncomingAnimator(new MovementAnimator(storeMenu, -MenuScreen.SCREEN_HEIGHT, 0, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
         storeMenu.addOutgoingAnimator(new MovementAnimator(storeMenu, 0, -MenuScreen.SCREEN_HEIGHT, 1, 0, Interpolation.ACCELERATE_INTERPOLATOR, false, true));
 
-        final float AD_WIDTH = 45;
-        float AD_HEIGHT = 60;
+        final float AD_WIDTH = 60;
+        float AD_HEIGHT = 80;
         float AD_X = MenuScreen.SCREEN_WIDTH / 2 - AD_WIDTH / 2;
         float AD_Y = MenuScreen.SCREEN_HEIGHT / 2 - 15;
 
@@ -353,7 +353,7 @@ public class MenuWorld extends KodyWorld {
 
         storeMenu.addPopupWidget(storeScroll);
 
-        PopupButtonMaterial buyButton = new PopupButtonMaterial(Assets.buyButton, MenuScreen.SCREEN_WIDTH / 2 - 20, MenuScreen.SCREEN_HEIGHT / 6, BUTTON_HEIGHT, 40, 15);
+        PopupButtonMaterial buyButton = new PopupButtonMaterial(Assets.buyButton, MenuScreen.SCREEN_WIDTH / 2 - 20, MenuScreen.SCREEN_HEIGHT / 8, BUTTON_HEIGHT, 40, 15);
         buyButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
