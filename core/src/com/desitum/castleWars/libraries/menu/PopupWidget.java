@@ -1,6 +1,5 @@
 package com.desitum.castleWars.libraries.menu;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -96,19 +95,6 @@ public abstract class PopupWidget extends Sprite {
     public void clearAllAnimators() {
         this.clearIncomingAnimators();
         this.clearOutgoingAnimators();
-    }
-
-    public void addFadeInAnimator(float duration, float delay) {
-        ColorEffects fadeIn = new ColorEffects(new Color(this.getColor().r, this.getColor().g, this.getColor().b, 0), this.getColor(), duration, delay);
-        fadeIn.setSprite(this, false, false);
-        addIncomingAnimator(fadeIn);
-        setColor(new Color(1, 1, 1, 0));
-    }
-
-    public void addFadeOutAnimator(float duration, float delay) {
-        ColorEffects fadeOut = new ColorEffects(this.getColor(), new Color(this.getColor().r, this.getColor().g, this.getColor().b, 0), duration, delay);
-        fadeOut.setSprite(this, false, false);
-        addIncomingAnimator(fadeOut);
     }
 
     public void clearColorEffects() {

@@ -50,6 +50,8 @@ public class MenuWorld extends KodyWorld {
     private PopupToggleButton flameCardsToggle;
     private PopupToggleButton japaneseCardsToggle;
 
+    private PopupScrollArea storeScroll;
+
     private int settingsToggle;
 
     private PopupMenu storeMenu;
@@ -333,7 +335,9 @@ public class MenuWorld extends KodyWorld {
         float AD_X = MenuScreen.SCREEN_WIDTH / 2 - AD_WIDTH / 2;
         float AD_Y = MenuScreen.SCREEN_HEIGHT / 2 - 15;
 
-        final PopupScrollArea storeScroll = new PopupScrollArea(Assets.invisible, 0, AD_Y, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, PopupScrollArea.HORIZONTAL, 3, MenuScreen.SCREEN_WIDTH, AD_WIDTH);
+        storeScroll = new PopupScrollArea(Assets.invisible, 0, AD_Y, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, PopupScrollArea.HORIZONTAL, 3, MenuScreen.SCREEN_WIDTH, AD_WIDTH);
+
+        this.addPopupMenu(storeMenu);
 
         flameAd = new PopupImage(Assets.flameAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 1
         japanAd = new PopupImage(Assets.japaneseAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 2
@@ -403,7 +407,5 @@ public class MenuWorld extends KodyWorld {
             }
         });
         storeMenu.addPopupWidget(okButton);
-
-        this.addPopupMenu(storeMenu);
     }
 }
