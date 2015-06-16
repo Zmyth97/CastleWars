@@ -177,7 +177,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         //Fill Both Players Hands At Start
         for (int i = 0; i < Settings.CARDS_DEALT; i++) {
-            float cardX = (MenuScreen.SCREEN_WIDTH / 2 + 5)- ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
+            float cardX = (MenuScreen.SCREEN_WIDTH / 2 + 5) - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
             player1.getHand().addCardToHand(drawNewCard(cardX, CARDS_Y, i * 0.2f, false));
             player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f, true));
         }

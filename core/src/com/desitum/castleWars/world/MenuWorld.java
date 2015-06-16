@@ -60,7 +60,7 @@ public class MenuWorld extends KodyWorld {
     private PopupImage japanAd;
     private PopupImage slotAd;
 
-    private int currentItem = 1; //Current Item Showing in Store Menu
+    private int currentItem = 0; //Current Item Showing in Store Menu
     //USED FOR SETTINGS IN THIS THINGY
     private boolean wantsFlame = Settings.WANTS_FLAME_CARDS;
     private boolean wantsJapanese = Settings.WANTS_JAPANESE_CARDS;
@@ -76,7 +76,10 @@ public class MenuWorld extends KodyWorld {
         createButtons();
         setupOnClickListeners();
         createStore();
+        createPopupMenu();
+    }
 
+    private void createPopupMenu() {
         //region Settings Popup Menu
 
         popupMenu = new PopupMenu(Assets.popupMenuBackground, 10, -130, 130, 80);
@@ -328,18 +331,21 @@ public class MenuWorld extends KodyWorld {
     }
 
     private void createStore() {
-        storeMenu = new PopupMenu(Assets.blur, 0, 0, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
-        storeMenu.addFadeInAnimator(1, 0);
-        storeMenu.addFadeOutAnimator(1, 0);
+        storeMenu = new PopupMenu(Assets.blur, 0, -MenuScreen.SCREEN_HEIGHT, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
+        storeMenu.addIncomingAnimator(new MovementAnimator(storeMenu, -MenuScreen.SCREEN_HEIGHT, 0, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true));
 
         final float AD_WIDTH = 45;
         float AD_HEIGHT = 60;
         float AD_X = MenuScreen.SCREEN_WIDTH / 2 - AD_WIDTH / 2;
         float AD_Y = MenuScreen.SCREEN_HEIGHT / 2 - 15;
 
-        storeScroll = new PopupScrollArea(Assets.invisible, 0, AD_Y, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, PopupScrollArea.HORIZONTAL, 3, MenuScreen.SCREEN_WIDTH, AD_WIDTH);
+        //storeScroll = new PopupScrollArea(Assets.invisible, 0, AD_Y, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, PopupScrollArea.HORIZONTAL, 3, MenuScreen.SCREEN_WIDTH, AD_WIDTH);
 
-        this.addPopupMenu(storeMenu);
+        System.out.println("WIDTH: " + MenuScreen.SCREEN_WIDTH);
+
+        storeScroll = new PopupScrollArea(Assets.invisible, 0, MenuScreen.SCREEN_HEIGHT / 2 - AD_HEIGHT / 2, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT, PopupScrollArea.HORIZONTAL, 1, 20, 40);
+
+        storeScroll = new PopupScrollArea(Assets.invisible, 0, MenuScreen.SCREEN_HEIGHT / 2 - AD_HEIGHT / 4, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, PopupScrollArea.HORIZONTAL, 1, 40, AD_WIDTH);
 
         flameAd = new PopupImage(Assets.flameAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 1
         japanAd = new PopupImage(Assets.japaneseAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 2
@@ -348,6 +354,7 @@ public class MenuWorld extends KodyWorld {
         storeScroll.addPopupWidget(flameAd);
         storeScroll.addPopupWidget(japanAd);
         storeScroll.addPopupWidget(slotAd);
+
         storeMenu.addPopupWidget(storeScroll);
 
         PopupButtonMaterial buyButton = new PopupButtonMaterial(Assets.buyButton, MenuScreen.SCREEN_WIDTH / 2 - 20, MenuScreen.SCREEN_HEIGHT / 6, BUTTON_HEIGHT, 40, 15);
@@ -355,11 +362,11 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                if (currentItem == 1) {
+                if (currentItem == 0) {
                     menuInterface.buyItem(FIRE_SKU);
-                } else if (currentItem == 2) {
+                } else if (currentItem == 1) {
                     menuInterface.buyItem(JAPANESE_SKU);
-                } else if (currentItem == 3) {
+                } else if (currentItem == 2) {
                     //Need to Add Second Card Slot Thingy
                     menuInterface.buyItem(EXTRA_CARD_SLOT_1_ID);
                 }
@@ -372,13 +379,9 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                if (currentItem == 1) {
-                    storeScroll.goToWidget(2);
-                    currentItem = 2;
-                } else if (currentItem == 2) {
-                    storeScroll.goToWidget(3);
-                    currentItem = 3;
-                }
+                currentItem += 1;
+                if (currentItem >= 2) currentItem = 2;
+                storeScroll.slideToPosition(storeScroll.getPositionToCenter(currentItem));
             }
         });
         storeMenu.addPopupWidget(leftButton);
@@ -388,13 +391,9 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                if (currentItem == 3) {
-                    storeScroll.goToWidget(2);
-                    currentItem = 2;
-                } else if (currentItem == 2) {
-                    storeScroll.goToWidget(1);
-                    currentItem = 1;
-                }
+                currentItem -= 1;
+                if (currentItem <= 0) currentItem = 0;
+                storeScroll.slideToPosition(storeScroll.getPositionToCenter(currentItem));
             }
         });
         storeMenu.addPopupWidget(rightButton);
@@ -409,5 +408,7 @@ public class MenuWorld extends KodyWorld {
             }
         });
         storeMenu.addPopupWidget(okButton);
+
+        this.addPopupMenu(storeMenu);
     }
 }

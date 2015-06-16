@@ -22,16 +22,14 @@ public class Card extends PopupButton {
     public static final int MAGIC = 3;
     private static Color regularColor = new Color(1f, 1f, 1f, 1);
     private static Color fadedColor = new Color(0.5f, 0.5f, 0.5f, 1);
+    public boolean atMax;
     private FlipEffect flipEffect;
     private int cardType;
     private boolean available;
     private int cardCost;
     private int cardID;
-
     private float cardX;
     private float cardY;
-    public boolean atMax;
-
     private ColorEffects colorChanger; //Fade from a lighter shade to more vibrant when you actually have enough resources
     private MovementAnimator movementAnimator;
 
@@ -105,7 +103,7 @@ public class Card extends PopupButton {
         } else {
             super.draw(batch);
         }
-        if(atMax){
+        if (atMax) {
             batch.draw(Assets.max, this.getX(), this.getY(), CARD_WIDTH, CARD_HEIGHT);
         }
     }

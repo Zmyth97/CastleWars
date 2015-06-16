@@ -37,8 +37,8 @@ public class Hand {
             if (gi.getPlayer1().getHand().equals(this)) {
                 if (card.getCardType() == Card.BUILD) {
                     if (card.getCardCost() < gi.getResources().getPlayerStones()) {
-                        if(peopleCards.contains(card.getCardID()) ){
-                            if(checkBuilderMax(0, card.getCardID())){
+                        if (peopleCards.contains(card.getCardID())) {
+                            if (checkBuilderMax(0, card.getCardID())) {
                                 card.disable();
                                 card.atMax = true;
                             } else {
@@ -53,8 +53,8 @@ public class Hand {
                     }
                 } else if (card.getCardType() == Card.ATTACK) {
                     if (card.getCardCost() < gi.getResources().getPlayerWeapons()) {
-                        if(peopleCards.contains(card.getCardID()) ){
-                            if(checkSoldierMax(0, card.getCardID())){
+                        if (peopleCards.contains(card.getCardID())) {
+                            if (checkSoldierMax(0, card.getCardID())) {
                                 card.disable();
                                 card.atMax = true;
                             } else {
@@ -69,8 +69,8 @@ public class Hand {
                     }
                 } else {
                     if (card.getCardCost() < gi.getResources().getPlayerGems()) {
-                        if(peopleCards.contains(card.getCardID()) ){
-                            if(checkWizardMax(0, card.getCardID())){
+                        if (peopleCards.contains(card.getCardID())) {
+                            if (checkWizardMax(0, card.getCardID())) {
                                 card.disable();
                                 card.atMax = true;
                             } else {
@@ -87,8 +87,8 @@ public class Hand {
             } else {
                 if (card.getCardType() == Card.BUILD) {
                     if (card.getCardCost() < gi.getResources().getComputerStones()) {
-                        if(peopleCards.contains(card.getCardID()) ){
-                            if(checkBuilderMax(1, card.getCardID())){
+                        if (peopleCards.contains(card.getCardID())) {
+                            if (checkBuilderMax(1, card.getCardID())) {
                                 card.disable();
                                 card.atMax = true;
                             } else {
@@ -103,8 +103,8 @@ public class Hand {
                     }
                 } else if (card.getCardType() == Card.ATTACK) {
                     if (card.getCardCost() < gi.getResources().getComputerWeapons()) {
-                        if(peopleCards.contains(card.getCardID()) ){
-                            if(checkSoldierMax(1, card.getCardID())){
+                        if (peopleCards.contains(card.getCardID())) {
+                            if (checkSoldierMax(1, card.getCardID())) {
                                 card.disable();
                                 card.atMax = true;
                             } else {
@@ -119,8 +119,8 @@ public class Hand {
                     }
                 } else {
                     if (card.getCardCost() < gi.getResources().getComputerGems()) {
-                        if(peopleCards.contains(card.getCardID()) ){
-                            if(checkWizardMax(1, card.getCardID())){
+                        if (peopleCards.contains(card.getCardID())) {
+                            if (checkWizardMax(1, card.getCardID())) {
                                 card.disable();
                                 card.atMax = true;
                             } else {
@@ -138,7 +138,7 @@ public class Hand {
         }
     }
 
-    private void fillPeopleCardList(){
+    private void fillPeopleCardList() {
         peopleCards.add(CardActions.ARCHITECT);
         peopleCards.add(CardActions.RECRUITER);
         peopleCards.add(CardActions.MAGE);
@@ -152,25 +152,25 @@ public class Hand {
         peopleCards.add(JapanesePack.SEPPUKU);
     }
 
-    private boolean checkBuilderMax(int player, int card){
+    private boolean checkBuilderMax(int player, int card) {
         boolean atMax = false;
-        if(player == 0){
-            if(card == CardActions.ARCHITECT){
-                if(gi.getResources().getPlayerBuilders() > 5){
+        if (player == 0) {
+            if (card == CardActions.ARCHITECT) {
+                if (gi.getResources().getPlayerBuilders() > 5) {
                     atMax = true;
                 }
             } else {
-                if(gi.getResources().getPlayerBuilders() > 4){
+                if (gi.getResources().getPlayerBuilders() > 4) {
                     atMax = true;
                 }
             }
         } else {
-            if(card == CardActions.ARCHITECT){
-                if(gi.getResources().getComputerBuilders() > 5){
+            if (card == CardActions.ARCHITECT) {
+                if (gi.getResources().getComputerBuilders() > 5) {
                     atMax = true;
                 }
             } else {
-                if(gi.getResources().getComputerBuilders() > 4){
+                if (gi.getResources().getComputerBuilders() > 4) {
                     atMax = true;
                 }
             }
@@ -179,25 +179,25 @@ public class Hand {
         return atMax;
     }
 
-    private boolean checkSoldierMax(int player, int card){
+    private boolean checkSoldierMax(int player, int card) {
         boolean atMax = false;
-        if(player == 0){
-            if(card == CardActions.RECRUITER){
-                if(gi.getResources().getPlayerSoldiers() > 5){
+        if (player == 0) {
+            if (card == CardActions.RECRUITER) {
+                if (gi.getResources().getPlayerSoldiers() > 5) {
                     atMax = true;
                 }
             } else {
-                if(gi.getResources().getPlayerSoldiers() > 4){
+                if (gi.getResources().getPlayerSoldiers() > 4) {
                     atMax = true;
                 }
             }
         } else {
-            if(card == CardActions.RECRUITER){
-                if(gi.getResources().getComputerSoldiers() > 5){
+            if (card == CardActions.RECRUITER) {
+                if (gi.getResources().getComputerSoldiers() > 5) {
                     atMax = true;
                 }
             } else {
-                if(gi.getResources().getComputerSoldiers() > 4){
+                if (gi.getResources().getComputerSoldiers() > 4) {
                     atMax = true;
                 }
             }
@@ -206,25 +206,25 @@ public class Hand {
         return atMax;
     }
 
-    private boolean checkWizardMax(int player, int card){
+    private boolean checkWizardMax(int player, int card) {
         boolean atMax = false;
-        if(player == 0){
-            if(card == CardActions.MAGE){
-                if(gi.getResources().getPlayerWizards() > 5){
+        if (player == 0) {
+            if (card == CardActions.MAGE) {
+                if (gi.getResources().getPlayerWizards() > 5) {
                     atMax = true;
                 }
             } else {
-                if(gi.getResources().getPlayerWizards() > 4){
+                if (gi.getResources().getPlayerWizards() > 4) {
                     atMax = true;
                 }
             }
         } else {
-            if(card == CardActions.MAGE){
-                if(gi.getResources().getComputerWizards() > 5){
+            if (card == CardActions.MAGE) {
+                if (gi.getResources().getComputerWizards() > 5) {
                     atMax = true;
                 }
             } else {
-                if(gi.getResources().getComputerWizards() > 4){
+                if (gi.getResources().getComputerWizards() > 4) {
                     atMax = true;
                 }
             }
@@ -232,6 +232,7 @@ public class Hand {
 
         return atMax;
     }
+
     public ArrayList<Card> getCardsInHand() {
         return cardList;
     }

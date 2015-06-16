@@ -1,9 +1,6 @@
 package com.desitum.castleWars.libraries.menu;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
-import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
@@ -17,7 +14,6 @@ public class PopupScrollArea extends PopupMenu {
 
     public static final int VERTICAL = 0;
     public static final int HORIZONTAL = 1;
-    ArrayList<PopupWidget> widgets;
     private float scrollAmount;
     private int scrollDirection;
     private int columns;
@@ -32,8 +28,7 @@ public class PopupScrollArea extends PopupMenu {
     public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, float spacing, float widgetSize) {
         super(background, width, height, x, y);
 
-        widgets = new ArrayList<PopupWidget>();
-
+        super.setSize(width, height);
         scrollAmount = 0;
         this.scrollDirection = scrollDirection;
         this.columns = columns;
@@ -49,7 +44,7 @@ public class PopupScrollArea extends PopupMenu {
     public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, int rows, float spacing, float widgetWidth, float widgetHeight) {
         super(background, width, height, x, y);
 
-        widgets = new ArrayList<PopupWidget>();
+        super.setSize(width, height);
 
         scrollAmount = 0;
         this.scrollDirection = scrollDirection;
@@ -68,35 +63,10 @@ public class PopupScrollArea extends PopupMenu {
 
         if (scrollAmount > 0) {
             scrollAmount = 0;
-        } else if (scrollDirection == HORIZONTAL && scrollAmount < -(widgets.size() - 1) * (widgetWidth + spacing)) {
-            scrollAmount = -(widgets.size() - 1) * (widgetWidth + spacing);
+        } else if (scrollDirection == HORIZONTAL && scrollAmount < -(getChildren().size() - 1) * (widgetWidth + spacing)) {
+            scrollAmount = -(getChildren().size() - 1) * (widgetWidth + spacing);
         }
         updateWidgets();
-    }
-
-    public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
-        for (PopupWidget widget : widgets) {
-            boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
-            if (widget.getClass().equals(PopupButton.class)) {
-                PopupButton button = (PopupButton) widget;
-                if (clickInArea && clickDown) {
-                    button.onClickDown();
-                } else if (clickInArea) {
-                    button.onClickUp(true);
-                } else {
-                    button.onClickUp(false);
-                }
-            } else if (widget.getClass().equals(PopupImage.class)) {
-                PopupImage button = (PopupImage) widget;
-                if (clickInArea && clickDown) {
-                    button.onClickDown();
-                } else if (clickInArea) {
-                    button.onClickUp(true);
-                } else {
-                    button.onClickUp(false);
-                }
-            }
-        }
     }
 
     @Override
@@ -112,18 +82,13 @@ public class PopupScrollArea extends PopupMenu {
         }
     }
 
-    @Override
-    public void draw(SpriteBatch batch) {
-        super.draw(batch);
-
-        for (PopupWidget wid : widgets) {
-            wid.draw(batch);
-        }
-    }
-
     public void updateWidgets() {
-        for (int widgetNum = 0; widgetNum < widgets.size(); widgetNum++) {
-            PopupWidget widget = widgets.get(widgetNum);
+        System.out.println("getWidth() : " + getWidth());
+        System.out.println("columns : " + columns);
+        System.out.println("getX() : " + getX());
+        System.out.println("1 : " + (getX() + getWidth() / 2 + (1 / columns) * (widgetWidth + spacing) + scrollAmount));
+        for (int widgetNum = 0; widgetNum < getChildren().size(); widgetNum++) {
+            PopupWidget widget = getChildren().get(widgetNum);
 
             if (scrollDirection == HORIZONTAL) {
                 widget.setX(getX() + getWidth() / 2 + (widgetNum / columns) * (widgetWidth + spacing) + scrollAmount);
@@ -150,12 +115,12 @@ public class PopupScrollArea extends PopupMenu {
         toAdd.setSize(widgetWidth, widgetHeight);
 
         if (scrollDirection == HORIZONTAL) {
-            toAdd.setX(getX() + getWidth() / 2 + (widgets.size() / columns) * (widgetWidth + spacing));
-            toAdd.setY(getY() + (widgets.size() % columns) * (widgetHeight + spacing));
+            toAdd.setX(getX() + getWidth() / 2 + (getChildren().size() / columns) * (widgetWidth + spacing));
+            toAdd.setY(getY() + (getChildren().size() % columns) * (widgetHeight + spacing));
         } else if (scrollDirection == VERTICAL) {
-            toAdd.setY(getY() + getHeight() / 2 + (widgets.size() / columns) * (widgetWidth + spacing));
+            toAdd.setY(getY() + getHeight() / 2 + (getChildren().size() / columns) * (widgetWidth + spacing));
             System.out.println(toAdd.getY());
-            toAdd.setX(getX() + (widgets.size() % columns) * (widgetHeight + spacing));
+            toAdd.setX(getX() + (getChildren().size() % columns) * (widgetHeight + spacing));
             System.out.println(toAdd.getX());
         }
 
@@ -191,18 +156,12 @@ public class PopupScrollArea extends PopupMenu {
                 }
             }
         }
-        if (isFadeIn()) {
-            toAdd.setColor(1, 1, 1, 0);
-        }
-        widgets.add(toAdd);
+        getChildren().add(toAdd);
         updateWidgets();
     }
 
     public void setWidgets(ArrayList<PopupWidget> widgetsToSet) {
-        this.widgets = new ArrayList<PopupWidget>();
-        for (PopupWidget widget : widgetsToSet) {
-            this.addPopupWidget(widget);
-        }
+        super.setWidgets(widgetsToSet);
         updateWidgets();
     }
 
@@ -227,8 +186,8 @@ public class PopupScrollArea extends PopupMenu {
 
     public void selectWidget(int position, boolean deselectRest) {
         if (deselectRest) {
-            for (int pos = 0; pos < widgets.size(); pos++) {
-                PopupWidget widget = widgets.get(pos);
+            for (int pos = 0; pos < getChildren().size(); pos++) {
+                PopupWidget widget = getChildren().get(pos);
                 if (widget.getClass().equals(PopupImage.class)) {
                     PopupImage image = (PopupImage) widget;
                     if (pos == position) {

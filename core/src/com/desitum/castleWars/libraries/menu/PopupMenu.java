@@ -354,5 +354,16 @@ public class PopupMenu extends PopupWidget {
         }
         super.setY(y);
     }
+
+    public ArrayList<PopupWidget> getChildren() {
+        return widgets;
+    }
+
+    public void setWidgets(ArrayList<PopupWidget> widgetsToSet) {
+        this.widgets = new ArrayList<PopupWidget>();
+        for (PopupWidget widget : widgetsToSet) {
+            this.addPopupWidget(widget);
+        }
+    }
 }
 

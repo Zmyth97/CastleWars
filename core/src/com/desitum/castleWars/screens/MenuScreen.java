@@ -21,8 +21,8 @@ import com.desitum.castleWars.world.MenuWorld;
  */
 public class MenuScreen implements Screen, MenuInterface {
 
-    public static final float SCREEN_WIDTH = 150;
-    public static final float SCREEN_HEIGHT = 100;
+    public static final float SCREEN_WIDTH = 150.0f;
+    public static final float SCREEN_HEIGHT = 100.0f;
 
 
     private OrthographicCamera cam;
