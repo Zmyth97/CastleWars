@@ -403,6 +403,7 @@ public class ComputerAI {
             toDiscard = gi.getPlayer2().getHand().getCardsInHand().get(0);
         }
 
+        discarding = true;
         return toDiscard;
     }
 

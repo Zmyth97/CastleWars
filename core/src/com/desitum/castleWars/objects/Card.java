@@ -3,6 +3,7 @@ package com.desitum.castleWars.objects;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.effects.FlipEffect;
@@ -27,15 +28,22 @@ public class Card extends PopupButton {
     private int cardCost;
     private int cardID;
 
+    private float cardX;
+    private float cardY;
+    public boolean atMax;
+
     private ColorEffects colorChanger; //Fade from a lighter shade to more vibrant when you actually have enough resources
     private MovementAnimator movementAnimator;
 
     public Card(Texture cardImage, int cardType, int cardID, int cardCost, float x, float y) {
         super(cardImage, cardImage, x, y, CARD_WIDTH, CARD_HEIGHT);
         available = true;
+        atMax = false;
         this.cardType = cardType;
         this.cardCost = cardCost;
         this.cardID = cardID;
+        this.cardX = x;
+        this.cardY = y;
         this.setPosition(x, y);
     }
 
@@ -96,6 +104,9 @@ public class Card extends PopupButton {
             flipEffect.draw(batch);
         } else {
             super.draw(batch);
+        }
+        if(atMax){
+            batch.draw(Assets.max, this.getX(), this.getY(), CARD_WIDTH, CARD_HEIGHT);
         }
     }
 
