@@ -102,9 +102,6 @@ public class PopupScrollArea extends PopupMenu {
     @Override
     public void update(float delta) {
         super.update(delta);
-        for (PopupWidget widget : widgets) {
-            widget.update(delta);
-        }
 
         if (slideAnimator != null) {
             if (slideAnimator.isRunning()) {
@@ -112,32 +109,6 @@ public class PopupScrollArea extends PopupMenu {
                 scrollAmount = slideAnimator.getAmount();
                 updateWidgets();
             }
-        }
-    }
-
-    @Override
-    public void addIncomingAnimator(Animator anim) {
-        super.addIncomingAnimator(anim);
-    }
-
-    @Override
-    public void addOutgoingAnimator(Animator anim) {
-        super.addOutgoingAnimator(anim);
-    }
-
-    @Override
-    public void moveIn() {
-        super.moveIn();
-        for (PopupWidget widget : widgets) {
-            widget.moveIn();
-        }
-    }
-
-    @Override
-    public void moveOut() {
-        super.moveOut();
-        for (PopupWidget widget : widgets) {
-            widget.moveOut();
         }
     }
 
@@ -160,7 +131,7 @@ public class PopupScrollArea extends PopupMenu {
                 widgetDistanceFromCenter *= 4;
                 if (widgetDistanceFromCenter < 0) widgetDistanceFromCenter *= -1;
                 if (widgetDistanceFromCenter > 1) widgetDistanceFromCenter = 1;
-                widget.setAlpha(1 - widgetDistanceFromCenter);
+                if (isEnabled()) widget.setAlpha(1 - widgetDistanceFromCenter);
                 widget.setScale(1 - widgetDistanceFromCenter, 1);
             } else {
                 widget.setY(getY() + getHeight() / 2 + (widgetNum / columns) * (widgetHeight + spacing) + scrollAmount);
@@ -168,7 +139,7 @@ public class PopupScrollArea extends PopupMenu {
                 widgetDistanceFromCenter *= 4;
                 if (widgetDistanceFromCenter < 0) widgetDistanceFromCenter *= -1;
                 if (widgetDistanceFromCenter > 1) widgetDistanceFromCenter = 1;
-                widget.setAlpha(1 - widgetDistanceFromCenter);
+                if (isEnabled()) widget.setAlpha(1 - widgetDistanceFromCenter);
                 widget.setScale(1 - widgetDistanceFromCenter, 1);
             }
         }

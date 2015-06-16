@@ -25,8 +25,6 @@ public class PopupMenu extends PopupWidget {
 
     private Texture background;
 
-    private boolean fadeIn;
-
     private int commandToSend;
 
     /**
@@ -47,8 +45,6 @@ public class PopupMenu extends PopupWidget {
         outgoingAnimatorsToAdd = new ArrayList<Animator>();
 
         this.background = background;
-
-        fadeIn = false;
 
         setPosition(x, y);
         this.setSize(width, height);
@@ -247,10 +243,6 @@ public class PopupMenu extends PopupWidget {
             }
         }
 
-        if (fadeIn) {
-            toAdd.setColor(1, 1, 1, 0);
-        }
-
         toAdd.setX(getX() + toAdd.getX());
         toAdd.setY(getY() + toAdd.getY());
         widgets.add(toAdd);
@@ -335,22 +327,12 @@ public class PopupMenu extends PopupWidget {
         }
     }
 
-    @Override
-    public void addFadeInAnimator(float duration, float delay) {
-        super.addFadeInAnimator(duration, delay);
-        fadeIn = true;
-    }
-
     protected ArrayList<Animator> getIncomingAnimatorsToAdd() {
         return incomingAnimatorsToAdd;
     }
 
     protected ArrayList<Animator> getOutgoingAnimatorsToAdd() {
         return outgoingAnimatorsToAdd;
-    }
-
-    public boolean isFadeIn() {
-        return fadeIn;
     }
 
     @Override
