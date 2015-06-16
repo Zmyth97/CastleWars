@@ -83,10 +83,6 @@ public class PopupScrollArea extends PopupMenu {
     }
 
     public void updateWidgets() {
-        System.out.println("getWidth() : " + getWidth());
-        System.out.println("columns : " + columns);
-        System.out.println("getX() : " + getX());
-        System.out.println("1 : " + (getX() + getWidth() / 2 + (1 / columns) * (widgetWidth + spacing) + scrollAmount));
         for (int widgetNum = 0; widgetNum < getChildren().size(); widgetNum++) {
             PopupWidget widget = getChildren().get(widgetNum);
 
