@@ -36,7 +36,7 @@ public class Hand {
         for (Card card : cardList) {
             if (gi.getPlayer1().getHand().equals(this)) {
                 if (card.getCardType() == Card.BUILD) {
-                    if (card.getCardCost() < gi.getResources().getPlayerStones()) {
+                    if (card.getCardCost() <= gi.getResources().getPlayerStones()) {
                         if (peopleCards.contains(card.getCardID())) {
                             if (checkBuilderMax(0, card.getCardID())) {
                                 card.disable();
@@ -52,7 +52,7 @@ public class Hand {
                         card.disable();
                     }
                 } else if (card.getCardType() == Card.ATTACK) {
-                    if (card.getCardCost() < gi.getResources().getPlayerWeapons()) {
+                    if (card.getCardCost() <= gi.getResources().getPlayerWeapons()) {
                         if (peopleCards.contains(card.getCardID())) {
                             if (checkSoldierMax(0, card.getCardID())) {
                                 card.disable();
@@ -68,7 +68,7 @@ public class Hand {
                         card.disable();
                     }
                 } else {
-                    if (card.getCardCost() < gi.getResources().getPlayerGems()) {
+                    if (card.getCardCost() <= gi.getResources().getPlayerGems()) {
                         if (peopleCards.contains(card.getCardID())) {
                             if (checkWizardMax(0, card.getCardID())) {
                                 card.disable();
@@ -86,7 +86,7 @@ public class Hand {
                 }
             } else {
                 if (card.getCardType() == Card.BUILD) {
-                    if (card.getCardCost() < gi.getResources().getComputerStones()) {
+                    if (card.getCardCost() <= gi.getResources().getComputerStones()) {
                         if (peopleCards.contains(card.getCardID())) {
                             if (checkBuilderMax(1, card.getCardID())) {
                                 card.disable();
@@ -102,7 +102,7 @@ public class Hand {
                         card.disable();
                     }
                 } else if (card.getCardType() == Card.ATTACK) {
-                    if (card.getCardCost() < gi.getResources().getComputerWeapons()) {
+                    if (card.getCardCost() <= gi.getResources().getComputerWeapons()) {
                         if (peopleCards.contains(card.getCardID())) {
                             if (checkSoldierMax(1, card.getCardID())) {
                                 card.disable();
@@ -118,7 +118,7 @@ public class Hand {
                         card.disable();
                     }
                 } else {
-                    if (card.getCardCost() < gi.getResources().getComputerGems()) {
+                    if (card.getCardCost() <= gi.getResources().getComputerGems()) {
                         if (peopleCards.contains(card.getCardID())) {
                             if (checkWizardMax(1, card.getCardID())) {
                                 card.disable();
