@@ -478,27 +478,24 @@ public class BuildScreen extends KodyWorld implements Screen {
 
         //endregion
         //region FlamePack Spinners
-        wallOfFireSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, wallOfFireMenu.getX(),  wallOfFireMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        campfireSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, campfireMenu.getX(),    campfireMenu.getY(),    Card.CARD_WIDTH, SPINNER_HEIGHT);
-        forgeSpinner = new PopupSpinner         (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, forgeMenu.getX(),       forgeMenu.getY(),       Card.CARD_WIDTH, SPINNER_HEIGHT);
-        boilingOilSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, boilingOilMenu.getX(),  boilingOilMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        bonfireSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, bonfireMenu.getX(),     bonfireMenu.getY(),     Card.CARD_WIDTH, SPINNER_HEIGHT);
-
-        fireSpinner = new PopupSpinner          (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireMenu.getX(),        fireMenu.getY(),        Card.CARD_WIDTH, SPINNER_HEIGHT);
-        fireArrowsSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireArrowsMenu.getX(),  fireArrowsMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        flamingAxeSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, flamingAxeMenu.getX(),  flamingAxeMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        flamingShotSpinner = new PopupSpinner   (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, flamingShotMenu.getX(), flamingShotMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        flameLegionSpinner = new PopupSpinner   (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, flameLegionMenu.getX(), flameLegionMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-
-        fireShamanSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireShamanMenu.getX(),  fireShamanMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        lavaFlowSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, lavaFlowMenu.getX(),    lavaFlowMenu.getY(),    Card.CARD_WIDTH, SPINNER_HEIGHT);
-        coalSpinner = new PopupSpinner          (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, coalMenu.getX(),        coalMenu.getY(),        Card.CARD_WIDTH, SPINNER_HEIGHT);
-        blacksmithSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, blacksmithMenu.getX(),  blacksmithMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        fireballSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireballMenu.getX(),    fireballMenu.getY(),    Card.CARD_WIDTH, SPINNER_HEIGHT);
-
-        phoenixSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, phoenixMenu.getX(),     phoenixMenu.getY(),     Card.CARD_WIDTH, SPINNER_HEIGHT);
-        meteorsSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, meteorsMenu.getX(),     meteorsMenu.getY(),     Card.CARD_WIDTH, SPINNER_HEIGHT);
-        infernoSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, infernoMenu.getX(),     infernoMenu.getY(),     Card.CARD_WIDTH, SPINNER_HEIGHT);
+        wallOfFireSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        campfireSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        forgeSpinner = new PopupSpinner         (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        boilingOilSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        bonfireSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireSpinner = new PopupSpinner          (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireArrowsSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        flamingAxeSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        flamingShotSpinner = new PopupSpinner   (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        flameLegionSpinner = new PopupSpinner   (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireShamanSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        lavaFlowSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        coalSpinner = new PopupSpinner          (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        blacksmithSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireballSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        phoenixSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        meteorsSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        infernoSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
 
         wallOfFireMenu.addPopupWidget(wallOfFireSpinner);
         campfireMenu.addPopupWidget(campfireSpinner);
