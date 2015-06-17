@@ -1,6 +1,7 @@
 package com.desitum.castleWars.libraries.particles;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.data.Assets;
@@ -104,7 +105,8 @@ public class ParticleEmitter {
 
     private void openFile(String particleFile) {
         try {
-            Scanner myScanner = new Scanner(Gdx.files.internal(particleFile).file());
+            FileHandle file = Gdx.files.internal(particleFile);
+            Scanner myScanner = new Scanner(file.reader());
             String line = "";
             while (myScanner.hasNext()) {
                 line = myScanner.nextLine();
@@ -151,7 +153,7 @@ public class ParticleEmitter {
                     this.emitterTexture = new Texture(lineChange);
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

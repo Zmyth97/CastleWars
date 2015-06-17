@@ -178,7 +178,7 @@ public class MenuWorld extends KodyWorld {
                     if (japaneseCardsToggle.isOn()) {
                         wantsJapanese = true;
                     }
-                    if (japaneseCardsToggle.isOn() == false) {
+                    if (!japaneseCardsToggle.isOn()) {
                         wantsJapanese = false;
                     }
                 }

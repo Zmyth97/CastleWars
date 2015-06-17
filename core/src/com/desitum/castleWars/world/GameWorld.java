@@ -51,8 +51,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public static final float DISCARD_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
     public static final float CARD_SPACING = 0.5f;
     public static final float CARDS_Y = 2;
-    public static final int EASY_DIFFICULTY = 0;
-    public static final int NORMAL_DIFFICULTY = 1;
+    public static boolean EASY_DIFFICULTY = false;
+    public static boolean NORMAL_DIFFICULTY = false;
     private static final float FADE_IN_DURATION = 1f;
     private static final float FADE_DELAY = 04f;
     private static final float FADE_OUT_DURATION = 0.3f;
@@ -107,7 +107,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private PopupTextLabel computerCastleLabelChange;
     private PopupTextLabel computerWallLabelChange;
     private PopupToggleButton discardToggle;
-    private int difficulty;
     private Deck deck;
     private Resources myResources;
     private CardActions cardActions;
@@ -263,7 +262,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private void computerTurn() {
         Card c;
-        if (difficulty == EASY_DIFFICULTY) {
+        if (EASY_DIFFICULTY) {
             boolean usedCard = false;
             for (Card card : player2.getHand().getCardsInHand()) {
                 if (card.isAvailable()) {
@@ -282,7 +281,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 c = player2.getHand().getCardsInHand().get(0);
                 disableCard(c);
             }
-        } else if (difficulty == NORMAL_DIFFICULTY) {
+        } else if (NORMAL_DIFFICULTY) {
             Card chosenCard = ai.processAI();
             if (!ai.isDiscarding()) {
                 cardActions.doCardAction(chosenCard.getCardID());
@@ -789,10 +788,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
             @Override
             public void onClick(PopupWidget widget) {
                 if (easyButton.isOn()) {
-                    difficulty = EASY_DIFFICULTY;
+                    EASY_DIFFICULTY = true;
                 }
                 {
-                    difficulty = NORMAL_DIFFICULTY;
+                    NORMAL_DIFFICULTY = true;
                 }
                 Assets.buttonSound.play(Settings.VOLUME);
                 difficultyMenu.moveOut();

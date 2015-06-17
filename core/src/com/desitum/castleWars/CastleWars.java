@@ -67,10 +67,8 @@ public class CastleWars extends Game {
     //TODO: CheckList!!!
     //Disposals
     //Memory Leak Stuff
-    //Fix Particle Effects on Android
-    //Make sure everything works (like achievements) if you aren't signed in, that it doesn't cause a crash or anything haha
+    // Make sure everything works (like achievements) if you aren't signed in, that it doesn't cause a crash or anything haha
     //See if In App Purchases Work
-    //Make Sure Adding Card Slots Works
     //Save Purchases to Settings In Case of No Internet Connection (Hash?)
     //Fix Popup Scroll Area
     //Arrange Build Screen Nicely

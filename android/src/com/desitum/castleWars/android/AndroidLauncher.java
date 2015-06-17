@@ -125,7 +125,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, "12345"), 100);
         } else {
-            //Nothing!
+            mGoogleApiClient.connect();
         }
     }
 
@@ -289,6 +289,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     @Override
     protected void onStart() {
         super.onStart();
+        System.out.println("Start Trying to Connect to Google");
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addApi(Games.API)
@@ -297,6 +298,9 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .build();
+        }
+        if(!mGoogleApiClient.isConnected()){
+            mGoogleApiClient.connect();
         }
     }
 
