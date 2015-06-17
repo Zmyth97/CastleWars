@@ -258,7 +258,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         castleWars = cw;
         this.gpgs = gpgs;
 
-        cardScrollArea = new PopupScrollArea(Assets.invisible, 10, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, PopupScrollArea.VERTICAL, 4, GameWorld.CARD_SPACING, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea = new PopupScrollArea(Assets.invisible, 10, -30, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, PopupScrollArea.VERTICAL, 4, GameWorld.CARD_SPACING, Card.CARD_HEIGHT + SPINNER_HEIGHT);
 
         //region BasicMenus
         PopupMenu barrierMenu = new PopupMenu         (Assets.invisible,  0, 0, Card.CARD_WIDTH,  Card.CARD_HEIGHT + SPINNER_HEIGHT);
@@ -461,6 +461,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         merlinMenu.addPopupWidget(merlinImage);
         duplicateMenu.addPopupWidget(duplicateImage);
         //endregion
+
         //region FlamePack Menus
         PopupMenu wallOfFireMenu = new PopupMenu      (Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
         PopupMenu campfireMenu = new PopupMenu        (Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
@@ -571,6 +572,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         meteorsMenu.addPopupWidget(meteorsImage);
         infernoMenu.addPopupWidget(infernoImage);
         //endregion
+
         //region JapanesePack Menus
         PopupMenu stockadeMenu = new PopupMenu   (Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
         PopupMenu fortressMenu = new PopupMenu   (Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
@@ -682,6 +684,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         dragonMenu.addPopupWidget(dragonImage);
         shogunMenu.addPopupWidget(shogunImage);
         //endregion
+
         //region Add Basic Menus To Card Scroll Area
         cardScrollArea.addPopupWidget(barrierMenu);
         cardScrollArea.addPopupWidget(wallMenu);
@@ -775,7 +778,18 @@ public class BuildScreen extends KodyWorld implements Screen {
 
         addWidget(cardScrollArea);
 
-        PopupButtonMaterial saveButton = new PopupButtonMaterial(Assets.okButtonRound, SCREEN_WIDTH - 22, 2, MenuWorld.BUTTON_HEIGHT, 20, 20);
+        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButtonRound, SCREEN_WIDTH -  2, 2, MenuWorld.BUTTON_HEIGHT, 20, 20);
+        cancelButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                moveToMenuScreen();
+                //DISPOSE STUFF HERE?
+            }
+        });
+        addWidget(cancelButton);
+
+        PopupButtonMaterial saveButton = new PopupButtonMaterial(Assets.okButtonRound, 22, 2, MenuWorld.BUTTON_HEIGHT, 20, 20);
         saveButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -787,17 +801,6 @@ public class BuildScreen extends KodyWorld implements Screen {
             }
         });
         addWidget(saveButton);
-
-        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButtonRound, 2, 2, MenuWorld.BUTTON_HEIGHT, 20, 20);
-        cancelButton.setButtonListener(new OnClickListener() {
-            @Override
-            public void onClick(PopupWidget widget) {
-                Assets.buttonSound.play(Settings.VOLUME);
-                moveToMenuScreen();
-                //DISPOSE STUFF HERE?
-            }
-        });
-        addWidget(cancelButton);
     }
 
     private void moveToMenuScreen() {

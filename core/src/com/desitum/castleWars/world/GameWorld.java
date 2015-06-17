@@ -668,7 +668,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.discardToggle = new PopupToggleButton(Assets.trashCanSelected, Assets.trashCan, 5, 12, 8, 12, false);
         this.addWidgetToWorld(discardToggle);
 
-        PopupButtonMaterial settingsButton = new PopupButtonMaterial(Assets.settings, 5, 2, MenuWorld.BUTTON_HEIGHT, 8, 8);
+        PopupButtonMaterial settingsButton = new PopupButtonMaterial(Assets.exitButtonRound, 5, 2, MenuWorld.BUTTON_HEIGHT, 8, 8);
         settingsButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -685,63 +685,29 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     private void setupSettingsMenu() {
-        settingsMenu = new PopupMenu(Assets.popupMenuBackground, 10, -130, 130, 80);
+        settingsMenu = new PopupMenu(Assets.invisible, 10, -130, 130, 80);
         MovementAnimator yAnimator = new MovementAnimator(settingsMenu, -130, 10, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
         settingsMenu.addIncomingAnimator(yAnimator);
         MovementAnimator yAnimator2 = new MovementAnimator(settingsMenu, 10, -130, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
         settingsMenu.addOutgoingAnimator(yAnimator2);
 
-        PopupTextLabel settingsLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 40, 65, 50, 10, "Settings", BitmapFont.HAlignment.CENTER);
-        settingsMenu.addPopupWidget(settingsLabel);
-
-        PopupTextLabel volumeLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 55, 55, 30, 5, "Volume", BitmapFont.HAlignment.CENTER);
-        settingsMenu.addPopupWidget(volumeLabel);
-        final PopupSlider volumeSlider = new PopupSlider(Assets.toggleButtonOff, Assets.toggleButtonOff, Settings.VOLUME, 5, 45, 120, 5, 3, 10);
-        volumeSlider.setSliderListener(new PopupSliderListener() {
-            @Override
-            public void onChange(float pos) {
-                Settings.VOLUME = pos;
-                Settings.setSound();
-            }
-        });
-        settingsMenu.addPopupWidget(volumeSlider);
-
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 17.5f, 5, MenuWorld.BUTTON_HEIGHT, 30, 10);
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButtonRound, 40, 40, MenuWorld.BUTTON_HEIGHT, 20, 20);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
-                Settings.setVolume(volumeSlider.getPosition());
-                Assets.buttonSound.play(Settings.VOLUME);
-                settingsToggle--;
-                settingsMenu.moveOut();
+                gameOver = true;
             }
         });
         settingsMenu.addPopupWidget(okButton);
 
-
-        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButton, 82.5f, 5, MenuWorld.BUTTON_HEIGHT, 30, 10);
+        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButtonRound, 70, 40, MenuWorld.BUTTON_HEIGHT, 20, 20);
         cancelButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
-                Assets.buttonSound.play(Settings.VOLUME);
                 settingsMenu.moveOut();
             }
         });
         settingsMenu.addPopupWidget(cancelButton);
-
-
-        PopupTextLabel exitLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 52, 30, 30, 5, "Exit Game", BitmapFont.HAlignment.CENTER);
-        settingsMenu.addPopupWidget(exitLabel);
-
-        PopupButtonMaterial exitButton = new PopupButtonMaterial(Assets.exitButton, 50, 20, MenuWorld.BUTTON_HEIGHT, 30, 10);
-        exitButton.setButtonListener(new OnClickListener() {
-            @Override
-            public void onClick(PopupWidget widget) {
-                Assets.buttonSound.play(Settings.VOLUME);
-                gameOver = true;
-            }
-        });
-        settingsMenu.addPopupWidget(exitButton);
 
         this.addPopupMenu(settingsMenu);
     }
@@ -761,7 +727,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
             @Override
             public void onClick(PopupWidget widget) {
                 easyButton.turnOn();
-                Assets.buttonSound.play(Settings.VOLUME);
                 if (normalButton.isOn()) {
                     normalButton.turnOff();
                 }
@@ -772,7 +737,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
             @Override
             public void onClick(PopupWidget widget) {
                 normalButton.turnOn();
-                Assets.buttonSound.play(Settings.VOLUME);
                 if (easyButton.isOn()) {
                     easyButton.turnOff();
                 }
@@ -793,7 +757,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
                 {
                     NORMAL_DIFFICULTY = true;
                 }
-                Assets.buttonSound.play(Settings.VOLUME);
                 difficultyMenu.moveOut();
                 removeWidgetFromWorld(difficultyMenu);
             }
