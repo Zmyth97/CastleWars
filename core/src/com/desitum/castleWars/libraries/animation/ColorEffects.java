@@ -174,7 +174,7 @@ public class ColorEffects implements Animator {
 
     @Override
     public Animator duplicate() {
-        return new ColorEffects(new Color(startRed, startGreen, startBlue, 1), new Color(endRed, endGreen, endBlue, 1), duration);
+        return new ColorEffects(new Color(startRed, startGreen, startBlue, startAlpha), new Color(endRed, endGreen, endBlue, endAlpha), duration);
     }
 
     @Override

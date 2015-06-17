@@ -353,7 +353,7 @@ public class MenuWorld extends KodyWorld {
 
         storeMenu.addPopupWidget(storeScroll);
 
-        PopupButtonMaterial buyButton = new PopupButtonMaterial(Assets.buyButton, MenuScreen.SCREEN_WIDTH / 2 - 20, MenuScreen.SCREEN_HEIGHT / 8, BUTTON_HEIGHT, 40, 15);
+        PopupButtonMaterial buyButton = new PopupButtonMaterial(Assets.buyButton, MenuScreen.SCREEN_WIDTH / 2 - 20, MenuScreen.SCREEN_HEIGHT / 6, BUTTON_HEIGHT, 40, 15);
         buyButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {

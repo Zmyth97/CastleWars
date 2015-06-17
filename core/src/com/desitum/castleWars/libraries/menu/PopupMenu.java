@@ -220,6 +220,10 @@ public class PopupMenu extends PopupWidget {
                 }
                 toAdd.addIncomingAnimator(dupMov);
             } else if (dupAnim instanceof ColorEffects) {
+                System.out.println(((ColorEffects) dupAnim).getCurrentColor().a);
+                dupAnim.start(false);
+                dupAnim.update(0.5f);
+                System.out.println(((ColorEffects) dupAnim).getCurrentColor().a);
                 dupAnim.setSprite(toAdd, false, false);
                 toAdd.addIncomingAnimator(dupAnim);
             }
