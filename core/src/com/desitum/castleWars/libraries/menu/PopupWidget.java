@@ -164,7 +164,7 @@ public abstract class PopupWidget extends Sprite {
         return enabled;
     }
 
-    public void updateScroll(int amount, Vector3 mousePos) {
+    public void updateScroll(float amount, Vector3 mousePos) {
 
     }
 

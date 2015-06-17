@@ -1,6 +1,7 @@
 package com.desitum.castleWars.libraries.menu;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
@@ -23,6 +24,12 @@ public class PopupScrollArea extends PopupMenu {
     private float activeWidth;
     private float activeHeight;
 
+    private boolean fadeOnSides;
+
+    private float lastDelta;
+    private float touchDuration;
+    private Vector3 lastTouchPos;
+
     private MovementAnimator slideAnimator;
 
     public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, float spacing, float widgetSize) {
@@ -38,7 +45,10 @@ public class PopupScrollArea extends PopupMenu {
         this.spacing = spacing;
         this.activeWidth = activeWidth;
         this.activeHeight = activeHeight;
+        this.touchDuration = 0;
         this.setPosition(x, y);
+
+        lastTouchPos = new Vector3(0, 0, 0);
     }
 
     public PopupScrollArea(Texture background, float x, float y, float width, float height, float activeWidth, float activeHeight, int scrollDirection, int columns, int rows, float spacing, float widgetWidth, float widgetHeight) {
@@ -55,10 +65,14 @@ public class PopupScrollArea extends PopupMenu {
         this.spacing = spacing;
         this.activeWidth = activeWidth;
         this.activeHeight = activeHeight;
+        this.touchDuration = 0;
         this.setPosition(x, y);
+
+        lastTouchPos = new Vector3(0, 0, 0);
     }
 
-    public void updateScrollInput(float amount) {
+    @Override
+    public void updateScroll(float amount, Vector3 touchPos) {
         scrollAmount += amount;
 
         if (scrollAmount > 0) {
@@ -72,6 +86,8 @@ public class PopupScrollArea extends PopupMenu {
     @Override
     public void update(float delta) {
         super.update(delta);
+
+        lastDelta = delta;
 
         if (slideAnimator != null) {
             if (slideAnimator.isRunning()) {
@@ -88,22 +104,46 @@ public class PopupScrollArea extends PopupMenu {
 
             if (scrollDirection == HORIZONTAL) {
                 widget.setX(getX() + getWidth() / 2 + (widgetNum / columns) * (widgetWidth + spacing) + scrollAmount);
-                float widgetDistanceFromCenter = (getX() + getWidth() / 2 - widget.getX() - widget.getWidth() / 2) / activeWidth / 2;
-                widgetDistanceFromCenter *= 4;
-                if (widgetDistanceFromCenter < 0) widgetDistanceFromCenter *= -1;
-                if (widgetDistanceFromCenter > 1) widgetDistanceFromCenter = 1;
-                if (isEnabled()) widget.setAlpha(1 - widgetDistanceFromCenter);
-                widget.setScale(1 - widgetDistanceFromCenter, 1);
+                if (fadeOnSides) {
+                    float widgetDistanceFromCenter = (getX() + getWidth() / 2 - widget.getX() - widget.getWidth() / 2) / activeWidth / 2;
+                    widgetDistanceFromCenter *= 4;
+                    if (widgetDistanceFromCenter < 0) widgetDistanceFromCenter *= -1;
+                    if (widgetDistanceFromCenter > 1) widgetDistanceFromCenter = 1;
+                    if (isEnabled()) widget.setAlpha(1 - widgetDistanceFromCenter);
+                    widget.setScale(1 - widgetDistanceFromCenter, 1);
+                }
             } else {
                 widget.setY(getY() + getHeight() / 2 + (widgetNum / columns) * (widgetHeight + spacing) + scrollAmount);
-                float widgetDistanceFromCenter = (getY() + getHeight() / 2 - widget.getY()) / activeHeight / 2;
-                widgetDistanceFromCenter *= 4;
-                if (widgetDistanceFromCenter < 0) widgetDistanceFromCenter *= -1;
-                if (widgetDistanceFromCenter > 1) widgetDistanceFromCenter = 1;
-                if (isEnabled()) widget.setAlpha(1 - widgetDistanceFromCenter);
-                widget.setScale(1 - widgetDistanceFromCenter, 1);
+                if (fadeOnSides) {
+                    float widgetDistanceFromCenter = (getY() + getHeight() / 2 - widget.getY()) / activeHeight / 2;
+                    widgetDistanceFromCenter *= 4;
+                    if (widgetDistanceFromCenter < 0) widgetDistanceFromCenter *= -1;
+                    if (widgetDistanceFromCenter > 1) widgetDistanceFromCenter = 1;
+                    if (isEnabled()) widget.setAlpha(1 - widgetDistanceFromCenter);
+                    widget.setScale(1 - widgetDistanceFromCenter, 1);
+                }
             }
         }
+    }
+
+    /**
+     * updates the PopupMenu with touch, done automatically in KodyWorld
+     *
+     * @param touchPos  - touchPos in relation to the world
+     * @param clickDown - whether or not the mouse is down or not
+     */
+    @Override
+    public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
+        super.updateTouchInput(touchPos, clickDown);
+
+        if (clickDown) touchDuration += lastDelta;
+        else touchDuration = 0;
+        if (clickDown && touchDuration >= 0.25f){
+            System.out.println((lastTouchPos.y - touchPos.y) + "; " + lastTouchPos.y + "; " + touchPos.y);
+            updateScroll(touchPos.y - lastTouchPos.y, touchPos);
+        }
+
+        lastTouchPos.set(touchPos);
     }
 
     @Override

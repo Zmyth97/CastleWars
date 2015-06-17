@@ -2,6 +2,7 @@ package com.desitum.castleWars.libraries.world;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.libraries.CollisionDetection;
@@ -57,6 +58,12 @@ public class KodyWorld implements InputProcessor {
 
         if (cam != null) {
             updateTouchInput(touchPoint, Gdx.input.isTouched());
+        }
+    }
+
+    public void draw(SpriteBatch batch) {
+        for (PopupWidget widget: widgets) {
+            widget.draw(batch);
         }
     }
 
@@ -207,8 +214,10 @@ public class KodyWorld implements InputProcessor {
 
     @Override
     public boolean scrolled(int amount) {
+        System.out.println("scrolled : " + amount);
         for (PopupWidget widget : widgets) {
             widget.updateScroll(amount, touchPoint);
+            System.out.println(widget + " : scrolled : " + amount);
         }
 
         return false;

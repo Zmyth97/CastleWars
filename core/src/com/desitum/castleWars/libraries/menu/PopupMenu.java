@@ -123,6 +123,12 @@ public class PopupMenu extends PopupWidget {
                 } else {
                     button.onClickUp(false);
                 }
+            } else if (widget instanceof PopupSpinner) { // if widget is a Spinner
+                PopupSpinner spinner = (PopupSpinner) widget;
+                spinner.updateTouchInput(touchPos, clickDown);
+            } else if (widget instanceof PopupMenu) { // if widget is a Menu (Nested Menu)
+                PopupMenu menu = (PopupMenu) widget;
+                menu.updateTouchInput(touchPos, clickDown);
             }
         }
     }
@@ -135,19 +141,17 @@ public class PopupMenu extends PopupWidget {
      * @param mousePos pos of the cursor
      */
     @Override
-    public void updateScroll(int amount, Vector3 mousePos) {
+    public void updateScroll(float amount, Vector3 mousePos) {
         for (PopupWidget widget : widgets) {
             if (!widget.getClass().equals(PopupScrollArea.class)) {
                 continue;
             }
             if (widget.scrollPosMatters() && isEnabled()) {
-                if (CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), mousePos)) {
-                    PopupScrollArea scrollArea = (PopupScrollArea) widget;
-                    scrollArea.updateScrollInput(amount);
-                }
+                PopupScrollArea scrollArea = (PopupScrollArea) widget;
+                scrollArea.updateScroll(amount, mousePos);
             } else if (isEnabled()) {
                 PopupScrollArea scrollArea = (PopupScrollArea) widget;
-                scrollArea.updateScrollInput(amount);
+                scrollArea.updateScroll(amount, mousePos);
             }
         }
     }
