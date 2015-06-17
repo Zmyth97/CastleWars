@@ -99,7 +99,7 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void buildDeck() {
-        castleWars.setScreen(new BuildScreen(castleWars));
+        castleWars.setScreen(new BuildScreen(gpgs, castleWars));
     }
 
     @Override

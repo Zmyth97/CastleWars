@@ -8,15 +8,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.CastleWars;
+import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
+import com.desitum.castleWars.libraries.menu.OnClickListener;
+import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
 import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupScrollArea;
 import com.desitum.castleWars.libraries.menu.PopupSpinner;
+import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.world.GameWorld;
+import com.desitum.castleWars.world.MenuWorld;
 
 /**
  * Created by Zmyth97 on 6/1/2015.
@@ -25,7 +30,7 @@ public class BuildScreen extends KodyWorld implements Screen {
 
     public static final float SCREEN_WIDTH = 150;
     public static final float SCREEN_HEIGHT = 100;
-    public static final float SPINNER_HEIGHT = 6;
+    public static final float SPINNER_HEIGHT = 12;
 
     private CastleWars castleWars;
 
@@ -34,6 +39,8 @@ public class BuildScreen extends KodyWorld implements Screen {
     private Viewport viewport;
 
     private PopupScrollArea cardScrollArea;
+
+    GooglePlayServicesInterface gpgs;
 
     //region Basic PopupSpinners
     //Build Cards
@@ -235,7 +242,7 @@ public class BuildScreen extends KodyWorld implements Screen {
     //endregion
 
 
-    public BuildScreen(CastleWars cw) {
+    public BuildScreen(final GooglePlayServicesInterface gpgs, CastleWars cw) {
         super();
 
         Gdx.input.setInputProcessor(this);
@@ -249,8 +256,9 @@ public class BuildScreen extends KodyWorld implements Screen {
         setCam(viewport);
 
         castleWars = cw;
+        this.gpgs = gpgs;
 
-        cardScrollArea = new PopupScrollArea(Assets.invisible, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, PopupScrollArea.VERTICAL, 5, GameWorld.CARD_SPACING, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea = new PopupScrollArea(Assets.invisible, 10, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, PopupScrollArea.VERTICAL, 4, GameWorld.CARD_SPACING, Card.CARD_HEIGHT + SPINNER_HEIGHT);
 
         //region BasicMenus
         PopupMenu barrierMenu = new PopupMenu         (Assets.invisible,  0, 0, Card.CARD_WIDTH,  Card.CARD_HEIGHT + SPINNER_HEIGHT);
@@ -766,9 +774,35 @@ public class BuildScreen extends KodyWorld implements Screen {
         cardScrollArea.enable();
 
         addWidget(cardScrollArea);
+
+        PopupButtonMaterial saveButton = new PopupButtonMaterial(Assets.okButtonRound, SCREEN_WIDTH - 22, 2, MenuWorld.BUTTON_HEIGHT, 20, 20);
+        saveButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                gpgs.unlockAchievement(CastleWars.DO_IT_YOURSELF); //First time Building Deck
+                //KODY SAVE LOGIC HERE
+                moveToMenuScreen();
+                //DISPOSE STUFF HERE?
+            }
+        });
+        addWidget(saveButton);
+
+        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButtonRound, 2, 2, MenuWorld.BUTTON_HEIGHT, 20, 20);
+        cancelButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                moveToMenuScreen();
+                //DISPOSE STUFF HERE?
+            }
+        });
+        addWidget(cancelButton);
     }
 
-
+    private void moveToMenuScreen() {
+        castleWars.setScreen(new MenuScreen(gpgs, castleWars));
+    }
     @Override
     public void show() {
 

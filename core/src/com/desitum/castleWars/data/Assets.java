@@ -40,6 +40,7 @@ public class Assets {
     //Round Button Textures
     public static Texture settingsButtonRound;
     public static Texture okButtonRound;
+    public static Texture cancelButtonRound;
     public static Texture storeButtonRound;
 
     //Menu Textures
@@ -204,6 +205,7 @@ public class Assets {
         //Round Button Textures
         settingsButtonRound = new Texture("menu/settings_button_round.png");
         okButtonRound = new Texture("menu/ok_button_round.png");
+        cancelButtonRound = new Texture("menu/cancel_button_round.png");
         storeButtonRound = new Texture("menu/shopping_button_round.png");
 
         menuBackground = new Texture("menu/menu_bg.png");
