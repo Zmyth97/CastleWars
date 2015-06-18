@@ -8,15 +8,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.CastleWars;
+import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
+import com.desitum.castleWars.libraries.menu.OnClickListener;
+import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
 import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
 import com.desitum.castleWars.libraries.menu.PopupScrollArea;
 import com.desitum.castleWars.libraries.menu.PopupSpinner;
+import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.world.GameWorld;
+import com.desitum.castleWars.world.MenuWorld;
 
 /**
  * Created by Zmyth97 on 6/1/2015.
@@ -25,7 +30,7 @@ public class BuildScreen extends KodyWorld implements Screen {
 
     public static final float SCREEN_WIDTH = 150;
     public static final float SCREEN_HEIGHT = 100;
-    public static final float SPINNER_HEIGHT = 6;
+    public static final float SPINNER_HEIGHT = 12;
 
     private CastleWars castleWars;
 
@@ -34,6 +39,8 @@ public class BuildScreen extends KodyWorld implements Screen {
     private Viewport viewport;
 
     private PopupScrollArea cardScrollArea;
+
+    GooglePlayServicesInterface gpgs;
 
     //region Basic PopupSpinners
     //Build Cards
@@ -235,7 +242,7 @@ public class BuildScreen extends KodyWorld implements Screen {
     //endregion
 
 
-    public BuildScreen(CastleWars cw) {
+    public BuildScreen(final GooglePlayServicesInterface gpgs, CastleWars cw) {
         super();
 
         Gdx.input.setInputProcessor(this);
@@ -249,8 +256,9 @@ public class BuildScreen extends KodyWorld implements Screen {
         setCam(viewport);
 
         castleWars = cw;
+        this.gpgs = gpgs;
 
-        cardScrollArea = new PopupScrollArea(Assets.invisible, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, PopupScrollArea.VERTICAL, 5, GameWorld.CARD_SPACING, Card.CARD_HEIGHT + SPINNER_HEIGHT);
+        cardScrollArea = new PopupScrollArea(Assets.invisible, 10, -30, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, PopupScrollArea.VERTICAL, 4, GameWorld.CARD_SPACING, Card.CARD_HEIGHT + SPINNER_HEIGHT);
 
         //region BasicMenus
         PopupMenu barrierMenu = new PopupMenu         (Assets.invisible,  0, 0, Card.CARD_WIDTH,  Card.CARD_HEIGHT + SPINNER_HEIGHT);
@@ -453,6 +461,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         merlinMenu.addPopupWidget(merlinImage);
         duplicateMenu.addPopupWidget(duplicateImage);
         //endregion
+
         //region FlamePack Menus
         PopupMenu wallOfFireMenu = new PopupMenu      (Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
         PopupMenu campfireMenu = new PopupMenu        (Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
@@ -478,27 +487,24 @@ public class BuildScreen extends KodyWorld implements Screen {
 
         //endregion
         //region FlamePack Spinners
-        wallOfFireSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, wallOfFireMenu.getX(),  wallOfFireMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        campfireSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, campfireMenu.getX(),    campfireMenu.getY(),    Card.CARD_WIDTH, SPINNER_HEIGHT);
-        forgeSpinner = new PopupSpinner         (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, forgeMenu.getX(),       forgeMenu.getY(),       Card.CARD_WIDTH, SPINNER_HEIGHT);
-        boilingOilSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, boilingOilMenu.getX(),  boilingOilMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        bonfireSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, bonfireMenu.getX(),     bonfireMenu.getY(),     Card.CARD_WIDTH, SPINNER_HEIGHT);
-
-        fireSpinner = new PopupSpinner          (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireMenu.getX(),        fireMenu.getY(),        Card.CARD_WIDTH, SPINNER_HEIGHT);
-        fireArrowsSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireArrowsMenu.getX(),  fireArrowsMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        flamingAxeSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, flamingAxeMenu.getX(),  flamingAxeMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        flamingShotSpinner = new PopupSpinner   (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, flamingShotMenu.getX(), flamingShotMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-        flameLegionSpinner = new PopupSpinner   (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, flameLegionMenu.getX(), flameLegionMenu.getY(), Card.CARD_WIDTH, SPINNER_HEIGHT);
-
-        fireShamanSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireShamanMenu.getX(),  fireShamanMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        lavaFlowSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, lavaFlowMenu.getX(),    lavaFlowMenu.getY(),    Card.CARD_WIDTH, SPINNER_HEIGHT);
-        coalSpinner = new PopupSpinner          (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, coalMenu.getX(),        coalMenu.getY(),        Card.CARD_WIDTH, SPINNER_HEIGHT);
-        blacksmithSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, blacksmithMenu.getX(),  blacksmithMenu.getY(),  Card.CARD_WIDTH, SPINNER_HEIGHT);
-        fireballSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, fireballMenu.getX(),    fireballMenu.getY(),    Card.CARD_WIDTH, SPINNER_HEIGHT);
-
-        phoenixSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, phoenixMenu.getX(),     phoenixMenu.getY(),     Card.CARD_WIDTH, SPINNER_HEIGHT);
-        meteorsSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, meteorsMenu.getX(),     meteorsMenu.getY(),     Card.CARD_WIDTH, SPINNER_HEIGHT);
-        infernoSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, infernoMenu.getX(),     infernoMenu.getY(),     Card.CARD_WIDTH, SPINNER_HEIGHT);
+        wallOfFireSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        campfireSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        forgeSpinner = new PopupSpinner         (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        boilingOilSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        bonfireSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireSpinner = new PopupSpinner          (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireArrowsSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        flamingAxeSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        flamingShotSpinner = new PopupSpinner   (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        flameLegionSpinner = new PopupSpinner   (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireShamanSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        lavaFlowSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        coalSpinner = new PopupSpinner          (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        blacksmithSpinner = new PopupSpinner    (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        fireballSpinner = new PopupSpinner      (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        phoenixSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        meteorsSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
+        infernoSpinner = new PopupSpinner       (Assets.invisible, Assets.upArrow, Assets.downArrow, Assets.textFieldFont, 0, 0,  Card.CARD_WIDTH, SPINNER_HEIGHT);
 
         wallOfFireMenu.addPopupWidget(wallOfFireSpinner);
         campfireMenu.addPopupWidget(campfireSpinner);
@@ -566,6 +572,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         meteorsMenu.addPopupWidget(meteorsImage);
         infernoMenu.addPopupWidget(infernoImage);
         //endregion
+
         //region JapanesePack Menus
         PopupMenu stockadeMenu = new PopupMenu   (Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
         PopupMenu fortressMenu = new PopupMenu   (Assets.invisible, 0, 0, Card.CARD_WIDTH, Card.CARD_HEIGHT + SPINNER_HEIGHT);
@@ -677,6 +684,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         dragonMenu.addPopupWidget(dragonImage);
         shogunMenu.addPopupWidget(shogunImage);
         //endregion
+
         //region Add Basic Menus To Card Scroll Area
         cardScrollArea.addPopupWidget(barrierMenu);
         cardScrollArea.addPopupWidget(wallMenu);
@@ -769,9 +777,35 @@ public class BuildScreen extends KodyWorld implements Screen {
         cardScrollArea.enable();
 
         addWidget(cardScrollArea);
+
+        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButtonRound, SCREEN_WIDTH -  2, 2, MenuWorld.BUTTON_HEIGHT, 20, 20);
+        cancelButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                moveToMenuScreen();
+                //DISPOSE STUFF HERE?
+            }
+        });
+        addWidget(cancelButton);
+
+        PopupButtonMaterial saveButton = new PopupButtonMaterial(Assets.okButtonRound, 22, 2, MenuWorld.BUTTON_HEIGHT, 20, 20);
+        saveButton.setButtonListener(new OnClickListener() {
+            @Override
+            public void onClick(PopupWidget widget) {
+                Assets.buttonSound.play(Settings.VOLUME);
+                gpgs.unlockAchievement(CastleWars.DO_IT_YOURSELF); //First time Building Deck
+                //KODY SAVE LOGIC HERE
+                moveToMenuScreen();
+                //DISPOSE STUFF HERE?
+            }
+        });
+        addWidget(saveButton);
     }
 
-
+    private void moveToMenuScreen() {
+        castleWars.setScreen(new MenuScreen(gpgs, castleWars));
+    }
     @Override
     public void show() {
 

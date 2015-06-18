@@ -27,7 +27,6 @@ public class Assets {
 
     //Button Textures
     public static Texture playButton;
-    public static Texture exitButton;
     public static Texture settings;
     public static Texture leaderboardButton;
     public static Texture cancelButton;
@@ -40,6 +39,8 @@ public class Assets {
     //Round Button Textures
     public static Texture settingsButtonRound;
     public static Texture okButtonRound;
+    public static Texture cancelButtonRound;
+    public static Texture exitButtonRound;
     public static Texture storeButtonRound;
 
     //Menu Textures
@@ -191,7 +192,6 @@ public class Assets {
 
         //Button Textures
         playButton = new Texture("menu/play_button.png");
-        exitButton = new Texture("menu/exit_button.png");
         settings = new Texture("menu/settings.png");
         leaderboardButton = new Texture("menu/leaderboard_button.png");
         cancelButton = new Texture("menu/cancel_button.png");
@@ -204,6 +204,8 @@ public class Assets {
         //Round Button Textures
         settingsButtonRound = new Texture("menu/settings_button_round.png");
         okButtonRound = new Texture("menu/ok_button_round.png");
+        cancelButtonRound = new Texture("menu/cancel_button_round.png");
+        exitButtonRound = new Texture("menu/exit_button_round.png");
         storeButtonRound = new Texture("menu/shopping_button_round.png");
 
         menuBackground = new Texture("menu/menu_bg.png");

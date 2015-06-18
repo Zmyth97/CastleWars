@@ -3,6 +3,7 @@ package com.desitum.castleWars.world;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
@@ -97,6 +98,9 @@ public class MenuWorld extends KodyWorld {
             public void onChange(float pos) {
                 Settings.VOLUME = pos;
                 Settings.setSound();
+                if(pos == 0){
+                    gpgs.unlockAchievement(CastleWars.SILENT_BUT_DEADLY);
+                }
             }
         });
         popupMenu.addPopupWidget(volumeSlider);
@@ -209,7 +213,7 @@ public class MenuWorld extends KodyWorld {
             wantsJapanese = false;
         }
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 45, 7, BUTTON_HEIGHT, 40, 15);
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 45, 10, BUTTON_HEIGHT, 40, 20);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -236,19 +240,19 @@ public class MenuWorld extends KodyWorld {
 
     private void createButtons() {
         //Create the buttons!
-        playButton = new PopupButtonMaterial(Assets.playButton, ((MenuScreen.SCREEN_WIDTH / 2) * .35f) - 15f, 38, BUTTON_HEIGHT, 60, 20);
+        playButton = new PopupButtonMaterial(Assets.playButton, ((MenuScreen.SCREEN_WIDTH / 2) * .35f) - 5f, 38, BUTTON_HEIGHT, 40, 20);
         playButton.addIncomingAnimator(new MovementAnimator(playButton, -20, playButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         playButton.moveIn();
 
-        leaderboardButton = new PopupButtonMaterial(Assets.leaderboardButton, ((MenuScreen.SCREEN_WIDTH / 4) * 2.5f) - 15f, 38, BUTTON_HEIGHT, 60, 20);
+        leaderboardButton = new PopupButtonMaterial(Assets.leaderboardButton, ((MenuScreen.SCREEN_WIDTH / 4) * 2.5f) - 5f, 38, BUTTON_HEIGHT, 40, 20);
         leaderboardButton.addIncomingAnimator(new MovementAnimator(leaderboardButton, -20, leaderboardButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         leaderboardButton.moveIn();
 
-        multiButton = new PopupButtonMaterial(Assets.multiButton, ((MenuScreen.SCREEN_WIDTH / 4) * 2.5f) - 15f, 10, BUTTON_HEIGHT, 60, 20);
+        multiButton = new PopupButtonMaterial(Assets.multiButton, ((MenuScreen.SCREEN_WIDTH / 4) * 2.5f) - 5f, 10, BUTTON_HEIGHT, 40, 20);
         multiButton.addIncomingAnimator(new MovementAnimator(multiButton, -20, multiButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         multiButton.moveIn();
 
-        deckButton = new PopupButtonMaterial(Assets.buildDeckButton, ((MenuScreen.SCREEN_WIDTH / 2) * .35f) - 15f, 10, BUTTON_HEIGHT, 60, 20);
+        deckButton = new PopupButtonMaterial(Assets.buildDeckButton, ((MenuScreen.SCREEN_WIDTH / 2) * .35f) - 5f, 10, BUTTON_HEIGHT, 40, 20);
         deckButton.addIncomingAnimator(new MovementAnimator(deckButton, -20, deckButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         deckButton.moveIn();
 
