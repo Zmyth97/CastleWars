@@ -15,6 +15,8 @@ public interface GooglePlayServicesInterface {
 
     public void checkForPurchasesMade();
 
+    public void showAchievements();
+
     public void login();
 
     public void logout();

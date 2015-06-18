@@ -1,5 +1,6 @@
 package com.desitum.castleWars.world;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -18,8 +19,6 @@ import com.desitum.castleWars.libraries.menu.OnClickListener;
 import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
 import com.desitum.castleWars.libraries.menu.PopupImage;
 import com.desitum.castleWars.libraries.menu.PopupMenu;
-import com.desitum.castleWars.libraries.menu.PopupSlider;
-import com.desitum.castleWars.libraries.menu.PopupSliderListener;
 import com.desitum.castleWars.libraries.menu.PopupTextLabel;
 import com.desitum.castleWars.libraries.menu.PopupToggleButton;
 import com.desitum.castleWars.libraries.menu.PopupWidget;
@@ -29,7 +28,6 @@ import com.desitum.castleWars.objects.Cloud;
 import com.desitum.castleWars.objects.Deck;
 import com.desitum.castleWars.objects.Player;
 import com.desitum.castleWars.screens.GameScreen;
-import com.desitum.castleWars.screens.MenuScreen;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,10 +43,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public static final int PLAYER = 0;
     public static final int PLAYER2 = 1;
     ////////////////////////////////////////////////
-    public static final float DRAW_PILE_X = MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH - 1.25f;
-    public static final float DRAW_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
-    public static final float DISCARD_PILE_X = MenuScreen.SCREEN_WIDTH / 2 + 1.25f;
-    public static final float DISCARD_PILE_Y = MenuScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
+    public static final float DRAW_PILE_X = GameScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH - 1.25f;
+    public static final float DRAW_PILE_Y = GameScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
+    public static final float DISCARD_PILE_X = GameScreen.SCREEN_WIDTH / 2 + 1.25f;
+    public static final float DISCARD_PILE_Y = GameScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
     public static final float CARD_SPACING = 0.5f;
     public static final float CARDS_Y = 2;
     public static boolean EASY_DIFFICULTY = false;
@@ -176,9 +174,9 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         //Fill Both Players Hands At Start
         for (int i = 0; i < Settings.CARDS_DEALT; i++) {
-            float cardX = (MenuScreen.SCREEN_WIDTH / 2 + 5) - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
+            float cardX = (GameScreen.SCREEN_WIDTH / 2 + 5) - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
             player1.getHand().addCardToHand(drawNewCard(cardX, CARDS_Y, i * 0.2f, false));
-            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f, true));
+            player2.getHand().addCardToHand(drawNewCard(GameScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, i * 0.2f + 0.1f, true));
         }
 
         gpgs.unlockAchievement(CastleWars.AN_ERA_BEGINS);
@@ -270,7 +268,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
                     c.moveOut();
                     cardActions.doCardAction(card.getCardID());
                     player2.getHand().removeCardFromHand(c);
-                    player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0, true));
+                    player2.getHand().addCardToHand(drawNewCard(GameScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0, true));
                     disableCard(c);
                     usedCard = true;
                     deck.addCard(c);
@@ -292,7 +290,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             }
             chosenCard.moveOut();
             player2.getHand().removeCardFromHand(chosenCard);
-            player2.getHand().addCardToHand(drawNewCard(MenuScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0, true));
+            player2.getHand().addCardToHand(drawNewCard(GameScreen.SCREEN_WIDTH / 2 - Card.CARD_WIDTH / 2, -Card.CARD_HEIGHT, 0, true));
             deck.addCard(chosenCard);
             disableCard(chosenCard);
         }
@@ -310,7 +308,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
             player1.getHand().removeCardFromHand(card);
             int iRange = player1.getHand().getCardsInHand().size();
             for (int i = 0; i <= iRange; i++) {
-                float cardX = (MenuScreen.SCREEN_WIDTH / 2) + 5 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
+                float cardX = (GameScreen.SCREEN_WIDTH / 2) + 5 - ((Settings.CARDS_DEALT * Card.CARD_WIDTH) + ((Settings.CARDS_DEALT - 1) * CARD_SPACING)) / 2 + ((i * Card.CARD_WIDTH) + (i * CARD_SPACING));
                 if (i == player1.getHand().getCardsInHand().size()) {
                     player1.getHand().addCardToHand(drawNewCard(cardX, card.getY(), 0, false));
                 } else {
@@ -668,7 +666,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.discardToggle = new PopupToggleButton(Assets.trashCanSelected, Assets.trashCan, 5, 12, 8, 12, false);
         this.addWidgetToWorld(discardToggle);
 
-        PopupButtonMaterial settingsButton = new PopupButtonMaterial(Assets.exitButtonRound, 5, 2, MenuWorld.BUTTON_HEIGHT, 8, 8);
+        PopupButtonMaterial settingsButton = new PopupButtonMaterial(Assets.exitButtonRound, 5, 2, Settings.BUTTON_HEIGHT, 8, 8);
         settingsButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -691,7 +689,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         MovementAnimator yAnimator2 = new MovementAnimator(settingsMenu, 10, -130, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
         settingsMenu.addOutgoingAnimator(yAnimator2);
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButtonRound, 40, 40, MenuWorld.BUTTON_HEIGHT, 20, 20);
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButtonRound, 40, 40, Settings.BUTTON_HEIGHT, 20, 20);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -700,7 +698,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         });
         settingsMenu.addPopupWidget(okButton);
 
-        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButtonRound, 70, 40, MenuWorld.BUTTON_HEIGHT, 20, 20);
+        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButtonRound, 70, 40, Settings.BUTTON_HEIGHT, 20, 20);
         cancelButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -747,7 +745,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         PopupTextLabel easyLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth / 7, (menuHeight / 3) * 2, menuWidth / 4, (menuHeight / 8), "Easy");
         PopupTextLabel normalLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth / 4 * 2.3f, (menuHeight / 3) * 2, menuWidth / 3f, (menuHeight / 8), "Normal");
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, menuWidth / 2 - (menuWidth / 4) / 1.75f, menuHeight / 4 - menuHeight / 6, MenuWorld.BUTTON_HEIGHT, menuWidth / 4, menuHeight / 6);
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, menuWidth / 2 - (menuWidth / 4) / 1.75f, menuHeight / 4 - menuHeight / 6, Settings.BUTTON_HEIGHT, menuWidth / 4, menuHeight / 6);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {

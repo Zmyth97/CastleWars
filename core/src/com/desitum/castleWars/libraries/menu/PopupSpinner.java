@@ -17,6 +17,8 @@ public class PopupSpinner extends PopupMenu {
     private Texture background;
 
     private int value = 0;
+    private int max;
+    private int min;
 
     /**
      * Create new Popup Menu with a blank canvas
@@ -85,5 +87,16 @@ public class PopupSpinner extends PopupMenu {
         label.setText("" + value);
 
         super.update(delta);
+    }
+
+    public void setValue(int value){
+        this.value = value;
+    }
+
+    public void setMax(int max){
+        this.max = max;
+    }
+    public void setMin(int min){
+        this.min = min;
     }
 }

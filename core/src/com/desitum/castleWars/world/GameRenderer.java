@@ -9,7 +9,6 @@ import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Cloud;
 import com.desitum.castleWars.screens.GameScreen;
-import com.desitum.castleWars.screens.MenuScreen;
 
 /**
  * Created by Zmyth97 on 2/25/2015.
@@ -29,7 +28,7 @@ public class GameRenderer {
     }
 
     public void draw() {
-        gameCam.position.set(MenuScreen.SCREEN_WIDTH / 2, MenuScreen.SCREEN_HEIGHT / 2, 0);
+        gameCam.position.set(GameScreen.SCREEN_WIDTH / 2, GameScreen.SCREEN_HEIGHT / 2, 0);
         gameCam.update();
         gameBatch.setProjectionMatrix(gameCam.combined);
 

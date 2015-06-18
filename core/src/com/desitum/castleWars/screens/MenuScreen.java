@@ -24,7 +24,6 @@ public class MenuScreen implements Screen, MenuInterface {
     public static final float SCREEN_WIDTH = 150.0f;
     public static final float SCREEN_HEIGHT = 100.0f;
 
-
     private OrthographicCamera cam;
     private Viewport viewport;
 
@@ -83,8 +82,8 @@ public class MenuScreen implements Screen, MenuInterface {
     }
 
     @Override
-    public void leaderboard() {
-        //For when we add leaderboards
+    public void achievements() {
+        gpgs.showAchievements();
     }
 
     @Override
@@ -111,8 +110,8 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void render(float delta) {
-        update(delta);
-        draw();
+            update(delta);
+            draw();
     }
 
     @Override
@@ -138,7 +137,6 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void dispose() {
-
 
     }
 }

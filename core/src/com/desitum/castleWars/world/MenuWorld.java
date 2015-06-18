@@ -27,18 +27,11 @@ import com.desitum.castleWars.screens.MenuScreen;
  */
 public class MenuWorld extends KodyWorld {
 
-    public static final float BUTTON_HEIGHT = 0.5f;
-
-    private static final String FIRE_SKU = "flame_card_pack_id";
-    private static final String JAPANESE_SKU = "japanese_card_pack_id";
-    private static final String EXTRA_CARD_SLOT_1_ID = "extra_slot_1_id";
-    private static final String EXTRA_CARD_SLOT_2_ID = "extra_slot_2_id";
-
     private MenuInterface menuInterface;
     private GooglePlayServicesInterface gpgs;
     private PopupMenu popupMenu;
     private PopupButtonMaterial playButton;
-    private PopupButtonMaterial leaderboardButton;
+    private PopupButtonMaterial achievementButton;
     private PopupButtonMaterial multiButton;
     private PopupButtonMaterial deckButton;
     private PopupButtonMaterial settingsButton;
@@ -213,7 +206,7 @@ public class MenuWorld extends KodyWorld {
             wantsJapanese = false;
         }
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 45, 10, BUTTON_HEIGHT, 40, 20);
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, 45, 10, Settings.BUTTON_HEIGHT, 40, 20);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -240,33 +233,33 @@ public class MenuWorld extends KodyWorld {
 
     private void createButtons() {
         //Create the buttons!
-        playButton = new PopupButtonMaterial(Assets.playButton, ((MenuScreen.SCREEN_WIDTH / 2) * .35f) - 5f, 38, BUTTON_HEIGHT, 40, 20);
+        playButton = new PopupButtonMaterial(Assets.playButton, ((MenuScreen.SCREEN_WIDTH / 2) * .35f) - 5f, 38, Settings.BUTTON_HEIGHT, 40, 20);
         playButton.addIncomingAnimator(new MovementAnimator(playButton, -20, playButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         playButton.moveIn();
 
-        leaderboardButton = new PopupButtonMaterial(Assets.leaderboardButton, ((MenuScreen.SCREEN_WIDTH / 4) * 2.5f) - 5f, 38, BUTTON_HEIGHT, 40, 20);
-        leaderboardButton.addIncomingAnimator(new MovementAnimator(leaderboardButton, -20, leaderboardButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
-        leaderboardButton.moveIn();
+        achievementButton = new PopupButtonMaterial(Assets.leaderboardButton, ((MenuScreen.SCREEN_WIDTH / 4) * 2.5f) - 5f, 38, Settings.BUTTON_HEIGHT, 40, 20);
+        achievementButton.addIncomingAnimator(new MovementAnimator(achievementButton, -20, achievementButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
+        achievementButton.moveIn();
 
-        multiButton = new PopupButtonMaterial(Assets.multiButton, ((MenuScreen.SCREEN_WIDTH / 4) * 2.5f) - 5f, 10, BUTTON_HEIGHT, 40, 20);
+        multiButton = new PopupButtonMaterial(Assets.multiButton, ((MenuScreen.SCREEN_WIDTH / 4) * 2.5f) - 5f, 10, Settings.BUTTON_HEIGHT, 40, 20);
         multiButton.addIncomingAnimator(new MovementAnimator(multiButton, -20, multiButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         multiButton.moveIn();
 
-        deckButton = new PopupButtonMaterial(Assets.buildDeckButton, ((MenuScreen.SCREEN_WIDTH / 2) * .35f) - 5f, 10, BUTTON_HEIGHT, 40, 20);
+        deckButton = new PopupButtonMaterial(Assets.buildDeckButton, ((MenuScreen.SCREEN_WIDTH / 2) * .35f) - 5f, 10, Settings.BUTTON_HEIGHT, 40, 20);
         deckButton.addIncomingAnimator(new MovementAnimator(deckButton, -20, deckButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         deckButton.moveIn();
 
-        settingsButton = new PopupButtonMaterial(Assets.settingsButtonRound, ((MenuScreen.SCREEN_WIDTH)) - 22f, MenuScreen.SCREEN_HEIGHT - 22f, BUTTON_HEIGHT, 20, 20);
+        settingsButton = new PopupButtonMaterial(Assets.settingsButtonRound, ((MenuScreen.SCREEN_WIDTH)) - 22f, MenuScreen.SCREEN_HEIGHT - 22f, Settings.BUTTON_HEIGHT, 20, 20);
         settingsButton.addIncomingAnimator(new MovementAnimator(settingsButton, -20, settingsButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         settingsButton.moveIn();
 
-        storeButton = new PopupButtonMaterial(Assets.storeButtonRound, 2, MenuScreen.SCREEN_HEIGHT - 22f, BUTTON_HEIGHT, 20, 20);
+        storeButton = new PopupButtonMaterial(Assets.storeButtonRound, 2, MenuScreen.SCREEN_HEIGHT - 22f, Settings.BUTTON_HEIGHT, 20, 20);
         storeButton.addIncomingAnimator(new MovementAnimator(storeButton, -20, storeButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         storeButton.moveIn();
 
         //Add the buttons to the ArrayList
         this.addWidget(playButton);
-        this.addWidget(leaderboardButton);
+        this.addWidget(achievementButton);
         this.addWidget(multiButton);
         this.addWidget(deckButton);
         this.addWidget(settingsButton);
@@ -285,11 +278,11 @@ public class MenuWorld extends KodyWorld {
             }
         });
 
-        leaderboardButton.setButtonListener(new OnClickListener() {
+        achievementButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                menuInterface.leaderboard();
+                menuInterface.achievements();
             }
         });
 
@@ -312,8 +305,6 @@ public class MenuWorld extends KodyWorld {
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
                 menuInterface.multiplayer();
-                menuInterface.buyItem(FIRE_SKU);
-                System.out.println("Bought Something?");
             }
         });
 
@@ -344,7 +335,7 @@ public class MenuWorld extends KodyWorld {
         float AD_X = MenuScreen.SCREEN_WIDTH / 2 - AD_WIDTH / 2;
         float AD_Y = MenuScreen.SCREEN_HEIGHT / 2 - 15;
 
-        storeScroll = new PopupScrollArea(Assets.invisible, 0, MenuScreen.SCREEN_HEIGHT / 2 - AD_HEIGHT / 4, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, PopupScrollArea.HORIZONTAL, 1, 40, AD_WIDTH);
+        storeScroll = new PopupScrollArea(Assets.invisible, 0, MenuScreen.SCREEN_HEIGHT / 2 - AD_HEIGHT / 5, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, PopupScrollArea.HORIZONTAL, 1, 40, AD_WIDTH);
 
         flameAd = new PopupImage(Assets.flameAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 1
         japanAd = new PopupImage(Assets.japaneseAd, Assets.invisible, 0, 0, AD_WIDTH, AD_HEIGHT, false); //item 2
@@ -357,24 +348,24 @@ public class MenuWorld extends KodyWorld {
 
         storeMenu.addPopupWidget(storeScroll);
 
-        PopupButtonMaterial buyButton = new PopupButtonMaterial(Assets.buyButton, MenuScreen.SCREEN_WIDTH / 2 - 20, MenuScreen.SCREEN_HEIGHT / 6, BUTTON_HEIGHT, 40, 15);
+        PopupButtonMaterial buyButton = new PopupButtonMaterial(Assets.buyButton, MenuScreen.SCREEN_WIDTH / 2 - 20, MenuScreen.SCREEN_HEIGHT / 6, Settings.BUTTON_HEIGHT, 40, 15);
         buyButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
                 if (currentItem == 0) {
-                    menuInterface.buyItem(FIRE_SKU);
+                    menuInterface.buyItem(Settings.FIRE_SKU);
                 } else if (currentItem == 1) {
-                    menuInterface.buyItem(JAPANESE_SKU);
+                    menuInterface.buyItem(Settings.JAPANESE_SKU);
                 } else if (currentItem == 2) {
                     //Need to Add Second Card Slot Thingy
-                    menuInterface.buyItem(EXTRA_CARD_SLOT_1_ID);
+                    menuInterface.buyItem(Settings.EXTRA_CARD_SLOT_1_ID);
                 }
             }
         });
         storeMenu.addPopupWidget(buyButton);
 
-        PopupButtonMaterial leftButton = new PopupButtonMaterial(Assets.leftArrow, 2, MenuScreen.SCREEN_HEIGHT / 2 - 10, BUTTON_HEIGHT, 20, 20);
+        PopupButtonMaterial leftButton = new PopupButtonMaterial(Assets.leftArrow, 2, MenuScreen.SCREEN_HEIGHT / 2 - 10, Settings.BUTTON_HEIGHT, 20, 20);
         leftButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -386,7 +377,7 @@ public class MenuWorld extends KodyWorld {
         });
         storeMenu.addPopupWidget(leftButton);
 
-        PopupButtonMaterial rightButton = new PopupButtonMaterial(Assets.rightArrow, MenuScreen.SCREEN_WIDTH - 22, MenuScreen.SCREEN_HEIGHT / 2 - 10, BUTTON_HEIGHT, 20, 20);
+        PopupButtonMaterial rightButton = new PopupButtonMaterial(Assets.rightArrow, MenuScreen.SCREEN_WIDTH - 22, MenuScreen.SCREEN_HEIGHT / 2 - 10, Settings.BUTTON_HEIGHT, 20, 20);
         rightButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -399,7 +390,7 @@ public class MenuWorld extends KodyWorld {
         storeMenu.addPopupWidget(rightButton);
 
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButtonRound, 2, 2, BUTTON_HEIGHT, 20, 20);
+        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButtonRound, 2, 2, Settings.BUTTON_HEIGHT, 20, 20);
         okButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -410,5 +401,25 @@ public class MenuWorld extends KodyWorld {
         storeMenu.addPopupWidget(okButton);
 
         this.addPopupMenu(storeMenu);
+    }
+
+    public void dispose(){
+        popupMenu = null;
+        playButton = null;
+        achievementButton = null;
+        multiButton = null;
+        deckButton = null;
+        settingsButton = null;
+        storeButton = null;
+        originalAssetsToggle = null;
+        flameAssetsToggle = null;
+        japaneseAssetsToggle = null;
+        flameCardsToggle = null;
+        japaneseCardsToggle = null;
+        storeScroll = null;
+        storeMenu = null;
+        flameAd = null;
+        japanAd = null;
+        slotAd = null;
     }
 }

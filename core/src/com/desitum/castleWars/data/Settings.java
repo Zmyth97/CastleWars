@@ -7,6 +7,14 @@ import com.badlogic.gdx.Preferences;
  * Created by Zmyth97 on 2/25/2015.
  */
 public class Settings {
+
+    public static final float BUTTON_HEIGHT = 0.5f;
+
+    public static final String FIRE_SKU = "flame_card_pack_id";
+    public static final String JAPANESE_SKU = "japanese_card_pack_id";
+    public static final String EXTRA_CARD_SLOT_1_ID = "extra_slot_1_id";
+    private static final String EXTRA_CARD_SLOT_2_ID = "extra_slot_2_id";
+
     public static boolean volumeOn = true;
     public static float VOLUME = 1;
     public static int highscore;
@@ -18,10 +26,10 @@ public class Settings {
     public static boolean WANTS_JAPANESE_CARDS = true;
     public static int ASSETS_TO_USE = 1;
 
-    public static boolean BOUGHT_FlAME_PACK = true;
-    public static boolean BOUGHT_JAPANESE_PACK = true;
-    public static boolean EXTRA_CARD_SLOT_1 = true;
-    public static boolean EXTRA_CARD_SLOT_2 = true;
+    public static boolean BOUGHT_FlAME_PACK = false;
+    public static boolean BOUGHT_JAPANESE_PACK = false;
+    public static boolean EXTRA_CARD_SLOT_1 = false;
+    public static boolean EXTRA_CARD_SLOT_2 = false;
 
     //region CardAmounts
     public static int REINFORCE_AMOUNT = 3;

@@ -35,6 +35,11 @@ public class DesktopLauncher {
             }
 
             @Override
+            public void showAchievements(){
+
+            }
+
+            @Override
             public void login() {
 
             }

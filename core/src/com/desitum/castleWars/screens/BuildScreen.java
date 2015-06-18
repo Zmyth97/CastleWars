@@ -21,7 +21,6 @@ import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.world.GameWorld;
-import com.desitum.castleWars.world.MenuWorld;
 
 /**
  * Created by Zmyth97 on 6/1/2015.
@@ -778,7 +777,7 @@ public class BuildScreen extends KodyWorld implements Screen {
 
         addWidget(cardScrollArea);
 
-        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButtonRound, SCREEN_WIDTH -  2, 2, MenuWorld.BUTTON_HEIGHT, 20, 20);
+        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButtonRound, SCREEN_WIDTH -  22, 2, Settings.BUTTON_HEIGHT, 20, 20);
         cancelButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -789,7 +788,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         });
         addWidget(cancelButton);
 
-        PopupButtonMaterial saveButton = new PopupButtonMaterial(Assets.okButtonRound, 22, 2, MenuWorld.BUTTON_HEIGHT, 20, 20);
+        PopupButtonMaterial saveButton = new PopupButtonMaterial(Assets.okButtonRound, 2, 2, Settings.BUTTON_HEIGHT, 20, 20);
         saveButton.setButtonListener(new OnClickListener() {
             @Override
             public void onClick(PopupWidget widget) {
@@ -826,7 +825,7 @@ public class BuildScreen extends KodyWorld implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(cam.combined);
         batch.begin();
-        cam.position.set(MenuScreen.SCREEN_WIDTH / 2, MenuScreen.SCREEN_HEIGHT / 2, 0);
+        cam.position.set(BuildScreen.SCREEN_WIDTH / 2, BuildScreen.SCREEN_HEIGHT / 2, 0);
         cam.update();
         super.draw(batch);
         batch.end();

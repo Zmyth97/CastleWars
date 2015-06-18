@@ -13,7 +13,7 @@ public interface MenuInterface {
 
     public void buildDeck();
 
-    public void leaderboard();
+    public void achievements();
 
     public void store();
 
