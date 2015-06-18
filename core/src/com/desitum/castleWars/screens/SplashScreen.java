@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.CastleWars;
+import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
 
@@ -19,7 +20,7 @@ public class SplashScreen implements Screen {
     private OrthographicCamera cam;
     private SpriteBatch batch;
     private CastleWars game;
-    private com.desitum.castleWars.GooglePlayServicesInterface gps;
+    private GooglePlayServicesInterface gps;
 
     private Sprite desitum;
 
@@ -27,7 +28,7 @@ public class SplashScreen implements Screen {
     private boolean hasLoaded = false;
     private float timeElapsed = 0;
 
-    public SplashScreen(com.desitum.castleWars.GooglePlayServicesInterface gps, CastleWars game) {
+    public SplashScreen(GooglePlayServicesInterface gps, CastleWars game) {
 
         cam = new OrthographicCamera(MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
         cam.position.set(MenuScreen.SCREEN_WIDTH / 2, MenuScreen.SCREEN_HEIGHT / 2, 0);

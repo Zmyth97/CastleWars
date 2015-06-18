@@ -8,10 +8,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
@@ -24,50 +21,32 @@ import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
-import com.desitum.castleWars.data.Settings;
-import com.desitum.castleWars.world.GameWorld;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
-import com.google.android.gms.games.achievement.Achievement;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class AndroidLauncher extends AndroidApplication implements GooglePlayServicesInterface,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener{
-
-    private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
-
-    private static final String TAG = "GooglePlayServicesActivity";
-
-    private static final String KEY_IN_RESOLUTION = "is_in_resolution";
-
-    private static final String FIRE_PACK_SKU = "flame_card_pack_id";
-    private static final String JAPANESE_PACK_SKU = "japanese_card_pack_id";
-    private static final String EXTRA_SLOT_1_SKU = "extra_slot_1_id";
-    private static final String EXTRA_SLOT_2_SKU = "extra_slot_2_id";
-
-    private ConnectionResult mConnectionResult;
+        GoogleApiClient.OnConnectionFailedListener {
 
     /**
      * Request code for auto Google Play Services error resolution.
      */
     protected static final int REQUEST_CODE_RESOLUTION = 1;
-
-    /**
-     * Google API client.
-     */
-    private GoogleApiClient mGoogleApiClient;
-    /**
-     * Determines if the client is in a resolution state, and
-     * waiting for resolution intent to return.
-     */
-    private boolean mIsInResolution;
-
+    private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
+    private static final String TAG = "GooglePlayServicesActivity";
+    private static final String KEY_IN_RESOLUTION = "is_in_resolution";
+    private static final String FIRE_PACK_SKU = "flame_card_pack_id";
+    private static final String JAPANESE_PACK_SKU = "japanese_card_pack_id";
+    private static final String EXTRA_SLOT_1_SKU = "extra_slot_1_id";
+    private static final String EXTRA_SLOT_2_SKU = "extra_slot_2_id";
+    protected View gameView;
     //In App Purchase Code
     IInAppBillingService mService;
     ServiceConnection mServiceConn = new ServiceConnection() {
@@ -77,17 +56,27 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         }
 
         @Override
-        public void onServiceConnected(ComponentName name,
-                                       IBinder service) {
+        public void onServiceConnected(ComponentName name, IBinder service) {
             System.out.println("In App Purchase Service Connected");
             mService = IInAppBillingService.Stub.asInterface(service);
         }
     };
+    private PurchaseRunnable purchaseRunnable;
+    private ConnectionResult mConnectionResult;
 
-    protected View gameView;
+    /**
+     * Google API client.
+     */
+    private GoogleApiClient mGoogleApiClient;
+
+    /**
+     * Determines if the client is in a resolution state, and
+     * waiting for resolution intent to return.
+     */
+    private boolean mIsInResolution;
 
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             mIsInResolution = savedInstanceState.getBoolean(KEY_IN_RESOLUTION, false);
@@ -98,6 +87,12 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         config.useCompass = false;
         config.useWakelock = false;
 
+        purchaseRunnable = new PurchaseRunnable();
+        Thread myThread = new Thread(purchaseRunnable);
+        myThread.start();
+
+        createBillingService();
+
         // Do the stuff that initialize() would do for you
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -107,18 +102,30 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         layout.setLayoutParams(params);
 
-        //In App Purchases Code
-        System.out.println("Start Store Services");
-        Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
-        serviceIntent.setPackage("com.android.vending");
-        bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
-
         View gameView = createGameView(config);
         layout.addView(gameView);
 
         setContentView(layout);
+
+        Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
+        serviceIntent.setPackage("com.android.vending");
+        bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
     }
 
+    public void createBillingService() {
+        ServiceConnection mServiceConn = new ServiceConnection() {
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                mService = null;
+            }
+
+            @Override
+            public void onServiceConnected(ComponentName name,
+                                           IBinder service) {
+                mService = IInAppBillingService.Stub.asInterface(service);
+            }
+        };
+    }
 
     @Override
     public void getLeaderBoard() {
@@ -133,8 +140,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     public void submitScore(int score) {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             Games.Leaderboards.submitScore(mGoogleApiClient, "12345", score);
-        }
-        else{
+        } else {
             //Nothing!
         }
     }
@@ -152,7 +158,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_templar), 1);
             } else if (achievement == CastleWars.CRUSADER) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_crusader), 1);
-            }else if (achievement == CastleWars.DESTROYER) {
+            } else if (achievement == CastleWars.DESTROYER) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_destroyer), 1);
             } else if (achievement == CastleWars.BEGINNER_RAIDER) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_beginner_raider));
@@ -160,7 +166,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_novice_raider), 1);
             } else if (achievement == CastleWars.ADVANCED_RAIDER) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_advanced_raider), 1);
-            }else if (achievement == CastleWars.EXPERT_RAIDER) {
+            } else if (achievement == CastleWars.EXPERT_RAIDER) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_expert_raider), 1);
             } else if (achievement == CastleWars.MASTER_RAIDER) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_master_raider), 1);
@@ -168,7 +174,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_do_it_yourself));
             } else if (achievement == CastleWars.SILENT_BUT_DEADLY) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_silent_but_deadly));
-            }else if (achievement == CastleWars.WORLD_CONQUEST) {
+            } else if (achievement == CastleWars.WORLD_CONQUEST) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_world_conquest));
             } else if (achievement == CastleWars.PILLAGED) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_pillaged));
@@ -176,7 +182,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_flaming_ninja));
             } else if (achievement == CastleWars.BUILDER) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_builder));
-            }else if (achievement == CastleWars.ATTACKER) {
+            } else if (achievement == CastleWars.ATTACKER) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_attacker));
             } else if (achievement == CastleWars.CLOUD_WATCHER) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_cloud_watcher), 1);
@@ -184,7 +190,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_didnt_see_that_coming));
             } else if (achievement == CastleWars.CASTLE_MASTER) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_castle_master), 1);
-            }else if (achievement == CastleWars.FEUDAL_JAPAN) {
+            } else if (achievement == CastleWars.FEUDAL_JAPAN) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_feudal_japan));
             } else if (achievement == CastleWars.DEATH_BY_FIRE) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_death_by_fire));
@@ -192,7 +198,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_night_killer), 1);
             } else if (achievement == CastleWars.HONORABLE_SACRIFICE) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_honorable_sacrifice), 1);
-            }else if (achievement == CastleWars.JAPANESE_MASTER) {
+            } else if (achievement == CastleWars.JAPANESE_MASTER) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_japanese_master));
             } else if (achievement == CastleWars.BURN_IT_ALL) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_burn_it_all));
@@ -200,7 +206,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_death_from_above));
             } else if (achievement == CastleWars.REBORN) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_reborn), 1);
-            }else if (achievement == CastleWars.LET_IT_FLOW) {
+            } else if (achievement == CastleWars.LET_IT_FLOW) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_let_it_flow), 1);
             } else if (achievement == CastleWars.ELEMENTALIST) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_elementalist));
@@ -211,42 +217,16 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     }
 
     @Override
-    public void makePurchase(String sku){
-
-        int value = 0;
-        if(sku.contains("flame")){
-            value = 10001;
-        } else if(sku.contains("japan")){
-            value = 10002;
-        } else if(sku.contains("slot_1")){
-            value = 10003;
-        } else if(sku.contains("slot_2")){
-            value = 10004;
-        }
-
-        try {
-            System.out.println("Trying to Make Purchase!");
-            Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(),
-                    sku, "inapp", "");
-
-            PendingIntent pendingIntent = buyIntentBundle.getParcelable("BUY_INTENT");
-            try {
-                startIntentSenderForResult(pendingIntent.getIntentSender(),
-                        value, new Intent(), Integer.valueOf(0), Integer.valueOf(0),
-                        Integer.valueOf(0));
-            } catch(IntentSender.SendIntentException exception){
-                System.out.println(exception);
-            }
-        } catch(RemoteException exception) {
-            System.out.println(exception);
-        }
-
+    public void makePurchase(String sku) {
+        System.out.println("Adding sku: " + sku);
+        purchaseRunnable.addPhurchase(sku);
     }
 
     @Override
-    public void checkForPurchasesMade(){
+    public void checkForPurchasesMade() {
 
     }
+
     @Override
     public void login() {
 
@@ -257,7 +237,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
 
     }
 
-
     @Override
     public void shareRegularScore(int score) {
         Intent sendIntent = new Intent();
@@ -267,8 +246,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         startActivity(sendIntent);
     }
 
-
-
     private View createGameView(AndroidApplicationConfiguration cfg) {
         gameView = initializeForView(new CastleWars(this), cfg);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -277,7 +254,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         gameView.setLayoutParams(params);
         return gameView;
     }
-
 
     /**
      * Called when the Activity is made visible.
@@ -299,7 +275,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                     .addOnConnectionFailedListener(this)
                     .build();
         }
-        if(!mGoogleApiClient.isConnected()){
+        if (!mGoogleApiClient.isConnected()) {
             mGoogleApiClient.connect();
         }
     }
@@ -330,13 +306,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_RESOLVE_ERR && resultCode == RESULT_OK) {
-            mConnectionResult = null;
-            mGoogleApiClient.connect();
-        }
-
-        if (requestCode == 1001) { //Fire Card Pack
-            System.out.println("Finished Purchase, Result Code 1001, Fire Pack");
+        if (requestCode == 1001) {
             int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
             String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
             String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
@@ -344,66 +314,9 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
             if (resultCode == RESULT_OK) {
                 try {
                     JSONObject jo = new JSONObject(purchaseData);
-                    String sku = jo.getString("productId");
-                    System.out.println("You have bought the " + sku + ". Excellent choice!");
-                    Settings.BOUGHT_FlAME_PACK = true;
-                }
-                catch (JSONException e) {
-                    System.out.println("Failed to parse purchase data.");
-                    e.printStackTrace();
-                }
-            }
-        } else if (requestCode == 1002) { //Japan Card Pack
-            System.out.println("Finished Purchase, Result Code 1002, Japanese Pack");
-            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
-            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
-            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
-
-            if (resultCode == RESULT_OK) {
-                try {
-                    JSONObject jo = new JSONObject(purchaseData);
-                    String sku = jo.getString("productId");
-                    System.out.println("You have bought the " + sku + ". Excellent choice!");
-                    Settings.BOUGHT_JAPANESE_PACK = true;
-                }
-                catch (JSONException e) {
-                    System.out.println("Failed to parse purchase data.");
-                    e.printStackTrace();
-                }
-            }
-        }else if (requestCode == 1003) { //Extra Card Slot 1
-            System.out.println("Finished Purchase, Result Code 1003, Extra Card Slot 1");
-            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
-            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
-            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
-
-            if (resultCode == RESULT_OK) {
-                try {
-                    JSONObject jo = new JSONObject(purchaseData);
-                    String sku = jo.getString("productId");
-                    System.out.println("You have bought the " + sku + ". Excellent choice!");
-                    Settings.EXTRA_CARD_SLOT_1 = true;
-                }
-                catch (JSONException e) {
-                    System.out.println("Failed to parse purchase data.");
-                    e.printStackTrace();
-                }
-            }
-        }else if (requestCode == 1004) { //Extra Card Slot 2
-            System.out.println("Finished Purchase, Result Code 1004, Extra Card Slot 2");
-            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
-            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
-            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
-
-            if (resultCode == RESULT_OK) {
-                try {
-                    JSONObject jo = new JSONObject(purchaseData);
-                    String sku = jo.getString("productId");
-                    System.out.println("You have bought the " + sku + ". Excellent choice!");
-                    Settings.EXTRA_CARD_SLOT_2 = true;
-                }
-                catch (JSONException e) {
-                    System.out.println("Failed to parse purchase data.");
+                    System.out.println(jo.getString("productId"));
+                    if (jo.getString("productId").equals(FIRE_PACK_SKU)) System.out.println("Yay");
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -458,6 +371,63 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         super.onDestroy();
         if (mService != null) {
             unbindService(mServiceConn);
+        }
+    }
+
+    private class PurchaseRunnable implements Runnable {
+
+        private ArrayList<String> purchasesToMake;
+        private Iterator<String> skus;
+
+        public PurchaseRunnable() {
+            purchasesToMake = new ArrayList<String>();
+        }
+        @Override
+        public void run() {
+            while (true) {
+                int value = 1001;
+
+                skus = purchasesToMake.iterator();
+                while (skus.hasNext()) {
+                    String sku = skus.next();
+                    System.out.println("Trying sku: " + sku);
+                    try {
+                        Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(),
+                                sku, "inapp", "");
+
+                        PendingIntent pendingIntent = buyIntentBundle.getParcelable("BUY_INTENT");
+                        try {
+                            startIntentSenderForResult(pendingIntent.getIntentSender(),
+                                    value, new Intent(), Integer.valueOf(0), Integer.valueOf(0),
+                                    Integer.valueOf(0));
+                        } catch (IntentSender.SendIntentException exception) {
+                            System.out.println(exception);
+                        }
+                    } catch (RemoteException exception) {
+                        System.out.println(exception);
+                    }
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        public void addPhurchase(String phurchase) {
+            if (!phurchaseInQueue(phurchase)) {
+                System.out.println(phurchase);
+                purchasesToMake.add(phurchase);
+            }
+        }
+
+        public boolean phurchaseInQueue(String phurchase) {
+            boolean inQueue = false;
+            for (String item: purchasesToMake) {
+                if (item.equals(phurchase)) inQueue = true;
+            }
+            return inQueue;
         }
     }
 }

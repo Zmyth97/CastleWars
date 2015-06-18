@@ -3,6 +3,7 @@ package com.desitum.castleWars;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.desitum.castleWars.screens.SplashScreen;
 
 
 public class CastleWars extends Game {
@@ -46,7 +47,7 @@ public class CastleWars extends Game {
 
     @Override
     public void create() {
-        Screen splashScreen = new com.desitum.castleWars.screens.SplashScreen(googlePlay, this);
+        Screen splashScreen = new SplashScreen(googlePlay, this);
         this.setScreen(splashScreen);
     }
 

@@ -94,7 +94,9 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void buyItem(String sku) {
+        System.out.println("buying item: " + sku);
         gpgs.makePurchase(sku);
+        System.out.println("buying item2: " + sku);
     }
 
     @Override
