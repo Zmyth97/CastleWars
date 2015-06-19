@@ -2,5 +2,6 @@
 <resources>
 
     <string name="app_name">CastleWars</string>
+    <string name="service_id">com.desitum.castlewars.service --></string>
 
 </resources>

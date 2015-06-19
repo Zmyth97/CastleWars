@@ -1,10 +1,14 @@
 package com.desitum.castleWars.libraries.menu;
 
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.CollisionDetection;
+
+import java.util.ArrayList;
 
 /**
  * Created by kody on 4/18/15.
@@ -71,6 +75,7 @@ public class PopupSpinner extends PopupMenu {
      * @param posMatters if your mouse position matters
      */
     public void udpateScrollInput(int amount, Vector3 mousePos, boolean posMatters) {
+        if (Gdx.app.getType() == ApplicationType.Android)
         if (posMatters) {
             if (CollisionDetection.pointInRectangle(this.getBoundingRectangle(), mousePos)) {
                 value += amount;
@@ -96,7 +101,13 @@ public class PopupSpinner extends PopupMenu {
     public void setMax(int max){
         this.max = max;
     }
+
     public void setMin(int min){
         this.min = min;
+    }
+
+    @Override
+    public ArrayList<PopupWidget> getChildren(boolean walk) {
+        return getChildren();
     }
 }

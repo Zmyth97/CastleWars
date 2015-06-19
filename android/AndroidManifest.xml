@@ -23,6 +23,8 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.google.android.gms.nearby.connection.SERVICE_ID"
+            android:value="@string/service_id" />
         <activity
             android:name="com.desitum.castleWars.android.AndroidLauncher"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
