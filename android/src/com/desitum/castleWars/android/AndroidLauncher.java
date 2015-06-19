@@ -95,11 +95,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            mIsInResolution = savedInstanceState.getBoolean(KEY_IN_RESOLUTION, false);
-        }
-        mContext = getContext();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -108,6 +103,12 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                 .addScope(Games.SCOPE_GAMES)
                 .addApi(Nearby.CONNECTIONS_API)
                 .build();
+
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mIsInResolution = savedInstanceState.getBoolean(KEY_IN_RESOLUTION, false);
+        }
+        mContext = getContext();
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useImmersiveMode = true;
