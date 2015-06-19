@@ -68,12 +68,11 @@ public class CastleWars extends Game {
     //TODO: CheckList!!!
     // Make sure everything works (like achievements) if you aren't signed in, that it doesn't cause a crash or anything haha
     //See if In App Purchases Work
-    //Save Purchases to Settings In Case of No Internet Connection (Hash?)
+    //Query Google on Load to See if they have purchased anything. Call it after "Settings.load"
     //Add Saving/Loading Decks
     //Spinners Show Default Values (Their deck values? If so we need a way of settings back to "default" values)
     //Spinners can't go 10+ or negative
     //Finish Dev Console
-    //Make Promo Graphic, Upload Finished APK (Add a Video?)
     //Finish Adding Achievements that aren't done (They don't have a # next to them)
     //Add Networking Code and Implement
     //Test Networking

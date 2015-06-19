@@ -800,6 +800,7 @@ public class BuildScreen extends KodyWorld implements Screen {
             if (widget instanceof PopupSpinner) {
                 PopupSpinner spinner = (PopupSpinner) widget;
                 spinner.setMin(0);
+                spinner.setMax(9);
             }
         }
     }

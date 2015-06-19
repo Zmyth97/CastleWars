@@ -350,10 +350,20 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                     JSONObject jo = new JSONObject(purchaseData);
                     String sku = jo.getString("productId");
                     System.out.println("You have bought the " + sku + ". Excellent choice!");
-                    if (sku.equals(FIRE_PACK_SKU)) Settings.BOUGHT_FlAME_PACK = true;
-                    else if (sku.equals(JAPANESE_PACK_SKU)) Settings.BOUGHT_JAPANESE_PACK = true;
-                    else if (sku.equals(EXTRA_SLOT_1_SKU)) Settings.EXTRA_CARD_SLOT_1 = true;
-                    else if (sku.equals(EXTRA_SLOT_2_SKU)) Settings.EXTRA_CARD_SLOT_2 = true;
+                    if (sku.equals(FIRE_PACK_SKU)) {
+                        Settings.saveCardPacks(true, Settings.BOUGHT_JAPANESE_PACK);
+                        Settings.savePackSettings(2, true, Settings.WANTS_JAPANESE_CARDS);
+                    }
+                    else if (sku.equals(JAPANESE_PACK_SKU)){
+                        Settings.saveCardPacks(Settings.BOUGHT_FlAME_PACK, true);
+                        Settings.savePackSettings(3, Settings.WANTS_FLAME_CARDS, true);
+                    }
+                    else if (sku.equals(EXTRA_SLOT_1_SKU)) {
+                        Settings.saveExtraSlots(true, false);
+                    }
+                    else if (sku.equals(EXTRA_SLOT_2_SKU)) {
+                        Settings.saveExtraSlots(true, true);
+                    }
                 }
                 catch (JSONException e) {
                     System.out.println("Failed to parse purchase data.");
@@ -478,6 +488,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     private void startAdvertising() {
         if (!isConnectedToNetwork()) {
             // Implement logic when device is not connected to a network
+            System.out.println("Not Connected");
         }
 
         // Identify that this device is the host
@@ -500,6 +511,8 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
             @Override
             public void onResult(Connections.StartAdvertisingResult result) {
                 if (result.getStatus().isSuccess()) {
+                    System.out.println("Connected");
+
                     // Device is advertising
                 } else {
                     int statusCode = result.getStatus().getStatusCode();
@@ -512,6 +525,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     private void startDiscovery() {
         if (!isConnectedToNetwork()) {
             // Implement logic when device is not connected to a network
+            System.out.println("Not Connected");
         }
         String serviceId = getString(R.string.service_id);
 
@@ -524,6 +538,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                     @Override
                     public void onResult(Status status) {
                         if (status.isSuccess()) {
+                            System.out.println("Connected");
                             // Device is discovering
                         } else {
                             int statusCode = status.getStatusCode();

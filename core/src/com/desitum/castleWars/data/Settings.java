@@ -13,7 +13,7 @@ public class Settings {
     public static final String FIRE_SKU = "flame_card_pack_id";
     public static final String JAPANESE_SKU = "japanese_card_pack_id";
     public static final String EXTRA_CARD_SLOT_1_ID = "extra_slot_1_id";
-    private static final String EXTRA_CARD_SLOT_2_ID = "extra_slot_2_id";
+    public static final String EXTRA_CARD_SLOT_2_ID = "extra_slot_2_id";
 
     public static boolean volumeOn = true;
     public static float VOLUME = 1;
@@ -85,6 +85,10 @@ public class Settings {
         ASSETS_TO_USE = prefs.getInteger("assetsType", 1);
         WANTS_FLAME_CARDS = prefs.getBoolean("wantsFlame", true);
         WANTS_JAPANESE_CARDS = prefs.getBoolean("wantsJapanese", true);
+        EXTRA_CARD_SLOT_1 = prefs.getBoolean("extraSlot1", false);
+        EXTRA_CARD_SLOT_2 = prefs.getBoolean("extraSlot2", false);
+        BOUGHT_FlAME_PACK = prefs.getBoolean("boughtFlame", false);
+        BOUGHT_JAPANESE_PACK = prefs.getBoolean("boughtJapanese", false);
         VOLUME = prefs.getFloat("sound", 0.5f);
     }
 
@@ -101,6 +105,22 @@ public class Settings {
         prefs.putBoolean("wantsFlame", wantsFlame);
         prefs.putBoolean("wantsJapanese", wantsJapanese);
         prefs.flush();
+    }
+
+    public static void saveExtraSlots(boolean extraSlot1, boolean extraSlot2){
+        EXTRA_CARD_SLOT_1 = extraSlot1;
+        EXTRA_CARD_SLOT_2 = extraSlot2;
+        Preferences prefs = Gdx.app.getPreferences("settings");
+        prefs.putBoolean("extraSlot1", extraSlot1);
+        prefs.putBoolean("extraSlot2", extraSlot2);
+    }
+
+    public static void saveCardPacks(boolean boughtFlame, boolean boughtJapanese){
+        BOUGHT_FlAME_PACK = boughtFlame;
+        BOUGHT_JAPANESE_PACK = boughtJapanese;
+        Preferences prefs = Gdx.app.getPreferences("settings");
+        prefs.putBoolean("boughtFlame", boughtFlame);
+        prefs.putBoolean("boughtJapanese", boughtJapanese);
     }
 
 

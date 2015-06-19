@@ -304,7 +304,7 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                menuInterface.multiplayer(true);
+                menuInterface.multiplayer(false);
             }
         });
 
@@ -358,8 +358,11 @@ public class MenuWorld extends KodyWorld {
                 } else if (currentItem == 1) {
                     menuInterface.buyItem(Settings.JAPANESE_SKU);
                 } else if (currentItem == 2) {
-                    //Need to Add Second Card Slot Thingy
-                    menuInterface.buyItem(Settings.EXTRA_CARD_SLOT_1_ID);
+                    if(Settings.EXTRA_CARD_SLOT_1){
+                        menuInterface.buyItem(Settings.EXTRA_CARD_SLOT_2_ID);
+                    } else {
+                        menuInterface.buyItem(Settings.EXTRA_CARD_SLOT_1_ID);
+                    }
                 }
             }
         });
