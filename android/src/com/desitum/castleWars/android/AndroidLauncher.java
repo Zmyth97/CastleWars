@@ -104,6 +104,8 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
+                .addApi(Games.API)
+                .addScope(Games.SCOPE_GAMES)
                 .addApi(Nearby.CONNECTIONS_API)
                 .build();
 

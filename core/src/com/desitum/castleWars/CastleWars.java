@@ -71,7 +71,6 @@ public class CastleWars extends Game {
     //Query Google on Load to See if they have purchased anything. Call it after "Settings.load"
     //Add Saving/Loading Decks
     //Spinners Show Default Values (Their deck values? If so we need a way of settings back to "default" values)
-    //Spinners can't go 10+ or negative
     //Finish Dev Console
     //Finish Adding Achievements that aren't done (They don't have a # next to them)
     //Add Networking Code and Implement
