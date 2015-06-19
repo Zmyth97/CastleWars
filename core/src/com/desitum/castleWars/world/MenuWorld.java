@@ -304,7 +304,7 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
-                menuInterface.multiplayer();
+                menuInterface.multiplayer(true);
             }
         });
 

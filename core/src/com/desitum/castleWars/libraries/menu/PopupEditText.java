@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 
+import java.util.ArrayList;
+
 /**
  * Created by kody on 5/23/15.
  * can be used by kody and people in [kody}]
@@ -238,6 +240,11 @@ public class PopupEditText extends PopupWidget {
     @Override
     boolean scrollPosMatters() {
         return false;
+    }
+
+    @Override
+    public ArrayList<PopupWidget> getChildren(boolean walk) {
+        return new ArrayList<PopupWidget>();
     }
 
     public void setText(String text) {

@@ -9,7 +9,7 @@ public interface MenuInterface {
 
     public void settings();
 
-    public void multiplayer();
+    public void multiplayer(boolean host);
 
     public void buildDeck();
 

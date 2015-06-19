@@ -170,5 +170,5 @@ public abstract class PopupWidget extends Sprite {
 
     abstract boolean scrollPosMatters();
 
-    abstract ArrayList<PopupWidget> getChildren(boolean walk);
+    public abstract ArrayList<PopupWidget> getChildren(boolean walk);
 }

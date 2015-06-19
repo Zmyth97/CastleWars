@@ -212,5 +212,10 @@ public class PopupTextLabel extends PopupWidget {
     public void setFontColor(Color color) {
         currentColor = color;
     }
+
+    @Override
+    public ArrayList<PopupWidget> getChildren(boolean walk) {
+        return new ArrayList<PopupWidget>();
+    }
 }
 

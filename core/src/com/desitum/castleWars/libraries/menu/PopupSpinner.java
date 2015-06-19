@@ -48,7 +48,7 @@ public class PopupSpinner extends PopupMenu {
             @Override
             public void onClick(PopupWidget widget) {
                 value += 1;
-                System.out.println("Clicked: " + value);
+                if (value > max) value = max;
             }
         });
         addPopupWidget(clickUp);
@@ -58,6 +58,7 @@ public class PopupSpinner extends PopupMenu {
             @Override
             public void onClick(PopupWidget widget) {
                 value -= 1;
+                if (value < min) value = min;
             }
         });
         addPopupWidget(clickDown);
@@ -108,6 +109,6 @@ public class PopupSpinner extends PopupMenu {
 
     @Override
     public ArrayList<PopupWidget> getChildren(boolean walk) {
-        return getChildren();
+        return new ArrayList<PopupWidget>();
     }
 }

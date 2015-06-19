@@ -11,6 +11,8 @@ import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.ScaleAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
 
+import java.util.ArrayList;
+
 /**
  * Created by kody on 4/19/15.
  * can be used by kody and people in []
@@ -122,5 +124,10 @@ public class PopupButtonMaterial extends PopupWidget {
     public void setY(float y) {
         super.setY(y);
         originalY = y;
+    }
+
+    @Override
+    public ArrayList<PopupWidget> getChildren(boolean walk) {
+        return new ArrayList<PopupWidget>();
     }
 }

@@ -77,8 +77,9 @@ public class MenuScreen implements Screen, MenuInterface {
     }
 
     @Override
-    public void multiplayer() {
-        //For when we add multiplayer
+    public void multiplayer(boolean isHost) {
+        if (isHost) gpgs.hostMultiplayer();
+        else gpgs.joinMultiplayer();
     }
 
     @Override

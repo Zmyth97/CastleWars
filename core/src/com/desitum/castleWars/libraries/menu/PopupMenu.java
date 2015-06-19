@@ -161,6 +161,17 @@ public class PopupMenu extends PopupWidget {
         return true;
     }
 
+    @Override
+    public ArrayList<PopupWidget> getChildren(boolean walk) {
+        ArrayList<PopupWidget> widgets = getChildren();
+        if (walk) {
+            for (PopupWidget widget: getChildren()) {
+                widgets.addAll(widget.getChildren(walk));
+            }
+        }
+        return widgets;
+    }
+
     /**
      * update animation and widgets and their animations associated with the PopupMenu
      *

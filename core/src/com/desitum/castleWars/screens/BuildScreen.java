@@ -30,17 +30,12 @@ public class BuildScreen extends KodyWorld implements Screen {
     public static final float SCREEN_WIDTH = 150;
     public static final float SCREEN_HEIGHT = 100;
     public static final float SPINNER_HEIGHT = 12;
-
+    GooglePlayServicesInterface gpgs;
     private CastleWars castleWars;
-
     private SpriteBatch batch;
     private OrthographicCamera cam;
     private Viewport viewport;
-
     private PopupScrollArea cardScrollArea;
-
-    GooglePlayServicesInterface gpgs;
-
     //region Basic PopupSpinners
     //Build Cards
     private PopupSpinner barrierSpinner;
@@ -800,6 +795,13 @@ public class BuildScreen extends KodyWorld implements Screen {
             }
         });
         addWidget(saveButton);
+
+        for (PopupWidget widget: cardScrollArea.getChildren(true)) {
+            if (widget instanceof PopupSpinner) {
+                PopupSpinner spinner = (PopupSpinner) widget;
+                spinner.setMin(0);
+            }
+        }
     }
 
     private void moveToMenuScreen() {

@@ -79,6 +79,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
             mService = IInAppBillingService.Stub.asInterface(service);
         }
     };
+    private Context mContext;
     private ConnectionResult mConnectionResult;
     // Identify if the device is the host
     private boolean mIsHost = false;
@@ -98,6 +99,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         if (savedInstanceState != null) {
             mIsInResolution = savedInstanceState.getBoolean(KEY_IN_RESOLUTION, false);
         }
+        mContext = getContext();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -225,34 +227,20 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     @Override
     public void makePurchase(String sku){
 
-        int value = 0;
-        if(sku.contains("flame")){
-            value = 10001;
-        } else if(sku.contains("japan")){
-            value = 10002;
-        } else if(sku.contains("slot_1")){
-            value = 10003;
-        } else if(sku.contains("slot_2")){
-            value = 10004;
-        }
-
+        System.out.println("Trying sku: " + sku);
+        int value = 1001;
         try {
-            System.out.println("Trying to Make Purchase!");
-            Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(),
-                    sku, "inapp", "");
+            Bundle buyIntentBundle = mService.getBuyIntent(3, getPackageName(), sku, "inapp", "");
 
             PendingIntent pendingIntent = buyIntentBundle.getParcelable("BUY_INTENT");
             try {
-                startIntentSenderForResult(pendingIntent.getIntentSender(),
-                        value, new Intent(), Integer.valueOf(0), Integer.valueOf(0),
-                        Integer.valueOf(0));
-            } catch(IntentSender.SendIntentException exception){
+                startIntentSenderForResult(pendingIntent.getIntentSender(), value, new Intent(), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0));
+            } catch (IntentSender.SendIntentException exception) {
                 System.out.println(exception);
             }
-        } catch(RemoteException exception) {
+        } catch (RemoteException exception) {
             System.out.println(exception);
         }
-
     }
 
     @Override
@@ -277,6 +265,20 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     @Override
     public void logout() {
 
+    }
+
+    @Override
+    public void hostMultiplayer() {
+        if (isConnectedToNetwork()) {
+            startAdvertising();
+        }
+    }
+
+    @Override
+    public void joinMultiplayer() {
+        if (isConnectedToNetwork()) {
+            startDiscovery();
+        }
     }
 
     @Override
@@ -337,7 +339,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
             mGoogleApiClient.connect();
         }
 
-        if (requestCode == 1001) { //Fire Card Pack
+        if (requestCode == 1001) {
             System.out.println("Finished Purchase, Result Code 1001, Fire Pack");
             int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
             String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
@@ -348,61 +350,10 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                     JSONObject jo = new JSONObject(purchaseData);
                     String sku = jo.getString("productId");
                     System.out.println("You have bought the " + sku + ". Excellent choice!");
-                    Settings.BOUGHT_FlAME_PACK = true;
-                }
-                catch (JSONException e) {
-                    System.out.println("Failed to parse purchase data.");
-                    e.printStackTrace();
-                }
-            }
-        } else if (requestCode == 1002) { //Japan Card Pack
-            System.out.println("Finished Purchase, Result Code 1002, Japanese Pack");
-            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
-            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
-            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
-
-            if (resultCode == RESULT_OK) {
-                try {
-                    JSONObject jo = new JSONObject(purchaseData);
-                    String sku = jo.getString("productId");
-                    System.out.println("You have bought the " + sku + ". Excellent choice!");
-                    Settings.BOUGHT_JAPANESE_PACK = true;
-                }
-                catch (JSONException e) {
-                    System.out.println("Failed to parse purchase data.");
-                    e.printStackTrace();
-                }
-            }
-        }else if (requestCode == 1003) { //Extra Card Slot 1
-            System.out.println("Finished Purchase, Result Code 1003, Extra Card Slot 1");
-            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
-            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
-            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
-
-            if (resultCode == RESULT_OK) {
-                try {
-                    JSONObject jo = new JSONObject(purchaseData);
-                    String sku = jo.getString("productId");
-                    System.out.println("You have bought the " + sku + ". Excellent choice!");
-                    Settings.EXTRA_CARD_SLOT_1 = true;
-                }
-                catch (JSONException e) {
-                    System.out.println("Failed to parse purchase data.");
-                    e.printStackTrace();
-                }
-            }
-        }else if (requestCode == 1004) { //Extra Card Slot 2
-            System.out.println("Finished Purchase, Result Code 1004, Extra Card Slot 2");
-            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
-            String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
-            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
-
-            if (resultCode == RESULT_OK) {
-                try {
-                    JSONObject jo = new JSONObject(purchaseData);
-                    String sku = jo.getString("productId");
-                    System.out.println("You have bought the " + sku + ". Excellent choice!");
-                    Settings.EXTRA_CARD_SLOT_2 = true;
+                    if (sku.equals(FIRE_PACK_SKU)) Settings.BOUGHT_FlAME_PACK = true;
+                    else if (sku.equals(JAPANESE_PACK_SKU)) Settings.BOUGHT_JAPANESE_PACK = true;
+                    else if (sku.equals(EXTRA_SLOT_1_SKU)) Settings.EXTRA_CARD_SLOT_1 = true;
+                    else if (sku.equals(EXTRA_SLOT_2_SKU)) Settings.EXTRA_CARD_SLOT_2 = true;
                 }
                 catch (JSONException e) {
                     System.out.println("Failed to parse purchase data.");
@@ -464,8 +415,27 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
     }
 
     @Override
-    public void onConnectionRequest(String s, String s2, String s3, byte[] bytes) {
-
+    public void onConnectionRequest(final String s, String s2, final String s3, byte[] bytes) {
+        if (mIsHost) {
+            byte[] myPayload = null;
+            // Automatically accept all requests
+            Nearby.Connections.acceptConnectionRequest(mGoogleApiClient, s,
+                    myPayload, this).setResultCallback(new ResultCallback<Status>() {
+                @Override
+                public void onResult(Status status) {
+                    if (status.isSuccess()) {
+                        Toast.makeText(mContext, "Connected to " + s3,
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mContext, "Failed to connect to: " + s3,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            // Clients should not be advertising and will reject all connection requests.
+            Nearby.Connections.rejectConnectionRequest(mGoogleApiClient, s);
+        }
     }
 
     @Override

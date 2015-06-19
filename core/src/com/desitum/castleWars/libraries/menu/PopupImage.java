@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.ArrayList;
+
 /**
  * Created by kody on 4/19/15.
  * can be used by kody and people in [Zack]
@@ -87,5 +89,10 @@ public class PopupImage extends PopupWidget {
 
     public void setButtonListener(OnClickListener buttonListener) {
         this.buttonListener = buttonListener;
+    }
+
+    @Override
+    public ArrayList<PopupWidget> getChildren(boolean walk) {
+        return new ArrayList<PopupWidget>();
     }
 }

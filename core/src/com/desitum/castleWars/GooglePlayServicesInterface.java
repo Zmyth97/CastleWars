@@ -21,5 +21,9 @@ public interface GooglePlayServicesInterface {
 
     public void logout();
 
+    public void hostMultiplayer();
+
+    public void joinMultiplayer();
+
     public void shareRegularScore(int score);
 }

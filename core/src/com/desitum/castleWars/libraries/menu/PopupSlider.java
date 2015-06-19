@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
+import java.util.ArrayList;
+
 /**
  * Created by kody on 4/21/15.
  * can be used by kody and people in []
@@ -71,5 +73,10 @@ public class PopupSlider extends PopupWidget {
     @Override
     boolean scrollPosMatters() {
         return true;
+    }
+
+    @Override
+    public ArrayList<PopupWidget> getChildren(boolean walk) {
+        return new ArrayList<PopupWidget>();
     }
 }

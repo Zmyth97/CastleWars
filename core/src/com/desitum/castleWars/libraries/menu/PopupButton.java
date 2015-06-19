@@ -3,6 +3,8 @@ package com.desitum.castleWars.libraries.menu;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import java.util.ArrayList;
+
 /**
  * Created by kody on 4/19/15.
  * can be used by kody and people in []
@@ -51,5 +53,10 @@ public class PopupButton extends PopupWidget {
     @Override
     boolean scrollPosMatters() {
         return false;
+    }
+
+    @Override
+    public ArrayList<PopupWidget> getChildren(boolean walk) {
+        return new ArrayList<PopupWidget>();
     }
 }
