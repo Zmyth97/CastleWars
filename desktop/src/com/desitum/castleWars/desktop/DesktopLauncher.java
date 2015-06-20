@@ -50,16 +50,6 @@ public class DesktopLauncher {
             }
 
             @Override
-            public void hostMultiplayer() {
-
-            }
-
-            @Override
-            public void joinMultiplayer() {
-
-            }
-
-            @Override
             public void shareRegularScore(int score) {
 
             }

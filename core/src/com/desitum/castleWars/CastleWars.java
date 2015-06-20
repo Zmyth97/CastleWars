@@ -12,14 +12,14 @@ public class CastleWars extends Game {
     public static final int TEMPLAR = 2; //10 Wins #
     public static final int CRUSADER = 3; //50 Wins #
     public static final int DESTROYER = 4; //100 Wins #
-    public static final int BEGINNER_RAIDER = 5; //1 Multi Win #
-    public static final int NOVICE_RAIDER = 6; //3 Multi Wins #
-    public static final int ADVANCED_RAIDER = 7; //5 Multi Wins #
-    public static final int EXPERT_RAIDER = 8; //10 Multi Wins #
-    public static final int MASTER_RAIDER = 9; //25 Multi Wins #
+    public static final int BEGINNER_BUILDER = 5; //1 Multi Win # ??WRONG! THESE ARE BY BUILDING WINS NOW
+    public static final int NOVICE_BUILDER = 6; //3 Multi Wins #??WRONG! THESE ARE BY BUILDING WINS NOW
+    public static final int ADVANCED_BUILDER = 7; //5 Multi Wins #??WRONG! THESE ARE BY BUILDING WINS NOW
+    public static final int EXPERT_BUILDER = 8; //10 Multi Wins #??WRONG! THESE ARE BY BUILDING WINS NOW
+    public static final int MASTER_BUILDER = 9; //25 Multi Wins #??WRONG! THESE ARE BY BUILDING WINS NOW
     public static final int DO_IT_YOURSELF = 10; //Build First Deck #
     public static final int SILENT_BUT_DEADLY = 11; //First Time Muting the Game (lol) #
-    public static final int WORLD_CONQUEST = 12; //First Multiplayer Game
+    public static final int WORLD_CONQUEST = 12; //#
     public static final int PILLAGED = 13; //Be Beaten by the AI on Normal #
     public static final int FLAMING_NINJA = 14; //Buy Both Fire and Japanese Card Packs #
     public static final int FEUDAL_JAPAN = 15; //Buy the Japanese Card Pack #
@@ -66,15 +66,10 @@ public class CastleWars extends Game {
     }
 
     //TODO: CheckList!!!
-    // Make sure everything works (like achievements) if you aren't signed in, that it doesn't cause a crash or anything haha
-    //See if In App Purchases Work
-    //Query Google on Load to See if they have purchased anything. Call it after "Settings.load"
+    //Query Google on Load to See if they have purchased anything. (Call it after "Settings.load" in SplashScreen though)
     //Add Saving/Loading Decks
-    //Spinners Show Default Values (Their deck values? If so we need a way of settings back to "default" values)
-    //Finish Dev Console
-    //Finish Adding Achievements that aren't done (They don't have a # next to them)
-    //Add Networking Code and Implement
-    //Test Networking
+    //Spinners Show Default Values (Default at first, then theirs) Whichever is current
+    //Have a button on build screen to restore default values
 
     //General Testing! Cards work, buttons, loading and unloading screens, saving stuff, purchases, signed in, signed out, achievements, etc.
 

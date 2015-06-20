@@ -7,17 +7,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.android.vending.billing.IInAppBillingService;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -25,45 +25,50 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.desitum.castleWars.CastleWars;
 import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.data.Settings;
+import com.desitum.castleWars.world.GameWorld;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.games.Games;
-import com.google.android.gms.nearby.Nearby;
-import com.google.android.gms.nearby.connection.AppIdentifier;
-import com.google.android.gms.nearby.connection.AppMetadata;
-import com.google.android.gms.nearby.connection.Connections;
+import com.google.android.gms.games.achievement.Achievement;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AndroidLauncher extends AndroidApplication implements GooglePlayServicesInterface,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener,
-        Connections.ConnectionRequestListener,
-        Connections.MessageListener,
-        Connections.EndpointDiscoveryListener{
+        GoogleApiClient.OnConnectionFailedListener{
+
+    private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
+    private static final int REQUEST_ACHIEVEMENTS = 20002;
+
+    private static final String TAG = "GooglePlayServicesActivity";
+
+    private static final String KEY_IN_RESOLUTION = "is_in_resolution";
+
+    private static final String FIRE_PACK_SKU = "flame_card_pack_id";
+    private static final String JAPANESE_PACK_SKU = "japanese_card_pack_id";
+    private static final String EXTRA_SLOT_1_SKU = "extra_slot_1_id";
+    private static final String EXTRA_SLOT_2_SKU = "extra_slot_2_id";
+
+    private ConnectionResult mConnectionResult;
 
     /**
      * Request code for auto Google Play Services error resolution.
      */
     protected static final int REQUEST_CODE_RESOLUTION = 1;
-    private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
-    private static final int REQUEST_ACHIEVEMENTS = 20002;
-    private static final String TAG = "GooglePlayServicesActivity";
-    private static final String KEY_IN_RESOLUTION = "is_in_resolution";
-    private static final String FIRE_PACK_SKU = "flame_card_pack_id";
-    private static final String JAPANESE_PACK_SKU = "japanese_card_pack_id";
-    private static final String EXTRA_SLOT_1_SKU = "extra_slot_1_id";
-    private static final String EXTRA_SLOT_2_SKU = "extra_slot_2_id";
-    private static int[] NETWORK_TYPES = {ConnectivityManager.TYPE_WIFI,
-            ConnectivityManager.TYPE_ETHERNET};
-    protected View gameView;
+
+    /**
+     * Google API client.
+     */
+    private GoogleApiClient mGoogleApiClient;
+    /**
+     * Determines if the client is in a resolution state, and
+     * waiting for resolution intent to return.
+     */
+    private boolean mIsInResolution;
+
     //In App Purchase Code
     IInAppBillingService mService;
     ServiceConnection mServiceConn = new ServiceConnection() {
@@ -79,37 +84,15 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
             mService = IInAppBillingService.Stub.asInterface(service);
         }
     };
-    private Context mContext;
-    private ConnectionResult mConnectionResult;
-    // Identify if the device is the host
-    private boolean mIsHost = false;
-    /**
-     * Google API client.
-     */
-    private GoogleApiClient mGoogleApiClient;
-    /**
-     * Determines if the client is in a resolution state, and
-     * waiting for resolution intent to return.
-     */
-    private boolean mIsInResolution;
+
+    protected View gameView;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Games.API)
-                .addScope(Games.SCOPE_GAMES)
-                .addApi(Nearby.CONNECTIONS_API)
-                .build();
-
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             mIsInResolution = savedInstanceState.getBoolean(KEY_IN_RESOLUTION, false);
         }
-        mContext = getContext();
-
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useImmersiveMode = true;
         config.useAccelerometer = false;
@@ -136,6 +119,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
 
         setContentView(layout);
     }
+
 
     @Override
     public void getLeaderBoard() {
@@ -171,16 +155,16 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_crusader), 1);
             }else if (achievement == CastleWars.DESTROYER) {
                 Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_destroyer), 1);
-            } else if (achievement == CastleWars.BEGINNER_RAIDER) {
-                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_beginner_raider));
-            } else if (achievement == CastleWars.NOVICE_RAIDER) {
-                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_novice_raider), 1);
-            } else if (achievement == CastleWars.ADVANCED_RAIDER) {
-                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_advanced_raider), 1);
-            }else if (achievement == CastleWars.EXPERT_RAIDER) {
-                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_expert_raider), 1);
-            } else if (achievement == CastleWars.MASTER_RAIDER) {
-                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_master_raider), 1);
+            } else if (achievement == CastleWars.BEGINNER_BUILDER) {
+                Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_beginner_builder));
+            } else if (achievement == CastleWars.NOVICE_BUILDER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_novice_builder), 1);
+            } else if (achievement == CastleWars.ADVANCED_BUILDER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_advanced_builder), 1);
+            }else if (achievement == CastleWars.EXPERT_BUILDER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_expert_builder), 1);
+            } else if (achievement == CastleWars.MASTER_BUILDER) {
+                Games.Achievements.increment(mGoogleApiClient, getString(R.string.achievement_master_builder), 1);
             } else if (achievement == CastleWars.DO_IT_YOURSELF) {
                 Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_do_it_yourself));
             } else if (achievement == CastleWars.SILENT_BUT_DEADLY) {
@@ -270,19 +254,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
 
     }
 
-    @Override
-    public void hostMultiplayer() {
-        if (isConnectedToNetwork()) {
-            startAdvertising();
-        }
-    }
-
-    @Override
-    public void joinMultiplayer() {
-        if (isConnectedToNetwork()) {
-            startDiscovery();
-        }
-    }
 
     @Override
     public void shareRegularScore(int score) {
@@ -293,6 +264,8 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         startActivity(sendIntent);
     }
 
+
+
     private View createGameView(AndroidApplicationConfiguration cfg) {
         gameView = initializeForView(new CastleWars(this), cfg);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -302,6 +275,7 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         return gameView;
     }
 
+
     /**
      * Called when the Activity is made visible.
      * A connection to Play Services need to be initiated as
@@ -310,17 +284,29 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
      * activities itself.
      */
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(Games.API)
+                    .addScope(Games.SCOPE_GAMES)
+                            // Optionally, add additional APIs and scopes if required.
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .build();
+        }
     }
 
+    /**
+     * Called when activity gets invisible. Connection to Play Services needs to
+     * be disconnected as soon as an activity is invisible.
+     */
     @Override
-    public void onStop() {
-        super.onStop();
-        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+    protected void onStop() {
+        if (mGoogleApiClient != null) {
             mGoogleApiClient.disconnect();
         }
+        super.onStop();
     }
 
     /**
@@ -425,151 +411,6 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         if (mService != null) {
             unbindService(mServiceConn);
         }
-    }
-
-    @Override
-    public void onConnectionRequest(final String s, String s2, final String s3, byte[] bytes) {
-        if (mIsHost) {
-            byte[] myPayload = null;
-            // Automatically accept all requests
-            Nearby.Connections.acceptConnectionRequest(mGoogleApiClient, s,
-                    myPayload, this).setResultCallback(new ResultCallback<Status>() {
-                @Override
-                public void onResult(Status status) {
-                    if (status.isSuccess()) {
-                        Toast.makeText(mContext, "Connected to " + s3,
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(mContext, "Failed to connect to: " + s3,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        } else {
-            // Clients should not be advertising and will reject all connection requests.
-            Nearby.Connections.rejectConnectionRequest(mGoogleApiClient, s);
-        }
-    }
-
-    @Override
-    public void onEndpointFound(String s, String s2, String s3, String s4) {
-
-    }
-
-    @Override
-    public void onEndpointLost(String s) {
-
-    }
-
-    @Override
-    public void onMessageReceived(String s, byte[] bytes, boolean b) {
-
-    }
-
-    @Override
-    public void onDisconnected(String s) {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    private boolean isConnectedToNetwork() {
-        ConnectivityManager connManager =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        for (int networkType : NETWORK_TYPES) {
-            NetworkInfo info = connManager.getNetworkInfo(networkType);
-            if (info != null && info.isConnectedOrConnecting()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void startAdvertising() {
-        if (!isConnectedToNetwork()) {
-            // Implement logic when device is not connected to a network
-            System.out.println("Not Connected");
-        }
-
-        // Identify that this device is the host
-        mIsHost = true;
-
-        // Advertising with an AppIdentifer lets other devices on the
-        // network discover this application and prompt the user to
-        // install the application.
-        List<AppIdentifier> appIdentifierList = new ArrayList<>();
-        appIdentifierList.add(new AppIdentifier(getPackageName()));
-        AppMetadata appMetadata = new AppMetadata(appIdentifierList);
-
-        // The advertising timeout is set to run indefinitely
-        // Positive values represent timeout in milliseconds
-        long NO_TIMEOUT = 0L;
-
-        String name = null;
-        Nearby.Connections.startAdvertising(mGoogleApiClient, name, appMetadata, NO_TIMEOUT,
-                this).setResultCallback(new ResultCallback<Connections.StartAdvertisingResult>() {
-            @Override
-            public void onResult(Connections.StartAdvertisingResult result) {
-                if (result.getStatus().isSuccess()) {
-                    System.out.println("Connected");
-
-                    // Device is advertising
-                } else {
-                    int statusCode = result.getStatus().getStatusCode();
-                    // Advertising failed - see statusCode for more details
-                }
-            }
-        });
-    }
-
-    private void startDiscovery() {
-        if (!isConnectedToNetwork()) {
-            // Implement logic when device is not connected to a network
-            System.out.println("Not Connected");
-        }
-        String serviceId = getString(R.string.service_id);
-
-        // Set an appropriate timeout length in milliseconds
-        long DISCOVER_TIMEOUT = 1000L;
-
-        // Discover nearby apps that are advertising with the required service ID.
-        Nearby.Connections.startDiscovery(mGoogleApiClient, serviceId, DISCOVER_TIMEOUT, this)
-                .setResultCallback(new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        if (status.isSuccess()) {
-                            System.out.println("Connected");
-                            // Device is discovering
-                        } else {
-                            int statusCode = status.getStatusCode();
-                            // Advertising failed - see statusCode for more details
-                        }
-                    }
-                });
-    }
-
-    private void connectTo(String endpointId, final String endpointName) {
-
-        // Send a connection request to a remote endpoint. By passing 'null' for the name,
-        // the Nearby Connections API will construct a default name based on device model
-        // such as 'LGE Nexus 5'.
-        String myName = null;
-        byte[] myPayload = null;
-        Nearby.Connections.sendConnectionRequest(mGoogleApiClient, myName, endpointId, myPayload,
-                new Connections.ConnectionResponseCallback() {
-                    @Override
-                    public void onConnectionResponse(String remoteEndpointId, Status status,
-                                                     byte[] bytes) {
-                        if (status.isSuccess()) {
-                            Toast.makeText(getContext(), "Connected", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Failed connection
-                        }
-                    }
-                }, this);
     }
 }
 

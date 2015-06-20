@@ -86,6 +86,11 @@ public class Castle extends Sprite {
                 gi.lose();
             } else {
                 gi.unlockAchievement(CastleWars.ATTACKER);
+                gi.unlockAchievement(CastleWars.RAIDER);
+                gi.unlockAchievement(CastleWars.PILLAGER);
+                gi.unlockAchievement(CastleWars.TEMPLAR);
+                gi.unlockAchievement(CastleWars.CRUSADER);
+                gi.unlockAchievement(CastleWars.DESTROYER);
                 gi.win();
             }
         }
@@ -102,6 +107,11 @@ public class Castle extends Sprite {
             health = 100;
             if (this.equals(gi.getPlayer1().getCastle())) {
                 gi.unlockAchievement(CastleWars.BUILDER);
+                gi.unlockAchievement(CastleWars.BEGINNER_BUILDER);
+                gi.unlockAchievement(CastleWars.NOVICE_BUILDER);
+                gi.unlockAchievement(CastleWars.ADVANCED_BUILDER);
+                gi.unlockAchievement(CastleWars.EXPERT_BUILDER);
+                gi.unlockAchievement(CastleWars.MASTER_BUILDER);
                 gi.win();
             } else {
                 gi.lose();
@@ -140,6 +150,17 @@ public class Castle extends Sprite {
         animators.start(false);
         if (health <= 0) {
             health = 0;
+            if (this.equals(gi.getPlayer1().getCastle())) {
+                gi.lose();
+            } else {
+                gi.unlockAchievement(CastleWars.ATTACKER);
+                gi.unlockAchievement(CastleWars.RAIDER);
+                gi.unlockAchievement(CastleWars.PILLAGER);
+                gi.unlockAchievement(CastleWars.TEMPLAR);
+                gi.unlockAchievement(CastleWars.CRUSADER);
+                gi.unlockAchievement(CastleWars.DESTROYER);
+                gi.win();
+            }
         }
     }
 

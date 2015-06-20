@@ -11,11 +11,11 @@ Save this file as res/values/games-ids.xml in your project.
     <string name="achievement_templar">CgkIitC_s7EaEAIQAw</string>
     <string name="achievement_crusader">CgkIitC_s7EaEAIQBA</string>
     <string name="achievement_destroyer">CgkIitC_s7EaEAIQBQ</string>
-    <string name="achievement_beginner_raider">CgkIitC_s7EaEAIQBg</string>
-    <string name="achievement_novice_raider">CgkIitC_s7EaEAIQBw</string>
-    <string name="achievement_advanced_raider">CgkIitC_s7EaEAIQCA</string>
-    <string name="achievement_expert_raider">CgkIitC_s7EaEAIQCQ</string>
-    <string name="achievement_master_raider">CgkIitC_s7EaEAIQCg</string>
+    <string name="achievement_beginner_builder">CgkIitC_s7EaEAIQBg</string>
+    <string name="achievement_novice_builder">CgkIitC_s7EaEAIQBw</string>
+    <string name="achievement_advanced_builder">CgkIitC_s7EaEAIQCA</string>
+    <string name="achievement_expert_builder">CgkIitC_s7EaEAIQCQ</string>
+    <string name="achievement_master_builder">CgkIitC_s7EaEAIQCg</string>
     <string name="achievement_do_it_yourself">CgkIitC_s7EaEAIQCw</string>
     <string name="achievement_silent_but_deadly">CgkIitC_s7EaEAIQDA</string>
     <string name="achievement_world_conquest">CgkIitC_s7EaEAIQDQ</string>
@@ -36,9 +36,4 @@ Save this file as res/values/games-ids.xml in your project.
     <string name="achievement_reborn">CgkIitC_s7EaEAIQHQ</string>
     <string name="achievement_let_it_flow">CgkIitC_s7EaEAIQHg</string>
     <string name="achievement_elementalist">CgkIitC_s7EaEAIQHw</string>
-    <string name="achievement_been_there_done_that">CgkIitC_s7EaEAIQIA</string>
-    <string name="base64EncodedPublicKey1">"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvWtFwGSbpNZEuHFz0lqPumUjeYPqi+CJrp2IiEfDTdZepv+Vqvv3dOI09"</string>
-    <string name="base64EncodedPublicKey2">"cEJGeht0WqR5RNLUYJC4saTUrgfRwbplRmMh5MrNfR/3r07++VGj4SorV6wWubqXRD7oiRV6fOOVEl+FSxKL1jV+Ji2lTMl3wZzhL"</string>
-    <string name="base64EncodedPublicKey3">"QmxEYT60voJG1Fo4T6f1mbzI9MWSVi70FugnvJXtucVhNDt0UigB9IFzeiTIPawBooLza8FDWOj0QlnaNaPpSkrOIeNoWbd9sf6gv3efS0CZA+I1N48hKU/aaMTXp/Q4tKmcKZ/uSmAfYJKiPbWSKDTV0DqEtblS4Ux7y/4ArfKHcpUEWpx/WYvwIDAQAB"</string>
-
 </resources>

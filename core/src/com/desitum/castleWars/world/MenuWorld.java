@@ -32,7 +32,6 @@ public class MenuWorld extends KodyWorld {
     private PopupMenu popupMenu;
     private PopupButtonMaterial playButton;
     private PopupButtonMaterial achievementButton;
-    private PopupButtonMaterial multiButton;
     private PopupButtonMaterial deckButton;
     private PopupButtonMaterial settingsButton;
     private PopupButtonMaterial storeButton;
@@ -241,9 +240,9 @@ public class MenuWorld extends KodyWorld {
         achievementButton.addIncomingAnimator(new MovementAnimator(achievementButton, -20, achievementButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         achievementButton.moveIn();
 
-        multiButton = new PopupButtonMaterial(Assets.multiButton, ((MenuScreen.SCREEN_WIDTH / 4) * 2.5f) - 5f, 10, Settings.BUTTON_HEIGHT, 40, 20);
-        multiButton.addIncomingAnimator(new MovementAnimator(multiButton, -20, multiButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
-        multiButton.moveIn();
+        storeButton = new PopupButtonMaterial(Assets.storeButton, ((MenuScreen.SCREEN_WIDTH / 4) * 2.5f) - 5f, 10, Settings.BUTTON_HEIGHT, 40, 20);
+        storeButton.addIncomingAnimator(new MovementAnimator(storeButton, -20, storeButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
+        storeButton.moveIn();
 
         deckButton = new PopupButtonMaterial(Assets.buildDeckButton, ((MenuScreen.SCREEN_WIDTH / 2) * .35f) - 5f, 10, Settings.BUTTON_HEIGHT, 40, 20);
         deckButton.addIncomingAnimator(new MovementAnimator(deckButton, -20, deckButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
@@ -253,14 +252,9 @@ public class MenuWorld extends KodyWorld {
         settingsButton.addIncomingAnimator(new MovementAnimator(settingsButton, -20, settingsButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
         settingsButton.moveIn();
 
-        storeButton = new PopupButtonMaterial(Assets.storeButtonRound, 2, MenuScreen.SCREEN_HEIGHT - 22f, Settings.BUTTON_HEIGHT, 20, 20);
-        storeButton.addIncomingAnimator(new MovementAnimator(storeButton, -20, storeButton.getY(), 0.5f, 0, Interpolation.OVERSHOOT_INTERPOLATOR, false, true));
-        storeButton.moveIn();
-
         //Add the buttons to the ArrayList
         this.addWidget(playButton);
         this.addWidget(achievementButton);
-        this.addWidget(multiButton);
         this.addWidget(deckButton);
         this.addWidget(settingsButton);
         this.addWidget(storeButton);
@@ -297,14 +291,6 @@ public class MenuWorld extends KodyWorld {
                     settingsToggle--;
                     popupMenu.moveOut();
                 }
-            }
-        });
-
-        multiButton.setButtonListener(new OnClickListener() {
-            @Override
-            public void onClick(PopupWidget widget) {
-                Assets.buttonSound.play(Settings.VOLUME);
-                menuInterface.multiplayer(false);
             }
         });
 
@@ -406,23 +392,4 @@ public class MenuWorld extends KodyWorld {
         this.addPopupMenu(storeMenu);
     }
 
-    public void dispose(){
-        popupMenu = null;
-        playButton = null;
-        achievementButton = null;
-        multiButton = null;
-        deckButton = null;
-        settingsButton = null;
-        storeButton = null;
-        originalAssetsToggle = null;
-        flameAssetsToggle = null;
-        japaneseAssetsToggle = null;
-        flameCardsToggle = null;
-        japaneseCardsToggle = null;
-        storeScroll = null;
-        storeMenu = null;
-        flameAd = null;
-        japanAd = null;
-        slotAd = null;
-    }
 }

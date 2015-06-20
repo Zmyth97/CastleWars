@@ -32,16 +32,14 @@ public class Assets {
     public static Texture cancelButton;
     public static Texture okButton;
     public static Texture buildDeckButton;
-    public static Texture shareButton;
-    public static Texture multiButton;
     public static Texture buyButton;
+    public static Texture storeButton;
 
     //Round Button Textures
     public static Texture settingsButtonRound;
     public static Texture okButtonRound;
     public static Texture cancelButtonRound;
     public static Texture exitButtonRound;
-    public static Texture storeButtonRound;
 
     //Menu Textures
     public static Texture menuBackground;
@@ -196,17 +194,15 @@ public class Assets {
         leaderboardButton = new Texture("menu/leaderboard_button.png");
         cancelButton = new Texture("menu/cancel_button.png");
         okButton = new Texture("menu/ok_button.png");
-        multiButton = new Texture("menu/multi_button.png");
         buildDeckButton = new Texture("menu/build_deck_button.png");
-        shareButton = new Texture("menu/share_button.png");
         buyButton = new Texture("menu/buy_button.png");
+        storeButton = new Texture("menu/shopping_button.png");
 
         //Round Button Textures
         settingsButtonRound = new Texture("menu/settings_button_round.png");
         okButtonRound = new Texture("menu/ok_button_round.png");
         cancelButtonRound = new Texture("menu/cancel_button_round.png");
         exitButtonRound = new Texture("menu/exit_button_round.png");
-        storeButtonRound = new Texture("menu/shopping_button_round.png");
 
         menuBackground = new Texture("menu/menu_bg.png");
 

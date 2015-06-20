@@ -370,18 +370,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
         if (lastCardUsed.getCardID() == CardActions.TROJAN_HORSE) {
             gpgs.unlockAchievement(CastleWars.DIDNT_SEE_THAT_COMING);
         }
-        if (NETWORK_GAME) {
-            gpgs.unlockAchievement(CastleWars.BEGINNER_RAIDER);
-            gpgs.unlockAchievement(CastleWars.NOVICE_RAIDER);
-            gpgs.unlockAchievement(CastleWars.ADVANCED_RAIDER);
-            gpgs.unlockAchievement(CastleWars.EXPERT_RAIDER);
-            gpgs.unlockAchievement(CastleWars.MASTER_RAIDER);
-        } else {
-            gpgs.unlockAchievement(CastleWars.RAIDER);
-            gpgs.unlockAchievement(CastleWars.PILLAGER);
-            gpgs.unlockAchievement(CastleWars.TEMPLAR);
-            gpgs.unlockAchievement(CastleWars.CRUSADER);
-            gpgs.unlockAchievement(CastleWars.DESTROYER);
+        if(Settings.ASSETS_TO_USE == 3){
+            gpgs.unlockAchievement(CastleWars.WORLD_CONQUEST);
         }
         PopupTextLabel winLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH / 2 - 25, GameScreen.SCREEN_HEIGHT / 4 * 2.5f, 50, 10, "You Won!");
         addWidgetToWorld(winLabel);
@@ -393,9 +383,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
     @Override
     public void lose() {
         gpgs.unlockAchievement(CastleWars.CASTLE_MASTER);
-        if (!NETWORK_GAME) {
-            gpgs.unlockAchievement(CastleWars.PILLAGED);
-        }
+        gpgs.unlockAchievement(CastleWars.PILLAGED);
+
         PopupTextLabel loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH / 2 - 25, GameScreen.SCREEN_HEIGHT / 4 * 2.5f, 55, 10, "You Lost!");
         addWidgetToWorld(loseLabel);
         loseLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
