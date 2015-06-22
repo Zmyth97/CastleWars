@@ -240,7 +240,9 @@ public class AndroidLauncher extends AndroidApplication implements GooglePlaySer
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             startActivityForResult(Games.Achievements.getAchievementsIntent(mGoogleApiClient), REQUEST_ACHIEVEMENTS);
         } else {
-            //Nothing!
+           if(mGoogleApiClient != null){
+               mGoogleApiClient.connect();
+           }
         }
     }
 

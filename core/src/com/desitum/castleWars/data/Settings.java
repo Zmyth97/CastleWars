@@ -73,9 +73,9 @@ public class Settings {
     //endregion
 
 
-    public static void setSound() {
+    public static void setSound(float volume) {
         Preferences prefs = Gdx.app.getPreferences("settings");
-        prefs.putFloat("sound", VOLUME);
+        prefs.putFloat("sound", volume);
         prefs.flush();
         Assets.menuMusic.setVolume(VOLUME);
     }

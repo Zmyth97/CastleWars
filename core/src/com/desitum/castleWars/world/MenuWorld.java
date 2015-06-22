@@ -89,7 +89,7 @@ public class MenuWorld extends KodyWorld {
             @Override
             public void onChange(float pos) {
                 Settings.VOLUME = pos;
-                Settings.setSound();
+                Settings.setSound(pos);
                 if(pos == 0){
                     gpgs.unlockAchievement(CastleWars.SILENT_BUT_DEADLY);
                 }

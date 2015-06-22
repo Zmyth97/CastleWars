@@ -47,6 +47,7 @@ public class MenuScreen implements Screen, MenuInterface {
         menuRenderer = new MenuRenderer(menuWorld, spriteBatch);
 
         Assets.menuMusic.play();
+        Assets.menuMusic.setVolume(Settings.VOLUME);
 
     }
 
