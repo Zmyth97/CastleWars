@@ -2,6 +2,8 @@ package com.desitum.castleWars.data;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.desitum.castleWars.packs.FlamePack;
+import com.desitum.castleWars.packs.JapanesePack;
 
 import java.util.HashMap;
 
@@ -28,7 +30,7 @@ public class Settings {
     public static boolean WANTS_JAPANESE_CARDS = true;
     public static int ASSETS_TO_USE = 1;
 
-    public static boolean BOUGHT_FlAME_PACK = false;
+    public static boolean BOUGHT_FlAME_PACK = true;
     public static boolean BOUGHT_JAPANESE_PACK = false;
     public static boolean EXTRA_CARD_SLOT_1 = false;
     public static boolean EXTRA_CARD_SLOT_2 = false;
@@ -157,42 +159,85 @@ public class Settings {
 
     public static String loadDefaultString() {
         String returnString = "";
-        //TODO for you amigo, fix all of these amounts
         returnString += CardActions.BARRIER                   + ":" + BARRIER_AMOUNT              + ";";
         returnString += CardActions.WALL                      + ":" + WALL_AMOUNT                 + ";";
-        returnString += CardActions.GREATWALL                 + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.REINFORCE                 + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.FORTIFY                   + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.CASTLE                    + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.ARCHITECT                 + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.RESERVE                   + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.SABOTAGE                  + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.STRONGHOLD                + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.GREATWALL                 + ":" + GREATWALL_AMOUNT            + ";";
+        returnString += CardActions.REINFORCE                 + ":" + REINFORCE_AMOUNT            + ";";
+        returnString += CardActions.FORTIFY                   + ":" + FORTIFY_AMOUNT              + ";";
+        returnString += CardActions.CASTLE                    + ":" + CASTLE_AMOUNT               + ";";
+        returnString += CardActions.ARCHITECT                 + ":" + ARCHITECT_AMOUNT            + ";";
+        returnString += CardActions.RESERVE                   + ":" + RESERVE_AMOUNT              + ";";
+        returnString += CardActions.SABOTAGE                  + ":" + SABOTAGE_AMOUNT             + ";";
+        returnString += CardActions.STRONGHOLD                + ":" + STRONGHOLD_AMOUNT           + ";";
 
-        returnString += CardActions.RECRUITER                 + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.SPEARMAN                  + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.RAM                       + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.CATAPULT                  + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.LEGION                    + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.TREBUCHET                 + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.ASSASSIN                  + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.BURGLAR                   + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.THIEF                     + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.RAID                      + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.RECRUITER                 + ":" + RECRUITER_AMOUNT            + ";";
+        returnString += CardActions.SPEARMAN                  + ":" + SPEARMAN_AMOUNT             + ";";
+        returnString += CardActions.RAM                       + ":" + RAM_AMOUNT                  + ";";
+        returnString += CardActions.CATAPULT                  + ":" + CATAPULT_AMOUNT             + ";";
+        returnString += CardActions.LEGION                    + ":" + LEGION_AMOUNT               + ";";
+        returnString += CardActions.TREBUCHET                 + ":" + TREBUCHET_AMOUNT            + ";";
+        returnString += CardActions.ASSASSIN                  + ":" + ASSASSIN_AMOUNT             + ";";
+        returnString += CardActions.BURGLAR                   + ":" + BURGLAR_AMOUNT              + ";";
+        returnString += CardActions.THIEF                     + ":" + THIEF_AMOUNT                + ";";
+        returnString += CardActions.RAID                      + ":" + RAID_AMOUNT                 + ";";
 
-        returnString += CardActions.CREATE_STONES             + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.CREATE_WEAPONS            + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.CREATE_GEMS               + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.DESTROY_STONES            + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.DESTROY_WEAPONS           + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.DESTROY_GEMS              + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.MAGE                      + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.HAT_TRICK                 + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.LIGHTNING_STRIKE          + ":" + BARRIER_AMOUNT              + ";";
-        returnString += CardActions.BLAST                     + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.CREATE_STONES             + ":" + CREATE_STONES_AMOUNT        + ";";
+        returnString += CardActions.CREATE_WEAPONS            + ":" + CREATE_WEAPONS_AMOUNT       + ";";
+        returnString += CardActions.CREATE_GEMS               + ":" + CREATE_GEMS_AMOUNT          + ";";
+        returnString += CardActions.DESTROY_STONES            + ":" + DESTROY_STONES_AMOUNT       + ";";
+        returnString += CardActions.DESTROY_WEAPONS           + ":" + DESTROY_WEAPONS_AMOUNT      + ";";
+        returnString += CardActions.DESTROY_GEMS              + ":" + DESTROY_GEMS_AMOUNT         + ";";
+        returnString += CardActions.MAGE                      + ":" + MAGE_AMOUNT                 + ";";
+        returnString += CardActions.HAT_TRICK                 + ":" + HAT_TRICK_AMOUNT            + ";";
+        returnString += CardActions.LIGHTNING_STRIKE          + ":" + LIGHTNING_STRIKE_AMOUNT     + ";";
+        returnString += CardActions.BLAST                     + ":" + BLAST_AMOUNT                + ";";
 
-        //TODO do we want all of the extra packs in here?
-        //TODO if so just follow the pattern I made
+        //FlAMEPACK
+        returnString += FlamePack.WALL_OF_FIRE                + ":" + FlamePack.WALL_OF_FIRE_AMOUNT   + ";";
+        returnString += FlamePack.CAMPFIRE                    + ":" + FlamePack.CAMPFIRE_AMOUNT       + ";";
+        returnString += FlamePack.FORGE                       + ":" + FlamePack.FORGE_AMOUNT          + ";";
+        returnString += FlamePack.BOILING_OIL                 + ":" + FlamePack.BOILING_OIL_AMOUNT    + ";";
+        returnString += FlamePack.BONFIRE                     + ":" + FlamePack.BONFIRE_AMOUNT        + ";";
+
+        returnString += FlamePack.FIRE                        + ":" + FlamePack.FIRE_AMOUNT           + ";";
+        returnString += FlamePack.FIRE_ARROWS                 + ":" + FlamePack.FIRE_ARROWS_AMOUNT    + ";";
+        returnString += FlamePack.FLAMING_AXE                 + ":" + FlamePack.FLAMING_AXE_AMOUNT    + ";";
+        returnString += FlamePack.FLAMING_SHOT                + ":" + FlamePack.FLAMING_SHOT_AMOUNT   + ";";
+        returnString += FlamePack.FLAME_LEGION                + ":" + FlamePack.FLAME_LEGION_AMOUNT   + ";";
+
+        returnString += FlamePack.FIRE_SHAMAN                 + ":" + FlamePack.FIRE_SHAMAN_AMOUNT    + ";";
+        returnString += FlamePack.LAVA_FLOW                   + ":" + FlamePack.LAVA_FLOW_AMOUNT      + ";";
+        returnString += FlamePack.COAL                        + ":" + FlamePack.COAL_AMOUNT           + ";";
+        returnString += FlamePack.BLACKSMITH                  + ":" + FlamePack.BLACKSMITH_AMOUNT     + ";";
+        returnString += FlamePack.FIREBALL                    + ":" + FlamePack.FIREBALL_AMOUNT       + ";";
+
+        returnString += FlamePack.PHEONIX                     + ":" + FlamePack.PHOENIX_AMOUNT        + ";";
+        returnString += FlamePack.METEORS                     + ":" + FlamePack.METEORS_AMOUNT        + ";";
+        returnString += FlamePack.INFERNO                     + ":" + FlamePack.INFERNO_AMOUNT        + ";";
+
+        //JAPANESE PACK
+        returnString += JapanesePack.STOCKADE                 + ":" + JapanesePack.STOCKADE_AMOUNT       + ";";
+        returnString += JapanesePack.FORTRESS                 + ":" + JapanesePack.FORTRESS_AMOUNT       + ";";
+        returnString += JapanesePack.MONASTERY                + ":" + JapanesePack.MONASTERY_AMOUNT      + ";";
+        returnString += JapanesePack.RAMPART                  + ":" + JapanesePack.RAMPART_AMOUNT        + ";";
+        returnString += JapanesePack.CITADEL                  + ":" + JapanesePack.CITADEL_AMOUNT        + ";";
+
+        returnString += JapanesePack.ASHIGARU                 + ":" + JapanesePack.ASHIGARU_AMOUNT       + ";";
+        returnString += JapanesePack.SHURIKEN                 + ":" + JapanesePack.SHURIKEN_AMOUNT       + ";";
+        returnString += JapanesePack.KATANA                   + ":" + JapanesePack.KATANA_AMOUNT         + ";";
+        returnString += JapanesePack.SAMURAI                  + ":" + JapanesePack.SAMURAI_AMOUNT        + ";";
+        returnString += JapanesePack.DOJO                     + ":" + JapanesePack.DOJO_AMOUNT           + ";";
+
+        returnString += JapanesePack.SHRINE                   + ":" + JapanesePack.SHRINE_AMOUNT         + ";";
+        returnString += JapanesePack.QUARRY                   + ":" + JapanesePack.QUARRY_AMOUNT         + ";";
+        returnString += JapanesePack.TEMPLE                   + ":" + JapanesePack.TEMPLE_AMOUNT         + ";";
+        returnString += JapanesePack.RICE_PADDY               + ":" + JapanesePack.RICE_PADDY_AMOUNT     + ";";
+        returnString += JapanesePack.SEPPUKU                  + ":" + JapanesePack.SEPPUKU_AMOUNT        + ";";
+
+        returnString += JapanesePack.NINJA                    + ":" + JapanesePack.NINJA_AMOUNT          + ";";
+        returnString += JapanesePack.DRAGON                   + ":" + JapanesePack.DRAGON_AMOUNT         + ";";
+        returnString += JapanesePack.SHOGUN                   + ":" + JapanesePack.SHOGUN_AMOUNT         + ";";
+
         return returnString;
     }
 

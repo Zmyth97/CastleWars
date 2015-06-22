@@ -66,7 +66,6 @@ public class CastleWars extends Game {
     }
 
     //TODO: CheckList!!!
-    //Query Google on Load to See if they have purchased anything. (Call it after "Settings.load" in SplashScreen though)
     //Add Saving/Loading Decks
     //Spinners Show Default Values (Default at first, then theirs) Whichever is current
     //Have a button on build screen to restore default values

@@ -22,6 +22,10 @@ import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.screens.MenuScreen;
 
+import java.util.Set;
+
+import oracle.jrockit.jfr.openmbean.EventSettingType;
+
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
@@ -318,8 +322,6 @@ public class MenuWorld extends KodyWorld {
 
         final float AD_WIDTH = 60;
         float AD_HEIGHT = 80;
-        float AD_X = MenuScreen.SCREEN_WIDTH / 2 - AD_WIDTH / 2;
-        float AD_Y = MenuScreen.SCREEN_HEIGHT / 2 - 15;
 
         storeScroll = new PopupScrollArea(Assets.invisible, 0, MenuScreen.SCREEN_HEIGHT / 2 - AD_HEIGHT / 5, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, MenuScreen.SCREEN_WIDTH, AD_HEIGHT, PopupScrollArea.HORIZONTAL, 1, 40, AD_WIDTH);
 
@@ -340,14 +342,22 @@ public class MenuWorld extends KodyWorld {
             public void onClick(PopupWidget widget) {
                 Assets.buttonSound.play(Settings.VOLUME);
                 if (currentItem == 0) {
-                    menuInterface.buyItem(Settings.FIRE_SKU);
+                    if(!Settings.BOUGHT_FlAME_PACK) {
+                        menuInterface.buyItem(Settings.FIRE_SKU);
+                    }
                 } else if (currentItem == 1) {
-                    menuInterface.buyItem(Settings.JAPANESE_SKU);
+                    if(!Settings.BOUGHT_JAPANESE_PACK) {
+                        menuInterface.buyItem(Settings.JAPANESE_SKU);
+                    }
                 } else if (currentItem == 2) {
                     if(Settings.EXTRA_CARD_SLOT_1){
-                        menuInterface.buyItem(Settings.EXTRA_CARD_SLOT_2_ID);
+                        if(!Settings.EXTRA_CARD_SLOT_2) {
+                            menuInterface.buyItem(Settings.EXTRA_CARD_SLOT_2_ID);
+                        }
                     } else {
-                        menuInterface.buyItem(Settings.EXTRA_CARD_SLOT_1_ID);
+                        if(!Settings.EXTRA_CARD_SLOT_1) {
+                            menuInterface.buyItem(Settings.EXTRA_CARD_SLOT_1_ID);
+                        }
                     }
                 }
             }
@@ -374,6 +384,7 @@ public class MenuWorld extends KodyWorld {
                 currentItem -= 1;
                 if (currentItem <= 0) currentItem = 0;
                 storeScroll.slideToPosition(storeScroll.getPositionToCenter(currentItem));
+
             }
         });
         storeMenu.addPopupWidget(rightButton);
@@ -390,6 +401,32 @@ public class MenuWorld extends KodyWorld {
         storeMenu.addPopupWidget(okButton);
 
         this.addPopupMenu(storeMenu);
+    }
+
+    public void soldChecker(){
+        PopupImage soldImage = new PopupImage(Assets.sold, Assets.invisible, 0, 0, 60, 80, false);
+        boolean added = false;
+        if(currentItem == 0 && Settings.BOUGHT_FlAME_PACK){
+            if(!added){
+                this.addWidget(soldImage);
+                added = true;
+            }
+        } else if(currentItem == 1 && Settings.BOUGHT_JAPANESE_PACK){
+            if(!added){
+                this.addWidget(soldImage);
+                added = true;
+            }
+        } else if(currentItem == 2 && Settings.EXTRA_CARD_SLOT_1 && Settings.EXTRA_CARD_SLOT_2){
+            if(!added){
+                this.addWidget(soldImage);
+                added = true;
+            }
+        } else {
+            if(added) {
+                this.removeWidget(soldImage);
+                added = false;
+            }
+        }
     }
 
 }

@@ -17,6 +17,7 @@ public class Assets {
     public static Texture blur;
     public static Texture discard;
     public static Texture max;
+    public static Texture sold;
     public static Texture trashCan;
     public static Texture trashCanSelected;
 
@@ -182,6 +183,7 @@ public class Assets {
     public static void loadMenuTextures() {
         invisible = Drawing.getHollowRectangle(10, 10, 1, new Color(0, 0, 0, 0));
         blur = new Texture("menu/blur.png");
+        sold = new Texture("menu/sold.png");
 
         //Store
         flameAd = new Texture("menu/flame_ad.png");
