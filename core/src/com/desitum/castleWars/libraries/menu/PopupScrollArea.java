@@ -77,7 +77,7 @@ public class PopupScrollArea extends PopupMenu {
 
         if (scrollAmount > 0) {
             scrollAmount = 0;
-        } else if (scrollDirection == HORIZONTAL && scrollAmount < -(getChildren().size() - 1) * (widgetWidth + spacing)) {
+        } else if (scrollAmount < -(getChildren().size()%columns - 1) * ((scrollDirection == VERTICAL ? widgetHeight : widgetWidth) + spacing)) {
             scrollAmount = -(getChildren().size() - 1) * (widgetWidth + spacing);
         }
         updateWidgets();

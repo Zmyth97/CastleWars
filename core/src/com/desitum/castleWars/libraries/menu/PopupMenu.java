@@ -163,7 +163,8 @@ public class PopupMenu extends PopupWidget {
 
     @Override
     public ArrayList<PopupWidget> getChildren(boolean walk) {
-        ArrayList<PopupWidget> widgets = getChildren();
+        ArrayList<PopupWidget> widgets = new ArrayList<PopupWidget>();
+        widgets.addAll(getChildren());
         if (walk) {
             for (PopupWidget widget: getChildren()) {
                 widgets.addAll(widget.getChildren(walk));
