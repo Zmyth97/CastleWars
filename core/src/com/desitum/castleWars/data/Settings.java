@@ -3,6 +3,8 @@ package com.desitum.castleWars.data;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
+import java.util.HashMap;
+
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
@@ -72,6 +74,7 @@ public class Settings {
     public static int DUPLICATE_AMOUNT = 1;
     //endregion
 
+    private static HashMap<Integer, Integer> cardHashMap = new HashMap<Integer, Integer>();
 
     public static void setSound(float volume) {
         Preferences prefs = Gdx.app.getPreferences("settings");
@@ -90,6 +93,20 @@ public class Settings {
         BOUGHT_FlAME_PACK = prefs.getBoolean("boughtFlame", false);
         BOUGHT_JAPANESE_PACK = prefs.getBoolean("boughtJapanese", false);
         VOLUME = prefs.getFloat("sound", 0.5f);
+
+        loadDefaultString();
+
+        String cards = prefs.getString("cardAmounts");
+        String[] cardsA = cards.split(";");
+        loadCardsFromStringArray(cardsA);
+    }
+
+    private static void loadCardsFromStringArray(String[] cardsA) {
+        for (String cardB: cardsA) {
+            String[] cardInfoString = cardB.split(":");
+            int[] cardInfo = new int[]{Integer.parseInt(cardInfoString[0]), Integer.parseInt(cardInfoString[1])};
+            cardHashMap.put(cardInfo[0], cardInfo[1]);
+        }
     }
 
     public static void setVolume(float volume) {
@@ -123,5 +140,63 @@ public class Settings {
         prefs.putBoolean("boughtJapanese", boughtJapanese);
     }
 
+    public static void saveDeck() {
+        String saveString = "";
+        boolean isFirst = true;
+        for (Integer integer: cardHashMap.keySet()) {
+            if (isFirst) {
+                saveString += integer + ":" + cardHashMap.get(integer);
+            } else {
+                saveString += ";" + integer + ":" + cardHashMap.get(integer);
+            }
+        }
+        Preferences prefs = Gdx.app.getPreferences("settings");
+        prefs.putString("cardAmounts", saveString);
+        prefs.flush();
+    }
 
+    public static String loadDefaultString() {
+        String returnString = "";
+        //TODO for you amigo, fix all of these amounts
+        returnString += CardActions.BARRIER                   + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.WALL                      + ":" + WALL_AMOUNT                 + ";";
+        returnString += CardActions.GREATWALL                 + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.REINFORCE                 + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.FORTIFY                   + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.CASTLE                    + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.ARCHITECT                 + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.RESERVE                   + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.SABOTAGE                  + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.STRONGHOLD                + ":" + BARRIER_AMOUNT              + ";";
+
+        returnString += CardActions.RECRUITER                 + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.SPEARMAN                  + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.RAM                       + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.CATAPULT                  + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.LEGION                    + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.TREBUCHET                 + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.ASSASSIN                  + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.BURGLAR                   + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.THIEF                     + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.RAID                      + ":" + BARRIER_AMOUNT              + ";";
+
+        returnString += CardActions.CREATE_STONES             + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.CREATE_WEAPONS            + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.CREATE_GEMS               + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.DESTROY_STONES            + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.DESTROY_WEAPONS           + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.DESTROY_GEMS              + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.MAGE                      + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.HAT_TRICK                 + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.LIGHTNING_STRIKE          + ":" + BARRIER_AMOUNT              + ";";
+        returnString += CardActions.BLAST                     + ":" + BARRIER_AMOUNT              + ";";
+
+        //TODO do we want all of the extra packs in here?
+        //TODO if so just follow the pattern I made
+        return returnString;
+    }
+
+    public static int getCardAmount(int cardType) {
+        return cardHashMap.get(cardType);
+    }
 }
