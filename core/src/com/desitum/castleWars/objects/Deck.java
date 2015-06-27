@@ -31,7 +31,7 @@ public class Deck {
 
     private void fillDeck() {
         //BUILD CARDS
-        for (int i = 0; i < Settings.REINFORCE_AMOUNT; i++) {
+        for (int i = 0; i < Settings.getCardAmount(CardActions.REINFORCE); i++) { // TODO look at this line! Settings.getCardAmount vs Settings.REINFORCE_AMOUNT
             cardList.add(new Card(Assets.buildCardReinforce, Card.BUILD, CardActions.REINFORCE, CardActions.REINFORCE_COST, GameWorld.DRAW_PILE_X, GameWorld.DRAW_PILE_Y));
         }
         for (int i = 0; i < Settings.FORTIFY_AMOUNT; i++) {

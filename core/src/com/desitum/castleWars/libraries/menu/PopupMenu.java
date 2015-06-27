@@ -385,5 +385,9 @@ public class PopupMenu extends PopupWidget {
             this.addPopupWidget(widget);
         }
     }
+
+    public void clearChildren() {
+        this.widgets = new ArrayList<PopupWidget>();
+    }
 }
 

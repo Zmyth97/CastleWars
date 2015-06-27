@@ -96,9 +96,7 @@ public class Settings {
         BOUGHT_JAPANESE_PACK = prefs.getBoolean("boughtJapanese", false);
         VOLUME = prefs.getFloat("sound", 0.5f);
 
-        loadDefaultString();
-
-        String cards = prefs.getString("cardAmounts");
+        String cards = prefs.getString("cardAmounts", loadDefaultString());
         String[] cardsA = cards.split(";");
         loadCardsFromStringArray(cardsA);
     }
@@ -106,9 +104,15 @@ public class Settings {
     private static void loadCardsFromStringArray(String[] cardsA) {
         for (String cardB: cardsA) {
             String[] cardInfoString = cardB.split(":");
+            System.out.println(cardB);
             int[] cardInfo = new int[]{Integer.parseInt(cardInfoString[0]), Integer.parseInt(cardInfoString[1])};
             cardHashMap.put(cardInfo[0], cardInfo[1]);
         }
+    }
+
+    public static void reloadCards() {
+        Preferences prefs = Gdx.app.getPreferences("settings");
+        loadCardsFromStringArray(prefs.getString("cardAmounts", loadDefaultString()).split(";"));
     }
 
     public static void setVolume(float volume) {
@@ -243,5 +247,20 @@ public class Settings {
 
     public static int getCardAmount(int cardType) {
         return cardHashMap.get(cardType);
+    }
+
+    public static void setCardAmount(int cardId, int amount) {
+        if (cardHashMap.containsKey(cardId)){ // avoid hacking somehow adding a fake card
+            cardHashMap.put(cardId, amount);
+        }
+    }
+
+    public static void resetToDefault() {
+        //cardAmounts
+        Preferences prefs = Gdx.app.getPreferences("settings");
+
+        prefs.putString("cardAmounts", loadDefaultString());
+        prefs.flush();
+        reloadCards();
     }
 }

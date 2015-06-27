@@ -22,10 +22,6 @@ import com.desitum.castleWars.libraries.menu.PopupWidget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.screens.MenuScreen;
 
-import java.util.Set;
-
-import oracle.jrockit.jfr.openmbean.EventSettingType;
-
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
