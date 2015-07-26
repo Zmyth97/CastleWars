@@ -1,8 +1,9 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries.ui;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.desitum.castleWars.libraries.CollisionDetection;
 
 import java.util.ArrayList;
 
@@ -10,11 +11,11 @@ import java.util.ArrayList;
  * Created by kody on 4/21/15.
  * can be used by kody and people in []
  */
-public class PopupSlider extends PopupWidget {
+public class Slider extends Widget {
     private Texture barTexture;
     private Texture sliderTexture;
 
-    private PopupSliderListener sliderListener;
+    private SliderListener sliderListener;
 
     private float sliderX;
     private float sliderWidth;
@@ -22,7 +23,7 @@ public class PopupSlider extends PopupWidget {
 
     private boolean beingMoved;
 
-    public PopupSlider(Texture barTexture, Texture sliderTexture, float sliderX, float x, float y, float width, float height, float sliderWidth, float sliderHeight) {
+    public Slider(Texture barTexture, Texture sliderTexture, float sliderX, float x, float y, float width, float height, float sliderWidth, float sliderHeight) {
         super(barTexture, width, height, x, y);
 
         this.beingMoved = false;
@@ -57,7 +58,7 @@ public class PopupSlider extends PopupWidget {
         this.setTexture(barTexture);
     }
 
-    public void setSliderListener(PopupSliderListener sliderListener) {
+    public void setSliderListener(SliderListener sliderListener) {
         this.sliderListener = sliderListener;
     }
 
@@ -76,7 +77,19 @@ public class PopupSlider extends PopupWidget {
     }
 
     @Override
-    public ArrayList<PopupWidget> getChildren(boolean walk) {
-        return new ArrayList<PopupWidget>();
+    public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
+        boolean clickInArea = CollisionDetection.pointInRectangle(getBoundingRectangle(), touchPos);
+        if (clickInArea && clickDown) {
+            onClickDown(touchPos);
+        } else if (clickInArea) {
+            onClickUp();
+        } else {
+            onClickUp();
+        }
+    }
+
+    @Override
+    public ArrayList getChildren(boolean walk) {
+        return new ArrayList<Widget>();
     }
 }

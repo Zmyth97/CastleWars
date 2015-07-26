@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
-import com.desitum.castleWars.libraries.menu.PopupMenu;
-import com.desitum.castleWars.libraries.menu.PopupWidget;
+import com.desitum.castleWars.libraries.ui.Layout;
+import com.desitum.castleWars.libraries.ui.Widget;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Cloud;
 import com.desitum.castleWars.screens.GameScreen;
@@ -35,7 +35,7 @@ public class GameRenderer {
         drawWorld();
         drawCards();
 
-        for (PopupWidget widget : this.world.getWidgets()) {
+        for (Widget widget : this.world.getWidgets()) {
             widget.draw(gameBatch);
 
             if (widget instanceof Card) {
@@ -44,8 +44,8 @@ public class GameRenderer {
                 }
             }
         }
-        for (PopupMenu menu : this.world.getMenus()) {
-            menu.draw(gameBatch);
+        for (Layout layout : this.world.getLayouts()) {
+            layout.draw(gameBatch);
         }
 
     }

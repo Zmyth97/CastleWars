@@ -1,8 +1,10 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries.ui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
+import com.desitum.castleWars.libraries.CollisionDetection;
 
 import java.util.ArrayList;
 
@@ -10,7 +12,7 @@ import java.util.ArrayList;
  * Created by kody on 4/19/15.
  * can be used by kody and people in [Zack]
  */
-public class PopupImage extends PopupWidget {
+public class Image extends Widget {
     private Texture downTexture;
     private Texture upTexture;
 
@@ -20,18 +22,18 @@ public class PopupImage extends PopupWidget {
     private OnClickListener buttonListener;
 
     /**
-     * PopupImage can have a highlighted area showing it is selected,
-     * Extends PopupWidget and has all the animations you need
+     * Image can have a highlighted area showing it is selected,
+     * Extends Widget and has all the animations you need
      *
-     * @param upTexture       image to turn into a PopupImage
+     * @param upTexture       image to turn into a Image
      * @param highlight       texture to use as a highlight
      * @param x               x position in relation to the parent (if applicable)
      * @param y               y position in relation to the parent (if applicable)
-     * @param width           width of the PopupImage
-     * @param height          height of the PopupImage
+     * @param width           width of the Image
+     * @param height          height of the Image
      * @param enabledClicking whether you can click on it to highlight it
      */
-    public PopupImage(Texture upTexture, Texture highlight, float x, float y, float width, float height, boolean enabledClicking) {
+    public Image(Texture upTexture, Texture highlight, float x, float y, float width, float height, boolean enabledClicking) {
         super(upTexture, width, height, x, y);
 
         this.upTexture = upTexture;
@@ -79,6 +81,18 @@ public class PopupImage extends PopupWidget {
         return false;
     }
 
+    @Override
+    public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
+        boolean clickInArea = CollisionDetection.pointInRectangle(getBoundingRectangle(), touchPos);
+        if (clickInArea && clickDown) {
+            onClickDown();
+        } else if (clickInArea) {
+            onClickUp(true);
+        } else {
+            onClickUp(false);
+        }
+    }
+
     public void setActive() {
         beenDown = true;
     }
@@ -92,7 +106,7 @@ public class PopupImage extends PopupWidget {
     }
 
     @Override
-    public ArrayList<PopupWidget> getChildren(boolean walk) {
-        return new ArrayList<PopupWidget>();
+    public ArrayList getChildren(boolean walk) {
+        return new ArrayList<Widget>();
     }
 }

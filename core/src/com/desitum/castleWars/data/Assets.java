@@ -42,7 +42,7 @@ public class Assets {
     public static Texture cancelButtonRound;
     public static Texture exitButtonRound;
 
-    //Menu Textures
+    //Layout Textures
     public static Texture menuBackground;
     public static Texture toggleButtonOff;
     public static Texture toggleButtonOn;

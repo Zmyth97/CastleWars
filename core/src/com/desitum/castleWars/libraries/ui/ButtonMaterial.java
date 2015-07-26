@@ -1,4 +1,4 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries.ui;
 
 
 import com.badlogic.gdx.graphics.Color;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.data.Assets;
+import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.ScaleAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  * Created by kody on 4/19/15.
  * can be used by kody and people in []
  */
-public class PopupButtonMaterial extends PopupWidget {
+public class ButtonMaterial extends Widget {
     private Texture upTexture;
     private Texture shadow;
     private Texture touchShadow;
@@ -36,7 +37,7 @@ public class PopupButtonMaterial extends PopupWidget {
     private ScaleAnimator touchScale;
     private ColorEffects touchColor;
 
-    public PopupButtonMaterial(Texture upTexture, float x, float y, float z, float width, float height) {
+    public ButtonMaterial(Texture upTexture, float x, float y, float z, float width, float height) {
         super(upTexture, width, height, x, y);
 
         this.upTexture = upTexture;
@@ -61,7 +62,7 @@ public class PopupButtonMaterial extends PopupWidget {
         touchColor = new ColorEffects(Color.GRAY, new Color(0.5f, 0.5f, 0.5f, 0), 1);
     }
 
-    public void onClickDown(Vector3 pos) {
+    private void onClickDown(Vector3 pos) {
         this.touchPos.set(pos.x - getX(), pos.y - getY(), 0);
 
         setPosition(getX(), getY() - z * 0.4f);
@@ -72,7 +73,7 @@ public class PopupButtonMaterial extends PopupWidget {
         beenDown = true;
     }
 
-    public void onClickUp(boolean clicked) {
+    private void onClickUp(boolean clicked) {
         setPosition(originalX, originalY);
         this.setTexture(upTexture);
         if (buttonListener != null && clicked && beenDown) {
@@ -116,6 +117,18 @@ public class PopupButtonMaterial extends PopupWidget {
         return false;
     }
 
+    @Override
+    public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
+        boolean clickInArea = CollisionDetection.pointInRectangle(getBoundingRectangle(), touchPos);
+        if (clickInArea && clickDown) {
+            onClickDown(touchPos);
+        } else if (clickInArea) {
+            onClickUp(true);
+        } else {
+            onClickUp(false);
+        }
+    }
+
     public void setX(float x) {
         super.setX(x);
         originalX = x;
@@ -127,7 +140,7 @@ public class PopupButtonMaterial extends PopupWidget {
     }
 
     @Override
-    public ArrayList<PopupWidget> getChildren(boolean walk) {
-        return new ArrayList<PopupWidget>();
+    public ArrayList getChildren(boolean walk) {
+        return new ArrayList<Widget>();
     }
 }

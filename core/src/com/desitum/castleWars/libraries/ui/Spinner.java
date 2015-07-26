@@ -1,7 +1,8 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries.ui;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -14,9 +15,9 @@ import java.util.ArrayList;
  * Created by kody on 4/18/15.
  * can be used by kody and people in [Zack, Kody]
  */
-public class PopupSpinner extends PopupMenu {
+public class Spinner extends Layout {
 
-    private PopupTextLabel label;
+    private TextLabel label;
 
     private Texture background;
 
@@ -25,45 +26,45 @@ public class PopupSpinner extends PopupMenu {
     private int min;
 
     /**
-     * Create new Popup Menu with a blank canvas
-     * use PopupWidgets to create and add them to the PopupMenu
-     * PopupWidgets will inherit all Animators from the PopupMenu, and can be overriden
+     * Create new Popup Layout with a blank canvas
+     * use PopupWidgets to create and add them to the Layout
+     * PopupWidgets will inherit all Animators from the Layout, and can be overriden
      *
      * @param background background texture for the image
-     * @param x          left x position of the PopupMenu
-     * @param y          bottom y position of the PopupMenu
-     * @param width      the width of the PopupMenu
-     * @param height     the height of the PopupMenu
+     * @param x          left x position of the Layout
+     * @param y          bottom y position of the Layout
+     * @param width      the width of the Layout
+     * @param height     the height of the Layout
      */
-    public PopupSpinner(Texture background, Texture buttonClickUp, Texture buttonClickDown, BitmapFont font, float x, float y, float width, float height) {
-        super(background, 0, 0, background.getWidth(), background.getHeight());
+    public Spinner(Texture background, Texture buttonClickUp, Texture buttonClickDown, BitmapFont font, float x, float y, float width, float height, Camera camera) {
+        super(background, 0, 0, background.getWidth(), background.getHeight(), camera);
 
         this.background = background;
 
         setPosition(x, y);
         this.setSize(width, height);
 
-        PopupButton clickUp = new PopupButton(buttonClickUp, buttonClickDown, 0, height / 2, height / 2, height / 2);
+        Button clickUp = new Button(buttonClickUp, 0, height / 2, height / 2, height / 2);
         clickUp.setButtonListener(new OnClickListener() {
             @Override
-            public void onClick(PopupWidget widget) {
+            public void onClick(Widget widget) {
                 value += 1;
                 if (value > max) value = max;
             }
         });
         addPopupWidget(clickUp);
-        PopupButton clickDown = new PopupButton(buttonClickUp, buttonClickDown, 0, 0, height / 2, height / 2);
+        Button clickDown = new Button(buttonClickUp, 0, 0, height / 2, height / 2);
         clickDown.flip(false, true);
         clickDown.setButtonListener(new OnClickListener() {
             @Override
-            public void onClick(PopupWidget widget) {
+            public void onClick(Widget widget) {
                 value -= 1;
                 if (value < min) value = min;
             }
         });
         addPopupWidget(clickDown);
 
-        label = new PopupTextLabel(background, Color.BLACK, font, height / 2, 0, width - height / 2, height);
+        label = new TextLabel(background, Color.BLACK, font, height / 2, 0, width - height / 2, height);
         addPopupWidget(label);
     }
 
@@ -77,15 +78,15 @@ public class PopupSpinner extends PopupMenu {
      */
     public void udpateScrollInput(int amount, Vector3 mousePos, boolean posMatters) {
         if (Gdx.app.getType() == ApplicationType.Android)
-        if (posMatters) {
-            if (CollisionDetection.pointInRectangle(this.getBoundingRectangle(), mousePos)) {
-                value += amount;
+            if (posMatters) {
+                if (CollisionDetection.pointInRectangle(this.getBoundingRectangle(), mousePos)) {
+                    value += amount;
+                }
             }
-        }
     }
 
     /**
-     * update animation and widgets and their animations associated with the PopupMenu
+     * update animation and widgets and their animations associated with the Layout
      *
      * @param delta - time since last frame
      */
@@ -95,20 +96,20 @@ public class PopupSpinner extends PopupMenu {
         super.update(delta);
     }
 
-    public void setValue(int value){
+    public void setValue(int value) {
         this.value = value;
     }
 
-    public void setMax(int max){
+    public void setMax(int max) {
         this.max = max;
     }
 
-    public void setMin(int min){
+    public void setMin(int min) {
         this.min = min;
     }
 
     @Override
-    public ArrayList<PopupWidget> getChildren(boolean walk) {
-        return new ArrayList<PopupWidget>();
+    public ArrayList getChildren(boolean walk) {
+        return new ArrayList<Widget>();
     }
 }

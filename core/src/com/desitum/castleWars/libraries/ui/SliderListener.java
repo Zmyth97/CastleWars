@@ -1,9 +1,9 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries.ui;
 
 /**
  * Created by kody on 4/21/15.
  * can be used by kody and people in []
  */
-public interface PopupSliderListener {
+public interface SliderListener {
     public void onChange(float pos);
 }

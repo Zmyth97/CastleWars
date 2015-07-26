@@ -1,6 +1,5 @@
 package com.desitum.castleWars.world;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -15,13 +14,13 @@ import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.effects.FlipEffect;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
-import com.desitum.castleWars.libraries.menu.OnClickListener;
-import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
-import com.desitum.castleWars.libraries.menu.PopupImage;
-import com.desitum.castleWars.libraries.menu.PopupMenu;
-import com.desitum.castleWars.libraries.menu.PopupTextLabel;
-import com.desitum.castleWars.libraries.menu.PopupToggleButton;
-import com.desitum.castleWars.libraries.menu.PopupWidget;
+import com.desitum.castleWars.libraries.ui.Image;
+import com.desitum.castleWars.libraries.ui.Layout;
+import com.desitum.castleWars.libraries.ui.OnClickListener;
+import com.desitum.castleWars.libraries.ui.ButtonMaterial;
+import com.desitum.castleWars.libraries.ui.TextLabel;
+import com.desitum.castleWars.libraries.ui.ToggleButton;
+import com.desitum.castleWars.libraries.ui.Widget;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Cloud;
@@ -49,8 +48,6 @@ public class GameWorld extends KodyWorld implements GameInterface {
     public static final float DISCARD_PILE_Y = GameScreen.SCREEN_HEIGHT - Card.CARD_HEIGHT - 2.5f;
     public static final float CARD_SPACING = 0.5f;
     public static final float CARDS_Y = 2;
-    public static boolean EASY_DIFFICULTY = false;
-    public static boolean NORMAL_DIFFICULTY = false;
     private static final float FADE_IN_DURATION = 1f;
     private static final float FADE_DELAY = 04f;
     private static final float FADE_OUT_DURATION = 0.3f;
@@ -58,6 +55,8 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private static final float CHANGE_TEXT_HEIGHT = 6;
     private static final float MENU_TEXT_WIDTH = 15;
     private static final float MENU_TEXT_HEIGHT = 6;
+    public static boolean EASY_DIFFICULTY = false;
+    public static boolean NORMAL_DIFFICULTY = false;
     public static boolean NETWORK_GAME;
     private static Color buildColor = new Color(.122f, 0f, .616f, 1);
     private static Color attackColor = new Color(.855f, 0f, .102f, 1);
@@ -71,52 +70,52 @@ public class GameWorld extends KodyWorld implements GameInterface {
     private ComputerAI ai;
     private Card lastCardUsed;
     private int settingsToggle;
-    private PopupMenu settingsMenu;
-    private PopupTextLabel playerBuildersLabel;
-    private PopupTextLabel playerSoldiersLabel;
-    private PopupTextLabel playerWizardsLabel;
-    private PopupTextLabel playerStoneLabel;
-    private PopupTextLabel playerWeaponLabel;
-    private PopupTextLabel playerGemLabel;
-    private PopupTextLabel playerCastleLabel;
-    private PopupTextLabel playerWallLabel;
-    private PopupTextLabel computerBuildersLabel;
-    private PopupTextLabel computerSoldiersLabel;
-    private PopupTextLabel computerWizardsLabel;
-    private PopupTextLabel computerStoneLabel;
-    private PopupTextLabel computerWeaponLabel;
-    private PopupTextLabel computerGemLabel;
-    private PopupTextLabel computerCastleLabel;
-    private PopupTextLabel computerWallLabel;
-    private PopupTextLabel playerBuildersLabelChange;
-    private PopupTextLabel playerSoldiersLabelChange;
-    private PopupTextLabel playerWizardsLabelChange;
-    private PopupTextLabel playerStoneLabelChange;
-    private PopupTextLabel playerWeaponLabelChange;
-    private PopupTextLabel playerGemLabelChange;
-    private PopupTextLabel playerCastleLabelChange;
-    private PopupTextLabel playerWallLabelChange;
-    private PopupTextLabel computerBuildersLabelChange;
-    private PopupTextLabel computerSoldiersLabelChange;
-    private PopupTextLabel computerWizardsLabelChange;
-    private PopupTextLabel computerStoneLabelChange;
-    private PopupTextLabel computerWeaponLabelChange;
-    private PopupTextLabel computerGemLabelChange;
-    private PopupTextLabel computerCastleLabelChange;
-    private PopupTextLabel computerWallLabelChange;
-    private PopupToggleButton discardToggle;
+    private Layout settingsLayout;
+    private TextLabel playerBuildersLabel;
+    private TextLabel playerSoldiersLabel;
+    private TextLabel playerWizardsLabel;
+    private TextLabel playerStoneLabel;
+    private TextLabel playerWeaponLabel;
+    private TextLabel playerGemLabel;
+    private TextLabel playerCastleLabel;
+    private TextLabel playerWallLabel;
+    private TextLabel computerBuildersLabel;
+    private TextLabel computerSoldiersLabel;
+    private TextLabel computerWizardsLabel;
+    private TextLabel computerStoneLabel;
+    private TextLabel computerWeaponLabel;
+    private TextLabel computerGemLabel;
+    private TextLabel computerCastleLabel;
+    private TextLabel computerWallLabel;
+    private TextLabel playerBuildersLabelChange;
+    private TextLabel playerSoldiersLabelChange;
+    private TextLabel playerWizardsLabelChange;
+    private TextLabel playerStoneLabelChange;
+    private TextLabel playerWeaponLabelChange;
+    private TextLabel playerGemLabelChange;
+    private TextLabel playerCastleLabelChange;
+    private TextLabel playerWallLabelChange;
+    private TextLabel computerBuildersLabelChange;
+    private TextLabel computerSoldiersLabelChange;
+    private TextLabel computerWizardsLabelChange;
+    private TextLabel computerStoneLabelChange;
+    private TextLabel computerWeaponLabelChange;
+    private TextLabel computerGemLabelChange;
+    private TextLabel computerCastleLabelChange;
+    private TextLabel computerWallLabelChange;
+    private ToggleButton discardToggle;
     private Deck deck;
     private Resources myResources;
     private CardActions cardActions;
     private float computerDelay;
     private ArrayList<Cloud> cloudList;
-    private PopupTextLabel playerLabel;
-    private PopupTextLabel computerLabel;
-    private PopupTextLabel aiDiscardLabel; //Looked Weird When the AI Moved a Card and it Did Nothing
+    private TextLabel playerLabel;
+    private TextLabel computerLabel;
+    private TextLabel aiDiscardLabel; //Looked Weird When the AI Moved a Card and it Did Nothing
     private float endTimer;
-    private PopupMenu difficultyMenu;
-    private PopupToggleButton easyButton;
-    private PopupToggleButton normalButton;
+    private Layout difficultyLayout;
+    private ToggleButton easyButton;
+    private ToggleButton normalButton;
 
     public GameWorld(GooglePlayServicesInterface gpgs, Viewport cam) {
         super();
@@ -142,7 +141,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         for (Card card : deck.getCardList()) {
             card.setButtonListener(new OnClickListener() {
                 @Override
-                public void onClick(PopupWidget widget) {
+                public void onClick(Widget widget) {
                     Card card = (Card) widget;
                     onClickCard(card);
                 }
@@ -157,14 +156,14 @@ public class GameWorld extends KodyWorld implements GameInterface {
         endTimer = 0;
         gameOver = false;
 
-        playerLabel = new PopupTextLabel(Assets.invisible, Color.WHITE, Assets.textFieldFont, 0, (GameScreen.SCREEN_HEIGHT / 4 + 1), 20, 5, "Player");
-        computerLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH - 25, (GameScreen.SCREEN_HEIGHT / 4 + 1), 25, 5, "Computer");
+        playerLabel = new TextLabel(Assets.invisible, Color.WHITE, Assets.textFieldFont, 0, (GameScreen.SCREEN_HEIGHT / 4 + 1), 20, 5, "Player");
+        computerLabel = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH - 25, (GameScreen.SCREEN_HEIGHT / 4 + 1), 25, 5, "Computer");
         addWidgetToWorld(playerLabel);
         addWidgetToWorld(computerLabel);
         playerLabel.setFontColor(Color.BLACK);
         computerLabel.setFontColor(Color.BLACK);
 
-        aiDiscardLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, DISCARD_PILE_X - 2, DISCARD_PILE_Y - 5, 20, 3, "Discarded");
+        aiDiscardLabel = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, DISCARD_PILE_X - 2, DISCARD_PILE_Y - 5, 20, 3, "Discarded");
         aiDiscardLabel.setFontColor(new Color(0, 0, 0, 0));
         addWidgetToWorld(aiDiscardLabel);
 
@@ -370,10 +369,10 @@ public class GameWorld extends KodyWorld implements GameInterface {
         if (lastCardUsed.getCardID() == CardActions.TROJAN_HORSE) {
             gpgs.unlockAchievement(CastleWars.DIDNT_SEE_THAT_COMING);
         }
-        if(Settings.ASSETS_TO_USE == 3){
+        if (Settings.ASSETS_TO_USE == 3) {
             gpgs.unlockAchievement(CastleWars.WORLD_CONQUEST);
         }
-        PopupTextLabel winLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH / 2 - 25, GameScreen.SCREEN_HEIGHT / 4 * 2.5f, 50, 10, "You Won!");
+        TextLabel winLabel = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH / 2 - 25, GameScreen.SCREEN_HEIGHT / 4 * 2.5f, 50, 10, "You Won!");
         addWidgetToWorld(winLabel);
         winLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
         winLabel.startTextColorEffects();
@@ -385,7 +384,7 @@ public class GameWorld extends KodyWorld implements GameInterface {
         gpgs.unlockAchievement(CastleWars.CASTLE_MASTER);
         gpgs.unlockAchievement(CastleWars.PILLAGED);
 
-        PopupTextLabel loseLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH / 2 - 25, GameScreen.SCREEN_HEIGHT / 4 * 2.5f, 55, 10, "You Lost!");
+        TextLabel loseLabel = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, GameScreen.SCREEN_WIDTH / 2 - 25, GameScreen.SCREEN_HEIGHT / 4 * 2.5f, 55, 10, "You Lost!");
         addWidgetToWorld(loseLabel);
         loseLabel.addFontColorChanger(new ColorEffects(new Color(0, 0, 0, 0), Color.BLACK, 1f));
         loseLabel.startTextColorEffects();
@@ -432,12 +431,12 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     @Override
-    public void removeWidgetFromWorld(PopupWidget widget) {
+    public void removeWidgetFromWorld(Widget widget) {
         super.removeWidget(widget);
     }
 
     @Override
-    public void addWidgetToWorld(PopupWidget widget) {
+    public void addWidgetToWorld(Widget widget) {
         super.addWidget(widget);
     }
 
@@ -447,190 +446,190 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
     private void setupSideMenus() {
         //region player menus
-        PopupMenu playerBuildMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 16);
-        playerBuildMenu.setColor(buildColor);
-        MovementAnimator playerBuildAnimator = new MovementAnimator(playerBuildMenu, 0, 85, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        playerBuildMenu.addIncomingAnimator(playerBuildAnimator);
-        playerBuildMenu.addPopupWidget(new PopupImage(Assets.hammer, Assets.invisible, 1, 9, 6, 6, false));
-        playerBuildMenu.addPopupWidget(new PopupImage(Assets.stone, Assets.invisible, 1, 1, 6, 6, false));
-        playerBuildersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        Layout playerBuildLayout = new Layout(Assets.menuArea, 0, -40, 20, 16, getCam());
+        playerBuildLayout.setColor(buildColor);
+        MovementAnimator playerBuildAnimator = new MovementAnimator(playerBuildLayout, 0, 85, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        playerBuildLayout.addIncomingAnimator(playerBuildAnimator);
+        playerBuildLayout.addPopupWidget(new Image(Assets.hammer, Assets.invisible, 1, 9, 6, 6, false));
+        playerBuildLayout.addPopupWidget(new Image(Assets.stone, Assets.invisible, 1, 1, 6, 6, false));
+        playerBuildersLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerBuildersLabel.setText(":" + myResources.getPlayerSoldiers());
-        playerStoneLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        playerStoneLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerStoneLabel.setText(":" + myResources.getPlayerWeapons());
-        playerBuildMenu.addPopupWidget(playerBuildersLabel);
-        playerBuildMenu.addPopupWidget(playerStoneLabel);
-        this.addPopupMenu(playerBuildMenu);
+        playerBuildLayout.addPopupWidget(playerBuildersLabel);
+        playerBuildLayout.addPopupWidget(playerStoneLabel);
+        this.addPopupMenu(playerBuildLayout);
 
-        //Attack Popup Menu
-        PopupMenu playerAttackMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 16);
-        playerAttackMenu.setColor(attackColor);
-        MovementAnimator playerAttackAnimator = new MovementAnimator(playerAttackMenu, 0, 67, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        playerAttackMenu.addIncomingAnimator(playerAttackAnimator);
-        playerAttackMenu.addPopupWidget(new PopupImage(Assets.helmet, Assets.invisible, 1, 9, 6, 6, false));
-        playerAttackMenu.addPopupWidget(new PopupImage(Assets.spear, Assets.invisible, 1, 1, 6, 6, false));
-        playerSoldiersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        //Attack Popup Layout
+        Layout playerAttackLayout = new Layout(Assets.menuArea, 0, -40, 20, 16, getCam());
+        playerAttackLayout.setColor(attackColor);
+        MovementAnimator playerAttackAnimator = new MovementAnimator(playerAttackLayout, 0, 67, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        playerAttackLayout.addIncomingAnimator(playerAttackAnimator);
+        playerAttackLayout.addPopupWidget(new Image(Assets.helmet, Assets.invisible, 1, 9, 6, 6, false));
+        playerAttackLayout.addPopupWidget(new Image(Assets.spear, Assets.invisible, 1, 1, 6, 6, false));
+        playerSoldiersLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerSoldiersLabel.setText(":" + myResources.getPlayerSoldiers());
-        playerWeaponLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        playerWeaponLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerWeaponLabel.setText(":" + myResources.getPlayerWeapons());
-        playerAttackMenu.addPopupWidget(playerSoldiersLabel);
-        playerAttackMenu.addPopupWidget(playerWeaponLabel);
-        this.addPopupMenu(playerAttackMenu);
+        playerAttackLayout.addPopupWidget(playerSoldiersLabel);
+        playerAttackLayout.addPopupWidget(playerWeaponLabel);
+        this.addPopupMenu(playerAttackLayout);
 
-        //Magic Popup Menu
-        PopupMenu playerMagicMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 16);
-        playerMagicMenu.setColor(magicColor);
-        MovementAnimator playerMagicAnimator = new MovementAnimator(playerMagicMenu, 0, 50, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        playerMagicMenu.addIncomingAnimator(playerMagicAnimator);
-        playerMagicMenu.addPopupWidget(new PopupImage(Assets.wand, Assets.invisible, 1, 9, 6, 6, false));
-        playerMagicMenu.addPopupWidget(new PopupImage(Assets.gem, Assets.invisible, 1, 1, 6, 6, false));
-        playerWizardsLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        //Magic Popup Layout
+        Layout playerMagicLayout = new Layout(Assets.menuArea, 0, -40, 20, 16, getCam());
+        playerMagicLayout.setColor(magicColor);
+        MovementAnimator playerMagicAnimator = new MovementAnimator(playerMagicLayout, 0, 50, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        playerMagicLayout.addIncomingAnimator(playerMagicAnimator);
+        playerMagicLayout.addPopupWidget(new Image(Assets.wand, Assets.invisible, 1, 9, 6, 6, false));
+        playerMagicLayout.addPopupWidget(new Image(Assets.gem, Assets.invisible, 1, 1, 6, 6, false));
+        playerWizardsLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerWizardsLabel.setText(":" + myResources.getPlayerWizards());
-        playerGemLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        playerGemLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerGemLabel.setText(":" + myResources.getPlayerGems());
-        playerMagicMenu.addPopupWidget(playerWizardsLabel);
-        playerMagicMenu.addPopupWidget(playerGemLabel);
-        this.addPopupMenu(playerMagicMenu);
+        playerMagicLayout.addPopupWidget(playerWizardsLabel);
+        playerMagicLayout.addPopupWidget(playerGemLabel);
+        this.addPopupMenu(playerMagicLayout);
 
-        //Castle Popup Menu
-        PopupMenu playerCastleMenu = new PopupMenu(Assets.menuArea, 0, -40, 20, 15);
-        playerCastleMenu.setColor(castleColor);
-        MovementAnimator playerCastleAnimator = new MovementAnimator(playerCastleMenu, 0, 33, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        playerCastleMenu.addIncomingAnimator(playerCastleAnimator);
-        playerCastleMenu.addPopupWidget(new PopupImage(Assets.castle, Assets.invisible, 2, 9, 5, 5, false));
-        playerCastleMenu.addPopupWidget(new PopupImage(Assets.wall, Assets.invisible, 3, 1, 3, 5, false));
-        playerCastleLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        //Castle Popup Layout
+        Layout playerCastleLayout = new Layout(Assets.menuArea, 0, -40, 20, 15, getCam());
+        playerCastleLayout.setColor(castleColor);
+        MovementAnimator playerCastleAnimator = new MovementAnimator(playerCastleLayout, 0, 33, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        playerCastleLayout.addIncomingAnimator(playerCastleAnimator);
+        playerCastleLayout.addPopupWidget(new Image(Assets.castle, Assets.invisible, 2, 9, 5, 5, false));
+        playerCastleLayout.addPopupWidget(new Image(Assets.wall, Assets.invisible, 3, 1, 3, 5, false));
+        playerCastleLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerCastleLabel.setText(":" + (int) player1.getCastle().getHealth());
-        playerWallLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        playerWallLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         playerWallLabel.setText(":" + (int) player1.getCastle().getWall().getHealth());
-        playerCastleMenu.addPopupWidget(playerCastleLabel);
-        playerCastleMenu.addPopupWidget(playerWallLabel);
-        this.addPopupMenu(playerCastleMenu);
+        playerCastleLayout.addPopupWidget(playerCastleLabel);
+        playerCastleLayout.addPopupWidget(playerWallLabel);
+        this.addPopupMenu(playerCastleLayout);
 
         //endregion
 
         //region Computer Menus
 
-        //Build Popup Menu
-        PopupMenu computerBuildMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
-        computerBuildMenu.setColor(buildColor);
-        MovementAnimator computerBuildAnimator = new MovementAnimator(computerBuildMenu, 130, 85, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        computerBuildMenu.addIncomingAnimator(computerBuildAnimator);
-        computerBuildMenu.addPopupWidget(new PopupImage(Assets.hammer, Assets.invisible, 1, 9, 6, 6, false));
-        computerBuildMenu.addPopupWidget(new PopupImage(Assets.stone, Assets.invisible, 1, 1, 6, 6, false));
-        computerBuildersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        //Build Popup Layout
+        Layout computerBuildLayout = new Layout(Assets.menuArea, 130, -40, 20, 15, getCam());
+        computerBuildLayout.setColor(buildColor);
+        MovementAnimator computerBuildAnimator = new MovementAnimator(computerBuildLayout, 130, 85, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        computerBuildLayout.addIncomingAnimator(computerBuildAnimator);
+        computerBuildLayout.addPopupWidget(new Image(Assets.hammer, Assets.invisible, 1, 9, 6, 6, false));
+        computerBuildLayout.addPopupWidget(new Image(Assets.stone, Assets.invisible, 1, 1, 6, 6, false));
+        computerBuildersLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         computerBuildersLabel.setText(":" + myResources.getComputerSoldiers());
-        computerStoneLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        computerStoneLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         computerStoneLabel.setText(":" + myResources.getComputerWeapons());
-        computerBuildMenu.addPopupWidget(computerBuildersLabel);
-        computerBuildMenu.addPopupWidget(computerStoneLabel);
-        this.addPopupMenu(computerBuildMenu);
+        computerBuildLayout.addPopupWidget(computerBuildersLabel);
+        computerBuildLayout.addPopupWidget(computerStoneLabel);
+        this.addPopupMenu(computerBuildLayout);
 
-        //Attack Popup Menu
-        PopupMenu computerAttackMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
-        computerAttackMenu.setColor(attackColor);
-        MovementAnimator computerAttackAnimator = new MovementAnimator(computerAttackMenu, 130, 67, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        computerAttackMenu.addIncomingAnimator(computerAttackAnimator);
-        computerAttackMenu.addPopupWidget(new PopupImage(Assets.helmet, Assets.invisible, 1, 8, 6, 6, false));
-        computerAttackMenu.addPopupWidget(new PopupImage(Assets.spear, Assets.invisible, 1, 1, 6, 6, false));
-        computerSoldiersLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        //Attack Popup Layout
+        Layout computerAttackLayout = new Layout(Assets.menuArea, 130, -40, 20, 15, getCam());
+        computerAttackLayout.setColor(attackColor);
+        MovementAnimator computerAttackAnimator = new MovementAnimator(computerAttackLayout, 130, 67, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        computerAttackLayout.addIncomingAnimator(computerAttackAnimator);
+        computerAttackLayout.addPopupWidget(new Image(Assets.helmet, Assets.invisible, 1, 8, 6, 6, false));
+        computerAttackLayout.addPopupWidget(new Image(Assets.spear, Assets.invisible, 1, 1, 6, 6, false));
+        computerSoldiersLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         computerSoldiersLabel.setText(":" + myResources.getComputerSoldiers());
-        computerWeaponLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        computerWeaponLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         computerWeaponLabel.setText(":" + myResources.getComputerWeapons());
-        computerAttackMenu.addPopupWidget(computerSoldiersLabel);
-        computerAttackMenu.addPopupWidget(computerWeaponLabel);
-        this.addPopupMenu(computerAttackMenu);
+        computerAttackLayout.addPopupWidget(computerSoldiersLabel);
+        computerAttackLayout.addPopupWidget(computerWeaponLabel);
+        this.addPopupMenu(computerAttackLayout);
 
-        //magic Popup Menu
-        PopupMenu computerMagicMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
-        computerMagicMenu.setColor(magicColor);
-        MovementAnimator computerMagicAnimator = new MovementAnimator(computerMagicMenu, 130, 50, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        computerMagicMenu.addIncomingAnimator(computerMagicAnimator);
-        computerMagicMenu.addPopupWidget(new PopupImage(Assets.wand, Assets.invisible, 1, 9, 6, 6, false));
-        computerMagicMenu.addPopupWidget(new PopupImage(Assets.gem, Assets.invisible, 1, 1, 6, 6, false));
-        computerWizardsLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        //magic Popup Layout
+        Layout computerMagicLayout = new Layout(Assets.menuArea, 130, -40, 20, 15, getCam());
+        computerMagicLayout.setColor(magicColor);
+        MovementAnimator computerMagicAnimator = new MovementAnimator(computerMagicLayout, 130, 50, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        computerMagicLayout.addIncomingAnimator(computerMagicAnimator);
+        computerMagicLayout.addPopupWidget(new Image(Assets.wand, Assets.invisible, 1, 9, 6, 6, false));
+        computerMagicLayout.addPopupWidget(new Image(Assets.gem, Assets.invisible, 1, 1, 6, 6, false));
+        computerWizardsLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         computerWizardsLabel.setText(":" + myResources.getComputerWizards());
-        computerGemLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        computerGemLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         computerGemLabel.setText(":" + myResources.getComputerGems());
-        computerMagicMenu.addPopupWidget(computerWizardsLabel);
-        computerMagicMenu.addPopupWidget(computerGemLabel);
-        this.addPopupMenu(computerMagicMenu);
+        computerMagicLayout.addPopupWidget(computerWizardsLabel);
+        computerMagicLayout.addPopupWidget(computerGemLabel);
+        this.addPopupMenu(computerMagicLayout);
 
-        //Castle Popup Menu
-        PopupMenu computerCastleMenu = new PopupMenu(Assets.menuArea, 130, -40, 20, 15);
-        computerCastleMenu.setColor(castleColor);
-        MovementAnimator computerCastleAnimator = new MovementAnimator(computerCastleMenu, 130, 33, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        computerCastleMenu.addIncomingAnimator(computerCastleAnimator);
-        computerCastleMenu.addPopupWidget(new PopupImage(Assets.castle, Assets.invisible, 2, 9, 5, 5, false));
-        computerCastleMenu.addPopupWidget(new PopupImage(Assets.wall, Assets.invisible, 3, 1, 3, 5, false));
-        computerCastleLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        //Castle Popup Layout
+        Layout computerCastleLayout = new Layout(Assets.menuArea, 130, -40, 20, 15, getCam());
+        computerCastleLayout.setColor(castleColor);
+        MovementAnimator computerCastleAnimator = new MovementAnimator(computerCastleLayout, 130, 33, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        computerCastleLayout.addIncomingAnimator(computerCastleAnimator);
+        computerCastleLayout.addPopupWidget(new Image(Assets.castle, Assets.invisible, 2, 9, 5, 5, false));
+        computerCastleLayout.addPopupWidget(new Image(Assets.wall, Assets.invisible, 3, 1, 3, 5, false));
+        computerCastleLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 9, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         computerCastleLabel.setText(":" + (int) player2.getCastle().getHealth());
-        computerWallLabel = new PopupTextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
+        computerWallLabel = new TextLabel(Assets.invisible, new Color(0, 0, 0, 0), Assets.textFieldFont, 8, 1, MENU_TEXT_WIDTH, MENU_TEXT_HEIGHT);
         computerWallLabel.setText(":" + (int) player2.getCastle().getWall().getHealth());
-        computerCastleMenu.addPopupWidget(computerCastleLabel);
-        computerCastleMenu.addPopupWidget(computerWallLabel);
-        this.addPopupMenu(computerCastleMenu);
+        computerCastleLayout.addPopupWidget(computerCastleLabel);
+        computerCastleLayout.addPopupWidget(computerWallLabel);
+        this.addPopupMenu(computerCastleLayout);
         //endregion
 
-        playerBuildMenu.moveIn();
-        playerAttackMenu.moveIn();
-        playerMagicMenu.moveIn();
-        playerCastleMenu.moveIn();
-        computerBuildMenu.moveIn();
-        computerAttackMenu.moveIn();
-        computerMagicMenu.moveIn();
-        computerCastleMenu.moveIn();
+        playerBuildLayout.moveIn();
+        playerAttackLayout.moveIn();
+        playerMagicLayout.moveIn();
+        playerCastleLayout.moveIn();
+        computerBuildLayout.moveIn();
+        computerAttackLayout.moveIn();
+        computerMagicLayout.moveIn();
+        computerCastleLayout.moveIn();
 
         float playerLabelX = 22;
 
-        playerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerBuildAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerBuildersLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerBuildAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 22, playerBuildAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerStoneLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, 22, playerBuildAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerAttackAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerSoldiersLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerAttackAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerAttackAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerWeaponLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerAttackAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerMagicAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerWizardsLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerMagicAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerMagicAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerGemLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerMagicAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerCastleAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerCastleLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerCastleAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        playerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerCastleAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
+        playerWallLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, playerLabelX, playerCastleAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT);
         playerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         playerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
 
-        float computerLabelX = computerAttackMenu.getX() - CHANGE_TEXT_WIDTH - 2;
+        float computerLabelX = computerAttackLayout.getX() - CHANGE_TEXT_WIDTH - 2;
 
-        computerBuildersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerBuildAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
+        computerBuildersLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerBuildAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerBuildersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerStoneLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerBuildAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
+        computerStoneLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerBuildAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerStoneLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerSoldiersLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerAttackAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
+        computerSoldiersLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerAttackAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerSoldiersLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerWeaponLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerAttackAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
+        computerWeaponLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerAttackAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerWeaponLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerWizardsLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerMagicAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
+        computerWizardsLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerMagicAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerWizardsLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerGemLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerMagicAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
+        computerGemLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerMagicAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerGemLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerCastleLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerCastleAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
+        computerCastleLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerCastleAnimator.getEndPos() + 9, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerCastleLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
-        computerWallLabelChange = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerCastleAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
+        computerWallLabelChange = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, computerLabelX, computerCastleAnimator.getEndPos() + 1, CHANGE_TEXT_WIDTH, CHANGE_TEXT_HEIGHT, "", BitmapFont.HAlignment.RIGHT);
         computerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), FADE_IN_DURATION));
         computerWallLabelChange.addFontColorChanger(new ColorEffects(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), FADE_DELAY, FADE_OUT_DURATION));
 
@@ -652,19 +651,19 @@ public class GameWorld extends KodyWorld implements GameInterface {
         this.addWidget(computerCastleLabelChange);
         this.addWidget(computerWallLabelChange);
 
-        this.discardToggle = new PopupToggleButton(Assets.trashCanSelected, Assets.trashCan, 5, 12, 8, 12, false);
+        this.discardToggle = new ToggleButton(Assets.trashCanSelected, Assets.trashCan, 5, 12, 8, 12, false);
         this.addWidgetToWorld(discardToggle);
 
-        PopupButtonMaterial settingsButton = new PopupButtonMaterial(Assets.exitButtonRound, 5, 2, Settings.BUTTON_HEIGHT, 8, 8);
+        ButtonMaterial settingsButton = new ButtonMaterial(Assets.exitButtonRound, 5, 2, Settings.BUTTON_HEIGHT, 8, 8);
         settingsButton.setButtonListener(new OnClickListener() {
             @Override
-            public void onClick(PopupWidget widget) {
+            public void onClick(Widget widget) {
                 if (settingsToggle == 0) {
                     settingsToggle++;
-                    settingsMenu.moveIn();
+                    settingsLayout.moveIn();
                 } else {
                     settingsToggle--;
-                    settingsMenu.moveOut();
+                    settingsLayout.moveOut();
                 }
             }
         });
@@ -672,57 +671,57 @@ public class GameWorld extends KodyWorld implements GameInterface {
     }
 
     private void setupSettingsMenu() {
-        settingsMenu = new PopupMenu(Assets.invisible, 10, -130, 130, 80);
-        MovementAnimator yAnimator = new MovementAnimator(settingsMenu, -130, 10, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        settingsMenu.addIncomingAnimator(yAnimator);
-        MovementAnimator yAnimator2 = new MovementAnimator(settingsMenu, 10, -130, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
-        settingsMenu.addOutgoingAnimator(yAnimator2);
+        settingsLayout = new Layout(Assets.invisible, 10, -130, 130, 80, getCam());
+        MovementAnimator yAnimator = new MovementAnimator(settingsLayout, -130, 10, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        settingsLayout.addIncomingAnimator(yAnimator);
+        MovementAnimator yAnimator2 = new MovementAnimator(settingsLayout, 10, -130, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
+        settingsLayout.addOutgoingAnimator(yAnimator2);
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButtonRound, 40, 40, Settings.BUTTON_HEIGHT, 20, 20);
+        ButtonMaterial okButton = new ButtonMaterial(Assets.okButtonRound, 40, 40, Settings.BUTTON_HEIGHT, 20, 20);
         okButton.setButtonListener(new OnClickListener() {
             @Override
-            public void onClick(PopupWidget widget) {
+            public void onClick(Widget widget) {
                 gameOver = true;
             }
         });
-        settingsMenu.addPopupWidget(okButton);
+        settingsLayout.addPopupWidget(okButton);
 
-        PopupButtonMaterial cancelButton = new PopupButtonMaterial(Assets.cancelButtonRound, 70, 40, Settings.BUTTON_HEIGHT, 20, 20);
+        ButtonMaterial cancelButton = new ButtonMaterial(Assets.cancelButtonRound, 70, 40, Settings.BUTTON_HEIGHT, 20, 20);
         cancelButton.setButtonListener(new OnClickListener() {
             @Override
-            public void onClick(PopupWidget widget) {
-                settingsMenu.moveOut();
+            public void onClick(Widget widget) {
+                settingsLayout.moveOut();
             }
         });
-        settingsMenu.addPopupWidget(cancelButton);
+        settingsLayout.addPopupWidget(cancelButton);
 
-        this.addPopupMenu(settingsMenu);
+        this.addPopupMenu(settingsLayout);
     }
 
     private void buildDifficultyGUI() {
         float menuWidth = (GameScreen.SCREEN_WIDTH * .75f);
         float menuHeight = (GameScreen.SCREEN_HEIGHT * .75f);
-        difficultyMenu = new PopupMenu(Assets.popupMenuBackground, (GameScreen.SCREEN_WIDTH / 2) - (GameScreen.SCREEN_WIDTH * .75f) / 2, -200, menuWidth, menuHeight);
-        MovementAnimator yAnimator = new MovementAnimator(difficultyMenu, -200, (GameScreen.SCREEN_HEIGHT / 2) - (GameScreen.SCREEN_HEIGHT * .75f) / 3, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
-        difficultyMenu.addIncomingAnimator(yAnimator);
-        MovementAnimator yAnimator2 = new MovementAnimator(difficultyMenu, (GameScreen.SCREEN_HEIGHT / 2) - (GameScreen.SCREEN_HEIGHT * .75f) / 3, -200, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
-        difficultyMenu.addOutgoingAnimator(yAnimator2);
+        difficultyLayout = new Layout(Assets.popupMenuBackground, (GameScreen.SCREEN_WIDTH / 2) - (GameScreen.SCREEN_WIDTH * .75f) / 2, -200, menuWidth, menuHeight, getCam());
+        MovementAnimator yAnimator = new MovementAnimator(difficultyLayout, -200, (GameScreen.SCREEN_HEIGHT / 2) - (GameScreen.SCREEN_HEIGHT * .75f) / 3, 1, 0, Interpolation.DECELERATE_INTERPOLATOR, false, true);
+        difficultyLayout.addIncomingAnimator(yAnimator);
+        MovementAnimator yAnimator2 = new MovementAnimator(difficultyLayout, (GameScreen.SCREEN_HEIGHT / 2) - (GameScreen.SCREEN_HEIGHT * .75f) / 3, -200, 1, 0, Interpolation.ANTICIPATE_INTERPOLATOR, false, true);
+        difficultyLayout.addOutgoingAnimator(yAnimator2);
 
 
-        easyButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth / 6, (menuHeight / 3), menuWidth / 6, (menuWidth / 6), false);
+        easyButton = new ToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth / 6, (menuHeight / 3), menuWidth / 6, (menuWidth / 6), false);
         easyButton.setButtonListener(new OnClickListener() {
             @Override
-            public void onClick(PopupWidget widget) {
+            public void onClick(Widget widget) {
                 easyButton.turnOn();
                 if (normalButton.isOn()) {
                     normalButton.turnOff();
                 }
             }
         });
-        normalButton = new PopupToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth / 4 * 2.5f, (menuHeight / 3), menuWidth / 6, (menuWidth / 6), false);
+        normalButton = new ToggleButton(Assets.toggleButtonOn, Assets.toggleButtonOff, menuWidth / 4 * 2.5f, (menuHeight / 3), menuWidth / 6, (menuWidth / 6), false);
         normalButton.setButtonListener(new OnClickListener() {
             @Override
-            public void onClick(PopupWidget widget) {
+            public void onClick(Widget widget) {
                 normalButton.turnOn();
                 if (easyButton.isOn()) {
                     easyButton.turnOff();
@@ -731,30 +730,30 @@ public class GameWorld extends KodyWorld implements GameInterface {
 
         });
 
-        PopupTextLabel easyLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth / 7, (menuHeight / 3) * 2, menuWidth / 4, (menuHeight / 8), "Easy");
-        PopupTextLabel normalLabel = new PopupTextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth / 4 * 2.3f, (menuHeight / 3) * 2, menuWidth / 3f, (menuHeight / 8), "Normal");
+        TextLabel easyLabel = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth / 7, (menuHeight / 3) * 2, menuWidth / 4, (menuHeight / 8), "Easy");
+        TextLabel normalLabel = new TextLabel(Assets.invisible, Color.BLACK, Assets.textFieldFont, menuWidth / 4 * 2.3f, (menuHeight / 3) * 2, menuWidth / 3f, (menuHeight / 8), "Normal");
 
-        PopupButtonMaterial okButton = new PopupButtonMaterial(Assets.okButton, menuWidth / 2 - (menuWidth / 4) / 1.75f, menuHeight / 4 - menuHeight / 6, Settings.BUTTON_HEIGHT, menuWidth / 4, menuHeight / 6);
+        ButtonMaterial okButton = new ButtonMaterial(Assets.okButton, menuWidth / 2 - (menuWidth / 4) / 1.75f, menuHeight / 4 - menuHeight / 6, Settings.BUTTON_HEIGHT, menuWidth / 4, menuHeight / 6);
         okButton.setButtonListener(new OnClickListener() {
             @Override
-            public void onClick(PopupWidget widget) {
+            public void onClick(Widget widget) {
                 if (easyButton.isOn()) {
                     EASY_DIFFICULTY = true;
                 }
                 {
                     NORMAL_DIFFICULTY = true;
                 }
-                difficultyMenu.moveOut();
-                removeWidgetFromWorld(difficultyMenu);
+                difficultyLayout.moveOut();
+                removeWidgetFromWorld(difficultyLayout);
             }
         });
-        difficultyMenu.addPopupWidget(easyButton);
-        difficultyMenu.addPopupWidget(normalButton);
-        difficultyMenu.addPopupWidget(easyLabel);
-        difficultyMenu.addPopupWidget(normalLabel);
-        difficultyMenu.addPopupWidget(okButton);
-        addPopupMenu(difficultyMenu);
-        difficultyMenu.moveIn();
+        difficultyLayout.addPopupWidget(easyButton);
+        difficultyLayout.addPopupWidget(normalButton);
+        difficultyLayout.addPopupWidget(easyLabel);
+        difficultyLayout.addPopupWidget(normalLabel);
+        difficultyLayout.addPopupWidget(okButton);
+        addPopupMenu(difficultyLayout);
+        difficultyLayout.moveIn();
     }
 
     public void setPlayerBuildersLabelChangeText(int change) {

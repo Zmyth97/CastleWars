@@ -12,6 +12,9 @@ import com.desitum.castleWars.GooglePlayServicesInterface;
 import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.data.Settings;
 
+import org.json.JSONObject;
+import org.json.JSONString;
+
 /**
  * Created by Zmyth97 on 2/25/2015.
  */
@@ -29,6 +32,9 @@ public class SplashScreen implements Screen {
     private float timeElapsed = 0;
 
     public SplashScreen(GooglePlayServicesInterface gps, CastleWars game) {
+        String myString = "{ 'hello' : 'json', 'hello2' : {'hello3' : 'json2'}}";
+        JSONObject myJson = new JSONObject(myString);
+        System.out.println(myJson.getString("hello2"));
 
         cam = new OrthographicCamera(MenuScreen.SCREEN_WIDTH, MenuScreen.SCREEN_HEIGHT);
         cam.position.set(MenuScreen.SCREEN_WIDTH / 2, MenuScreen.SCREEN_HEIGHT / 2, 0);

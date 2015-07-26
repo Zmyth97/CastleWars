@@ -1,4 +1,4 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries.ui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by kody on 5/23/15.
  * can be used by kody and people in [kody}]
  */
-public class PopupTextLabel extends PopupWidget {
+public class TextLabel extends Widget {
 
     private Texture backgroundTexture;
     private Color highlightColor;
@@ -34,7 +34,7 @@ public class PopupTextLabel extends PopupWidget {
     private float fontSize;
     private boolean cursorOn = false;
 
-    public PopupTextLabel(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height) {
+    public TextLabel(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height) {
         super(backgroundTexture, width, height, x, y);
 
         this.backgroundTexture = backgroundTexture;
@@ -57,7 +57,7 @@ public class PopupTextLabel extends PopupWidget {
         setupFontSize();
     }
 
-    public PopupTextLabel(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height, String text) {
+    public TextLabel(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height, String text) {
         super(backgroundTexture, width, height, x, y);
 
         this.backgroundTexture = backgroundTexture;
@@ -79,7 +79,7 @@ public class PopupTextLabel extends PopupWidget {
         setupFontSize();
     }
 
-    public PopupTextLabel(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height, String text, BitmapFont.HAlignment hAlignment) {
+    public TextLabel(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height, String text, BitmapFont.HAlignment hAlignment) {
         super(backgroundTexture, width, height, x, y);
 
         this.backgroundTexture = backgroundTexture;
@@ -197,6 +197,11 @@ public class PopupTextLabel extends PopupWidget {
         return false;
     }
 
+    @Override
+    public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
+
+    }
+
     public String getText() {
         return this.text;
     }
@@ -214,8 +219,8 @@ public class PopupTextLabel extends PopupWidget {
     }
 
     @Override
-    public ArrayList<PopupWidget> getChildren(boolean walk) {
-        return new ArrayList<PopupWidget>();
+    public ArrayList getChildren(boolean walk) {
+        return new ArrayList<Widget>();
     }
 }
 

@@ -1,7 +1,9 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries.ui;
 
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
+import com.desitum.castleWars.libraries.CollisionDetection;
 
 import java.util.ArrayList;
 
@@ -9,7 +11,7 @@ import java.util.ArrayList;
  * Created by kody on 4/19/15.
  * can be used by kody and people in []
  */
-public class PopupToggleButton extends PopupWidget {
+public class ToggleButton extends Widget {
     private Texture offTexture;
     private Texture onTexture;
 
@@ -18,7 +20,7 @@ public class PopupToggleButton extends PopupWidget {
 
     private OnClickListener buttonListener;
 
-    public PopupToggleButton(Texture onTexture, Texture offTexture, float x, float y, float width, float height, boolean on) {
+    public ToggleButton(Texture onTexture, Texture offTexture, float x, float y, float width, float height, boolean on) {
         super(on ? onTexture : offTexture, width, height, x, y);
 
         this.onTexture = onTexture;
@@ -79,7 +81,19 @@ public class PopupToggleButton extends PopupWidget {
     }
 
     @Override
-    public ArrayList<PopupWidget> getChildren(boolean walk) {
-        return new ArrayList<PopupWidget>();
+    public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
+        boolean clickInArea = CollisionDetection.pointInRectangle(getBoundingRectangle(), touchPos);
+        if (clickInArea && clickDown) {
+            onClickDown();
+        } else if (clickInArea) {
+            onClickUp(true);
+        } else {
+            onClickUp(false);
+        }
+    }
+
+    @Override
+    public ArrayList getChildren(boolean walk) {
+        return new ArrayList<Widget>();
     }
 }

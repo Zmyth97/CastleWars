@@ -7,13 +7,13 @@ import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.effects.FlipEffect;
-import com.desitum.castleWars.libraries.menu.PopupButton;
+import com.desitum.castleWars.libraries.ui.Button;
 
 
 /**
  * Created by Zmyth97 on 5/18/2015.
  */
-public class Card extends PopupButton {
+public class Card extends Button {
 
     public static final float CARD_WIDTH = 16;
     public static final float CARD_HEIGHT = 24;
@@ -34,7 +34,7 @@ public class Card extends PopupButton {
     private MovementAnimator movementAnimator;
 
     public Card(Texture cardImage, int cardType, int cardID, int cardCost, float x, float y) {
-        super(cardImage, cardImage, x, y, CARD_WIDTH, CARD_HEIGHT);
+        super(cardImage, x, y, CARD_WIDTH, CARD_HEIGHT);
         available = true;
         atMax = false;
         this.cardType = cardType;

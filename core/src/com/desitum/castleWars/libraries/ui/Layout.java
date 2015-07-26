@@ -1,9 +1,12 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries.ui;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
-import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
@@ -16,31 +19,32 @@ import java.util.Iterator;
  * Created by kody on 4/18/15.
  * can be used by kody and people in [Zack, Kody]
  */
-public class PopupMenu extends PopupWidget {
+public abstract class Layout extends Widget {
 
-    private ArrayList<PopupWidget> widgets;
+    private ArrayList<Widget> widgets;
 
     private ArrayList<Animator> incomingAnimatorsToAdd;
     private ArrayList<Animator> outgoingAnimatorsToAdd;
 
+    private ShapeRenderer shapeRenderer;
+    private Camera camera;
+
     private Texture background;
 
-    private int commandToSend;
-
     /**
-     * Create new Popup Menu with a blank canvas
-     * use PopupWidgets to create and add them to the PopupMenu
-     * PopupWidgets will inherit all Animators from the PopupMenu, and can be overriden
+     * Create new Popup Layout with a blank canvas
+     * use PopupWidgets to create and add them to the Layout
+     * PopupWidgets will inherit all Animators from the Layout, and can be overriden
      *
      * @param background background texture for the image
-     * @param x          left x position of the PopupMenu
-     * @param y          bottom y position of the PopupMenu
-     * @param width      the width of the PopupMenu
-     * @param height     the height of the PopupMenu
+     * @param x          left x position of the Layout
+     * @param y          bottom y position of the Layout
+     * @param width      the width of the Layout
+     * @param height     the height of the Layout
      */
-    public PopupMenu(Texture background, float x, float y, float width, float height) {
+    public Layout(Texture background, float x, float y, float width, float height, Camera camera) {
         super(background, 0, 0, background.getWidth(), background.getHeight());
-        widgets = new ArrayList<PopupWidget>();
+        widgets = new ArrayList<Widget>();
         incomingAnimatorsToAdd = new ArrayList<Animator>();
         outgoingAnimatorsToAdd = new ArrayList<Animator>();
 
@@ -49,87 +53,70 @@ public class PopupMenu extends PopupWidget {
         setPosition(x, y);
         this.setSize(width, height);
 
+        shapeRenderer = new ShapeRenderer();
+        this.camera = camera;
+
         disable();
     }
 
     /**
-     * Draws the PopupMenu with widgets on the screen
+     * Draws the Layout with widgets on the screen
      *
      * @param batch batch to draw with
      */
     public void draw(SpriteBatch batch) {
         super.draw(batch);
 
-        for (PopupWidget widget : widgets) {
+        if (batch.isDrawing()) {
+            batch.end();
+        }
+
+// Enable depth testing and mask and disable the color mask.
+        Gdx.gl.glDepthFunc(GL20.GL_LESS);
+        Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+        Gdx.gl.glDepthMask(true);
+        Gdx.gl.glColorMask(false, false, false, false);
+
+// Draw your mask.
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        shapeRenderer.setColor(1f, 0f, 0f, 0.5f);
+        //shapeRenderer.rect(getX(), getY(), getWidth(), getHeight());
+        //shapeRenderer.circle(getX() + getWidth()/2, getY() + getHeight()/2, getWidth()/2);
+        shapeRenderer.ellipse(getX() + getWidth() / 2, getY() + getHeight() / 2, getWidth() / 4, getHeight() / 2);
+        shapeRenderer.end();
+
+// Reenable the color mask and depth test.
+        batch.begin();
+        Gdx.gl.glColorMask(true, true, true, true);
+        Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+        Gdx.gl.glDepthFunc(GL20.GL_EQUAL);
+
+        // draw widgets such that they don't extend past the boundaries
+        for (Widget widget : widgets) {
             widget.draw(batch);
         }
+        batch.end();
+
+// Clear the depth buffer.
+        Gdx.gl.glClearDepthf(1f);
+        Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT);
+        Gdx.gl.glDisable(GL20.GL_DEPTH_TEST);
+        batch.begin();
+
+// Draw something else (UI, etc...)
+// ....
     }
 
     /**
-     * updates the PopupMenu with touch, done automatically in KodyWorld
+     * updates the Layout with touch, done automatically in KodyWorld
      *
      * @param touchPos  - touchPos in relation to the world
      * @param clickDown - whether or not the mouse is down or not
      */
     public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
-        for (PopupWidget widget : widgets) { // Go through each PopupWidget in the menu's widgets
-
-            boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
-            if (widget instanceof PopupButton) { // if Widget is a PopupButton
-                PopupButton button = (PopupButton) widget;
-                if (clickInArea && clickDown) {
-                    button.onClickDown();
-                } else if (clickInArea) {
-                    button.onClickUp(true);
-                } else {
-                    button.onClickUp(false);
-                }
-            } else if (widget instanceof PopupButtonMaterial) {
-                PopupButtonMaterial button = (PopupButtonMaterial) widget;
-                if (clickInArea && clickDown) {
-                    button.onClickDown(touchPos);
-                } else if (clickInArea) {
-                    button.onClickUp(true);
-                } else {
-                    button.onClickUp(false);
-                }
-            } else if (widget instanceof PopupSlider) { // if widget is a Slider
-                PopupSlider slider = (PopupSlider) widget;
-                if (clickInArea && clickDown) {
-                    slider.onClickDown(touchPos);
-                } else if (clickInArea) {
-                    slider.onClickUp();
-                } else {
-                    slider.onClickUp(); // handles if not in area
-                }
-            } else if (widget instanceof PopupScrollArea) { // if widget is a PopupScrollArea
-                PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
-                popupScrollArea.updateTouchInput(touchPos, clickDown);
-            } else if (widget instanceof PopupImage) {
-                PopupImage image = (PopupImage) widget;
-                if (clickInArea && clickDown) {
-                    image.onClickDown();
-                } else if (clickInArea) {
-                    image.onClickUp(true);
-                } else {
-                    image.onClickUp(false);
-                }
-            } else if (widget instanceof PopupToggleButton) {
-                PopupToggleButton button = (PopupToggleButton) widget;
-                if (clickInArea && clickDown) {
-                    button.onClickDown();
-                } else if (clickInArea) {
-                    button.onClickUp(true);
-                } else {
-                    button.onClickUp(false);
-                }
-            } else if (widget instanceof PopupSpinner) { // if widget is a Spinner
-                PopupSpinner spinner = (PopupSpinner) widget;
-                spinner.updateTouchInput(touchPos, clickDown);
-            } else if (widget instanceof PopupMenu) { // if widget is a Menu (Nested Menu)
-                PopupMenu menu = (PopupMenu) widget;
-                menu.updateTouchInput(touchPos, clickDown);
-            }
+        for (Widget widget : widgets) { // Go through each Widget in the menu's widgets
+            widget.updateTouchInput(touchPos, clickDown);
         }
     }
 
@@ -142,15 +129,15 @@ public class PopupMenu extends PopupWidget {
      */
     @Override
     public void updateScroll(float amount, Vector3 mousePos) {
-        for (PopupWidget widget : widgets) {
-            if (!widget.getClass().equals(PopupScrollArea.class)) {
+        for (Widget widget : widgets) {
+            if (!widget.getClass().equals(ScrollArea.class)) {
                 continue;
             }
             if (widget.scrollPosMatters() && isEnabled()) {
-                PopupScrollArea scrollArea = (PopupScrollArea) widget;
+                ScrollArea scrollArea = (ScrollArea) widget;
                 scrollArea.updateScroll(amount, mousePos);
             } else if (isEnabled()) {
-                PopupScrollArea scrollArea = (PopupScrollArea) widget;
+                ScrollArea scrollArea = (ScrollArea) widget;
                 scrollArea.updateScroll(amount, mousePos);
             }
         }
@@ -162,11 +149,11 @@ public class PopupMenu extends PopupWidget {
     }
 
     @Override
-    public ArrayList<PopupWidget> getChildren(boolean walk) {
-        ArrayList<PopupWidget> widgets = new ArrayList<PopupWidget>();
+    public ArrayList getChildren(boolean walk) {
+        ArrayList<Widget> widgets = new ArrayList<Widget>();
         widgets.addAll(getChildren());
         if (walk) {
-            for (PopupWidget widget: getChildren()) {
+            for (Widget widget : getChildren()) {
                 widgets.addAll(widget.getChildren(walk));
             }
         }
@@ -174,12 +161,12 @@ public class PopupMenu extends PopupWidget {
     }
 
     /**
-     * update animation and widgets and their animations associated with the PopupMenu
+     * update animation and widgets and their animations associated with the Layout
      *
      * @param delta - time since last frame
      */
     public void update(float delta) {
-        for (PopupWidget widget : widgets) {
+        for (Widget widget : widgets) {
             widget.update(delta);
         }
 
@@ -187,7 +174,7 @@ public class PopupMenu extends PopupWidget {
     }
 
     /**
-     * updates animation for the PopupMenu
+     * updates animation for the Layout
      *
      * @param delta - time since last frame
      */
@@ -216,12 +203,12 @@ public class PopupMenu extends PopupWidget {
     }
 
     /**
-     * add widget to the PopupMenu
-     * widget location is in relation to PopupMenu
+     * add widget to the Layout
+     * widget location is in relation to Layout
      *
      * @param toAdd
      */
-    public void addPopupWidget(PopupWidget toAdd) {
+    public void addPopupWidget(Widget toAdd) {
         for (Animator anim : incomingAnimatorsToAdd) {
             Animator dupAnim = anim.duplicate();
             if (dupAnim instanceof MovementAnimator) {
@@ -274,7 +261,7 @@ public class PopupMenu extends PopupWidget {
     @Override
     public void moveIn() {
         super.moveIn();
-        for (PopupWidget widget : widgets) {
+        for (Widget widget : widgets) {
             widget.moveIn();
         }
     }
@@ -285,7 +272,7 @@ public class PopupMenu extends PopupWidget {
     @Override
     public void moveOut() {
         super.moveOut();
-        for (PopupWidget widget : widgets) {
+        for (Widget widget : widgets) {
             widget.moveOut();
         }
     }
@@ -358,7 +345,7 @@ public class PopupMenu extends PopupWidget {
     @Override
     public void setX(float x) {
         if (widgets != null) {
-            for (PopupWidget widget : widgets) {
+            for (Widget widget : widgets) {
                 widget.setX(widget.getX() - getX() + x);
             }
         }
@@ -368,26 +355,48 @@ public class PopupMenu extends PopupWidget {
     @Override
     public void setY(float y) {
         if (widgets != null) {
-            for (PopupWidget widget : widgets) {
+            for (Widget widget : widgets) {
                 widget.setY(widget.getY() - getY() + y);
             }
         }
         super.setY(y);
     }
 
-    public ArrayList<PopupWidget> getChildren() {
+    public ArrayList<Widget> getChildren() {
         return widgets;
     }
 
-    public void setWidgets(ArrayList<PopupWidget> widgetsToSet) {
-        this.widgets = new ArrayList<PopupWidget>();
-        for (PopupWidget widget : widgetsToSet) {
+    public void setWidgets(ArrayList<Widget> widgetsToSet) {
+        this.widgets = new ArrayList<Widget>();
+        for (Widget widget : widgetsToSet) {
             this.addPopupWidget(widget);
         }
     }
 
     public void clearChildren() {
-        this.widgets = new ArrayList<PopupWidget>();
+        this.widgets = new ArrayList<Widget>();
+    }
+
+    public abstract float getPostionToCenterInScroll(ScrollArea scrollArea, int widgetID);
+
+    public Widget findWidgetByID (int id) {
+        Widget returnWidget = null;
+        for (Widget widget : getChildren()) {
+            if (widget.getID() == id)
+                returnWidget = widget;
+        }
+        return returnWidget;
+    }
+
+    public float getDistanceBetween(int index1, int index2) {
+        if ((index1 - index2) == 0) {
+            return 0;
+        }
+        float totalWidth = 0;
+        for (int i = index1; i <= index2; i++) {
+            totalWidth += getChildren().get(i).getWidth();
+        }
+        return totalWidth;
     }
 }
 

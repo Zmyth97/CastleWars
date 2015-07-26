@@ -1,5 +1,6 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries.ui;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,15 +17,24 @@ import java.util.Iterator;
  * Created by kody on 4/18/15.
  * can be used by kody and people in []
  */
-public abstract class PopupWidget extends Sprite {
+public abstract class Widget extends Sprite {
 
     private ArrayList<Animator> comingInAnimators;
     private ArrayList<Animator> goingOutAnimators;
 
+    private static int currentID;
+
+    private int id;
+
     private boolean enabled;
 
-    public PopupWidget(Texture texture, float width, float height, float x, float y) {
+    private OrthographicCamera camera;
+
+    public Widget(Texture texture, float width, float height, float x, float y) {
         super(texture, 0, 0, texture.getWidth(), texture.getHeight());
+
+        currentID += 1;
+        id = Integer.valueOf(currentID);
 
         setSize(width, height);
         setX(x);
@@ -170,5 +180,19 @@ public abstract class PopupWidget extends Sprite {
 
     abstract boolean scrollPosMatters();
 
-    public abstract ArrayList<PopupWidget> getChildren(boolean walk);
+    public abstract void updateTouchInput(Vector3 touchPos, boolean clickDown);
+
+    public abstract ArrayList getChildren(boolean walk);
+
+    public OrthographicCamera getCamera() {
+        return camera;
+    }
+
+    public void setCamera(OrthographicCamera camera) {
+        this.camera = camera;
+    }
+
+    public int getID() {
+        return id;
+    }
 }

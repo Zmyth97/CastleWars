@@ -7,10 +7,10 @@ public class FlamePack {
 
     //region Build Cards
     public static final int WALL_OF_FIRE = 401; //+8 Wall
-    public static final int CAMPFIRE     = 402; //+8 Castle
-    public static final int FORGE        = 403; //+2 Builders
-    public static final int BOILING_OIL  = 404; //+15 Wall
-    public static final int BONFIRE      = 405; //+15 Castle
+    public static final int CAMPFIRE = 402; //+8 Castle
+    public static final int FORGE = 403; //+2 Builders
+    public static final int BOILING_OIL = 404; //+15 Wall
+    public static final int BONFIRE = 405; //+15 Castle
     //endregion
 
     //region Build Costs
@@ -22,41 +22,41 @@ public class FlamePack {
     //endregion
 
     //region Attack Cards
-    public static final int FIRE          = 406; //+6 Attack
-    public static final int FIRE_ARROWS   = 407; //+10 Attack
-    public static final int FLAMING_AXE   = 408; //+12 Attack
-    public static final int FLAMING_SHOT  = 409; //+18 Attack
-    public static final int FLAME_LEGION  = 410; //+2 Soldier
+    public static final int FIRE = 406; //+6 Attack
+    public static final int FIRE_ARROWS = 407; //+10 Attack
+    public static final int FLAMING_AXE = 408; //+12 Attack
+    public static final int FLAMING_SHOT = 409; //+18 Attack
+    public static final int FLAME_LEGION = 410; //+2 Soldier
     //endregion
 
     //region Attack Costs
-    public static final int FIRE_COST          = 12;
-    public static final int FIRE_ARROWS_COST   = 18;
-    public static final int FLAMING_AXE_COST   = 22;
-    public static final int FLAMING_SHOT_COST  = 34;
-    public static final int FLAME_LEGION_COST  = 32;
+    public static final int FIRE_COST = 12;
+    public static final int FIRE_ARROWS_COST = 18;
+    public static final int FLAMING_AXE_COST = 22;
+    public static final int FLAMING_SHOT_COST = 34;
+    public static final int FLAME_LEGION_COST = 32;
     //endregion
 
     //region Magic Cards
-    public static final int FIRE_SHAMAN  = 411; //+2 Wizards
-    public static final int LAVA_FLOW    = 412; //+24 Stone
-    public static final int COAL         = 413; //+24 Gems
-    public static final int BLACKSMITH   = 414; //+24 weapons
-    public static final int FIREBALL     = 415; //+16 Attack
+    public static final int FIRE_SHAMAN = 411; //+2 Wizards
+    public static final int LAVA_FLOW = 412; //+24 Stone
+    public static final int COAL = 413; //+24 Gems
+    public static final int BLACKSMITH = 414; //+24 weapons
+    public static final int FIREBALL = 415; //+16 Attack
     //endregion
 
     //region Magic Costsfire
-    public static final int FIRE_SHAMAN_COST   = 32;
-    public static final int LAVA_FLOW_COST     = 14;
-    public static final int COAL_COST          = 14;
-    public static final int BLACKSMITH_COST    = 14;
-    public static final int FIREBALL_COST      = 30;
+    public static final int FIRE_SHAMAN_COST = 32;
+    public static final int LAVA_FLOW_COST = 14;
+    public static final int COAL_COST = 14;
+    public static final int BLACKSMITH_COST = 14;
+    public static final int FIREBALL_COST = 30;
     //endregion
 
     //region GoldenCards
-    public static final int PHEONIX   = 416; //Kill 1 Enemy Soldier, get 2 Soldier (Rise from dead? :D)
-    public static final int METEORS   = 417; //+40 Attack
-    public static final int INFERNO   = 418; //Burn 24 of Each Enemy Resource
+    public static final int PHEONIX = 416; //Kill 1 Enemy Soldier, get 2 Soldier (Rise from dead? :D)
+    public static final int METEORS = 417; //+40 Attack
+    public static final int INFERNO = 418; //Burn 24 of Each Enemy Resource
     //endRegion
 
     //region Golden Costs

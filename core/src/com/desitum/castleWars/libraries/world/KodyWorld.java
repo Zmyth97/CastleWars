@@ -2,19 +2,14 @@ package com.desitum.castleWars.libraries.world;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.libraries.CollisionDetection;
-import com.desitum.castleWars.libraries.menu.PopupButton;
-import com.desitum.castleWars.libraries.menu.PopupButtonMaterial;
-import com.desitum.castleWars.libraries.menu.PopupImage;
-import com.desitum.castleWars.libraries.menu.PopupMenu;
-import com.desitum.castleWars.libraries.menu.PopupScrollArea;
-import com.desitum.castleWars.libraries.menu.PopupSlider;
-import com.desitum.castleWars.libraries.menu.PopupSpinner;
-import com.desitum.castleWars.libraries.menu.PopupToggleButton;
-import com.desitum.castleWars.libraries.menu.PopupWidget;
+import com.desitum.castleWars.libraries.game_objects.GameObject;
+import com.desitum.castleWars.libraries.ui.Layout;
+import com.desitum.castleWars.libraries.ui.Widget;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -25,29 +20,29 @@ import java.util.ConcurrentModificationException;
  */
 public class KodyWorld implements InputProcessor {
 
-    private ArrayList<PopupWidget> widgets;
-    private ArrayList<PopupMenu> menus;
+    private ArrayList<Widget> widgets;
+    private ArrayList<Layout> layouts;
     private Vector3 touchPoint;
     private Viewport cam;
 
-    private ArrayList<PopupWidget> widgetsToAdd;
-    private ArrayList<PopupWidget> widgetsToRem;
+    private ArrayList<Widget> widgetsToAdd;
+    private ArrayList<Widget> widgetsToRem;
 
     public KodyWorld() {
-        widgets = new ArrayList<PopupWidget>();
-        widgetsToAdd = new ArrayList<PopupWidget>();
-        widgetsToRem = new ArrayList<PopupWidget>();
-        menus = new ArrayList<PopupMenu>();
+        widgets = new ArrayList<Widget>();
+        widgetsToAdd = new ArrayList<Widget>();
+        widgetsToRem = new ArrayList<Widget>();
+        layouts = new ArrayList<Layout>();
         touchPoint = new Vector3(0, 0, 0);
     }
 
     public void update(float delta) {
-        for (PopupWidget widget : widgets) {
+        for (Widget widget : widgets) {
             widget.update(delta);
         }
 
-        for (PopupMenu menu : menus) {
-            menu.update(delta);
+        for (Layout layout : layouts) {
+            layout.update(delta);
         }
 
         if (Gdx.input.isTouched()) {
@@ -62,9 +57,13 @@ public class KodyWorld implements InputProcessor {
     }
 
     public void draw(SpriteBatch batch) {
-        for (PopupWidget widget: widgets) {
+        for (Widget widget : widgets) {
             widget.draw(batch);
         }
+    }
+
+    public Camera getCam() {
+        return cam.getCamera();
     }
 
     public void setCam(Viewport cam) {
@@ -73,107 +72,55 @@ public class KodyWorld implements InputProcessor {
 
     public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
         boolean clickedOnWidget = false;
-        for (int i = menus.size() - 1; i >= 0; i--) {
-            PopupMenu menu = menus.get(i);
-            if (!menu.isEnabled()) continue;
-            boolean clickInArea = (CollisionDetection.pointInRectangle(menu.getBoundingRectangle(), touchPos) && !clickedOnWidget);
+        for (int i = layouts.size() - 1; i >= 0; i--) {
+            Layout layout = layouts.get(i);
+            if (!layout.isEnabled()) continue;
+            boolean clickInArea = (CollisionDetection.pointInRectangle(layout.getBoundingRectangle(), touchPos) && !clickedOnWidget);
             if (clickInArea) {
-                menu.updateTouchInput(touchPos, clickDown);
+                layout.updateTouchInput(touchPos, clickDown);
                 clickedOnWidget = true;
             }
         }
         if (!clickedOnWidget) {
             try {
-                for (PopupWidget widget : widgets) {
+                for (Widget widget : widgets) {
                     if (!widget.isEnabled()) continue;
-                    boolean clickInArea = CollisionDetection.pointInRectangle(widget.getBoundingRectangle(), touchPos);
-                    if (widget instanceof PopupButton) {
-                        PopupButton button = (PopupButton) widget;
-                        if (clickInArea && clickDown) {
-                            button.onClickDown();
-                        } else if (clickInArea) {
-                            button.onClickUp(true);
-                        } else {
-                            button.onClickUp(false);
-                        }
-                    } else if (widget instanceof PopupSlider) {
-                        PopupSlider slider = (PopupSlider) widget;
-                        if (clickInArea && clickDown) {
-                            slider.onClickDown(touchPos);
-                        } else if (clickInArea) {
-                            slider.onClickUp();
-                        } else {
-                            slider.onClickUp(); // handles if not in area
-                        }
-                    } else if (widget instanceof PopupButtonMaterial) {
-                        PopupButtonMaterial button = (PopupButtonMaterial) widget;
-                        if (clickInArea && clickDown) {
-                            button.onClickDown(touchPos);
-                        } else if (clickInArea) {
-                            button.onClickUp(true);
-                        } else {
-                            button.onClickUp(false); // handles if not in area
-                        }
-                    } else if (widget instanceof PopupScrollArea) {
-                        PopupScrollArea popupScrollArea = (PopupScrollArea) widget;
-                        popupScrollArea.updateTouchInput(touchPos, clickDown);
-                    } else if (widget instanceof PopupImage) {
-                        PopupImage image = (PopupImage) widget;
-                        if (clickInArea && clickDown) {
-                            image.onClickDown();
-                        } else if (clickInArea) {
-                            image.onClickUp(true);
-                        } else {
-                            image.onClickUp(false);
-                        }
-                    } else if (widget instanceof PopupToggleButton) {
-                        PopupToggleButton button = (PopupToggleButton) widget;
-                        if (clickInArea && clickDown) {
-                            button.onClickDown();
-                        } else if (clickInArea) {
-                            button.onClickUp(true);
-                        } else {
-                            button.onClickUp(false);
-                        }
-                    } else if (widget instanceof PopupSpinner) {
-                        PopupSpinner spinner = (PopupSpinner) widget;
-                        spinner.updateTouchInput(touchPos, clickDown);
-                    }
+                    widget.updateTouchInput(touchPos, clickDown);
                 }
             } catch (ConcurrentModificationException e) {
                 e.printStackTrace();
             }
         }
 
-        for (PopupWidget widget : widgetsToRem) {
+        for (Widget widget : widgetsToRem) {
             widgets.remove(widget);
         }
         widgetsToRem.clear();
 
-        for (PopupWidget widget : widgetsToAdd) {
+        for (Widget widget : widgetsToAdd) {
             widgets.add(widget);
         }
         widgetsToAdd.clear();
     }
 
-    public void addWidget(PopupWidget widget) {
+    public void addWidget(Widget widget) {
         widgetsToAdd.add(widget);
     }
 
-    public void addPopupMenu(PopupMenu menu) {
-        menus.add(menu);
+    public void addPopupMenu(Layout layout) {
+        layouts.add(layout);
     }
 
-    public void removeWidget(PopupWidget widget) {
+    public void removeWidget(Widget widget) {
         widgetsToRem.add(widget);
     }
 
-    public ArrayList<PopupWidget> getWidgets() {
+    public ArrayList<Widget> getWidgets() {
         return widgets;
     }
 
-    public ArrayList<PopupMenu> getMenus() {
-        return menus;
+    public ArrayList<Layout> getLayouts() {
+        return layouts;
     }
 
     @Override
@@ -214,12 +161,14 @@ public class KodyWorld implements InputProcessor {
 
     @Override
     public boolean scrolled(int amount) {
-        System.out.println("scrolled : " + amount);
-        for (PopupWidget widget : widgets) {
+        for (Widget widget : widgets) {
             widget.updateScroll(amount, touchPoint);
-            System.out.println(widget + " : scrolled : " + amount);
         }
 
         return false;
+    }
+
+    public void addGameObject(GameObject gameObject) {
+        //TODO we need game object functionality added to KodyWorld
     }
 }

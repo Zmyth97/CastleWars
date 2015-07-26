@@ -1,4 +1,4 @@
-package com.desitum.castleWars.libraries.menu;
+package com.desitum.castleWars.libraries.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by kody on 5/23/15.
  * can be used by kody and people in [kody}]
  */
-public class PopupEditText extends PopupWidget {
+public class EditText extends Widget {
 
     private Texture backgroundTexture;
     private Color highlightColor;
@@ -34,7 +34,7 @@ public class PopupEditText extends PopupWidget {
 
     private ColorEffects colorEffects;
 
-    public PopupEditText(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height) {
+    public EditText(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height) {
         super(backgroundTexture, width, height, x, y);
 
         this.backgroundTexture = backgroundTexture;
@@ -53,7 +53,7 @@ public class PopupEditText extends PopupWidget {
         setupFontSize();
     }
 
-    public PopupEditText(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height, String text) {
+    public EditText(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height, String text) {
         super(backgroundTexture, width, height, x, y);
 
         this.backgroundTexture = backgroundTexture;
@@ -72,7 +72,7 @@ public class PopupEditText extends PopupWidget {
         setupFontSize();
     }
 
-    public PopupEditText(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height, String text, BitmapFont.HAlignment hAlignment) {
+    public EditText(Texture backgroundTexture, Color highlightColor, BitmapFont font, float x, float y, float width, float height, String text, BitmapFont.HAlignment hAlignment) {
         super(backgroundTexture, width, height, x, y);
 
         this.backgroundTexture = backgroundTexture;
@@ -243,8 +243,13 @@ public class PopupEditText extends PopupWidget {
     }
 
     @Override
-    public ArrayList<PopupWidget> getChildren(boolean walk) {
-        return new ArrayList<PopupWidget>();
+    public void updateTouchInput(Vector3 touchPos, boolean clickDown) {
+        // TODO need to implement this
+    }
+
+    @Override
+    public ArrayList getChildren(boolean walk) {
+        return new ArrayList<Widget>();
     }
 
     public void setText(String text) {

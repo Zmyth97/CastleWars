@@ -106,8 +106,8 @@ public class MenuScreen implements Screen, MenuInterface {
 
     @Override
     public void render(float delta) {
-            update(delta);
-            draw();
+        update(delta);
+        draw();
     }
 
     @Override

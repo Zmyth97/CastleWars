@@ -1,7 +1,7 @@
 package com.desitum.castleWars.world;
 
 import com.desitum.castleWars.data.Resources;
-import com.desitum.castleWars.libraries.menu.PopupWidget;
+import com.desitum.castleWars.libraries.ui.Widget;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Player;
 
@@ -30,9 +30,9 @@ public interface GameInterface {
 
     public void removeCardFromWorld(Card card);
 
-    public void removeWidgetFromWorld(PopupWidget widget);
+    public void removeWidgetFromWorld(Widget widget);
 
-    public void addWidgetToWorld(PopupWidget widget);
+    public void addWidgetToWorld(Widget widget);
 
     public void setPlayerBuildersLabelChangeText(int change);
 
