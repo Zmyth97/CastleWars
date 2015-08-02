@@ -1,4 +1,4 @@
-package com.desitum.castleWars.libraries.ui;
+package com.desitum.castleWars.libraries.ui.widgets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
+import com.desitum.castleWars.libraries.ui.listeners.OnClickListener;
 
 import java.util.ArrayList;
 

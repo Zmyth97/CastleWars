@@ -1,4 +1,4 @@
-package com.desitum.castleWars.libraries.ui;
+package com.desitum.castleWars.libraries.ui.widgets;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.CollisionDetection;
+import com.desitum.castleWars.libraries.ui.listeners.OnClickListener;
+import com.desitum.castleWars.libraries.ui.layout.Layout;
 
 import java.util.ArrayList;
 

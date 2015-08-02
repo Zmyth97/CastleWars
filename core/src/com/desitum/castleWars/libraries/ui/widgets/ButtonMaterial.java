@@ -1,4 +1,4 @@
-package com.desitum.castleWars.libraries.ui;
+package com.desitum.castleWars.libraries.ui.widgets;
 
 
 import com.badlogic.gdx.graphics.Color;
@@ -11,6 +11,7 @@ import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.ScaleAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
+import com.desitum.castleWars.libraries.ui.listeners.OnClickListener;
 
 import java.util.ArrayList;
 

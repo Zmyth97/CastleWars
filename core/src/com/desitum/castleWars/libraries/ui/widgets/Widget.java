@@ -1,4 +1,4 @@
-package com.desitum.castleWars.libraries.ui;
+package com.desitum.castleWars.libraries.ui.widgets;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,6 +19,9 @@ import java.util.Iterator;
  */
 public abstract class Widget extends Sprite {
 
+    public static final int FILL_PARENT = -1;
+    public static final int WRAP_CONTENT = -2;
+
     private ArrayList<Animator> comingInAnimators;
     private ArrayList<Animator> goingOutAnimators;
 
@@ -27,6 +30,8 @@ public abstract class Widget extends Sprite {
     private int id;
 
     private boolean enabled;
+
+    private Widget parent;
 
     private OrthographicCamera camera;
 
@@ -178,7 +183,7 @@ public abstract class Widget extends Sprite {
 
     }
 
-    abstract boolean scrollPosMatters();
+    public abstract boolean scrollPosMatters();
 
     public abstract void updateTouchInput(Vector3 touchPos, boolean clickDown);
 
@@ -188,11 +193,55 @@ public abstract class Widget extends Sprite {
         return camera;
     }
 
+    @Override
+    public void setX(float x) {
+        if (parent != null) {
+            super.setX(parent.getX() + x);
+        } else {
+            super.setX(x);
+        }
+    }
+
+    @Override
+    public void setY (float y) {
+        if (parent != null) {
+            super.setY(parent.getY() + y);
+        } else {
+            super.setY(y);
+        }
+    }
+
+    @Override
+    public float getX() {
+        if (parent != null) {
+            return super.getX() - parent.getX();
+        } else {
+            return super.getX();
+        }
+    }
+
+    @Override
+    public float getY() {
+        if (parent != null) {
+            return super.getY() - parent.getY();
+        } else {
+            return super.getY();
+        }
+    }
+
     public void setCamera(OrthographicCamera camera) {
         this.camera = camera;
     }
 
     public int getID() {
         return id;
+    }
+
+    public Widget getParent() {
+        return parent;
+    }
+
+    public void setParent(Widget parent) {
+        this.parent = parent;
     }
 }

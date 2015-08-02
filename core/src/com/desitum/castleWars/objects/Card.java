@@ -7,7 +7,7 @@ import com.desitum.castleWars.data.Assets;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.effects.FlipEffect;
-import com.desitum.castleWars.libraries.ui.Button;
+import com.desitum.castleWars.libraries.ui.widgets.Button;
 
 
 /**

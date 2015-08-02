@@ -1,4 +1,4 @@
-package com.desitum.castleWars.libraries.ui;
+package com.desitum.castleWars.libraries.ui.layout;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -11,6 +11,8 @@ import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.ColorEffects;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.animation.ScaleAnimator;
+import com.desitum.castleWars.libraries.ui.widgets.ScrollArea;
+import com.desitum.castleWars.libraries.ui.widgets.Widget;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -130,7 +132,7 @@ public abstract class Layout extends Widget {
     @Override
     public void updateScroll(float amount, Vector3 mousePos) {
         for (Widget widget : widgets) {
-            if (!widget.getClass().equals(ScrollArea.class)) {
+            if (!(widget instanceof ScrollArea)) {
                 continue;
             }
             if (widget.scrollPosMatters() && isEnabled()) {
@@ -144,7 +146,7 @@ public abstract class Layout extends Widget {
     }
 
     @Override
-    boolean scrollPosMatters() {
+    public boolean scrollPosMatters() {
         return true;
     }
 
@@ -179,7 +181,34 @@ public abstract class Layout extends Widget {
      * @param delta - time since last frame
      */
     private void updateAnimation(float delta) {
-        super.update(delta);
+        for (Animator animator : getIncomingAnimatorsToAdd()) {
+            if (animator.isRunning()) {
+                if (animator instanceof MovementAnimator) {
+                    MovementAnimator movementAnimator = (MovementAnimator) animator;
+                    for (Widget widget : widgets) {
+                        if (movementAnimator.isControllingX()) {
+                            widget.setX(movementAnimator.getCurrentPos());
+                        } else if (movementAnimator.isControllingY()) {
+                            widget.setY(movementAnimator.getCurrentPos());
+                        }
+                    }
+                } else if (animator instanceof ScaleAnimator) {
+                    ScaleAnimator scaleAnimator = (ScaleAnimator) animator;
+                    for (Widget widget: widgets) {
+                        if (scaleAnimator.updateX()) {
+                            widget.setScale(scaleAnimator.getScaleSize(), widget.getScaleY());
+                        } else if (scaleAnimator.updateY()) {
+                            widget.setScale(widget.getScaleY(), scaleAnimator.getScaleSize());
+                        }
+                    }
+                } else if (animator instanceof ColorEffects) {
+                    ColorEffects colorEffects = (ColorEffects) animator;
+                    for (Widget widget: widgets) {
+                        widget.setColor(colorEffects.getCurrentColor());
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -388,15 +417,6 @@ public abstract class Layout extends Widget {
         return returnWidget;
     }
 
-    public float getDistanceBetween(int index1, int index2) {
-        if ((index1 - index2) == 0) {
-            return 0;
-        }
-        float totalWidth = 0;
-        for (int i = index1; i <= index2; i++) {
-            totalWidth += getChildren().get(i).getWidth();
-        }
-        return totalWidth;
-    }
+    public abstract float getDistanceBetween(int index1, int index2);
 }
 

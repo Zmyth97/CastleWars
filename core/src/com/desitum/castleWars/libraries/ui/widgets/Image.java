@@ -1,10 +1,11 @@
-package com.desitum.castleWars.libraries.ui;
+package com.desitum.castleWars.libraries.ui.widgets;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.CollisionDetection;
+import com.desitum.castleWars.libraries.ui.listeners.OnClickListener;
 
 import java.util.ArrayList;
 

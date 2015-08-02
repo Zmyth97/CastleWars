@@ -2,10 +2,9 @@ package com.desitum.castleWars.libraries.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.desitum.castleWars.libraries.game_objects.GameObject;
 import com.desitum.castleWars.libraries.styles.StyleBuilder;
-import com.desitum.castleWars.libraries.ui.Button;
+import com.desitum.castleWars.libraries.ui.widgets.Button;
 import com.desitum.castleWars.libraries.world.KodyWorld;
 
 import org.json.JSONObject;
@@ -86,7 +85,7 @@ public class WorldBuilder {
                 Float.parseFloat(jsonObject.getString(WIDTH)),
                 Float.parseFloat(jsonObject.getString(HEIGHT)));
         if (jsonObject.getJSONObject(STYLE) != null) {
-            //button.setStyle(StyleBuilder.build(jsonObject.getJSONObject(STYLE)));
+//            button.setStyle(StyleBuilder.build(jsonObject.getJSONObject(STYLE)));
         }
         return button;
     }

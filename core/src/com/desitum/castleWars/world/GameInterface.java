@@ -1,7 +1,7 @@
 package com.desitum.castleWars.world;
 
 import com.desitum.castleWars.data.Resources;
-import com.desitum.castleWars.libraries.ui.Widget;
+import com.desitum.castleWars.libraries.ui.widgets.Widget;
 import com.desitum.castleWars.objects.Card;
 import com.desitum.castleWars.objects.Player;
 

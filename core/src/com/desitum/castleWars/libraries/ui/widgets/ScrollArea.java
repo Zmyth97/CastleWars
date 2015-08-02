@@ -1,4 +1,4 @@
-package com.desitum.castleWars.libraries.ui;
+package com.desitum.castleWars.libraries.ui.widgets;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.desitum.castleWars.libraries.animation.Animator;
 import com.desitum.castleWars.libraries.animation.MovementAnimator;
 import com.desitum.castleWars.libraries.interpolation.Interpolation;
+import com.desitum.castleWars.libraries.ui.layout.Layout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +20,10 @@ public class ScrollArea extends Widget {
     public static final int HORIZONTAL = 1;
     private float scrollAmount;
     private int scrollDirection;
-    private float spacing;
-    private float activeWidth;
-    private float activeHeight;
 
     private float lastDelta;
     private float touchDuration;
     private Vector3 lastTouchPos;
-
-    private List<Animator> incomingAnimatorsToAdd;
-    private List<Animator> outgoingAnimatorsToAdd;
 
     private MovementAnimator slideAnimator;
     private Layout child;
@@ -39,9 +34,6 @@ public class ScrollArea extends Widget {
         super.setSize(width, height);
         scrollAmount = 0;
         this.scrollDirection = scrollDirection;
-        this.spacing = spacing;
-        this.activeWidth = width;
-        this.activeHeight = height;
         this.touchDuration = 0;
         this.setPosition(x, y);
 
@@ -63,7 +55,7 @@ public class ScrollArea extends Widget {
     }
 
     @Override
-    boolean scrollPosMatters() {
+    public boolean scrollPosMatters() {
         return false;
     }
 
@@ -127,38 +119,8 @@ public class ScrollArea extends Widget {
 
         toAdd.setPosition(getX(), getY() + getHeight() - toAdd.getHeight()); // set it to fill the beginning of the layout
 
-        if (scrollDirection == HORIZONTAL || scrollDirection == VERTICAL) {
-            for (Animator anim : incomingAnimatorsToAdd) {
-                Animator dupAnim = anim.duplicate();
-                if (dupAnim.getClass().equals(MovementAnimator.class)) {
-                    MovementAnimator dupMov = (MovementAnimator) dupAnim;
-                    if (dupMov.isControllingX() && scrollDirection == VERTICAL) {
-                        dupMov.setStartPos(toAdd.getX() - dupMov.getDistance());
-                        dupMov.setEndPos(toAdd.getX());
-                    }
-                    if (dupMov.isControllingY() && scrollDirection == HORIZONTAL) {
-                        dupMov.setStartPos(dupMov.getStartPos());
-                        dupMov.setEndPos(dupMov.getEndPos());
-                    }
-                    toAdd.addIncomingAnimator(dupMov);
-                }
-            }
-            for (Animator anim : outgoingAnimatorsToAdd) {
-                Animator dupAnim = anim.duplicate();
-                if (dupAnim.getClass().equals(MovementAnimator.class)) {
-                    MovementAnimator dupMov = (MovementAnimator) dupAnim;
-                    if (dupMov.isControllingX()) {
-                        dupMov.setStartPos(toAdd.getX() - dupMov.getDistance());
-                        dupMov.setEndPos(toAdd.getX());
-                    }
-                    if (dupMov.isControllingY()) {
-                        dupMov.setStartPos(toAdd.getY() - dupMov.getDistance());
-                        dupMov.setEndPos(toAdd.getY());
-                    }
-                    toAdd.addOutgoingAnimator(dupMov);
-                }
-            }
-        }
+        toAdd.setParent(this);
+
         setChild(toAdd);
         updateWidgets();
     }
@@ -183,18 +145,6 @@ public class ScrollArea extends Widget {
 
     public void setChild(Layout child) {
         this.child = child;
-    }
-
-    @Override
-    public void addIncomingAnimator(Animator animator) {
-        super.addIncomingAnimator(animator);
-        incomingAnimatorsToAdd.add(animator);
-    }
-
-    @Override
-    public void addOutgoingAnimator(Animator animator) {
-        super.addOutgoingAnimator(animator);
-        outgoingAnimatorsToAdd.add(animator);
     }
 
     public int getScrollDirection() {

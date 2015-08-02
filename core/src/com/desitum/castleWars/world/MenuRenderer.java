@@ -2,8 +2,8 @@ package com.desitum.castleWars.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.desitum.castleWars.libraries.ui.Layout;
-import com.desitum.castleWars.libraries.ui.Widget;
+import com.desitum.castleWars.libraries.ui.layout.Layout;
+import com.desitum.castleWars.libraries.ui.widgets.Widget;
 import com.desitum.castleWars.screens.MenuScreen;
 
 /**

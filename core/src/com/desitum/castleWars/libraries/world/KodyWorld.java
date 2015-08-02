@@ -8,8 +8,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.desitum.castleWars.libraries.CollisionDetection;
 import com.desitum.castleWars.libraries.game_objects.GameObject;
-import com.desitum.castleWars.libraries.ui.Layout;
-import com.desitum.castleWars.libraries.ui.Widget;
+import com.desitum.castleWars.libraries.ui.layout.Layout;
+import com.desitum.castleWars.libraries.ui.widgets.Widget;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
